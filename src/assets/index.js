@@ -17,9 +17,18 @@ export {default as icSiren} from '@assets/icon/ico_siren.svg';
 export {default as icTrash} from '@assets/icon/ico_trash.svg';
 export {default as icCheck} from '@assets/icon/ico_check.svg';
 
+export {default as icCommunity} from '@assets/icon/ico_community.svg';
+export {default as icCommunityFill} from '@assets/icon/ico_community_fill.svg';
+export {default as icMatch} from '@assets/icon/ico_match.svg';
+export {default as icMatchFill} from '@assets/icon/ico_match_fill.svg';
+export {default as icNutrition} from '@assets/icon/ico_nutrition.svg';
+export {default as icNutritionFill} from '@assets/icon/ico_nutrition_fill.svg';
+export {default as icNotify} from '@assets/icon/ico_notify.svg';
+
 
 
 export {default as imgBlank} from '@assets/images/img_blank.svg';
 export {default as imgProfile} from '@assets/images/img_profile.svg';
+export {default as imgMainProfile} from '@assets/images/img_main_profile.svg';
 
 
