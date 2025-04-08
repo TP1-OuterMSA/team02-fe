@@ -32,14 +32,24 @@
 }
 
 @layer components {
-    .lnb_menu{
-        cursor: pointer;
-        padding: 24px;
-        border: var(--primary);
+    .sidebar_text{
+        font-size: 1.25rem;
+        font-weight: bold;
     }
-    .lnb_menu:hover, .lnb_menu_active{
-        border-bottom: 2px solid var(--primary);
-        color: var(--primary);
+
+    .sidebar_menu{
+        display: flex;
+        gap: 0.5rem;
+        padding: 1rem;
+        align-items: center;
+        cursor: pointer;
+        color: black;
+    }
+
+    .sidebar_menu:hover, .sidebar_menu_active{
+        background-color: var(--primary);
+        border-radius: 0.5rem;
+        color: white;
     }
 
     .skeleton {

@@ -1,11 +1,13 @@
 import {Outlet} from "react-router-dom";
 import Header from "@layout/Header.jsx";
+import SideBar from "@layout/SideBar.jsx";
 
 const RootLayout = () => {
   return (
     <div className="w-full">
-      <div className="max-w-[1200px] mx-auto relative">
-        <Header/>
+      <Header/>
+      <div className="flex w-full">
+        <SideBar/>
         <Outlet/>
       </div>
     </div>

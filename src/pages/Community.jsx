@@ -80,7 +80,7 @@ const Community = () => {
   }
 
   return (
-      <>
+      <div className="w-full flex flex-col items-center">
         {postData ? (
             <div className="grid grid-cols-2 mt-10 mb-10 gap-5 pl-5 pr-5 max-md:grid-cols-1">
               {postData?.map((post) =>
@@ -106,7 +106,7 @@ const Community = () => {
           {isFetching && <ClipLoader/>}
         </div>
         <FloatingActionButton onClick={handleFAB}/>
-      </>
+      </div>
   );
 };
 

@@ -1,28 +1,18 @@
-import {useNavigate, useLocation} from "react-router-dom";
-
-import {icMain, icMenu} from "@assets/index.js";
+import {useCustomNavigation} from "@hooks/useCustomNavigation.js";
+import {icMain, icNotify, imgMainProfile} from "@assets/index.js";
 import {pagePath} from "@/routes/pagePath.js";
 
 const Header = () => {
-  const navigate = useNavigate();
-  const location = useLocation().pathname;
-
-  const handleMenu = (destinaition) => {
-    navigate(destinaition);
-  }
+  const {navigateTo} = useCustomNavigation();
 
   return (
-    <div className="w-full h-24 mt-4 flex justify-between items-center pl-3 pr-5">
-      <img src={icMain} className="w-40 cursor-pointer" onClick={() => navigate("/")} />
-      <img src={icMenu} className="w-[31px] h-[31px] min-md:hidden cursor-pointer"/>
-      <div className="max-md:hidden">
-        <ul className="flex text-lg font-semibold text-black">
-          <li className={`${location === pagePath.NUTRITION ? "lnb_menu lnb_menu_active" : "lnb_menu"}`} onClick={() => handleMenu(pagePath.NUTRITION)}>식단분석</li>
-          <li className={`${location === pagePath.COMMUNITY ? "lnb_menu lnb_menu_active" : "lnb_menu"}`} onClick={() => handleMenu(pagePath.COMMUNITY)}>커뮤니티</li>
-          <li className={`${location === pagePath.MATCH ? "lnb_menu lnb_menu_active" : "lnb_menu"}`} onClick={() => handleMenu(pagePath.MATCH)}>식사매칭</li>
-        </ul>
+      <div className="w-full h-24 flex justify-between pl-7 pr-7 border-b border-neutral-200">
+        <img src={icMain} className="w-40 cursor-pointer" onClick={()=>navigateTo(pagePath.ROOT)}/>
+        <div className="flex items-center gap-5">
+          <img src={icNotify} className="w-7 h-7 cursor-pointer"/>
+          <img src={imgMainProfile} className="w-11 h-11 cursor-pointer"/>
+        </div>
       </div>
-    </div>
   );
 };
 
