@@ -24,7 +24,7 @@ const SideBar = () => {
   };
 
   return (
-    <div className="flex flex-col gap-2 p-2.5 min-w-75 border-r border-neutral-200">
+    <div className="flex flex-col gap-2 p-2.5 min-w-75 max-md:hidden max-lg:min-w-47 border-r border-neutral-200">
       <div
         className={`sidebar_menu ${handleMenuFocus(pagePath.NUTRITION) ? "sidebar_menu_active" : ""}`}
         onClick={() => handleMenu(pagePath.NUTRITION)}
