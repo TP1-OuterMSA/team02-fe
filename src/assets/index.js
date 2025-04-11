@@ -16,6 +16,8 @@ export {default as icReplyEdit} from '@assets/icon/ico_reply_edit.svg';
 export {default as icSiren} from '@assets/icon/ico_siren.svg';
 export {default as icTrash} from '@assets/icon/ico_trash.svg';
 export {default as icCheck} from '@assets/icon/ico_check.svg';
+export {default as icLeft} from '@assets/icon/ico_left.svg';
+export {default as icRight} from '@assets/icon/ico_right.svg';
 
 export {default as icCommunity} from '@assets/icon/ico_community.svg';
 export {default as icCommunityFill} from '@assets/icon/ico_community_fill.svg';
