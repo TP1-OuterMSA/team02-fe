@@ -10,6 +10,8 @@
     --animate-float: float 2s ease-in-out forwards;
     --animate-wiggle: wiggle 1s ease-in-out infinite;
 
+    --custom-break: '916px';
+
     @keyframes float {
         from {
             transform: translateY(0);

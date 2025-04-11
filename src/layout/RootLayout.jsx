@@ -4,9 +4,9 @@ import SideBar from "@layout/SideBar.jsx";
 
 const RootLayout = () => {
   return (
-    <div className="w-full flex">
+    <div className="relative w-full">
       <SideBar/>
-      <div className="w-full">
+      <div className="pl-77 max-md:pl-0">
         <Header/>
         <Outlet/>
       </div>

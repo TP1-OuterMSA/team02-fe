@@ -2,7 +2,7 @@ import React from 'react';
 
 const Nutrition = () => {
   return (
-    <div>
+    <div className="w-full">
       this is 식단영양 분석스
     </div>
   );
