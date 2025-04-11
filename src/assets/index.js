@@ -21,8 +21,11 @@ export {default as icCommunity} from '@assets/icon/ico_community.svg';
 export {default as icCommunityFill} from '@assets/icon/ico_community_fill.svg';
 export {default as icMatch} from '@assets/icon/ico_match.svg';
 export {default as icMatchFill} from '@assets/icon/ico_match_fill.svg';
+export {default as icDiet} from '@assets/icon/ico_diet.svg';
+export {default as icDietFill} from '@assets/icon/ico_diet_fill.svg';
 export {default as icNutrition} from '@assets/icon/ico_nutrition.svg';
 export {default as icNutritionFill} from '@assets/icon/ico_nutrition_fill.svg';
+
 export {default as icNotify} from '@assets/icon/ico_notify.svg';
 
 

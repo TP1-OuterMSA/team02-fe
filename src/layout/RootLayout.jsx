@@ -4,10 +4,10 @@ import SideBar from "@layout/SideBar.jsx";
 
 const RootLayout = () => {
   return (
-    <div className="w-full">
-      <Header/>
-      <div className="flex w-full">
-        <SideBar/>
+    <div className="w-full flex">
+      <SideBar/>
+      <div className="w-full">
+        <Header/>
         <Outlet/>
       </div>
     </div>
