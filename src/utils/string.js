@@ -9,6 +9,11 @@ export const string = {
   DELETE: "삭제",
   T_EDIT: "글 수정",
   PHOTOEDIT: "사진 변경",
+  CALORIE: "총 섭취 칼로리",
+  M_CALORIE: "kcal",
+  CARBOHYDRATE: "탄수화물",
+  PROTEIN: "단백질",
+  PROVINCE: "지방",
 
   TITLE: "제목",
   PH_TITLE: "제목을 입력해주세요.",

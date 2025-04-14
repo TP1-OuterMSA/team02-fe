@@ -24,7 +24,7 @@ const SideBar = () => {
   };
 
   return (
-    <div className="flex flex-col gap-2 p-2.5 min-w-75 max-md:hidden @max-[915px]:hidden max-lg:min-w-47 border-r border-neutral-200 fixed top-0 left-0 h-full bg-white z-1 ">
+    <div className="flex flex-col gap-2 p-2.5 min-w-75 max-md:hidden @max-[1000px]:hidden max-lg:min-w-47 border-r border-neutral-200 fixed top-0 left-0 h-full bg-white z-1 ">
       <div className="w-72 h-24 px-5 py-5">
         <img src={icMain} className="w-38 cursor-pointer" onClick={() => navigate(pagePath.ROOT)}/>
       </div>

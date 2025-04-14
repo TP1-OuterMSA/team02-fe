@@ -1,10 +1,10 @@
 import React from 'react';
 
-const LineButton = ({text, img, onClick}) => {
+const LineButton = ({children, onClick}) => {
   return (
       <div>
-        <button className="p-2 h-11 rounded-md border border-neutral-200" onClick={onClick}>
-          {img? <img className="w-6 h-6" src={img} alt="" /> : {text}}
+        <button className="p-2 h-11 rounded-md border border-neutral-200 cursor-pointer" onClick={onClick}>
+          {children}
         </button>
       </div>
   );
