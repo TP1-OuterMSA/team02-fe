@@ -56,8 +56,11 @@ const Diet = () => {
             return <CalendarItem key={idx} idx={idx} date={date.format("DD")} isSelect={isSelect} onClick={() => handleSelectedDay(date)} />
           })}
         </div>
-        <div className="bg-indigo-50 rounded-2xl h-50 mt-3 p-5">
+        <div className="bg-indigo-50 rounded-2xl h-[72vh] mt-3 p-5 flex flex-col gap-6 overflow-y-auto"   style={{scrollbarWidth: 'none', msOverflowStyle: 'none',}}>
           <DietContainer img={icMorning} title={string.MORNING}/>
+          <DietContainer img={icLunch} title={string.LUNCH}/>
+          <DietContainer img={icDinner} title={string.DINNER}/>
+          <DietContainer img={icSnack} title={string.SNACK}/>
         </div>
       </div>
       <div className="w-100">

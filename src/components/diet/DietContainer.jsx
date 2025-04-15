@@ -10,11 +10,11 @@ const DietContainer = ({img, title}) => {
           <img src={img} className="w-7 h-7"/>
           <p className="text-black text-xl font-bold">{title}</p>
         </div>
-        <div className="w-7 h-7 bg-blue-600 rounded-full flex justify-center items-center">
+        <div className="w-7 h-7 bg-blue-600 rounded-full flex justify-center items-center cursor-pointer">
           <img src={icPlusWhite} className="w-4 h-4"/>
         </div>
       </div>
-      <div>
+      <div className="mt-3">
         <DietItem/>
       </div>
     </div>
