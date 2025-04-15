@@ -1,8 +1,9 @@
-import {icRight, icLeft, imgMainCharcter} from "@assets/index.js";
+import {icRight, icLeft, imgMainCharcter, icMorning, icLunch, icDinner, icSnack} from "@assets/index.js";
 import LineButton from "@components/common/LineButton.jsx";
 import {string} from "@utils/string.js";
 import Graph from "@components/diet/Graph.jsx";
 import CalendarItem from "@components/diet/CalendarItem.jsx";
+import DietContainer from "@components/diet/DietContainer.jsx";
 import dayjs from "dayjs";
 import 'dayjs/locale/ko';
 dayjs.locale("ko");
@@ -55,7 +56,8 @@ const Diet = () => {
             return <CalendarItem key={idx} idx={idx} date={date.format("DD")} isSelect={isSelect} onClick={() => handleSelectedDay(date)} />
           })}
         </div>
-        <div className="bg-indigo-50 rounded-2xl h-50 mt-3">
+        <div className="bg-indigo-50 rounded-2xl h-50 mt-3 p-5">
+          <DietContainer img={icMorning} title={string.MORNING}/>
         </div>
       </div>
       <div className="w-100">

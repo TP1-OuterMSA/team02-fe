@@ -14,6 +14,10 @@ export const string = {
   CARBOHYDRATE: "탄수화물",
   PROTEIN: "단백질",
   PROVINCE: "지방",
+  MORNING: "아침",
+  LUNCH: "점심",
+  DINNER: "저녁",
+  SNACK:"간식",
 
   TITLE: "제목",
   PH_TITLE: "제목을 입력해주세요.",

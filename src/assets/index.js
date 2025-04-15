@@ -12,12 +12,15 @@ export {default as icDate} from '@assets/icon/ico_date.svg';
 export {default as icPerson} from '@assets/icon/ico_person.svg';
 export {default as icSend} from '@assets/icon/ico_send.svg';
 export {default as icClose} from '@assets/icon/ico_close.svg';
+export {default as icCloseWhite} from '@assets/icon/ico_close_white.svg';
 export {default as icReplyEdit} from '@assets/icon/ico_reply_edit.svg';
 export {default as icSiren} from '@assets/icon/ico_siren.svg';
 export {default as icTrash} from '@assets/icon/ico_trash.svg';
 export {default as icCheck} from '@assets/icon/ico_check.svg';
 export {default as icLeft} from '@assets/icon/ico_left.svg';
 export {default as icRight} from '@assets/icon/ico_right.svg';
+export {default as icPlus} from '@assets/icon/ico_plus.svg';
+export {default as icPlusWhite} from '@assets/icon/ico_plus_white.svg';
 
 export {default as icCommunity} from '@assets/icon/ico_community.svg';
 export {default as icCommunityFill} from '@assets/icon/ico_community_fill.svg';
@@ -27,6 +30,11 @@ export {default as icDiet} from '@assets/icon/ico_diet.svg';
 export {default as icDietFill} from '@assets/icon/ico_diet_fill.svg';
 export {default as icNutrition} from '@assets/icon/ico_nutrition.svg';
 export {default as icNutritionFill} from '@assets/icon/ico_nutrition_fill.svg';
+
+export {default as icMorning} from '@assets/icon/ico_morning.svg';
+export {default as icLunch} from '@assets/icon/ico_lunch.svg';
+export {default as icDinner} from '@assets/icon/ico_dinner.svg';
+export {default as icSnack} from '@assets/icon/ico_snack.svg';
 
 export {default as icNotify} from '@assets/icon/ico_notify.svg';
 
