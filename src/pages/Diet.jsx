@@ -10,8 +10,8 @@ dayjs.locale("ko");
 import {useState} from "react";
 
 const Diet = () => {
-
   const today = dayjs();
+  const [selectedDay, setSelectedDay] = useState(today);
   const [startOfWeek, setStartOfWeek] = useState(today.startOf("week").add(1, "day"));
 
   const generateWeek = () => {
@@ -28,10 +28,14 @@ const Diet = () => {
 
   const handleToday = () => {
     setStartOfWeek(today.startOf("week").add(1, "day"));
+    setSelectedDay(today);
   };
 
+  const handleSelectedDay = (date) => {
+    setSelectedDay(date);
+  }
+
   const week = generateWeek();
-  console.log(week);
   return (
     <div className="pl-7 pr-7 flex gap-5">
       <div className="w-full">
@@ -47,9 +51,11 @@ const Diet = () => {
         </div>
         <div className="flex justify-between pl-2 pr-2 mt-5">
           {week.map((date, idx) => {
-            const isToday = date.isSame(today, "day");
-            return <CalendarItem key={idx} idx={idx} date={date.format("DD")} isToday={isToday} />
+            const isSelect = date.isSame(selectedDay, "day");
+            return <CalendarItem key={idx} idx={idx} date={date.format("DD")} isSelect={isSelect} onClick={() => handleSelectedDay(date)} />
           })}
+        </div>
+        <div className="bg-indigo-50 rounded-2xl h-50 mt-3">
         </div>
       </div>
       <div className="w-100">
