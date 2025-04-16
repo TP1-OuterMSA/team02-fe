@@ -10,14 +10,15 @@ dayjs.locale("ko");
 import {DayPicker, getDefaultClassNames} from "react-day-picker";
 import "react-day-picker/style.css";
 import {useState} from "react";
+import RecommendCalorie from "@components/modal/RecommendCalorie.jsx";
 
 const Diet = () => {
   const today = dayjs();
+  const [isModalOpen, setIsModalOpen] = useState(true);
   const [selectedDay, setSelectedDay] = useState(today);
   const [startOfWeek, setStartOfWeek] = useState(today.startOf("week").add(1, "day"));
   const [markedDays, setMarkedDays] = useState([new Date(2025, 3, 8), new Date(2025, 3, 10)]);
 
-  console.log(new Date(2025, 3, 8), dayjs("2025-04-08").toDate())
   const week = Array.from({ length: 7 }).map((_, idx) => startOfWeek.add(idx, "day"));
   const defaultClassNames = getDefaultClassNames();
 
@@ -101,6 +102,9 @@ const Diet = () => {
           />
         </div>
       </div>
+      {isModalOpen &&
+          <RecommendCalorie/>
+      }
     </div>
   );
 };

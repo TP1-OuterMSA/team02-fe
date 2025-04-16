@@ -45,5 +45,6 @@ export {default as imgRice} from '@assets/images/img_rice.svg';
 export {default as imgProfile} from '@assets/images/img_profile.svg';
 export {default as imgMainProfile} from '@assets/images/img_main_profile.svg';
 export {default as imgMainCharcter} from '@assets/images/img_main_character.svg';
+export {default as imgWelcome} from '@assets/images/img_welcome.svg';
 
 
