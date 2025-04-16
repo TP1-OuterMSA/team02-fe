@@ -30,6 +30,7 @@ export {default as icDiet} from '@assets/icon/ico_diet.svg';
 export {default as icDietFill} from '@assets/icon/ico_diet_fill.svg';
 export {default as icNutrition} from '@assets/icon/ico_nutrition.svg';
 export {default as icNutritionFill} from '@assets/icon/ico_nutrition_fill.svg';
+export {default as icDown} from '@assets/icon/ico_down.svg';
 
 export {default as icMorning} from '@assets/icon/ico_morning.svg';
 export {default as icLunch} from '@assets/icon/ico_lunch.svg';
