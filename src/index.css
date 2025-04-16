@@ -88,4 +88,12 @@
         transform: translateY(0);
         pointer-events: auto;
     }
+
+    .marked-day{
+        background-image: url("/src/assets/images/img_rice.svg");
+        background-repeat: no-repeat;
+        background-position: center;
+        font-weight: bold;
+        text-align: center;
+    }
 }

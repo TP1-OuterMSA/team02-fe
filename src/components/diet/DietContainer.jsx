@@ -15,7 +15,7 @@ const DietContainer = ({img, title}) => {
         </div>
       </div>
       <div className="mt-3">
-        <DietItem/>
+        <p className="text-center text-lg pt-3 pb-3">먹은 음식 혹은 먹고 싶은 음식들을 추가해보세요</p>
       </div>
     </div>
   );

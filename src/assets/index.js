@@ -41,6 +41,7 @@ export {default as icNotify} from '@assets/icon/ico_notify.svg';
 
 
 export {default as imgBlank} from '@assets/images/img_blank.svg';
+export {default as imgRice} from '@assets/images/img_rice.svg';
 export {default as imgProfile} from '@assets/images/img_profile.svg';
 export {default as imgMainProfile} from '@assets/images/img_main_profile.svg';
 export {default as imgMainCharcter} from '@assets/images/img_main_character.svg';
