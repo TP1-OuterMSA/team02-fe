@@ -1,3 +1,4 @@
+import {useEffect} from "react";
 import {icClose, imgRice, icPlus, icMinus} from "@assets/index.js";
 import {string} from "@utils/string.js";
 import SearchBar from "@components/common/SearchBar.jsx";
@@ -6,9 +7,18 @@ import AddDietReuslt from "@components/diet/AddDietReuslt.jsx";
 import Button from "@components/common/Button.jsx";
 import TabMenu from "@components/common/TabMenu.jsx";
 import OvalLineButton from "@components/diet/OvalLineButton.jsx";
+import dietService from "@apis/diet/dietService.js";
 
 const AddDiet = ({type, onClose}) => {
-  console.log(type)
+
+  useEffect(() => {
+    patchFoodsDate();
+  }, [])
+
+  const patchFoodsDate = async () => {
+    const datas = await dietService.getFoods();
+    console.log(datas);
+  }
   return (
     <div className="fixed inset-0 flex justify-center items-center bg-black/30 z-20">
       <div className="bg-white w-260 p-10 z-20 rounded-2xl flex flex-col items-center">
