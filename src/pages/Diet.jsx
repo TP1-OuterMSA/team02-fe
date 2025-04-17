@@ -23,7 +23,7 @@ const today = dayjs();
 
 const Diet = () => {
   const [isModalOpen, setIsModalOpen] = useState(true);
-  const [isAddDietOpen, setIsAddDietOpen] = useState(true);
+  const [isAddDietOpen, setIsAddDietOpen] = useState(false);
   const [selectedDay, setSelectedDay] = useState(today);
   const [startOfWeek, setStartOfWeek] = useState(today.startOf("week").add(1, "day"));
   const [markedDays, setMarkedDays] = useState([new Date(2025, 3, 8), new Date(2025, 3, 10)]);
