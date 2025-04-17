@@ -18,6 +18,7 @@ import {constant} from "@utils/constant.js";
 import {string} from "@utils/string.js";
 
 import userService from "@apis/user/userService.js";
+import dietService, {getDietDate} from "@apis/diet/dietService.js";
 
 // Global 변수
 const today = dayjs();
@@ -27,14 +28,20 @@ const Diet = () => {
   const [isAddDietOpen, setIsAddDietOpen] = useState(false);
   const [selectedDay, setSelectedDay] = useState(today);
   const [startOfWeek, setStartOfWeek] = useState(today.startOf("week").add(1, "day"));
-  const [markedDays, setMarkedDays] = useState([new Date(2025, 3, 8), new Date(2025, 3, 10)]);
+  const [markedDays, setMarkedDays] = useState([]);
+  const [breakFast, setBreakFast] = useState([]);
+  const [lunch, setLunch] = useState([]);
+  const [dinner, setDinner] = useState([]);
+  const [snack, setSnack] = useState([]);
   const [bodyInfo, setBodyInfo] = useState({gender: "", age:"", cm:"", kg:""});
   const [consumeCalories, setConsumeCalories] = useState(0);
   const [calories, setCalories] = useState(0);
   const [modalTime, setModalTime] = useState();
+  const [currentMonth, setCurrentMonth] = useState(dayjs().format('YYYY-MM'));
 
   const week = Array.from({ length: 7 }).map((_, idx) => startOfWeek.add(idx, "day"));
   const defaultClassNames = getDefaultClassNames();
+
 
   useEffect(() => {
     const calorie = localStorage.getItem("calories");
@@ -42,7 +49,49 @@ const Diet = () => {
       setCalories(calorie);
       setIsModalOpen(false);
     }
-  }, [])
+  }, []);
+
+  // 오른쪽 하단 달력 전체에 연결되는 api
+  useEffect(() => {
+    patchDiaryData();
+  }, [currentMonth]);
+
+
+  useEffect(() => {
+    patchGetDiets();
+  }, [selectedDay]);
+
+
+  const patchDiaryData = async () => {
+    const datas = await dietService.getDietDate(currentMonth);
+    datas?.forEach((data) => setMarkedDays((prev) => [...prev, dayjs(data).toDate()] ))
+  }
+
+  const patchGetDiets = async () => {
+    setBreakFast([]);
+    setLunch([]);
+    setDinner([]);
+    setSnack([]);
+
+    const datas = await dietService.getDiets(selectedDay.format("YYYY-MM-DD"));
+    console.log(datas);
+    datas?.forEach((data) => {
+      switch(data.type){
+        case constant.BREAKFAST:
+          setBreakFast(data.foods);
+          break;
+        case constant.LUNCH:
+          setLunch(data.foods);
+          break;
+        case constant.DINNER:
+          setDinner(data.foods);
+          break;
+        case constant.SNACK:
+          setSnack(data.foods);
+          break;
+      }
+    });
+  }
 
   const handlePrevWeek = () => {
     setStartOfWeek(startOfWeek.subtract(7, "day"));
@@ -56,11 +105,6 @@ const Diet = () => {
     setStartOfWeek(today.startOf("week").add(1, "day"));
     setSelectedDay(today);
   };
-
-  const handleChangeMonth = (month) => {
-    console.log(dayjs(month).format("YYYY-MM"));
-    // 해당 년,월에 데이터 받아오는 api 추가해야 함
-  }
 
   const handleBodyInfo = (data, type) => {
     setBodyInfo((prev) => ({
@@ -79,9 +123,8 @@ const Diet = () => {
       Math.round(655.1 + (9.56 * bodyInfo.kg) + (1.85 * bodyInfo.cm) - (4.68 * bodyInfo.age))
     )
     localStorage.setItem("calories", calories);
-    await userService.updateRecommendKcal(calories);
+    // await userService.updateRecommendKcal(calories);
     setIsModalOpen(false)
-
   }
 
   const handleModalOpen = (type) => {
@@ -109,10 +152,10 @@ const Diet = () => {
           })}
         </div>
         <div className="bg-indigo-50 rounded-2xl h-[72vh] mt-3 p-5 flex flex-col gap-6 overflow-y-auto" style={{scrollbarWidth: 'none', msOverflowStyle: 'none'}}>
-          <DietContainer img={icMorning} title={string.MORNING} onClickAdd={() => handleModalOpen(constant.MORNING)}/>
-          <DietContainer img={icLunch} title={string.LUNCH} onClickAdd={() => handleModalOpen(constant.LUNCH)}/>
-          <DietContainer img={icDinner} title={string.DINNER} onClickAdd={() => handleModalOpen(constant.DINNER)}/>
-          <DietContainer img={icSnack} title={string.SNACK} onClickAdd={() => handleModalOpen(constant.SNACK)}/>
+          <DietContainer img={icMorning} title={string.MORNING} onClickAdd={() => handleModalOpen(constant.BREAKFAST)} data={breakFast}/>
+          <DietContainer img={icLunch} title={string.LUNCH} onClickAdd={() => handleModalOpen(constant.LUNCH)} data={lunch}/>
+          <DietContainer img={icDinner} title={string.DINNER} onClickAdd={() => handleModalOpen(constant.DINNER)} data={dinner}/>
+          <DietContainer img={icSnack} title={string.SNACK} onClickAdd={() => handleModalOpen(constant.SNACK)} data={snack}/>
         </div>
       </div>
       <div className="w-100">
@@ -137,7 +180,7 @@ const Diet = () => {
                 booked: 'marked-day',
               }}
               onMonthChange={(month) => {
-                handleChangeMonth(month)
+                setCurrentMonth(dayjs(month).format("YYYY-MM"))
               }}
               classNames={{
                 today: `text-(--primary) font-extrabold`,

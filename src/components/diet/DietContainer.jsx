@@ -2,7 +2,7 @@ import React from 'react';
 import {icPlusWhite} from "@assets/index.js";
 import DietItem from "@components/diet/DietItem.jsx";
 
-const DietContainer = ({img, title, onClickAdd}) => {
+const DietContainer = ({img, title, onClickAdd, data}) => {
   return (
     <div className="px-7 py-5 bg-white rounded-3xl">
       <div className="flex justify-between items-center">
@@ -15,7 +15,15 @@ const DietContainer = ({img, title, onClickAdd}) => {
         </div>
       </div>
       <div className="mt-3">
-        <p className="text-center text-lg pt-3 pb-3">먹은 음식 혹은 먹고 싶은 음식들을 추가해보세요</p>
+        {data.length === 0 && <p className="text-center text-lg pt-3 pb-3">먹은 음식 혹은 먹고 싶은 음식들을 추가해보세요</p>}
+        {data.map((item, index) => (
+          <DietItem
+            key={index}
+            food={item.foodName}
+            gram={100}
+            kcal={item.intakeKcal}
+          />
+        ))}
       </div>
     </div>
   );

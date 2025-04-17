@@ -13,6 +13,7 @@ export {default as icPerson} from '@assets/icon/ico_person.svg';
 export {default as icSend} from '@assets/icon/ico_send.svg';
 export {default as icClose} from '@assets/icon/ico_close.svg';
 export {default as icCloseWhite} from '@assets/icon/ico_close_white.svg';
+export {default as icCloseGray} from '@assets/icon/ico_close_gray.svg';
 export {default as icReplyEdit} from '@assets/icon/ico_reply_edit.svg';
 export {default as icSiren} from '@assets/icon/ico_siren.svg';
 export {default as icTrash} from '@assets/icon/ico_trash.svg';
