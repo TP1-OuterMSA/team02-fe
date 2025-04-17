@@ -18,7 +18,7 @@ const Diet = () => {
   const [selectedDay, setSelectedDay] = useState(today);
   const [startOfWeek, setStartOfWeek] = useState(today.startOf("week").add(1, "day"));
   const [markedDays, setMarkedDays] = useState([new Date(2025, 3, 8), new Date(2025, 3, 10)]);
-
+  const [bodyInfo, setBodyInfo] = useState({gender: "", age:0, cm:0, kg:0});
   const week = Array.from({ length: 7 }).map((_, idx) => startOfWeek.add(idx, "day"));
   const defaultClassNames = getDefaultClassNames();
 
@@ -42,6 +42,14 @@ const Diet = () => {
   const handleChangeMonth = (month) => {
     console.log(dayjs(month).format("YYYY-MM"));
     // 해당 년,월에 데이터 받아오는 api 추가해야 함
+  }
+
+  const handleBodyInfo = (data, type) => {
+    setBodyInfo((prev) => ({
+      ...prev,
+      [type]: data
+    }));
+    console.log(bodyInfo);
   }
 
   return (
@@ -103,7 +111,7 @@ const Diet = () => {
         </div>
       </div>
       {isModalOpen &&
-          <RecommendCalorie/>
+          <RecommendCalorie bodyInfo={bodyInfo} setBodyInfo={handleBodyInfo}/>
       }
     </div>
   );
