@@ -84,7 +84,7 @@ const CommunityPost = () => {
         </label>
         <div className="mt-4">
           <p className="text-black text-lg font-semibold mb-2">{string.TITLE}</p>
-          <CustomInput text={string.PH_TITLE} value={title} setText={setTitle} />
+          <CustomInput type={"text"} text={string.PH_TITLE} value={title} setText={setTitle} />
         </div>
         <div className="mt-4 mb-6">
           <p className="text-black text-lg font-semibold mb-2">{string.CONTENT}</p>

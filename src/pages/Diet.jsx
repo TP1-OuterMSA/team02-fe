@@ -1,26 +1,47 @@
-import {icRight, icLeft, imgMainCharcter, icMorning, icLunch, icDinner, icSnack} from "@assets/index.js";
-import LineButton from "@components/common/LineButton.jsx";
-import {string} from "@utils/string.js";
-import Graph from "@components/diet/Graph.jsx";
-import CalendarItem from "@components/diet/CalendarItem.jsx";
-import DietContainer from "@components/diet/DietContainer.jsx";
+import {useState, useEffect} from "react";
 import dayjs from "dayjs";
 import 'dayjs/locale/ko';
 dayjs.locale("ko");
 import {DayPicker, getDefaultClassNames} from "react-day-picker";
 import "react-day-picker/style.css";
-import {useState} from "react";
+import {toast} from "react-toastify";
+
+import Graph from "@components/diet/Graph.jsx";
+import LineButton from "@components/common/LineButton.jsx";
+import CalendarItem from "@components/diet/CalendarItem.jsx";
+import DietContainer from "@components/diet/DietContainer.jsx";
 import RecommendCalorie from "@components/modal/RecommendCalorie.jsx";
+import AddDiet from "@components/modal/AddDiet.jsx";
+
+
+import {icRight, icLeft, imgMainCharcter, icMorning, icLunch, icDinner, icSnack} from "@assets/index.js";
+import {constant} from "@utils/constant.js";
+import {string} from "@utils/string.js";
+
+// Global 변수
+const today = dayjs();
 
 const Diet = () => {
-  const today = dayjs();
   const [isModalOpen, setIsModalOpen] = useState(true);
+  const [isAddDietOpen, setIsAddDietOpen] = useState(true);
   const [selectedDay, setSelectedDay] = useState(today);
   const [startOfWeek, setStartOfWeek] = useState(today.startOf("week").add(1, "day"));
   const [markedDays, setMarkedDays] = useState([new Date(2025, 3, 8), new Date(2025, 3, 10)]);
-  const [bodyInfo, setBodyInfo] = useState({gender: "", age:0, cm:0, kg:0});
+  const [bodyInfo, setBodyInfo] = useState({gender: "", age:"", cm:"", kg:""});
+  const [consumeCalories, setConsumeCalories] = useState(0);
+  const [calories, setCalories] = useState(0);
+  const [modalTime, setModalTime] = useState();
+
   const week = Array.from({ length: 7 }).map((_, idx) => startOfWeek.add(idx, "day"));
   const defaultClassNames = getDefaultClassNames();
+
+  useEffect(() => {
+    const calorie = localStorage.getItem("calories");
+    if(calorie){
+      setCalories(calorie);
+      setIsModalOpen(false);
+    }
+  }, [])
 
   const handlePrevWeek = () => {
     setStartOfWeek(startOfWeek.subtract(7, "day"));
@@ -35,10 +56,6 @@ const Diet = () => {
     setSelectedDay(today);
   };
 
-  const handleSelectedDay = (date) => {
-    setSelectedDay(date);
-  }
-
   const handleChangeMonth = (month) => {
     console.log(dayjs(month).format("YYYY-MM"));
     // 해당 년,월에 데이터 받아오는 api 추가해야 함
@@ -49,7 +66,25 @@ const Diet = () => {
       ...prev,
       [type]: data
     }));
-    console.log(bodyInfo);
+  }
+
+  const handleComplete = () => {
+    console.log(bodyInfo)
+    if(bodyInfo.gender === '' || bodyInfo.kg === "" || bodyInfo.cm === "" || bodyInfo.age === "") {
+      toast.warn("아래 항목을 모두 입력해주세요.")
+      return;
+    }
+    setCalories(bodyInfo.gender === constant.MALE ? 66.47 + (13.75 * bodyInfo.kg) + (5 * bodyInfo.cm) - (6.76 * bodyInfo.age) :
+      655.1 + (9.56 * bodyInfo.kg) + (1.85 * bodyInfo.cm) - (4.68 * bodyInfo.age)
+    )
+    localStorage.setItem("calories", calories);
+    setIsModalOpen(false)
+
+  }
+
+  const handleModalOpen = (type) => {
+    setModalTime(type);
+    setIsAddDietOpen(true);
   }
 
   return (
@@ -68,20 +103,20 @@ const Diet = () => {
         <div className="flex justify-between pl-2 pr-2 mt-5">
           {week.map((date, idx) => {
             const isSelect = date.isSame(selectedDay, "day");
-            return <CalendarItem key={idx} idx={idx} date={date.format("DD")} isSelect={isSelect} onClick={() => handleSelectedDay(date)} />
+            return <CalendarItem key={idx} idx={idx} date={date.format("DD")} isSelect={isSelect} onClick={() => setSelectedDay(date)} />
           })}
         </div>
         <div className="bg-indigo-50 rounded-2xl h-[72vh] mt-3 p-5 flex flex-col gap-6 overflow-y-auto" style={{scrollbarWidth: 'none', msOverflowStyle: 'none'}}>
-          <DietContainer img={icMorning} title={string.MORNING}/>
-          <DietContainer img={icLunch} title={string.LUNCH}/>
-          <DietContainer img={icDinner} title={string.DINNER}/>
-          <DietContainer img={icSnack} title={string.SNACK}/>
+          <DietContainer img={icMorning} title={string.MORNING} onClickAdd={() => handleModalOpen(constant.MORNING)}/>
+          <DietContainer img={icLunch} title={string.LUNCH} onClickAdd={() => handleModalOpen(constant.LUNCH)}/>
+          <DietContainer img={icDinner} title={string.DINNER} onClickAdd={() => handleModalOpen(constant.DINNER)}/>
+          <DietContainer img={icSnack} title={string.SNACK} onClickAdd={() => handleModalOpen(constant.SNACK)}/>
         </div>
       </div>
       <div className="w-100">
         <div className="w-100 h-96 bg-white rounded-2xl border border-neutral-200 flex flex-col items-center">
           <p className="text-zinc-500 text-base font-bold mt-10">{string.CALORIE}</p>
-          <p className="text-black text-2xl font-extrabold"><span className="text-blue-800 text-3xl font-extrabold">1999</span>/2000{string.M_CALORIE}</p>
+          <p className="text-black text-2xl font-extrabold"><span className="text-blue-800 text-3xl font-extrabold">{consumeCalories}</span>/{Math.round(calories)}{string.M_CALORIE}</p>
           <img src={imgMainCharcter} className="w-28 h-28 mt-10"/>
           <div className="mt-5 flex gap-5 w-full justify-center">
             <Graph title={string.CARBOHYDRATE} percentage={20} color={"bg-(--primary)"}/>
@@ -111,7 +146,13 @@ const Diet = () => {
         </div>
       </div>
       {isModalOpen &&
-          <RecommendCalorie bodyInfo={bodyInfo} setBodyInfo={handleBodyInfo}/>
+          <RecommendCalorie bodyInfo={bodyInfo} setBodyInfo={handleBodyInfo} onClick={handleComplete}/>
+      }
+      {isAddDietOpen &&
+        <AddDiet
+          type={modalTime}
+          onClose={()=> setIsAddDietOpen(false)}
+        />
       }
     </div>
   );

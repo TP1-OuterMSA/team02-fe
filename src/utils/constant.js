@@ -4,4 +4,8 @@ export const constant = {
   DELETE: "delete",
   MALE: "남자",
   FEMALE: "여자",
+  MORNING: "morning",
+  LUNCH:"lunch",
+  DINNER: "dinner",
+  SNACK: "snack",
 }

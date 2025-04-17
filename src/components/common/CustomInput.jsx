@@ -1,9 +1,9 @@
 import clsx from "clsx";
 
-const CustomInput = ({text, setText, value, style}) => {
+const CustomInput = ({type, text, setText, value, style}) => {
   return (
     <input
-      type="text"
+      type={type}
       value={value}
       placeholder={text}
       onChange={(e) => setText(e.target.value)}

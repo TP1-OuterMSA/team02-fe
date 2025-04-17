@@ -2,7 +2,7 @@ import React from 'react';
 import {icPlusWhite} from "@assets/index.js";
 import DietItem from "@components/diet/DietItem.jsx";
 
-const DietContainer = ({img, title}) => {
+const DietContainer = ({img, title, onClickAdd}) => {
   return (
     <div className="px-7 py-5 bg-white rounded-3xl">
       <div className="flex justify-between items-center">
@@ -10,7 +10,7 @@ const DietContainer = ({img, title}) => {
           <img src={img} className="w-7 h-7"/>
           <p className="text-black text-xl font-bold">{title}</p>
         </div>
-        <div className="w-7 h-7 bg-blue-600 rounded-full flex justify-center items-center cursor-pointer">
+        <div className="w-7 h-7 bg-blue-600 rounded-full flex justify-center items-center cursor-pointer" onClick={onClickAdd}>
           <img src={icPlusWhite} className="w-4 h-4"/>
         </div>
       </div>

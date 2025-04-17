@@ -18,10 +18,10 @@ const RecommendCalorie = ({bodyInfo, setBodyInfo, onClick}) => {
           <div className="w-full pl-12 pr-12 mt-5">
             <div className="w-full flex gap-3">
               <SelectBox placholder={"성별"} items={boxItems} onChange={(item) => {setBodyInfo(item, "gender")}}/>
-              <CustomInput text={"나이(만)"} value={bodyInfo?.age === 0 ? "": bodyInfo?.age} setText={(item) => setBodyInfo(item, "age")} />
+              <CustomInput type={"number"} text={"나이(만)"} value={bodyInfo?.age === 0 ? "": bodyInfo?.age} setText={(item) => setBodyInfo(item, "age")} />
             </div>
-            <CustomInput text={"키(cm)"} style={"mt-4"} value={bodyInfo?.cm === 0 ? "": bodyInfo?.cm} setText={(item) => setBodyInfo(item, "cm")} />
-            <CustomInput text={"몸무게(kg)"} style={"mt-4 mb-6"} value={bodyInfo?.kg === 0 ? "": bodyInfo?.kg} setText={(item) => setBodyInfo(item, "kg")}/>
+            <CustomInput type={"number"} text={"키(cm)"} style={"mt-4"} value={bodyInfo?.cm === 0 ? "": bodyInfo?.cm} setText={(item) => setBodyInfo(item, "cm")} />
+            <CustomInput type={"number"} text={"몸무게(kg)"} style={"mt-4 mb-6"} value={bodyInfo?.kg === 0 ? "": bodyInfo?.kg} setText={(item) => setBodyInfo(item, "kg")}/>
             <LongButton text={"작성완료"} onClick={onClick}/>
             <p className="text-center mt-3 cursor-pointer" onClick={() => navigateTo(pagePath.COMMUNITY)}>다른 서비스 이용하기</p>
           </div>
