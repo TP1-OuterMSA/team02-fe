@@ -13,10 +13,11 @@ import DietContainer from "@components/diet/DietContainer.jsx";
 import RecommendCalorie from "@components/modal/RecommendCalorie.jsx";
 import AddDiet from "@components/modal/AddDiet.jsx";
 
-
 import {icRight, icLeft, imgMainCharcter, icMorning, icLunch, icDinner, icSnack} from "@assets/index.js";
 import {constant} from "@utils/constant.js";
 import {string} from "@utils/string.js";
+
+import userService from "@apis/user/userService.js";
 
 // Global 변수
 const today = dayjs();
@@ -68,16 +69,17 @@ const Diet = () => {
     }));
   }
 
-  const handleComplete = () => {
+  const handleComplete = async () => {
     console.log(bodyInfo)
     if(bodyInfo.gender === '' || bodyInfo.kg === "" || bodyInfo.cm === "" || bodyInfo.age === "") {
       toast.warn("아래 항목을 모두 입력해주세요.")
       return;
     }
-    setCalories(bodyInfo.gender === constant.MALE ? 66.47 + (13.75 * bodyInfo.kg) + (5 * bodyInfo.cm) - (6.76 * bodyInfo.age) :
-      655.1 + (9.56 * bodyInfo.kg) + (1.85 * bodyInfo.cm) - (4.68 * bodyInfo.age)
+    setCalories(bodyInfo.gender === constant.MALE ? Math.round(66.47 + (13.75 * bodyInfo.kg) + (5 * bodyInfo.cm) - (6.76 * bodyInfo.age)) :
+      Math.round(655.1 + (9.56 * bodyInfo.kg) + (1.85 * bodyInfo.cm) - (4.68 * bodyInfo.age))
     )
     localStorage.setItem("calories", calories);
+    await userService.updateRecommendKcal(calories);
     setIsModalOpen(false)
 
   }
@@ -116,7 +118,7 @@ const Diet = () => {
       <div className="w-100">
         <div className="w-100 h-96 bg-white rounded-2xl border border-neutral-200 flex flex-col items-center">
           <p className="text-zinc-500 text-base font-bold mt-10">{string.CALORIE}</p>
-          <p className="text-black text-2xl font-extrabold"><span className="text-blue-800 text-3xl font-extrabold">{consumeCalories}</span>/{Math.round(calories)}{string.M_CALORIE}</p>
+          <p className="text-black text-2xl font-extrabold"><span className="text-blue-800 text-3xl font-extrabold">{consumeCalories}</span>/{calories}{string.M_CALORIE}</p>
           <img src={imgMainCharcter} className="w-28 h-28 mt-10"/>
           <div className="mt-5 flex gap-5 w-full justify-center">
             <Graph title={string.CARBOHYDRATE} percentage={20} color={"bg-(--primary)"}/>
