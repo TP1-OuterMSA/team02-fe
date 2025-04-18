@@ -20,6 +20,8 @@ export const string = {
   LUNCH: "점심",
   DINNER: "저녁",
   SNACK:"간식",
+  GRAM: "gram",
+  NUMBER: "개수",
 
   TITLE: "제목",
   PH_TITLE: "제목을 입력해주세요.",

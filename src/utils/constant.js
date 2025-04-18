@@ -8,4 +8,6 @@ export const constant = {
   LUNCH:"LUNCH",
   DINNER: "DINNER",
   SNACK: "snack",
+  PLUS: "plus",
+  MINUS: "minus",
 }

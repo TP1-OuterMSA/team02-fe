@@ -20,7 +20,7 @@ const DietContainer = ({img, title, onClickAdd, data}) => {
           <DietItem
             key={index}
             food={item.foodName}
-            gram={100}
+            gram={item.intakeWeight}
             kcal={item.intakeKcal}
           />
         ))}

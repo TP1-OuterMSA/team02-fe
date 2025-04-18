@@ -14,7 +14,7 @@ export const getDietDate = async (month) => {
   return response.data;
 }
 
-export const getFoods = async ({pageNo = 2, pageSize = 2, foodName}) => {
+export const getFoods = async ({pageNo = 1, pageSize = 2, foodName}) => {
   const response = await axiosInstance.get('/diet/getFoods', {
     params: {pageNo, pageSize, foodName}
   });

@@ -18,13 +18,14 @@ import {constant} from "@utils/constant.js";
 import {string} from "@utils/string.js";
 
 import userService from "@apis/user/userService.js";
-import dietService, {getDietDate} from "@apis/diet/dietService.js";
+import dietService from "@apis/diet/dietService.js";
+import {data} from "autoprefixer";
 
 // Global 변수
 const today = dayjs();
 
 const Diet = () => {
-  const [isModalOpen, setIsModalOpen] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [isAddDietOpen, setIsAddDietOpen] = useState(false);
   const [selectedDay, setSelectedDay] = useState(today);
   const [startOfWeek, setStartOfWeek] = useState(today.startOf("week").add(1, "day"));
@@ -44,12 +45,9 @@ const Diet = () => {
 
 
   useEffect(() => {
-    const calorie = localStorage.getItem("calories");
-    if(calorie){
-      setCalories(calorie);
-      setIsModalOpen(false);
-    }
+    patchUserData();
   }, []);
+
 
   // 오른쪽 하단 달력 전체에 연결되는 api
   useEffect(() => {
@@ -61,6 +59,11 @@ const Diet = () => {
     patchGetDiets();
   }, [selectedDay]);
 
+  const patchUserData = async () => {
+    const userData = await userService.getRecommendKcal();
+    if(userData === null) setIsModalOpen(true);
+    setCalories(userData);
+  }
 
   const patchDiaryData = async () => {
     const datas = await dietService.getDietDate(currentMonth);
@@ -122,8 +125,7 @@ const Diet = () => {
     setCalories(bodyInfo.gender === constant.MALE ? Math.round(66.47 + (13.75 * bodyInfo.kg) + (5 * bodyInfo.cm) - (6.76 * bodyInfo.age)) :
       Math.round(655.1 + (9.56 * bodyInfo.kg) + (1.85 * bodyInfo.cm) - (4.68 * bodyInfo.age))
     )
-    localStorage.setItem("calories", calories);
-    // await userService.updateRecommendKcal(calories);
+    await userService.updateRecommendKcal(calories);
     setIsModalOpen(false)
   }
 
