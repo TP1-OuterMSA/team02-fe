@@ -3,6 +3,8 @@ export const string = {
   USE: "이용하기",
   WRITE: "글 작성",
   SAVE: "저장하기",
+  SAVEANDCLOSE: "저장하고 닫기",
+  ADD: "추가하기",
   SELECT: "사진선택",
   COMPLETE: "작성완료",
   EDITCOMPLETE: "수정완료",
