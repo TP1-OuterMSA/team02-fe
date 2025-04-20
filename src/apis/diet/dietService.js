@@ -21,10 +21,16 @@ export const getFoods = async ({pageNo = 1, pageSize = 2, foodName}) => {
   return response.data;
 }
 
+export const saveDiet = async ({date, mealType, foods}) => {
+  const response = await axiosInstance.post("/diet/saveDiet", {date, mealType,foods});
+  return response.data;
+}
+
 const dietService = {
   getDietDate,
   getDiets,
   getFoods,
+  saveDiet,
 }
 
 export default dietService;

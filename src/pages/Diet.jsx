@@ -40,7 +40,6 @@ const Diet = () => {
   const [calories, setCalories] = useState(0);
   const [modalTime, setModalTime] = useState();
   const [currentMonth, setCurrentMonth] = useState(dayjs().format('YYYY-MM'));
-
   const week = Array.from({ length: 7 }).map((_, idx) => startOfWeek.add(idx, "day"));
   const defaultClassNames = getDefaultClassNames();
 
@@ -78,7 +77,7 @@ const Diet = () => {
     setSnack([]);
 
     const datas = await dietService.getDiets(selectedDay.format("YYYY-MM-DD"));
-    console.log(datas);
+
     datas?.forEach((data) => {
       switch(data.type){
         case constant.BREAKFAST:
@@ -133,6 +132,20 @@ const Diet = () => {
   const handleModalOpen = (type) => {
     setModalTime(type);
     setIsAddDietOpen(true);
+  }
+
+  const handleSaveAndClose = async (data) => {
+    const transData = data?.map((item) => ({
+      foodCode: item.foodCode,
+      intakeWeight: item.foodWeight,
+      intakeKcal: item.kcal,
+    }))
+    console.log(transData);
+    if(transData.length > 0) {
+      await dietService.saveDiet({date: selectedDay.format("YYYY-MM-DD"), mealType: modalTime, foods: transData});
+    }
+    await patchGetDiets();
+    setIsAddDietOpen(false);
   }
 
   return (
@@ -199,7 +212,7 @@ const Diet = () => {
       {isAddDietOpen &&
         <AddDiet
           type={modalTime}
-          onClose={()=> setIsAddDietOpen(false)}
+          onClose={handleSaveAndClose}
         />
       }
     </div>
