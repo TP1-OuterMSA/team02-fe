@@ -9,7 +9,6 @@ import Button from "@components/common/Button.jsx";
 import TabMenu from "@components/common/TabMenu.jsx";
 import OvalLineButton from "@components/diet/OvalLineButton.jsx";
 import dietService from "@apis/diet/dietService.js";
-import {useCustomCalcKcal} from "@hooks/useCustomCalcKcal.js";
 import {ClipLoader} from "react-spinners";
 
 const dummyData = [{foodCode: "D011002", foodGroupName:"쌀밥", foodName:"쌀밥", foodWeight: 210, kcal: 307}, {foodCode: "D012096", foodGroupName:"잡곡밥류", foodName:"현미찹쌀밥", foodWeight: 100, kcal: 105}];
@@ -27,8 +26,10 @@ const AddDiet = ({type, onClose}) => {
   const [number, setNumber] = useState(1);
   const [activeFood, setActiveFood] = useState();
   const [dietPickList, setDietPickList] = useState([]);
+  const [originKcal, setOriginKcal] = useState(0);
 
-  const {gramToKcal} = useCustomCalcKcal();
+  const perGram = originKcal && gram ? originKcal / gram : 0;
+
 
   useEffect(()=> {
     setFoodData(dummyData);
@@ -37,7 +38,7 @@ const AddDiet = ({type, onClose}) => {
   // debounce 적용
   useEffect(() => {
     if (debounce !== "") {
-      patchFoodsData();
+      // patchFoodsData();
     }
   }, [debounce]);
 
@@ -59,6 +60,30 @@ const AddDiet = ({type, onClose}) => {
     }
   }, [tabMenu, gram]);
 
+  // tabMenu가 변경될 때마다 activeFood.kcal 초기화
+  useEffect(() => {
+    setActiveFood((prev) => ({
+      ...prev,
+      kcal: originKcal,
+    }));
+  }, [tabMenu]);
+
+  // input값 변경에 따른 kcal 처리
+  useEffect(() => {
+    if (input === '' || isNaN(input)) return;
+
+    const updatedKcal =
+        tabMenu === string.GRAM
+            ? Number(input) * perGram
+            : Number(input) * originKcal;
+
+    setActiveFood((prevFood) => ({
+      ...prevFood,
+      kcal: Math.round(updatedKcal),
+      foodWeight: tabMenu === string.GRAM ? input : input * gram
+    }));
+  }, [input, tabMenu, originKcal, perGram]);
+
   const patchFoodsData = async () => {
     setIsFetching(true);
     try{
@@ -74,23 +99,54 @@ const AddDiet = ({type, onClose}) => {
   }
 
   const handlePlusMinus = (type) => {
-    const perGram = gramToKcal(activeFood.foodWeight, activeFood.kcal);
-    console.log(perGram);
-    if(tabMenu === string.GRAM){
-      setInput((prev) =>type === constant.PLUS ? prev+5 : prev === 0 ? prev=0 : prev-5);
+    if (tabMenu === string.GRAM) {
+      setInput((prev) => {
+        const newInput = type === constant.PLUS ? prev + 5 : Math.max(prev - 5, 0);
+        setActiveFood((prev) => {
+          const kcalChange = perGram * 5;
+          const newKcal = type === constant.PLUS
+              ? prev.kcal + kcalChange
+              : Math.max(prev.kcal - kcalChange, 0);
+          return { ...prev, kcal: newKcal, foodWeight: newInput };
+        });
+        return newInput;
+      });
 
-      setActiveFood((prev) => type === constant.PLUS ? prev.kcal = prev.kcal + perGram * 5: prev.kcal - perGram * 5)
-    } else if(tabMenu === string.NUMBER){
-      setInput((prev) =>type === constant.PLUS ? prev+1 : prev === 0 ? prev=0 : prev-1);
+
+    } else if (tabMenu === string.NUMBER) {
+      setInput((prev) => {
+        const newInput = type === constant.PLUS ? prev + 1 : Math.max(prev - 1, 1);
+        setActiveFood((prevFood) => ({
+          ...prevFood,
+          kcal: originKcal * newInput,
+        }));
+        return newInput;
+      });
     }
-  }
+  };
+
 
   const handleDietItem = (data) => {
     setActiveFood(data);
     setGram(data.foodWeight);
-    console.log(data);
+    setOriginKcal(data.kcal);
+    setTabMenu(string.GRAM);
+    setInput(data.foodWeight);
   }
 
+  const handleAddDietItem = () => {
+    console.log(activeFood);
+    setDietPickList((prev) => [
+        ...prev, activeFood]);
+    setActiveFood("");
+  }
+
+  const handlePickDietList = (index) => {
+    console.log(index);
+    setDietPickList((prev) => prev.filter((item,idx) => idx !== index));
+  }
+
+  console.log(dietPickList);
   return (
     <div className="fixed inset-0 flex justify-center items-center bg-black/30 z-20">
       <div className="bg-white w-260 p-10 z-20 rounded-2xl flex flex-col items-center">
@@ -129,28 +185,34 @@ const AddDiet = ({type, onClose}) => {
             <div className="w-full bg-white rounded-2xl border border-neutral-200 p-4 h-72 ">
               <p className="text-black text-sm font-bold mb-3">내가 추가한 식사</p>
               <div className="h-56 overflow-y-auto">
+                {dietPickList.length > 0 && dietPickList.map((item, index) => (
+                    <AddDietReuslt key={index} {...item} onClick={() => {handlePickDietList(index)}}/>
+                ))}
               </div>
             </div>
             <div className="w-full bg-white rounded-2xl border border-neutral-200 p-4 h-54 flex flex-col items-center">
               <TabMenu leftItem={string.GRAM} rightItem={string.NUMBER} setActive={setTabMenu}/>
-              <div className="flex gap-2 mt-8">
+              <div className="flex gap-2 mt-8 ">
                 <OvalLineButton src={icMinus} onClick={() => {handlePlusMinus(constant.MINUS)}}/>
                 <input
                   type="number"
                   value={input}
-                  onChange={(e) => {setInput(e.target.value)}}
+                  onChange={(e) => {setInput(e.target.value === '' ? setInput('') : Number(e.target.value))}}
                   className="appearance-none [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none w-20 text-center text-black text-xl font-bold appearance-none"/>
+                {tabMenu === string.GRAM && (
+                    <span className="absolute right-2 top-1/2 transform -translate-y-1/2 text-black text-sm">g</span>
+                )}
                 <OvalLineButton src={icPlus} onClick={() => {handlePlusMinus(constant.PLUS)}}/>
               </div>
               {activeFood && <div className="pl-3 pr-3 pt-2 pb-2 bg-stone-100 rounded-md mt-5">
-                <p className="text-black text-base font-bold">{Math.round(activeFood?.kcal)} Kcal</p>
+                <p className="text-black text-base font-bold">{Math.round(activeFood?.kcal)}Kcal</p>
               </div>}
             </div>
           </div>
         </div>
         <div className="flex gap-3">
           <Button text={string.SAVEANDCLOSE} style="bg-neutral-500" onClick={onClose}/>
-          <Button text={string.ADD}/>
+          <Button text={string.ADD} onClick={handleAddDietItem}/>
         </div>
 
       </div>
