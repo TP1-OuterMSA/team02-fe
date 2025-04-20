@@ -2,6 +2,8 @@ import {useState, useEffect} from "react";
 import dayjs from "dayjs";
 import 'dayjs/locale/ko';
 dayjs.locale("ko");
+import isoWeek from 'dayjs/plugin/isoWeek';
+dayjs.extend(isoWeek);
 import {DayPicker, getDefaultClassNames} from "react-day-picker";
 import "react-day-picker/style.css";
 import {toast} from "react-toastify";
@@ -19,7 +21,6 @@ import {string} from "@utils/string.js";
 
 import userService from "@apis/user/userService.js";
 import dietService from "@apis/diet/dietService.js";
-import {data} from "autoprefixer";
 
 // Global 변수
 const today = dayjs();
@@ -28,7 +29,7 @@ const Diet = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isAddDietOpen, setIsAddDietOpen] = useState(false);
   const [selectedDay, setSelectedDay] = useState(today);
-  const [startOfWeek, setStartOfWeek] = useState(today.startOf("week").add(1, "day"));
+  const [startOfWeek, setStartOfWeek] = useState(today.startOf("isoWeek"));
   const [markedDays, setMarkedDays] = useState([]);
   const [breakFast, setBreakFast] = useState([]);
   const [lunch, setLunch] = useState([]);
@@ -105,7 +106,7 @@ const Diet = () => {
   };
 
   const handleToday = () => {
-    setStartOfWeek(today.startOf("week").add(1, "day"));
+    setStartOfWeek(today.startOf("isoWeek"));
     setSelectedDay(today);
   };
 
