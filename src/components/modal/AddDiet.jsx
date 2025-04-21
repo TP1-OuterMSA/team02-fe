@@ -1,4 +1,4 @@
-import {useState, useEffect} from "react";
+import {useState, useEffect, useRef} from "react";
 import {useInView} from "react-intersection-observer";
 import {icClose, imgRice, icPlus, icMinus, imgNoodle} from "@assets/index.js";
 import {string} from "@utils/string.js";
@@ -34,6 +34,7 @@ const AddDiet = ({type, onClose}) => {
   const {ref, inView} = useInView({
     threshold: 0,
   })
+  const isFetchingRef = useRef(false);
 
   // useEffect(()=> {
   //   setFoodData(dummyData);
@@ -49,11 +50,14 @@ const AddDiet = ({type, onClose}) => {
   // debounce 적용
   useEffect(() => {
     const delaydebounceTimer = setTimeout(() => {
+      setPageNo(1); // 페이지 초기화
+      setFoodData([]); // 기존 데이터 초기화
       setDebounce(foodName);
     }, 500);
 
     return () => clearTimeout(delaydebounceTimer);
   }, [foodName]);
+
 
   // tabmenu 변경에 따른 input 값 처리
   useEffect(() => {
@@ -88,12 +92,19 @@ const AddDiet = ({type, onClose}) => {
     }));
   }, [input, tabMenu, originKcal, perGram]);
 
+
   useEffect(() => {
-      if(inView && !isFetching && cursor !== null){
-        setPageNo(pageNo+1);
-        patchFoodsData();
-      }
-  }, [inView])
+    if (pageNo > 1 || debounce !== "") {
+      patchFoodsData();
+    }
+  }, [pageNo]);
+
+  useEffect(()=> {
+    if(inView && !isFetchingRef.current){
+      isFetchingRef.current = true;
+      setPageNo((prev) => prev + 1);
+    }
+  }, [inView]);
 
   const patchFoodsData = async () => {
     if(isFetching) return;
@@ -102,12 +113,13 @@ const AddDiet = ({type, onClose}) => {
     try{
       const data = await dietService.getFoods({pageNo, pageSize, foodName});
       if(data.length > 0){
-        setFoodData(data);
+        setFoodData((prev) => [...prev, ...data]);
       }
     } catch(error){
       console.error(error)
     } finally {
       setIsFetching(false);
+      isFetchingRef.current = false; // 다시 false로 돌려놓기
     }
   }
 
@@ -158,6 +170,13 @@ const AddDiet = ({type, onClose}) => {
     setDietPickList((prev) => prev.filter((item,idx) => idx !== index));
   }
 
+  const handleOnKeyUp = (e) => {
+    if(e.key === 'Enter'){
+      setDebounce(foodName); // 검색어 즉시 반영
+      patchFoodsData();
+    }
+  }
+
   return (
     <div className="fixed inset-0 flex justify-center items-center bg-black/30 z-20">
       <div className="bg-white w-260 p-10 z-20 rounded-2xl flex flex-col items-center">
@@ -167,7 +186,7 @@ const AddDiet = ({type, onClose}) => {
         </div>
         <div className="w-full flex justify-between gap-5 mt-10 mb-5">
           <div className="w-full">
-            <SearchBar placeholder={string.PH_SEARCH} value={foodName} setValue={(item) => setFoodName(item)}/>
+            <SearchBar placeholder={string.PH_SEARCH} onKeyUp={handleOnKeyUp} value={foodName} setValue={(item) => setFoodName(item)}/>
             <button
               className="bg-(--primary) cursor-pointer flex w-full rounded-xl p-3 gap-1 items-center justify-center mt-4">
               <img src={imgRice} className="w-5 h-5"/>
@@ -190,8 +209,7 @@ const AddDiet = ({type, onClose}) => {
                   <p className="text-stone-400 text-base font-bold">오늘 어떤 음식을 먹었나요?</p>
                 </div>
               )}
-              <div className="w-full h-10" ref={ref}>
-
+              <div className="w-full h-10 mt-3" ref={ref}>
               </div>
             </div>
           </div>
