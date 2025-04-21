@@ -12,7 +12,6 @@ on:
 env:
   APP_ENV: development
   VITE_APP_BASE_URL: ${{ secrets.REACT_APP_API_URL }}/api/team2
-  VITE_API_URL: ${{ secrets.SERVER_HOST }}
   APP_NAME: team02-fe
   ECR_REPOSITORY: 809691348554.dkr.ecr.ap-northeast-2.amazonaws.com/team02-fe-repository
 permissions:
