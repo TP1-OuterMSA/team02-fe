@@ -12,6 +12,7 @@ import OvalLineButton from "@components/diet/OvalLineButton.jsx";
 import dietService from "@apis/diet/dietService.js";
 import {ClipLoader} from "react-spinners";
 import {cursor} from "@tailwindcss/postcss7-compat/lib/plugins/index.js";
+import {toast} from "react-toastify";
 
 const dummyData = [{foodCode: "D011002", foodGroupName:"쌀밥", foodName:"쌀밥", foodWeight: 210, kcal: 307}, {foodCode: "D012096", foodGroupName:"잡곡밥류", foodName:"현미찹쌀밥", foodWeight: 100, kcal: 105}];
 
@@ -161,8 +162,16 @@ const AddDiet = ({type, onClose}) => {
 
   const handleAddDietItem = () => {
     if(activeFood?.kcal === 0 || !activeFood) return;
-    setDietPickList((prev) => [
-        ...prev, activeFood]);
+    setDietPickList((prev) =>{
+      const isExist = prev.some(item => item.foodCode === activeFood.foodCode);
+
+      if(isExist){
+        toast.warn("이미 추가된 음식입니다.");
+        return prev;
+      }
+
+      return [...prev, activeFood];
+    });
     setActiveFood("");
   }
 
