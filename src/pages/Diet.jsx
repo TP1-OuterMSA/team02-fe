@@ -46,8 +46,7 @@ const Diet = () => {
 
   useEffect(() => {
     patchUserData();
-  }, []);
-
+  }, [calories]);
 
   // 오른쪽 하단 달력 전체에 연결되는 api
   useEffect(() => {
@@ -61,8 +60,8 @@ const Diet = () => {
 
   const patchUserData = async () => {
     const userData = await userService.getRecommendKcal();
-    if(userData === null) setIsModalOpen(true);
-    setCalories(userData);
+    if(userData === 0) setIsModalOpen(true);
+    else setCalories(userData);
   }
 
   const patchDiaryData = async () => {
@@ -117,15 +116,14 @@ const Diet = () => {
   }
 
   const handleComplete = async () => {
-    console.log(bodyInfo)
     if(bodyInfo.gender === '' || bodyInfo.kg === "" || bodyInfo.cm === "" || bodyInfo.age === "") {
       toast.warn("아래 항목을 모두 입력해주세요.")
       return;
     }
-    setCalories(bodyInfo.gender === constant.MALE ? Math.round(66.47 + (13.75 * bodyInfo.kg) + (5 * bodyInfo.cm) - (6.76 * bodyInfo.age)) :
-      Math.round(655.1 + (9.56 * bodyInfo.kg) + (1.85 * bodyInfo.cm) - (4.68 * bodyInfo.age))
-    )
+    const calories = bodyInfo.gender === constant.MALE ? Math.round(66.47 + (13.75 * bodyInfo.kg) + (5 * bodyInfo.cm) - (6.76 * bodyInfo.age)) :
+      Math.round(655.1 + (9.56 * bodyInfo.kg) + (1.85 * bodyInfo.cm) - (4.68 * bodyInfo.age));
     await userService.updateRecommendKcal(calories);
+    await patchUserData();
     setIsModalOpen(false)
   }
 

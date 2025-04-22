@@ -36,14 +36,14 @@ const AddDiet = ({type, onClose}) => {
   })
   const isFetchingRef = useRef(false);
 
-  // useEffect(()=> {
-  //   setFoodData(dummyData);
-  // }, [])
+  useEffect(()=> {
+    setFoodData(dummyData);
+  }, [])
 
   // debounce 적용
   useEffect(() => {
     if (debounce !== "") {
-      patchFoodsData();
+      // patchFoodsData();
     }
   }, [debounce]);
 
@@ -51,7 +51,7 @@ const AddDiet = ({type, onClose}) => {
   useEffect(() => {
     const delaydebounceTimer = setTimeout(() => {
       setPageNo(1); // 페이지 초기화
-      setFoodData([]); // 기존 데이터 초기화
+      // setFoodData([]); // 기존 데이터 초기화
       setDebounce(foodName);
     }, 500);
 
@@ -95,7 +95,7 @@ const AddDiet = ({type, onClose}) => {
 
   useEffect(() => {
     if (pageNo > 1 || debounce !== "") {
-      patchFoodsData();
+      // patchFoodsData();
     }
   }, [pageNo]);
 
@@ -107,20 +107,20 @@ const AddDiet = ({type, onClose}) => {
   }, [inView]);
 
   const patchFoodsData = async () => {
-    if(isFetching) return;
-    setIsFetching(true);
-
-    try{
-      const data = await dietService.getFoods({pageNo, pageSize, foodName});
-      if(data.length > 0){
-        setFoodData((prev) => [...prev, ...data]);
-      }
-    } catch(error){
-      console.error(error)
-    } finally {
-      setIsFetching(false);
-      isFetchingRef.current = false; // 다시 false로 돌려놓기
-    }
+    // if(isFetching) return;
+    // setIsFetching(true);
+    //
+    // try{
+    //   const data = await dietService.getFoods({pageNo, pageSize, foodName});
+    //   if(data.length > 0){
+    //     setFoodData((prev) => [...prev, ...data]);
+    //   }
+    // } catch(error){
+    //   console.error(error)
+    // } finally {
+    //   setIsFetching(false);
+    //   isFetchingRef.current = false; // 다시 false로 돌려놓기
+    // }
   }
 
   const handlePlusMinus = (type) => {
