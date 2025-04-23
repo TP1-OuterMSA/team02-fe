@@ -11,12 +11,9 @@ import TabMenu from "@components/common/TabMenu.jsx";
 import OvalLineButton from "@components/diet/OvalLineButton.jsx";
 import dietService from "@apis/diet/dietService.js";
 import {ClipLoader} from "react-spinners";
-import {cursor} from "@tailwindcss/postcss7-compat/lib/plugins/index.js";
 import {toast} from "react-toastify";
 
-const dummyData = [{foodCode: "D011002", foodGroupName:"쌀밥", foodName:"쌀밥", foodWeight: 210, kcal: 307}, {foodCode: "D012096", foodGroupName:"잡곡밥류", foodName:"현미찹쌀밥", foodWeight: 100, kcal: 105}];
-
-const AddDiet = ({type, onClose}) => {
+const AddDiet = ({onClose}) => {
   const [isFetching, setIsFetching] = useState(false);
   const [foodData, setFoodData] = useState([]);
   const [pageNo, setPageNo] = useState(1);
@@ -24,7 +21,7 @@ const AddDiet = ({type, onClose}) => {
   const [foodName, setFoodName] = useState("");
   const [debounce, setDebounce] = useState(foodName);
   const [input, setInput] = useState(0);
-  const [tabMenu, setTabMenu] = useState();
+  const [tabMenu, setTabMenu] = useState(string.GRAM);
   const [gram, setGram] = useState(100);
   const [number, setNumber] = useState(1);
   const [activeFood, setActiveFood] = useState({});
@@ -37,14 +34,10 @@ const AddDiet = ({type, onClose}) => {
   })
   const isFetchingRef = useRef(false);
 
-  useEffect(()=> {
-    setFoodData(dummyData);
-  }, [])
-
   // debounce 적용
   useEffect(() => {
     if (debounce !== "") {
-      // patchFoodsData();
+      patchFoodsData();
     }
   }, [debounce]);
 
@@ -52,9 +45,9 @@ const AddDiet = ({type, onClose}) => {
   useEffect(() => {
     const delaydebounceTimer = setTimeout(() => {
       setPageNo(1); // 페이지 초기화
-      // setFoodData([]); // 기존 데이터 초기화
+      setFoodData([]); // 기존 데이터 초기화
       setDebounce(foodName);
-    }, 500);
+    }, 1000);
 
     return () => clearTimeout(delaydebounceTimer);
   }, [foodName]);
@@ -96,7 +89,7 @@ const AddDiet = ({type, onClose}) => {
 
   useEffect(() => {
     if (pageNo > 1 || debounce !== "") {
-      // patchFoodsData();
+      patchFoodsData();
     }
   }, [pageNo]);
 
@@ -108,20 +101,20 @@ const AddDiet = ({type, onClose}) => {
   }, [inView]);
 
   const patchFoodsData = async () => {
-    // if(isFetching) return;
-    // setIsFetching(true);
-    //
-    // try{
-    //   const data = await dietService.getFoods({pageNo, pageSize, foodName});
-    //   if(data.length > 0){
-    //     setFoodData((prev) => [...prev, ...data]);
-    //   }
-    // } catch(error){
-    //   console.error(error)
-    // } finally {
-    //   setIsFetching(false);
-    //   isFetchingRef.current = false; // 다시 false로 돌려놓기
-    // }
+    if(isFetching) return;
+    setIsFetching(true);
+
+    try{
+      const data = await dietService.getFoods({pageNo, pageSize, foodName});
+      if(data.length > 0){
+        setFoodData((prev) => [...prev, ...data]);
+      }
+    } catch(error){
+      console.error(error)
+    } finally {
+      setIsFetching(false);
+      isFetchingRef.current = false; // 다시 false로 돌려놓기
+    }
   }
 
   const handlePlusMinus = (type) => {
@@ -218,7 +211,8 @@ const AddDiet = ({type, onClose}) => {
                   <p className="text-stone-400 text-base font-bold">오늘 어떤 음식을 먹었나요?</p>
                 </div>
               )}
-              <div className="w-full h-10 mt-3" ref={ref}>
+              <div className="w-full h-10 mt-3 flex justify-center" ref={ref}>
+                {isFetching && <ClipLoader/>}
               </div>
             </div>
           </div>
@@ -238,7 +232,10 @@ const AddDiet = ({type, onClose}) => {
                 <input
                   type="number"
                   value={Math.round(input)}
-                  onChange={(e) => {setInput(e.target.value === '' ? setInput('') : Number(e.target.value))}}
+                  onChange={(e) => {
+                    const val = e.target.value;
+                    setInput(val === '' ? '' : Number(val));
+                  }}
                   className="appearance-none [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none w-20 text-center text-black text-xl font-bold appearance-none"/>
                 {tabMenu === string.GRAM && (
                     <span className="absolute right-2 top-1/2 transform -translate-y-1/2 text-black text-sm">g</span>

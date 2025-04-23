@@ -15,7 +15,7 @@ import DietContainer from "@components/diet/DietContainer.jsx";
 import RecommendCalorie from "@components/modal/RecommendCalorie.jsx";
 import AddDiet from "@components/modal/AddDiet.jsx";
 
-import {icRight, icLeft, imgMainCharcter, icMorning, icLunch, icDinner, icSnack} from "@assets/index.js";
+import {icRight, icLeft, imgMainCharcter, icMorning, icLunch, icDinner, icSnack, imgEatRice} from "@assets/index.js";
 import {constant} from "@utils/constant.js";
 import {string} from "@utils/string.js";
 
