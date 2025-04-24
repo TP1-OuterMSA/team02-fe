@@ -24,13 +24,13 @@ export const string = {
   SNACK:"간식",
   GRAM: "gram",
   NUMBER: "개수",
-
   TITLE: "제목",
   PH_TITLE: "제목을 입력해주세요.",
   CONTENT: "글 내용",
   PH_CONTENT: "글 내용을 입력해주세요.",
   PH_REPLY: "댓글을 입력해주세요",
   PH_SEARCH : "음식을 검색해보세요",
+
   BLANK: "공유된 식단이 없습니다.",
   BLANK_CONTENT: " 제일 먼저 글을 작성해보세요!",
 
