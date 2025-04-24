@@ -3,7 +3,7 @@ import {useLocation} from "react-router-dom";
 import dayjs from "dayjs";
 import {toast} from "react-toastify";
 
-import {icKebab, icHand, icHandFill, icSend, icChat, icPerson, icDate} from "@assets";
+import {icKebab, icHand, icHandFill, icSend, icChat, icPerson, icDate, icThumb, icThumbFill} from "@assets/";
 import communityService from "@apis/community/communityService.js";
 import commentService from "@apis/comments/commentService.js";
 import ReplyForm from "@components/communityDetail/ReplyForm.jsx";
@@ -24,6 +24,7 @@ const CommunityDetail = () => {
   const [isEdit, setIsEdit] = useState(false);
   const [floatReactions, setFloatReactions] = useState([]);
   const [replyEditMap, setReplyEditMap] = useState({});
+  const [replyLikeMap, setReplyLikeMap] = useState({});
   const [image, setImage] = useState();
   const [preView, setPreView] = useState();
   const [title, setTitle] = useState("");
@@ -156,7 +157,9 @@ const CommunityDetail = () => {
           await updateComment(commentId, commentMap[commentId]);
         }
         break;
-      case constant.SIREN:
+      case constant.THUMB:
+        // 댓글 좋아요 api 연동해야함
+        setReplyLikeMap(prev => ({...prev, [commentId]: !prev[commentId]}));
         break;
       case constant.DELETE:
         await deleteComment(commentId);
@@ -165,6 +168,7 @@ const CommunityDetail = () => {
     await fetchData();
   }
 
+  console.log(replyLikeMap)
   // 댓글 수정 API
   const updateComment = async (commentId, content) => {
     try{
@@ -221,6 +225,7 @@ const CommunityDetail = () => {
     }, 3000); // 3초 후 제거
   }
 
+  console.log(detail)
   return (
       <div className="pl-10 pr-10 text-wrap mb-10 w-full">
         <header className="border-b pb-6 border-gray-200 relative">
@@ -236,6 +241,8 @@ const CommunityDetail = () => {
           <div className="flex gap-1 items-center">
             <img src={icDate} className="w-5 h-5"/>
             <p className="text-zinc-600 text-base font-normal">{dayjs(detail?.createdAt).format("YY.MM.DD")}</p>
+            <div className="w-1 h-1 bg-black rounded-full ml-1 mr-1"></div>
+            <p className="text-neutral-400 text-base font-norma">24.05.24에 수정됨</p>
           </div>
         </div>
         {isMenuOpen && (
@@ -290,6 +297,7 @@ const CommunityDetail = () => {
             <ReplyForm
                 key={idx}
                 data={item}
+                isLike={replyLikeMap[item?.commentId]}
                 isMine={myId === item?.userId.toString()}
                 isEdit={replyEditMap[item?.commentId] === true}
                 comment={commentMap[item?.commentId] !== undefined ? commentMap[item?.commentId] : item.content}
