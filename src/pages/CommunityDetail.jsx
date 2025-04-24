@@ -15,8 +15,6 @@ import {pagePath} from "@/routes/pagePath.js";
 import {string} from "@utils/string.js";
 import {constant} from "@utils/constant.js";
 
-
-
 const CommunityDetail = () => {
   const [isLiked, setIsLiked] = useState(false);
   const [search, setSearch] = useState("");
@@ -63,7 +61,6 @@ const CommunityDetail = () => {
   const fetchData = async () => {
     try {
       const postDetails = await communityService.getPostById(postId);
-      console.log(postDetails);
       setDetail(postDetails);
       setReply(postDetails.commentResponseList);
       setPreView(postDetails.image);
@@ -153,7 +150,6 @@ const CommunityDetail = () => {
         setReplyEditMap(prev => ({...prev, [commentId]: !prev[commentId]}));
         if(replyEditMap[commentId] && !!commentMap[commentId]){
           await updateComment(commentId, commentMap[commentId]);
-
         }
         break;
       case constant.SIREN:

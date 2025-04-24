@@ -46,7 +46,6 @@ const Community = () => {
     setIsFetching(true);
 
     try {
-      console.log(activeBadge)
       const posts = await communityService.getPosts(cursor, 4, activeBadge);
 
       if (posts.length > 0) {
