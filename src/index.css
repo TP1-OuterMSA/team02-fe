@@ -33,19 +33,19 @@
 }
 
 @layer components {
-    select{
+    select {
         -o-appearance: none;
         -webkit-appearance: none;
         -moz-appearance: none;
         appearance: none;
     }
 
-    .sidebar_text{
+    .sidebar_text {
         font-size: 1.2rem;
         font-weight: bold;
     }
 
-    .sidebar_menu{
+    .sidebar_menu {
         display: flex;
         gap: 0.5rem;
         padding: 1rem;
@@ -58,61 +58,50 @@
         background-color: var(--primary);
         border-radius: 0.5rem;
         color: white;
-
-        .lnb_menu {
-            cursor: pointer;
-            padding: 24px;
-            border: var(--primary);
-        }
-
-        .lnb_menu:hover, .lnb_menu_active {
-            border-bottom: 2px solid var(--primary);
-            color: var(--primary);
-
-        }
-
-        .skeleton {
-            width: 120px;
-            height: 23px;
-            border-radius: 5px;
-            background-color: var(--skeleton);
-            animation: var(--animate-pulse);
-        }
-
-        .dropdown_menu {
-            font-size: 16px;
-            font-weight: 400;
-            padding: 16px;
-            cursor: pointer;
-        }
-
-        .menu {
-            position: absolute;
-            top: 40px;
-            right: 0;
-            width: 150px;
-            background: white;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-            opacity: 0;
-            transform: translateY(-10px);
-            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
-            pointer-events: none;
-        }
-
-        .menu.open {
-            opacity: 1;
-            transform: translateY(0);
-            pointer-events: auto;
-        }
-
-        .marked-day {
-            background-image: url("/src/assets/images/img_rice.svg");
-            background-repeat: no-repeat;
-            background-position: center;
-            font-weight: bold;
-            text-align: center;
-        }
-
     }
+
+    .skeleton {
+        width: 120px;
+        height: 23px;
+        border-radius: 5px;
+        background-color: var(--skeleton);
+        animation: var(--animate-pulse);
+    }
+
+    .dropdown_menu {
+        font-size: 16px;
+        font-weight: 400;
+        padding: 16px;
+        cursor: pointer;
+    }
+
+    .menu {
+        position: absolute;
+        top: 40px;
+        right: 0;
+        width: 150px;
+        background: white;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        opacity: 0;
+        transform: translateY(-10px);
+        transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+        pointer-events: none;
+    }
+
+    .menu.open {
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
+    }
+
+    .marked-day {
+        background-image: url("/src/assets/images/img_rice.svg");
+        background-repeat: no-repeat;
+        background-position: center;
+        font-weight: bold;
+        text-align: center;
+    }
+
 }
+
