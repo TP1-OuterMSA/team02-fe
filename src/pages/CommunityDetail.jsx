@@ -115,12 +115,14 @@ const CommunityDetail = () => {
     } else if(menu === string.BLOCK) {
       const result = confirmAlert(string.SA_BLOCK);
       if(result){
-
+        await communityService.blockPost(postId);
+        toast.success(string.TP_BLOCK);
+        navigateTo(pagePath.COMMUNITY);
       }
     }
     else {
       await communityService.deletePost(postId);
-      toast.success("게시글을 삭제하였습니다.")
+      toast.success("게시글을 삭제하였습니다.");
       navigateTo(pagePath.COMMUNITY);
     }
     setIsMenuOpen(false);

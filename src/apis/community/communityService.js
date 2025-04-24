@@ -48,6 +48,14 @@ export const unLikePost = async (postId) => {
   const response = await axiosInstance.post(`/community/unlike/${postId}`);
   return response.data;
 }
+export const blockPost = async (postId) => {
+  const response = await axiosInstance.patch(`/community/block/${postId}`);
+  return response.data;
+}
+export const unBlockPost = async (postId) => {
+  const response = await axiosInstance.patch(`/community/unblock/${postId}`);
+  return response.data;
+}
 export const deletePost = async (postId) => {
   const response = await axiosInstance.delete(`/community/delete/${postId}`);
   return response.data;
@@ -60,6 +68,8 @@ const communityService = {
   updatePosts,
   likePost,
   unLikePost,
+  blockPost,
+  unBlockPost,
   deletePost,
 }
 
