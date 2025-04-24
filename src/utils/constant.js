@@ -10,4 +10,8 @@ export const constant = {
   SNACK: "snack",
   PLUS: "plus",
   MINUS: "minus",
+  ALL: "ALL",
+  LIKE: "LIKE",
+  COMMENT: "COMMENT",
+  MY: "MY",
 }

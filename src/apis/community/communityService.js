@@ -1,8 +1,8 @@
 import {axiosInstance} from "@apis/axiosInstance.js";
 
-export const getPosts = async (cursor = 0 , count = 4) => {
+export const getPosts = async (cursor = 0 , count = 4, filter) => {
   const response = await axiosInstance.get("/community/getPosts", {
-    params: {cursor, count}
+    params: {cursor, count, filter}
   });
   return response.data;
 }
