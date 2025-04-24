@@ -109,7 +109,8 @@ const CommunityDetail = () => {
   const handleMenu = async (menu) => {
     if(menu === string.EDIT) {
       setIsEdit(true);
-    } else if(menu === string.BLOCK) {
+    }
+    else if(menu === string.BLOCK) {
       const result = confirmAlert(string.SA_BLOCK);
       if(result){
         await communityService.blockPost(postId);
@@ -118,9 +119,12 @@ const CommunityDetail = () => {
       }
     }
     else {
-      await communityService.deletePost(postId);
-      toast.success("게시글을 삭제하였습니다.");
-      navigateTo(pagePath.COMMUNITY);
+      const result = confirmAlert(string.SA_DELETE);
+      if(result){
+        await communityService.deletePost(postId);
+        toast.success("게시글을 삭제하였습니다.");
+        navigateTo(pagePath.COMMUNITY);
+      }
     }
     setIsMenuOpen(false);
   }

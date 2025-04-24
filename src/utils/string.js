@@ -47,6 +47,7 @@ export const string = {
   TP_BLOCK : "게시글이 차단되었습니다",
 
   SA_BLOCK : "차단시, 해당 글은 목록에 노출되지 않으며, 다시 해제가 불가능합니다",
+  SA_DELETE: "게시글을 삭제 하시겠습니까?",
 
 
 }
