@@ -10,6 +10,7 @@ import ReplyForm from "@components/communityDetail/ReplyForm.jsx";
 import DropDown from "@components/common/DropDown.jsx";
 import PostDetailEdit from "@components/modal/PostDetailEdit.jsx";
 import {useCustomNavigation} from "@hooks/useCustomNavigation.js";
+import {useSystemAlert} from "@hooks/useSystemAlert.js";
 import {pagePath} from "@/routes/pagePath.js";
 import {string} from "@utils/string.js";
 import {constant} from "@utils/constant.js";
@@ -29,13 +30,15 @@ const CommunityDetail = () => {
   const [preView, setPreView] = useState();
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+  const [writers, setWriters] = useState();
   const [commentMap, setCommentMap] = useState({});
 
   const postId = useLocation().pathname.split("/").splice(4, 1);
   const myId = localStorage.getItem("userId");
   const menuRef = useRef(null);
 
-  const {navigateTo} = useCustomNavigation()
+  const {navigateTo} = useCustomNavigation();
+  const {confirmAlert} = useSystemAlert();
 
   useEffect(() => {
     fetchData()
@@ -60,11 +63,13 @@ const CommunityDetail = () => {
   const fetchData = async () => {
     try {
       const postDetails = await communityService.getPostById(postId);
+      console.log(postDetails);
       setDetail(postDetails);
       setReply(postDetails.commentResponseList);
       setPreView(postDetails.image);
       setTitle(postDetails.title);
       setContent(postDetails.content);
+      setWriters(postDetails.userId);
       setIsLiked(postDetails.likeStatus);
     } catch (e) {
       console.error(e);
@@ -107,7 +112,13 @@ const CommunityDetail = () => {
   const handleMenu = async (menu) => {
     if(menu === string.EDIT) {
       setIsEdit(true);
-    } else{
+    } else if(menu === string.BLOCK) {
+      const result = confirmAlert(string.SA_BLOCK);
+      if(result){
+
+      }
+    }
+    else {
       await communityService.deletePost(postId);
       toast.success("게시글을 삭제하였습니다.")
       navigateTo(pagePath.COMMUNITY);
@@ -218,7 +229,7 @@ const CommunityDetail = () => {
         <div className="flex gap-4 mt-4">
           <div className="flex gap-1 items-center">
             <img src={icPerson} className="w-5 h-5"/>
-            <p className="text-zinc-600 text-base font-normal">{string.NONAME}</p>
+            <p className="text-zinc-600 text-base font-normal">{string.NONAME + writers}</p>
           </div>
           <div className="flex gap-1 items-center">
             <img src={icDate} className="w-5 h-5"/>
@@ -227,7 +238,7 @@ const CommunityDetail = () => {
         </div>
         {isMenuOpen && (
           <div ref={menuRef} className={`menu ${isMenuOpen ? "open" : ""} absolute top-10 right-0`}>
-            <DropDown onClick={handleMenu} />
+            <DropDown onClick={handleMenu} isShow={writers == myId} />
           </div>
         )}
       </header>
