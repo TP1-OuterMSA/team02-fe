@@ -23,7 +23,7 @@ const ReplyForm = ({data,comment,setComment, isMine, isEdit, isLike , handleMenu
                 alt="좋아요"
                 className="w-6 h-6 cursor-pointer"
                 whileTap={{scale: 2}}
-                transition={{ type: "spring", stiffness: 150, damping: 5 }}
+                transition={{ type: "spring", stiffness: 150, damping: 10 }}
                 onClick={() => handleMenu(data.commentId, constant.THUMB)}
               />
             )}
