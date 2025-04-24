@@ -80,10 +80,6 @@
         background-color: #D9D9D9;
     }
 
-    .dropdown_menu:last-child:hover {
-        background-color: rgba(255, 64, 64, 0.10);
-    }
-
     .menu {
         position: absolute;
         top: 40px;
