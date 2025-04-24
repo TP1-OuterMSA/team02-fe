@@ -9,6 +9,7 @@ export const string = {
   COMPLETE: "작성완료",
   EDITCOMPLETE: "수정완료",
   EDIT: "수정",
+  BLOCK: "차단",
   DELETE: "삭제",
   T_EDIT: "글 수정",
   T_DIET: "식단 추가",

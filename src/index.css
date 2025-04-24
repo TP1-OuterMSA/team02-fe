@@ -70,9 +70,18 @@
 
     .dropdown_menu {
         font-size: 16px;
-        font-weight: 400;
-        padding: 16px;
+        font-weight: 600;
+        padding: 10px;
         cursor: pointer;
+    }
+
+    .dropdown_menu:hover{
+        border-radius: 6px;
+        background-color: #D9D9D9;
+    }
+
+    .dropdown_menu:last-child:hover {
+        background-color: rgba(255, 64, 64, 0.10);
     }
 
     .menu {
