@@ -16,6 +16,7 @@
     "axios": "^1.8.4",
     "clsx": "^2.1.1",
     "dayjs": "^1.11.13",
+    "framer-motion": "^12.8.2",
     "react": "^19.0.0",
     "react-day-picker": "^9.6.7",
     "react-dom": "^19.0.0",

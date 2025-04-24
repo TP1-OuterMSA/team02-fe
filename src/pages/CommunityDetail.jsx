@@ -25,6 +25,7 @@ const CommunityDetail = () => {
   const [floatReactions, setFloatReactions] = useState([]);
   const [replyEditMap, setReplyEditMap] = useState({});
   const [replyLikeMap, setReplyLikeMap] = useState({});
+  const [sprinkleMap, setSprinkleMap] = useState({});
   const [image, setImage] = useState();
   const [preView, setPreView] = useState();
   const [title, setTitle] = useState("");
@@ -160,6 +161,10 @@ const CommunityDetail = () => {
       case constant.THUMB:
         // 댓글 좋아요 api 연동해야함
         setReplyLikeMap(prev => ({...prev, [commentId]: !prev[commentId]}));
+        setSprinkleMap(prev => ({ ...prev, [commentId]: true }));
+        setTimeout(() => {
+          setSprinkleMap(prev => ({ ...prev, [commentId]: false }));
+        }, 800);
         break;
       case constant.DELETE:
         await deleteComment(commentId);
