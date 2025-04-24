@@ -50,13 +50,6 @@ export {default as imgMainCharcter} from '@assets/images/img_main_character.svg'
 export {default as imgWelcome} from '@assets/images/img_welcome.svg';
 export {default as imgNoodle} from '@assets/images/img_noodle.svg';
 export {default as imgEatRice} from '@assets/images/img_eat_rice.gif';
-export {default as icNutrition} from '@assets/icon/ico_nutrition.svg';
-export {default as icNutritionFill} from '@assets/icon/ico_nutrition_fill.svg';
-export {default as icNotify} from '@assets/icon/ico_notify.svg';
 
-
-export {default as imgBlank} from '@assets/images/img_blank.svg';
-export {default as imgProfile} from '@assets/images/img_profile.svg';
-export {default as imgMainProfile} from '@assets/images/img_main_profile.svg';
 
 
