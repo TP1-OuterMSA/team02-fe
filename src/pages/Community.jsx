@@ -71,18 +71,20 @@ const Community = () => {
 
   if(isLoading){
     return (
-        <div className="grid grid-cols-2 mt-10 mb-10 gap-5 pl-5 pr-5 max-md:grid-cols-1">
+      <div className="w-full flex flex-col items-center">
+        <div className="grid grid-cols-1 mt-10 mb-10 gap-5 pl-5 pr-5 w-150 max-md:w-full">
           {new Array(4).fill(0).map((_, idx) =>
             <PostCardSkeleton key={idx}/>
           )}
         </div>
+      </div>
     )
   }
 
   return (
-      <>
+    <div className="w-full flex flex-col items-center">
         {postData ? (
-            <div className="grid grid-cols-2 mt-10 mb-10 gap-5 pl-5 pr-5 max-md:grid-cols-1">
+            <div className="grid grid-cols-1 mt-10 mb-10 gap-5 pl-5 pr-5 w-150 max-md:w-full">
               {postData?.map((post) =>
                   (<PostCard
                       key={post.id}
@@ -106,7 +108,7 @@ const Community = () => {
           {isFetching && <ClipLoader/>}
         </div>
         <FloatingActionButton onClick={handleFAB}/>
-      </>
+      </div>
   );
 };
 

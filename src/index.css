@@ -9,6 +9,7 @@
 
     --animate-float: float 2s ease-in-out forwards;
     --animate-wiggle: wiggle 1s ease-in-out infinite;
+    --custom-break: '916px';
 
     @keyframes float {
         from {
@@ -32,48 +33,86 @@
 }
 
 @layer components {
-    .lnb_menu{
+    select{
+        -o-appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+    }
+
+    .sidebar_text{
+        font-size: 1.2rem;
+        font-weight: bold;
+    }
+
+    .sidebar_menu{
+        display: flex;
+        gap: 0.5rem;
+        padding: 1rem;
+        align-items: center;
         cursor: pointer;
-        padding: 24px;
-        border: var(--primary);
-    }
-    .lnb_menu:hover, .lnb_menu_active{
-        border-bottom: 2px solid var(--primary);
-        color: var(--primary);
+        color: black;
     }
 
-    .skeleton {
-        width: 120px;
-        height: 23px;
-        border-radius: 5px;
-        background-color: var(--skeleton);
-        animation: var(--animate-pulse);
-    }
+    .sidebar_menu:hover, .sidebar_menu_active {
+        background-color: var(--primary);
+        border-radius: 0.5rem;
+        color: white;
 
-    .dropdown_menu {
-        font-size: 16px;
-        font-weight: 400;
-        padding: 16px;
-        cursor: pointer;
-    }
+        .lnb_menu {
+            cursor: pointer;
+            padding: 24px;
+            border: var(--primary);
+        }
 
-    .menu {
-        position: absolute;
-        top: 40px;
-        right: 0;
-        width: 150px;
-        background: white;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        border-radius: 8px;
-        opacity: 0;
-        transform: translateY(-10px);
-        transition: opacity 0.5s ease-out, transform 0.5s ease-out;
-        pointer-events: none;
-    }
+        .lnb_menu:hover, .lnb_menu_active {
+            border-bottom: 2px solid var(--primary);
+            color: var(--primary);
 
-    .menu.open {
-        opacity: 1;
-        transform: translateY(0);
-        pointer-events: auto;
+        }
+
+        .skeleton {
+            width: 120px;
+            height: 23px;
+            border-radius: 5px;
+            background-color: var(--skeleton);
+            animation: var(--animate-pulse);
+        }
+
+        .dropdown_menu {
+            font-size: 16px;
+            font-weight: 400;
+            padding: 16px;
+            cursor: pointer;
+        }
+
+        .menu {
+            position: absolute;
+            top: 40px;
+            right: 0;
+            width: 150px;
+            background: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+            pointer-events: none;
+        }
+
+        .menu.open {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+
+        .marked-day {
+            background-image: url("/src/assets/images/img_rice.svg");
+            background-repeat: no-repeat;
+            background-position: center;
+            font-weight: bold;
+            text-align: center;
+        }
+
     }
 }

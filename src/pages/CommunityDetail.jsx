@@ -209,7 +209,7 @@ const CommunityDetail = () => {
   }
 
   return (
-      <div className="pl-10 pr-10 text-wrap mb-10">
+      <div className="pl-10 pr-10 text-wrap mb-10 w-full">
         <header className="border-b pb-6 border-gray-200 relative">
           <div className="flex justify-between mt-10">
             <p className="text-black text-2xl font-semibold">{detail?.title}</p>
