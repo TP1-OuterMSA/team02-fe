@@ -15,10 +15,22 @@ export const deleteComment = async (commentId) => {
   return response.data;
 }
 
+export const likeComment = async (commentId) => {
+  const response = await axiosInstance.post(`/community/comment/like/${commentId}`);
+  return response.data;
+}
+
+export const unlikeComment = async (commentId) => {
+  const response = await axiosInstance.post(`/community/comment/unlike/${commentId}`);
+  return response.data;
+}
+
 const commentService = {
   saveComments,
   updateComment,
   deleteComment,
+  likeComment,
+  unlikeComment,
 }
 
 export default commentService;

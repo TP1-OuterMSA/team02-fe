@@ -3,7 +3,7 @@ import {useLocation} from "react-router-dom";
 import dayjs from "dayjs";
 import {toast} from "react-toastify";
 
-import {icKebab, icHand, icHandFill, icSend, icChat, icPerson, icDate, icThumb, icThumbFill} from "@assets/";
+import {icKebab, icHand, icHandFill, icSend, icChat, icPerson, icDate} from "@assets/";
 import communityService from "@apis/community/communityService.js";
 import commentService from "@apis/comments/commentService.js";
 import ReplyForm from "@components/communityDetail/ReplyForm.jsx";
@@ -64,12 +64,15 @@ const CommunityDetail = () => {
     try {
       const postDetails = await communityService.getPostById(postId);
       setDetail(postDetails);
-      setReply(postDetails.commentResponseList);
-      setPreView(postDetails.image);
-      setTitle(postDetails.title);
-      setContent(postDetails.content);
-      setWriters(postDetails.userId);
-      setIsLiked(postDetails.likeStatus);
+      setReply(postDetails?.commentResponseList);
+      setPreView(postDetails?.image);
+      setTitle(postDetails?.title);
+      setContent(postDetails?.content);
+      setWriters(postDetails?.userId);
+      setIsLiked(postDetails?.likeStatus);
+      postDetails?.commentResponseList?.map(item => {
+        setReplyLikeMap(prev => ({...prev, [item?.commentId]: item?.liked}));
+      })
     } catch (e) {
       console.error(e);
     }
@@ -148,7 +151,6 @@ const CommunityDetail = () => {
       console.error(error);
     }
   }
-
   // 댓글 메뉴 관리(신고, 수정, 삭제)
   const handleReplyMenu = async (commentId, menu) => {
     switch(menu){
@@ -161,6 +163,7 @@ const CommunityDetail = () => {
       case constant.THUMB:
         // 댓글 좋아요 api 연동해야함
         setReplyLikeMap(prev => ({...prev, [commentId]: !prev[commentId]}));
+        !replyLikeMap[commentId] ? await commentService.likeComment(commentId) : await commentService.unlikeComment(commentId);
         setSprinkleMap(prev => ({ ...prev, [commentId]: true }));
         setTimeout(() => {
           setSprinkleMap(prev => ({ ...prev, [commentId]: false }));
