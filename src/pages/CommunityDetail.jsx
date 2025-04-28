@@ -172,8 +172,6 @@ const CommunityDetail = () => {
     }
     await fetchData();
   }
-
-  console.log(replyLikeMap)
   // 댓글 수정 API
   const updateComment = async (commentId, content) => {
     try{
@@ -230,7 +228,6 @@ const CommunityDetail = () => {
     }, 3000); // 3초 후 제거
   }
 
-  console.log(detail)
   return (
       <div className="pl-10 pr-10 text-wrap mb-10 w-full">
         <header className="border-b pb-6 border-gray-200 relative">
@@ -247,7 +244,7 @@ const CommunityDetail = () => {
             <img src={icDate} className="w-5 h-5"/>
             <p className="text-zinc-600 text-base font-normal">{dayjs(detail?.createdAt).format("YY.MM.DD")}</p>
             <div className="w-1 h-1 bg-black rounded-full ml-1 mr-1"></div>
-            <p className="text-neutral-400 text-base font-norma">24.05.24에 수정됨</p>
+            <p className="text-neutral-400 text-base font-norma">{dayjs(detail?.updatedAt).format('YY.MM.DD')}에 수정됨</p>
           </div>
         </div>
         {isMenuOpen && (
