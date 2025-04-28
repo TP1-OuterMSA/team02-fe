@@ -243,8 +243,12 @@ const CommunityDetail = () => {
           <div className="flex gap-1 items-center">
             <img src={icDate} className="w-5 h-5"/>
             <p className="text-zinc-600 text-base font-normal">{dayjs(detail?.createdAt).format("YY.MM.DD")}</p>
-            <div className="w-1 h-1 bg-black rounded-full ml-1 mr-1"></div>
-            <p className="text-neutral-400 text-base font-norma">{dayjs(detail?.updatedAt).format('YY.MM.DD')}에 수정됨</p>
+            {detail?.updatedAt &&
+                <>
+                <div className="w-1 h-1 bg-black rounded-full ml-1 mr-1"></div>
+                <p className="text-neutral-400 text-base font-norma">{dayjs(detail?.updatedAt).format('YY.MM.DD')}에 수정됨</p>
+                </>
+            }
           </div>
         </div>
         {isMenuOpen && (
