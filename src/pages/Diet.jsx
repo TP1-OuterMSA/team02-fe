@@ -14,6 +14,7 @@ import CalendarItem from "@components/diet/CalendarItem.jsx";
 import DietContainer from "@components/diet/DietContainer.jsx";
 import RecommendCalorie from "@components/modal/RecommendCalorie.jsx";
 import AddDiet from "@components/modal/AddDiet.jsx";
+import Loading from "@components/modal/Loading.jsx";
 
 import {icRight, icLeft, imgMainCharcter, icMorning, icLunch, icDinner, icSnack, imgEatRice} from "@assets/index.js";
 import {constant} from "@utils/constant.js";
@@ -28,6 +29,7 @@ const today = dayjs();
 const Diet = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isAddDietOpen, setIsAddDietOpen] = useState(false);
+  const [isLoadingOpen, setIsLoadingOpen] = useState(false);
   const [selectedDay, setSelectedDay] = useState(today);
   const [startOfWeek, setStartOfWeek] = useState(today.startOf("isoWeek"));
   const [markedDays, setMarkedDays] = useState([]);
@@ -146,6 +148,11 @@ const Diet = () => {
     setIsAddDietOpen(false);
   }
 
+  const handleTodayMeal = () => {
+    setIsLoadingOpen(!isLoadingOpen);
+    console.log("today's meal")
+  }
+
   return (
     <div className="pl-7 pr-7 flex gap-5">
       <div className="w-full">
@@ -211,7 +218,11 @@ const Diet = () => {
         <AddDiet
           type={modalTime}
           onClose={handleSaveAndClose}
+          onClickToday={handleTodayMeal}
         />
+      }
+      {isLoadingOpen &&
+        <Loading/>
       }
     </div>
   );

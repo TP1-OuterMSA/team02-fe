@@ -13,7 +13,7 @@ import dietService from "@apis/diet/dietService.js";
 import {ClipLoader} from "react-spinners";
 import {toast} from "react-toastify";
 
-const AddDiet = ({onClose}) => {
+const AddDiet = ({onClose, onClickToday}) => {
   const [isFetching, setIsFetching] = useState(false);
   const [foodData, setFoodData] = useState([]);
   const [pageNo, setPageNo] = useState(1);
@@ -189,8 +189,7 @@ const AddDiet = ({onClose}) => {
         <div className="w-full flex justify-between gap-5 mt-10 mb-5">
           <div className="w-full">
             <SearchBar placeholder={string.PH_SEARCH} onKeyUp={handleOnKeyUp} value={foodName} setValue={(item) => setFoodName(item)}/>
-            <button
-              className="bg-(--primary) cursor-pointer flex w-full rounded-xl p-3 gap-1 items-center justify-center mt-4">
+            <button className="bg-(--primary) cursor-pointer flex w-full rounded-xl p-3 gap-1 items-center justify-center mt-4" onClick={onClickToday}>
               <img src={imgRice} className="w-5 h-5"/>
               <p className="text-white text-base font-bold">오늘 먹은 학식 불러오기</p>
             </button>

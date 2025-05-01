@@ -26,6 +26,8 @@ export const string = {
   GRAM: "gram",
   NUMBER: "개수",
   TITLE: "제목",
+  MEAL: "학식 정보 불러오는 중...",
+  WAIT: "잠시만 기다려주세요",
   ALL: "전체",
   LIKE: "좋아요 많은 순",
   COMMENT: "댓글 많은 순",
