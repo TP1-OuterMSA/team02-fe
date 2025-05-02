@@ -16,8 +16,7 @@ import {toast} from "react-toastify";
 const AddDiet = ({onClose, onClickToday}) => {
   const [isFetching, setIsFetching] = useState(false);
   const [foodData, setFoodData] = useState([]);
-  const [pageNo, setPageNo] = useState(1);
-  const [pageSize, setPageSize] = useState(5);
+  const [pageNo, setPageNo] = useState(5);
   const [foodName, setFoodName] = useState("");
   const [debounce, setDebounce] = useState(foodName);
   const [input, setInput] = useState(0);
@@ -44,7 +43,7 @@ const AddDiet = ({onClose, onClickToday}) => {
   // debounce 적용
   useEffect(() => {
     const delaydebounceTimer = setTimeout(() => {
-      setPageNo(1); // 페이지 초기화
+      setPageNo(5); // 페이지 초기화
       setFoodData([]); // 기존 데이터 초기화
       setDebounce(foodName);
     }, 1000);
@@ -96,7 +95,7 @@ const AddDiet = ({onClose, onClickToday}) => {
   useEffect(()=> {
     if(inView && !isFetchingRef.current){
       isFetchingRef.current = true;
-      setPageNo((prev) => prev + 1);
+      setPageNo((prev) => prev + 5);
     }
   }, [inView]);
 
@@ -105,7 +104,7 @@ const AddDiet = ({onClose, onClickToday}) => {
     setIsFetching(true);
 
     try{
-      const data = await dietService.getFoods({pageNo, pageSize, foodName});
+      const data = await dietService.getFoods({count: pageNo, foodName});
       if(data.length > 0){
         setFoodData((prev) => [...prev, ...data]);
       }
@@ -200,7 +199,7 @@ const AddDiet = ({onClose, onClickToday}) => {
                   foodName={item?.foodName}
                   foodWeight={item?.foodWeight}
                   kcal={item?.kcal}
-                  active={item?.foodCode === activeFood?.foodCode}
+                  active={item?.foodName === activeFood?.foodName}
                   onClick={() => handleDietItem(item)}
                 />
               ))}
