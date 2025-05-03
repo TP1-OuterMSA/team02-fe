@@ -9,6 +9,7 @@ export const string = {
   COMPLETE: "작성완료",
   EDITCOMPLETE: "수정완료",
   EDIT: "수정",
+  BLOCK: "차단",
   DELETE: "삭제",
   T_EDIT: "글 수정",
   T_DIET: "식단 추가",
@@ -25,6 +26,10 @@ export const string = {
   GRAM: "gram",
   NUMBER: "개수",
   TITLE: "제목",
+  ALL: "전체",
+  LIKE: "좋아요 많은 순",
+  COMMENT: "댓글 많은 순",
+  MY: "내글만 보기",
   PH_TITLE: "제목을 입력해주세요.",
   CONTENT: "글 내용",
   PH_CONTENT: "글 내용을 입력해주세요.",
@@ -39,6 +44,10 @@ export const string = {
   TP_NOTITLE: "제목을 입력해주세요",
   TP_NOCONTENT: "내용을 입력해주세요",
   TP_NOIMAGE: "이미지를 업로드 해주세요",
+  TP_BLOCK : "게시글이 차단되었습니다",
+
+  SA_BLOCK : "차단시, 해당 글은 목록에 노출되지 않으며, 다시 해제가 불가능합니다",
+  SA_DELETE: "게시글을 삭제 하시겠습니까?",
 
 
 }

@@ -1,6 +1,7 @@
 export const constant = {
   SIREN: "siren",
   EDIT: "edit",
+  THUMB: "thumb",
   DELETE: "delete",
   MALE: "남자",
   FEMALE: "여자",
@@ -10,4 +11,8 @@ export const constant = {
   SNACK: "snack",
   PLUS: "plus",
   MINUS: "minus",
+  ALL: "ALL",
+  LIKE: "LIKE",
+  COMMENT: "COMMENT",
+  MY: "MY",
 }

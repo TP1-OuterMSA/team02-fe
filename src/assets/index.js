@@ -41,6 +41,8 @@ export {default as icDinner} from '@assets/icon/ico_dinner.svg';
 export {default as icSnack} from '@assets/icon/ico_snack.svg';
 
 export {default as icNotify} from '@assets/icon/ico_notify.svg';
+export {default as icThumb} from '@assets/icon/ico_thumb.svg';
+export {default as icThumbFill} from '@assets/icon/ico_thumb_fill.svg';
 
 export {default as imgBlank} from '@assets/images/img_blank.svg';
 export {default as imgRice} from '@assets/images/img_rice.svg';
@@ -50,6 +52,7 @@ export {default as imgMainCharcter} from '@assets/images/img_main_character.svg'
 export {default as imgWelcome} from '@assets/images/img_welcome.svg';
 export {default as imgNoodle} from '@assets/images/img_noodle.svg';
 export {default as imgEatRice} from '@assets/images/img_eat_rice.gif';
+export {default as imgEating} from '@assets/images/img_eating.gif';
 
 
 

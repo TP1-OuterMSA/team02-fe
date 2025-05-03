@@ -4,18 +4,23 @@ import {ClipLoader} from "react-spinners";
 import PostCard from "@components/community/PostCard.jsx";
 import FloatingActionButton from "@components/common/FloatingActionButton.jsx";
 import PostCardSkeleton from "@components/community/PostCardSkeleton.jsx";
+import Badges from "@components/common/Badges.jsx";
 import {pagePath} from "@/routes/pagePath.js";
 import {useCustomNavigation} from "@hooks/useCustomNavigation.js";
 import communityService from '@apis/community/communityService.js';
 import dayjs from "dayjs";
 import {imgBlank} from "@assets/index.js";
+import {constant} from "@utils/constant.js";
 import {string} from "@utils/string.js";
 
 const Community = () => {
+  const badges = [{id: constant.ALL, name: string.ALL}, {id: constant.LIKE, name: string.LIKE}, {id:constant.COMMENT, name:string.COMMENT}, {id: constant.MY, name: string.MY}];
+
   const [cursor, setCursor] = useState(0);
   const [postData, setPostData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isFetching, setIsFetching] = useState(false);
+  const [activeBadge, setActiveBadge] = useState(constant.ALL);
 
   const {navigateTo} = useCustomNavigation();
   const {ref, inView} = useInView({
@@ -30,12 +35,18 @@ const Community = () => {
     navigateTo(pagePath.COMMUNITY+`detail/${id}`);
   }
 
+  const handleBadges = (type) => {
+    setCursor(0);
+    setPostData([]);
+    setActiveBadge(type);
+  }
+
   const fetchData = async (isLoadMore = false) => {
     if (isFetching) return;
     setIsFetching(true);
 
     try {
-      const posts = await communityService.getPosts(cursor, 4);
+      const posts = await communityService.getPosts(cursor, 4, activeBadge);
 
       if (posts.length > 0) {
         setPostData((prev) => {
@@ -59,8 +70,12 @@ const Community = () => {
   // 커뮤니티 글 목록 api 연결
   useEffect( () => {
     localStorage.setItem("userId", 1);
-    fetchData();
   }, []);
+
+
+  useEffect(() => {
+    fetchData()
+  }, [activeBadge])
 
 
   useEffect(() => {
@@ -83,8 +98,18 @@ const Community = () => {
 
   return (
     <div className="w-full flex flex-col items-center">
+      <div className="pl-5 pr-5 w-150 max-md:w-full flex gap-3">
+        {badges.map((badge, index) => (
+          <Badges
+            key={index}
+            name={badge.name}
+            isActive={activeBadge === badge.id}
+            onClick={() => {handleBadges(badge.id)}}
+          />
+        ))}
+      </div>
         {postData ? (
-            <div className="grid grid-cols-1 mt-10 mb-10 gap-5 pl-5 pr-5 w-150 max-md:w-full">
+            <div className="grid grid-cols-1 mt-5 mb-10 gap-5 pl-5 pr-5 w-150 max-md:w-full">
               {postData?.map((post) =>
                   (<PostCard
                       key={post.id}

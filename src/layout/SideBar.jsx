@@ -13,7 +13,7 @@ const SideBar = () => {
   };
 
   const handleMenuFocus = (pageName) => {
-    return location === pageName;
+    return location.includes(pageName);
   };
 
   const getIcon = (pageName, icon, iconFill) => {
