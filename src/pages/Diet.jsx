@@ -15,6 +15,7 @@ import DietContainer from "@components/diet/DietContainer.jsx";
 import RecommendCalorie from "@components/modal/RecommendCalorie.jsx";
 import AddDiet from "@components/modal/AddDiet.jsx";
 import Loading from "@components/modal/Loading.jsx";
+import TodayMeal from "@components/modal/TodayMeal.jsx";
 
 import {icRight, icLeft, imgMainCharcter, icMorning, icLunch, icDinner, icSnack, imgEatRice} from "@assets/index.js";
 import {constant} from "@utils/constant.js";
@@ -30,9 +31,11 @@ const Diet = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isAddDietOpen, setIsAddDietOpen] = useState(false);
   const [isLoadingOpen, setIsLoadingOpen] = useState(false);
+  const [isTodayMealOpen, setIsTodayMealOpen] = useState(false);
   const [selectedDay, setSelectedDay] = useState(today);
   const [startOfWeek, setStartOfWeek] = useState(today.startOf("isoWeek"));
   const [markedDays, setMarkedDays] = useState([]);
+  const [schoolMeal, setSchoolMeal] = useState([]);
   const [breakFast, setBreakFast] = useState([]);
   const [lunch, setLunch] = useState([]);
   const [dinner, setDinner] = useState([]);
@@ -59,6 +62,11 @@ const Diet = () => {
   useEffect(() => {
     patchGetDiets();
   }, [selectedDay]);
+
+  useEffect(() => {
+    if(schoolMeal.length > 0)
+      setIsTodayMealOpen(true);
+  }, [schoolMeal]);
 
   const patchUserData = async () => {
     const userData = await userService.getRecommendKcal();
@@ -140,7 +148,6 @@ const Diet = () => {
       intakeWeight: item.foodWeight,
       intakeKcal: item.kcal,
     }))
-    console.log(transData);
     if(transData.length > 0) {
       await dietService.saveDiet({date: selectedDay.format("YYYY-MM-DD"), mealType: modalTime, foods: transData});
     }
@@ -148,10 +155,18 @@ const Diet = () => {
     setIsAddDietOpen(false);
   }
 
-  const handleTodayMeal = () => {
-    setIsLoadingOpen(!isLoadingOpen);
-    console.log("today's meal")
+  const handleTodayMeal = async () => {
+    setIsLoadingOpen(true);
+    try {
+      const datas = await dietService.getSchoolMeal({date: selectedDay.format("YYYY-MM-DD"), mealType: modalTime});
+      setSchoolMeal(datas);
+    } catch (error) {
+      toast.error(error.response.data);
+    } finally {
+      setIsLoadingOpen(false);
+    }
   }
+
 
   return (
     <div className="pl-7 pr-7 flex gap-5">
@@ -223,6 +238,16 @@ const Diet = () => {
       }
       {isLoadingOpen &&
         <Loading/>
+      }
+      {
+        isTodayMealOpen &&
+          <TodayMeal
+              data={schoolMeal}
+              handleCancel={() => {
+                setIsAddDietOpen(false);
+                setIsTodayMealOpen(false)
+              }}
+          />
       }
     </div>
   );

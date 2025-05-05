@@ -172,6 +172,9 @@ const AddDiet = ({onClose, onClickToday}) => {
   }
 
   const handleOnKeyUp = (e) => {
+
+
+
     if(e.key === 'Enter'){
       setDebounce(foodName); // 검색어 즉시 반영
       patchFoodsData();
@@ -190,7 +193,7 @@ const AddDiet = ({onClose, onClickToday}) => {
             <SearchBar placeholder={string.PH_SEARCH} onKeyUp={handleOnKeyUp} value={foodName} setValue={(item) => setFoodName(item)}/>
             <button className="bg-(--primary) cursor-pointer flex w-full rounded-xl p-3 gap-1 items-center justify-center mt-4" onClick={onClickToday}>
               <img src={imgRice} className="w-5 h-5"/>
-              <p className="text-white text-base font-bold">오늘 먹은 학식 불러오기</p>
+              <p className="text-white text-base font-bold">이날 먹은 학식 불러오기</p>
             </button>
             <div className="overflow-y-auto h-[44vh] mt-2" style={{scrollbarWidth: 'none', msOverflowStyle: 'none'}}>
               {foodData?.map((item, index)=> (
@@ -226,7 +229,7 @@ const AddDiet = ({onClose, onClickToday}) => {
             <div className="w-full bg-white rounded-2xl border border-neutral-200 p-4 h-54 flex flex-col items-center">
               <TabMenu leftItem={string.GRAM} rightItem={string.NUMBER} setActive={setTabMenu}/>
               <div className="flex gap-2 mt-8 ">
-                <OvalLineButton src={icMinus} onClick={() => {handlePlusMinus(constant.MINUS)}}/>
+                <OvalLineButton src={icMinus} size={5} onClick={() => {handlePlusMinus(constant.MINUS)}}/>
                 <input
                   type="number"
                   value={Math.round(input)}
@@ -238,7 +241,7 @@ const AddDiet = ({onClose, onClickToday}) => {
                 {tabMenu === string.GRAM && (
                     <span className="absolute right-2 top-1/2 transform -translate-y-1/2 text-black text-sm">g</span>
                 )}
-                <OvalLineButton src={icPlus} onClick={() => {handlePlusMinus(constant.PLUS)}}/>
+                <OvalLineButton src={icPlus} size={5} onClick={() => {handlePlusMinus(constant.PLUS)}}/>
               </div>
               {activeFood && <div className="pl-3 pr-3 pt-2 pb-2 bg-stone-100 rounded-md mt-5">
                 <p className="text-black text-base font-bold">{Math.round(activeFood?.kcal)}Kcal</p>

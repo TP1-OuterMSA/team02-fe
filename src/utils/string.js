@@ -8,6 +8,7 @@ export const string = {
   SELECT: "사진선택",
   COMPLETE: "작성완료",
   EDITCOMPLETE: "수정완료",
+  CANCEL: "취소하기",
   EDIT: "수정",
   BLOCK: "차단",
   DELETE: "삭제",

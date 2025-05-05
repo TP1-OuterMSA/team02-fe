@@ -21,6 +21,13 @@ export const getFoods = async ({count = 5, foodName}) => {
   return response.data;
 }
 
+export const getSchoolMeal = async ({date, mealType}) => {
+  const response = await axiosInstance.get('/diet/getSchoolMeal', {
+    params: {date, mealType}
+  });
+  return response.data;
+}
+
 export const saveDiet = async ({date, mealType, foods}) => {
   const response = await axiosInstance.post("/diet/saveDiet", {date, mealType,foods});
   return response.data;
@@ -29,6 +36,7 @@ export const saveDiet = async ({date, mealType, foods}) => {
 const dietService = {
   getDietDate,
   getDiets,
+  getSchoolMeal,
   getFoods,
   saveDiet,
 }
