@@ -159,7 +159,11 @@ const Diet = () => {
     setIsLoadingOpen(true);
     try {
       const datas = await dietService.getSchoolMeal({date: selectedDay.format("YYYY-MM-DD"), mealType: modalTime});
-      setSchoolMeal(datas);
+      const transformed = datas.map((item) => ({
+        ...item,
+        perGram: item.foodWeight > 0 ? item.kcal / item.foodWeight : 0,
+      }));
+      setSchoolMeal(transformed);
     } catch (error) {
       toast.error(error.response.data);
     } finally {
@@ -167,6 +171,21 @@ const Diet = () => {
     }
   }
 
+  const handlePlusMinus = (type, item) => {
+    setSchoolMeal((prev) => prev.map((prevItem) =>
+        prevItem.foodName === item.foodName ?
+            type === constant.PLUS ? {...prevItem, foodWeight: prevItem.foodWeight + 5, kcal: prevItem.kcal + prevItem.perGram * 5} :
+                {...prevItem, foodWeight: Math.max(prevItem.foodWeight - 5, 0), kcal: Math.max(prevItem.kcal - prevItem.perGram * 5, 0)} : prevItem
+    ))
+  }
+
+  const handleCancel = (item) => {
+    setSchoolMeal((prev) => prev.filter((prevItem) => prevItem.foodName !== item.foodName));
+  }
+
+  const handleChangeValue = (item, newWeight) => {
+    setSchoolMeal((prev) => prev.map((prevItem) => prevItem.foodName === item.foodName ? {...prevItem, foodWeight: Number(newWeight)} : prevItem));
+  }
 
   return (
     <div className="pl-7 pr-7 flex gap-5">
@@ -247,6 +266,9 @@ const Diet = () => {
                 setIsAddDietOpen(false);
                 setIsTodayMealOpen(false)
               }}
+              handlePlusMinus={handlePlusMinus}
+              handleChangeValue={handleChangeValue}
+              onClickCancel={handleCancel}
           />
       }
     </div>
