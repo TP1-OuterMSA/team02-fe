@@ -48,6 +48,7 @@ export const string = {
   TP_NOCONTENT: "내용을 입력해주세요",
   TP_NOIMAGE: "이미지를 업로드 해주세요",
   TP_BLOCK : "게시글이 차단되었습니다",
+  TP_DELETE : "해당 식사가 삭제되었습니다",
 
   SA_BLOCK : "차단시, 해당 글은 목록에 노출되지 않으며, 다시 해제가 불가능합니다",
   SA_DELETE: "게시글을 삭제 하시겠습니까?",

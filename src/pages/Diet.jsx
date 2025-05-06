@@ -79,7 +79,7 @@ const Diet = () => {
   // 오른쪽 하단 달력 전체에 연결되는 api
   useEffect(() => {
     patchDiaryData();
-  }, [currentMonth]);
+  }, [currentMonth, markedDays]);
 
   useEffect(() => {
     patchGetDiets();
@@ -234,23 +234,25 @@ const Diet = () => {
   }
 
   const handleDeleteDiet = async (item, type) => {
-    let dietId;
+    let foodIds;
     switch (type){
       case string.MORNING:
-        dietId = breakFastId;
+        foodIds = breakFastId;
         break;
       case string.LUNCH:
-        dietId = lunchId;
+        foodIds = lunchId;
         break;
       case string.DINNER:
-        dietId = dinnerId;
+        foodIds = dinnerId;
         break;
       case string.SNACK:
-        dietId = snackId;
+        foodIds = snackId;
         break;
     }
-    console.log(type, item.foodId, dietId)
-    await dietService.deleteDiet({dietId, foodIds:item?.foodId});
+    await dietService.deleteDiet({foodIds, dietFoodId:item?.foodId});
+    toast.success(string.TP_DELETE)
+    await patchGetDiets();
+    await patchNutrion();
   }
 
   return (
