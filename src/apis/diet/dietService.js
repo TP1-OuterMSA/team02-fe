@@ -33,12 +33,23 @@ export const saveDiet = async ({date, mealType, foods}) => {
   return response.data;
 }
 
+export const deleteDiet = async ({dietId, foodIds}) => {
+  const response = await axiosInstance.delete(`/diet/deleteDietFoods`,
+    {
+      params: {dietId},
+      data: {foodIds}
+    }
+  );
+  return response.data;
+}
+
 const dietService = {
   getDietDate,
   getDiets,
   getSchoolMeal,
   getFoods,
   saveDiet,
+  deleteDiet,
 }
 
 export default dietService;

@@ -22,7 +22,7 @@ import {constant} from "@utils/constant.js";
 import {string} from "@utils/string.js";
 
 import userService from "@apis/user/userService.js";
-import dietService, {saveDiet} from "@apis/diet/dietService.js";
+import dietService from "@apis/diet/dietService.js";
 
 // Global 변수
 const today = dayjs();
@@ -37,9 +37,13 @@ const Diet = () => {
   const [markedDays, setMarkedDays] = useState([]);
   const [schoolMeal, setSchoolMeal] = useState([]);
   const [breakFast, setBreakFast] = useState([]);
+  const [breakFastId, setBreakFastId] = useState(null);
   const [lunch, setLunch] = useState([]);
+  const [lunchId, setLunchId] = useState(null);
   const [dinner, setDinner] = useState([]);
+  const [dinnerId, setDinnerId] = useState(null);
   const [snack, setSnack] = useState([]);
+  const [snackId, setSnackId] = useState(null);
   const [bodyInfo, setBodyInfo] = useState({gender: "", age:"", cm:"", kg:""});
   const [consumeCalories, setConsumeCalories] = useState(0);
   const [calories, setCalories] = useState(0);
@@ -90,15 +94,19 @@ const Diet = () => {
       switch(data.type){
         case constant.BREAKFAST:
           setBreakFast(data.foods);
+          setBreakFastId(data.id);
           break;
         case constant.LUNCH:
           setLunch(data.foods);
+          setLunchId(data.id);
           break;
         case constant.DINNER:
           setDinner(data.foods);
+          setDinnerId(data.id);
           break;
         case constant.SNACK:
           setSnack(data.foods);
+          setSnack(data.id);
           break;
       }
     });
@@ -200,6 +208,26 @@ const Diet = () => {
     setSchoolMeal((prev) => prev.map((prevItem) => prevItem.foodName === item.foodName ? {...prevItem, foodWeight: Number(newWeight), kcal: Number(newWeight) * prevItem.perGram} : prevItem));
   }
 
+  const handleDeleteDiet = async (item, type) => {
+    let dietId;
+    switch (type){
+      case string.MORNING:
+        dietId = breakFastId;
+        break;
+      case string.LUNCH:
+        dietId = lunchId;
+        break;
+      case string.DINNER:
+        dietId = dinnerId;
+        break;
+      case string.SNACK:
+        dietId = snackId;
+        break;
+    }
+    console.log(type, item.foodId, dietId)
+    await dietService.deleteDiet({dietId, foodIds:item?.foodId});
+  }
+
   return (
     <div className="pl-7 pr-7 flex gap-5">
       <div className="w-full">
@@ -220,10 +248,10 @@ const Diet = () => {
           })}
         </div>
         <div className="bg-indigo-50 rounded-2xl h-[72vh] mt-3 p-5 flex flex-col gap-6 overflow-y-auto" style={{scrollbarWidth: 'none', msOverflowStyle: 'none'}}>
-          <DietContainer img={icMorning} title={string.MORNING} onClickAdd={() => handleModalOpen(constant.BREAKFAST)} data={breakFast}/>
-          <DietContainer img={icLunch} title={string.LUNCH} onClickAdd={() => handleModalOpen(constant.LUNCH)} data={lunch}/>
-          <DietContainer img={icDinner} title={string.DINNER} onClickAdd={() => handleModalOpen(constant.DINNER)} data={dinner}/>
-          <DietContainer img={icSnack} title={string.SNACK} onClickAdd={() => handleModalOpen(constant.SNACK)} data={snack}/>
+          <DietContainer img={icMorning} title={string.MORNING} onClickAdd={() => handleModalOpen(constant.BREAKFAST)} data={breakFast} onClickDelete={handleDeleteDiet}/>
+          <DietContainer img={icLunch} title={string.LUNCH} onClickAdd={() => handleModalOpen(constant.LUNCH)} data={lunch} onClickDelete={handleDeleteDiet}/>
+          <DietContainer img={icDinner} title={string.DINNER} onClickAdd={() => handleModalOpen(constant.DINNER)} data={dinner} onClickDelete={handleDeleteDiet}/>
+          <DietContainer img={icSnack} title={string.SNACK} onClickAdd={() => handleModalOpen(constant.SNACK)} data={snack} onClickDelete={handleDeleteDiet}/>
         </div>
       </div>
       <div className="w-100">
