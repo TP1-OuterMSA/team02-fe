@@ -146,13 +146,19 @@ const Diet = () => {
     setIsAddDietOpen(false);
   }
 
+  const handleAdd = async () => {
+    await saveDiets(schoolMeal);
+    setIsAddDietOpen(false);
+    setIsTodayMealOpen(false);
+  }
+
   const saveDiets = async (data) => {
     const transData = data?.map((item) => ({
       foodName: item.foodName,
       intakeWeight: item.foodWeight,
       intakeKcal: item.kcal,
-      standardWeight: item.originKcal,
-      standardKcal: item.gram,
+      standardWeight: item.standardWeight,
+      standardKcal: item.standardKcal,
     }))
     if(transData.length > 0) {
       await dietService.saveDiet({date: selectedDay.format("YYYY-MM-DD"), mealType: modalTime, foods: transData});
@@ -166,6 +172,8 @@ const Diet = () => {
       const datas = await dietService.getSchoolMeal({date: selectedDay.format("YYYY-MM-DD"), mealType: modalTime});
       const transformed = datas.map((item) => ({
         ...item,
+        standardWeight: item.foodWeight,
+        standardKcal: item.kcal,
         perGram: item.foodWeight > 0 ? item.kcal / item.foodWeight : 0,
       }));
       setSchoolMeal(transformed);
@@ -273,6 +281,7 @@ const Diet = () => {
               }}
               handlePlusMinus={handlePlusMinus}
               handleChangeValue={handleChangeValue}
+              handleAdd={handleAdd}
               onClickCancel={handleCancel}
           />
       }

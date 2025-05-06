@@ -26,7 +26,7 @@ const AddDiet = ({onClose, onClickToday}) => {
   const [activeFood, setActiveFood] = useState({});
   const [dietPickList, setDietPickList] = useState([]);
   const [originKcal, setOriginKcal] = useState(0);
-  
+
   const perGram = originKcal && gram ? originKcal / gram : 0;
   const {ref, inView} = useInView({
     threshold: 0,
@@ -162,7 +162,7 @@ const AddDiet = ({onClose, onClickToday}) => {
         return prev;
       }
 
-      return [...prev, {...activeFood, originKcal, gram}];
+      return [...prev, {...activeFood, standardKcal: originKcal, standardWeight: gram}];
     });
     setActiveFood("");
   }
