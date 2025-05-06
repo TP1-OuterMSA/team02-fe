@@ -3,7 +3,7 @@ import Button from "@components/common/Button.jsx";
 import {string} from "@utils/string.js";
 import {constant} from "@utils/constant.js";
 
-const TodayMeal = ({data, handleCancel, handleAdd, handlePlusMinus,handleChangeValue, onClickCancel}) => {
+const TodayMeal = ({data, handleCancel, handleAdd, handlePlusMinus, handleChangeValue, onClickCancel}) => {
   return (
       <div className="fixed inset-0 flex justify-center items-center bg-black/30 z-20">
         <div className="bg-white w-260 p-10 z-20 rounded-2xl flex flex-col items-center pt-20">

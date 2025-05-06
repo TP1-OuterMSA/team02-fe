@@ -26,7 +26,7 @@ const AddDiet = ({onClose, onClickToday}) => {
   const [activeFood, setActiveFood] = useState({});
   const [dietPickList, setDietPickList] = useState([]);
   const [originKcal, setOriginKcal] = useState(0);
-
+  
   const perGram = originKcal && gram ? originKcal / gram : 0;
   const {ref, inView} = useInView({
     threshold: 0,
@@ -155,14 +155,14 @@ const AddDiet = ({onClose, onClickToday}) => {
   const handleAddDietItem = () => {
     if(activeFood?.kcal === 0 || !activeFood) return;
     setDietPickList((prev) =>{
-      const isExist = prev.some(item => item.foodCode === activeFood.foodCode);
+      const isExist = prev.some(item => item.foodName === activeFood.foodName);
 
       if(isExist){
         toast.warn("이미 추가된 음식입니다.");
         return prev;
       }
 
-      return [...prev, activeFood];
+      return [...prev, {...activeFood, originKcal, gram}];
     });
     setActiveFood("");
   }
@@ -172,8 +172,6 @@ const AddDiet = ({onClose, onClickToday}) => {
   }
 
   const handleOnKeyUp = (e) => {
-
-
 
     if(e.key === 'Enter'){
       setDebounce(foodName); // 검색어 즉시 반영

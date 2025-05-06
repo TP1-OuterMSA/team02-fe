@@ -22,7 +22,7 @@ import {constant} from "@utils/constant.js";
 import {string} from "@utils/string.js";
 
 import userService from "@apis/user/userService.js";
-import dietService from "@apis/diet/dietService.js";
+import dietService, {saveDiet} from "@apis/diet/dietService.js";
 
 // Global 변수
 const today = dayjs();
@@ -47,7 +47,6 @@ const Diet = () => {
   const [currentMonth, setCurrentMonth] = useState(dayjs().format('YYYY-MM'));
   const week = Array.from({ length: 7 }).map((_, idx) => startOfWeek.add(idx, "day"));
   const defaultClassNames = getDefaultClassNames();
-
 
   useEffect(() => {
     patchUserData();
@@ -143,16 +142,22 @@ const Diet = () => {
   }
 
   const handleSaveAndClose = async (data) => {
+    await saveDiets(data);
+    setIsAddDietOpen(false);
+  }
+
+  const saveDiets = async (data) => {
     const transData = data?.map((item) => ({
-      foodCode: item.foodCode,
+      foodName: item.foodName,
       intakeWeight: item.foodWeight,
       intakeKcal: item.kcal,
+      standardWeight: item.originKcal,
+      standardKcal: item.gram,
     }))
     if(transData.length > 0) {
       await dietService.saveDiet({date: selectedDay.format("YYYY-MM-DD"), mealType: modalTime, foods: transData});
     }
     await patchGetDiets();
-    setIsAddDietOpen(false);
   }
 
   const handleTodayMeal = async () => {
@@ -184,7 +189,7 @@ const Diet = () => {
   }
 
   const handleChangeValue = (item, newWeight) => {
-    setSchoolMeal((prev) => prev.map((prevItem) => prevItem.foodName === item.foodName ? {...prevItem, foodWeight: Number(newWeight)} : prevItem));
+    setSchoolMeal((prev) => prev.map((prevItem) => prevItem.foodName === item.foodName ? {...prevItem, foodWeight: Number(newWeight), kcal: Number(newWeight) * prevItem.perGram} : prevItem));
   }
 
   return (
