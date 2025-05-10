@@ -14,9 +14,16 @@ export const getDietDate = async (month) => {
   return response.data;
 }
 
-export const getFoods = async ({pageNo = 1, pageSize = 2, foodName}) => {
+export const getFoods = async ({count = 5, foodName}) => {
   const response = await axiosInstance.get('/diet/getFoods', {
-    params: {pageNo, pageSize, foodName}
+    params: {count, foodName}
+  });
+  return response.data;
+}
+
+export const getSchoolMeal = async ({date, mealType}) => {
+  const response = await axiosInstance.get('/diet/getSchoolMeal', {
+    params: {date, mealType}
   });
   return response.data;
 }
@@ -26,11 +33,23 @@ export const saveDiet = async ({date, mealType, foods}) => {
   return response.data;
 }
 
+export const deleteDiet = async ({dietFoodId, foodIds}) => {
+  const response = await axiosInstance.delete(`/diet/deleteDietFood`,
+    {
+      params: {dietFoodId},
+      data: {foodIds}
+    }
+  );
+  return response.data;
+}
+
 const dietService = {
   getDietDate,
   getDiets,
+  getSchoolMeal,
   getFoods,
   saveDiet,
+  deleteDiet,
 }
 
 export default dietService;

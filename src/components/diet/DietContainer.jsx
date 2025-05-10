@@ -2,7 +2,7 @@ import React from 'react';
 import {icPlusWhite} from "@assets/index.js";
 import DietItem from "@components/diet/DietItem.jsx";
 
-const DietContainer = ({img, title, onClickAdd, data}) => {
+const DietContainer = ({img, title, onClickAdd, data, onClickDelete}) => {
   return (
     <div className="px-7 py-5 bg-white rounded-3xl">
       <div className="flex justify-between items-center">
@@ -22,6 +22,7 @@ const DietContainer = ({img, title, onClickAdd, data}) => {
             food={item.foodName}
             gram={item.intakeWeight}
             kcal={item.intakeKcal}
+            onClickDelete={() => onClickDelete(item, title)}
           />
         ))}
       </div>

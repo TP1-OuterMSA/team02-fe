@@ -15,4 +15,7 @@ export const constant = {
   LIKE: "LIKE",
   COMMENT: "COMMENT",
   MY: "MY",
+  CARB: "탄수화물",
+  PROTEIN: "단백질",
+  FAT: "지방",
 }

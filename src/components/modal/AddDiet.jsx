@@ -13,11 +13,10 @@ import dietService from "@apis/diet/dietService.js";
 import {ClipLoader} from "react-spinners";
 import {toast} from "react-toastify";
 
-const AddDiet = ({onClose}) => {
+const AddDiet = ({onClose, onClickToday}) => {
   const [isFetching, setIsFetching] = useState(false);
   const [foodData, setFoodData] = useState([]);
-  const [pageNo, setPageNo] = useState(1);
-  const [pageSize, setPageSize] = useState(5);
+  const [pageNo, setPageNo] = useState(5);
   const [foodName, setFoodName] = useState("");
   const [debounce, setDebounce] = useState(foodName);
   const [input, setInput] = useState(0);
@@ -44,7 +43,7 @@ const AddDiet = ({onClose}) => {
   // debounce 적용
   useEffect(() => {
     const delaydebounceTimer = setTimeout(() => {
-      setPageNo(1); // 페이지 초기화
+      setPageNo(5); // 페이지 초기화
       setFoodData([]); // 기존 데이터 초기화
       setDebounce(foodName);
     }, 1000);
@@ -96,7 +95,7 @@ const AddDiet = ({onClose}) => {
   useEffect(()=> {
     if(inView && !isFetchingRef.current){
       isFetchingRef.current = true;
-      setPageNo((prev) => prev + 1);
+      setPageNo((prev) => prev + 5);
     }
   }, [inView]);
 
@@ -105,7 +104,7 @@ const AddDiet = ({onClose}) => {
     setIsFetching(true);
 
     try{
-      const data = await dietService.getFoods({pageNo, pageSize, foodName});
+      const data = await dietService.getFoods({count: pageNo, foodName});
       if(data.length > 0){
         setFoodData((prev) => [...prev, ...data]);
       }
@@ -156,14 +155,14 @@ const AddDiet = ({onClose}) => {
   const handleAddDietItem = () => {
     if(activeFood?.kcal === 0 || !activeFood) return;
     setDietPickList((prev) =>{
-      const isExist = prev.some(item => item.foodCode === activeFood.foodCode);
+      const isExist = prev.some(item => item.foodName === activeFood.foodName);
 
       if(isExist){
         toast.warn("이미 추가된 음식입니다.");
         return prev;
       }
 
-      return [...prev, activeFood];
+      return [...prev, {...activeFood, standardKcal: originKcal, standardWeight: gram}];
     });
     setActiveFood("");
   }
@@ -173,6 +172,7 @@ const AddDiet = ({onClose}) => {
   }
 
   const handleOnKeyUp = (e) => {
+
     if(e.key === 'Enter'){
       setDebounce(foodName); // 검색어 즉시 반영
       patchFoodsData();
@@ -189,10 +189,9 @@ const AddDiet = ({onClose}) => {
         <div className="w-full flex justify-between gap-5 mt-10 mb-5">
           <div className="w-full">
             <SearchBar placeholder={string.PH_SEARCH} onKeyUp={handleOnKeyUp} value={foodName} setValue={(item) => setFoodName(item)}/>
-            <button
-              className="bg-(--primary) cursor-pointer flex w-full rounded-xl p-3 gap-1 items-center justify-center mt-4">
+            <button className="bg-(--primary) cursor-pointer flex w-full rounded-xl p-3 gap-1 items-center justify-center mt-4" onClick={onClickToday}>
               <img src={imgRice} className="w-5 h-5"/>
-              <p className="text-white text-base font-bold">오늘 먹은 학식 불러오기</p>
+              <p className="text-white text-base font-bold">이날 먹은 학식 불러오기</p>
             </button>
             <div className="overflow-y-auto h-[44vh] mt-2" style={{scrollbarWidth: 'none', msOverflowStyle: 'none'}}>
               {foodData?.map((item, index)=> (
@@ -201,7 +200,7 @@ const AddDiet = ({onClose}) => {
                   foodName={item?.foodName}
                   foodWeight={item?.foodWeight}
                   kcal={item?.kcal}
-                  active={item?.foodCode === activeFood?.foodCode}
+                  active={item?.foodName === activeFood?.foodName}
                   onClick={() => handleDietItem(item)}
                 />
               ))}
@@ -228,7 +227,7 @@ const AddDiet = ({onClose}) => {
             <div className="w-full bg-white rounded-2xl border border-neutral-200 p-4 h-54 flex flex-col items-center">
               <TabMenu leftItem={string.GRAM} rightItem={string.NUMBER} setActive={setTabMenu}/>
               <div className="flex gap-2 mt-8 ">
-                <OvalLineButton src={icMinus} onClick={() => {handlePlusMinus(constant.MINUS)}}/>
+                <OvalLineButton src={icMinus} size={5} onClick={() => {handlePlusMinus(constant.MINUS)}}/>
                 <input
                   type="number"
                   value={Math.round(input)}
@@ -240,7 +239,7 @@ const AddDiet = ({onClose}) => {
                 {tabMenu === string.GRAM && (
                     <span className="absolute right-2 top-1/2 transform -translate-y-1/2 text-black text-sm">g</span>
                 )}
-                <OvalLineButton src={icPlus} onClick={() => {handlePlusMinus(constant.PLUS)}}/>
+                <OvalLineButton src={icPlus} size={5} onClick={() => {handlePlusMinus(constant.PLUS)}}/>
               </div>
               {activeFood && <div className="pl-3 pr-3 pt-2 pb-2 bg-stone-100 rounded-md mt-5">
                 <p className="text-black text-base font-bold">{Math.round(activeFood?.kcal)}Kcal</p>
