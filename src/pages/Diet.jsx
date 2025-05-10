@@ -67,7 +67,7 @@ const Diet = () => {
 
   const week = Array.from({ length: 7 }).map((_, idx) => startOfWeek.add(idx, "day"));
   const defaultClassNames = getDefaultClassNames();
-
+  
   useEffect(() => {
     patchNutrion();
   }, [selectedDay]);
@@ -79,7 +79,7 @@ const Diet = () => {
   // 오른쪽 하단 달력 전체에 연결되는 api
   useEffect(() => {
     patchDiaryData();
-  }, [currentMonth, markedDays]);
+  }, [currentMonth]);
 
   useEffect(() => {
     patchGetDiets();
