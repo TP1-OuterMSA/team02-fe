@@ -59,6 +59,7 @@ export {default as imgWelcome} from '@assets/images/img_welcome.svg';
 export {default as imgNoodle} from '@assets/images/img_noodle.svg';
 export {default as imgAdvice} from '@assets/images/img_advice.svg';
 export {default as imgFood} from '@assets/images/img_food.svg';
+export {default as imgRecommend} from '@assets/images/img_recommend.svg';
 
 export {default as imgEatRice} from '@assets/images/img_eat_rice.gif';
 export {default as imgEating} from '@assets/images/img_eating.gif';

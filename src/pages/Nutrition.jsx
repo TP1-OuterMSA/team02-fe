@@ -6,14 +6,14 @@ import "react-datepicker/dist/react-datepicker.css";
 import {ko} from "date-fns/locale/ko";
 import {constant} from "@utils/constant.js";
 import {string} from "@utils/string.js";
-import {icCalendar, icBar, icBarWhite, icLinear, icLinearWhite, imgAdvice} from "@assets/index.js";
+import {icCalendar, icBar, icBarWhite, icLinear, icLinearWhite, imgAdvice, imgRecommend} from "@assets/index.js";
 import nutritionService from "@apis/nutrition/nutritionService.js";
 
 
 import NutritionChart from "@components/nutrition/NutritionChart.jsx";
 import RecommendFood from "@components/nutrition/RecommendFood.jsx";
-import {format} from "date-fns";
-const ADVICE_TEXT = "단백질 섭취량이 적어요. 단백질이 많은 음식을 섭취해보세요";
+import LoadingSpinner from "@components/common/LoadingSpinner.jsx";
+
 const Nutrition = () => {
   const [selectedDate, setSelectedDate] = useState(dayjs());
   const [activeTab, setActiveTab] = useState(constant.DAY);
@@ -25,6 +25,7 @@ const Nutrition = () => {
   const [proteinData, setProteinData] = useState([]);
   const [fatData, setFatData] = useState([]);
   const [recommendFood, setRecommendFood] = useState([]);
+  const [evaluation, setEvaluation] = useState("한줄평을 가져올 수 없습니다. 다시 시도해주세요");
 
   useEffect(() => {
     patchAnalyzeDate();
@@ -38,13 +39,13 @@ const Nutrition = () => {
     const typingInterval = setInterval(() => {
       setDisplayedText((prev) => {
         // 방어 코드: index가 범위를 넘지 않도록
-        if (index >= ADVICE_TEXT.length) {
+        if (index >= evaluation.length) {
           clearInterval(typingInterval);
           // 전체 출력 후 3초 뒤에 말풍선 숨김
           setTimeout(() => setShowTextBalloon(false), 2500);
           return prev;
         }
-        const next = prev + ADVICE_TEXT[index];
+        const next = prev + evaluation[index];
         index++;
         return next;
       });
@@ -70,7 +71,6 @@ const Nutrition = () => {
     console.log("분석결과", datas);
   }
 
-  console.log(recommendFood);
 
   const handleAdviceClick = () => {
     setDisplayedText("");
@@ -138,12 +138,25 @@ const Nutrition = () => {
         <div className="bg-white rounded-2xl shadow-[10px_10px_80px_-15px_rgba(231,228,232,0.60)] w-[50%] p-6">
           <p className="text-black text-xl font-bold">{string.RECOMMENDMENU}</p>
           <div className="flex p-2 mt-2 overflow-x-auto gap-4 w-full">
-            {recommendFood.map((food, index) => (
-              <RecommendFood
-                key={index}
-                {...food}
-              />
-            ))}
+            <RecommendFood/>
+            <RecommendFood foodName={"d어라ㅇ마dddddddㅣㅓ리"}/>
+            <RecommendFood/>
+            <RecommendFood/>
+            <RecommendFood/>
+            <RecommendFood/>
+            {/*{recommendFood?.map((food, index) => (*/}
+            {/*  <RecommendFood*/}
+            {/*    key={index}*/}
+            {/*    {...food}*/}
+            {/*  />*/}
+            {/*))}*/}
+            {/*{!!recommendFood && (*/}
+            {/*    <div className="w-full flex flex-col items-center">*/}
+            {/*      <LoadingSpinner img={imgRecommend} size={200}/>*/}
+            {/*      <p className="text-black mt-3 text-xl">추천 메뉴 불러오는 중...</p>*/}
+            {/*      <p></p>*/}
+            {/*    </div>*/}
+            {/*)}*/}
           </div>
         </div>
         <div className="bg-white rounded-2xl shadow-[10px_10px_80px_-15px_rgba(231,228,232,0.60)] w-[50%] p-6">
@@ -158,7 +171,6 @@ const Nutrition = () => {
             </div>
             <p className=" text-black text-xl font-normal ">평균적으로 2183 Kcal를 섭취하셨어요</p>
           </div>
-
         </div>
       </div>
       <div
