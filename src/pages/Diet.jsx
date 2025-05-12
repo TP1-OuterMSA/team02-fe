@@ -67,7 +67,7 @@ const Diet = () => {
 
   const week = Array.from({ length: 7 }).map((_, idx) => startOfWeek.add(idx, "day"));
   const defaultClassNames = getDefaultClassNames();
-  
+
   useEffect(() => {
     patchNutrion();
   }, [selectedDay]);

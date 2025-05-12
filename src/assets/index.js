@@ -34,6 +34,12 @@ export {default as icDietFill} from '@assets/icon/ico_diet_fill.svg';
 export {default as icNutrition} from '@assets/icon/ico_nutrition.svg';
 export {default as icNutritionFill} from '@assets/icon/ico_nutrition_fill.svg';
 export {default as icDown} from '@assets/icon/ico_down.svg';
+export {default as icCalendar} from "@assets/icon/ico_calendar.svg";
+export {default as icBar} from "@assets/icon/ico_bar.svg";
+export {default as icBarWhite} from "@assets/icon/ico_bar_white.svg";
+export {default as icLinear} from "@assets/icon/ico_linear.svg";
+export {default as icLinearWhite} from "@assets/icon/ico_linear_white.svg";
+
 
 export {default as icMorning} from '@assets/icon/ico_morning.svg';
 export {default as icLunch} from '@assets/icon/ico_lunch.svg';

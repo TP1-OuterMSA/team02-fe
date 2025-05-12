@@ -18,4 +18,8 @@ export const constant = {
   CARB: "탄수화물",
   PROTEIN: "단백질",
   FAT: "지방",
+  DAY: "일일",
+  WEEK: "주간",
+  LINEAR: "선형",
+  STICK: "막대",
 }
