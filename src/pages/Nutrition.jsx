@@ -1,12 +1,15 @@
 import {useEffect, useState} from "react";
 import clsx from "clsx";
 import dayjs from "dayjs";
+import {Swiper, SwiperSlide} from "swiper/react";
+import {Navigation} from "swiper/modules";
+import 'swiper/css';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import {ko} from "date-fns/locale/ko";
 import {constant} from "@utils/constant.js";
 import {string} from "@utils/string.js";
-import {icCalendar, icBar, icBarWhite, icLinear, icLinearWhite, imgAdvice, imgRecommend} from "@assets/index.js";
+import {icCalendar, icBar, icBarWhite, icLinear, icLinearWhite,icLeft, icRight, imgAdvice, imgRecommend} from "@assets/index.js";
 import nutritionService from "@apis/nutrition/nutritionService.js";
 
 
@@ -136,27 +139,40 @@ const Nutrition = () => {
       </div>
       <div className="flex mt-4 gap-4">
         <div className="bg-white rounded-2xl shadow-[10px_10px_80px_-15px_rgba(231,228,232,0.60)] w-[50%] p-6">
-          <p className="text-black text-xl font-bold">{string.RECOMMENDMENU}</p>
-          <div className="flex p-2 mt-2 overflow-x-auto gap-4 w-full">
-            <RecommendFood/>
-            <RecommendFood foodName={"d어라ㅇ마dddddddㅣㅓ리"}/>
-            <RecommendFood/>
-            <RecommendFood/>
-            <RecommendFood/>
-            <RecommendFood/>
-            {/*{recommendFood?.map((food, index) => (*/}
-            {/*  <RecommendFood*/}
-            {/*    key={index}*/}
-            {/*    {...food}*/}
-            {/*  />*/}
-            {/*))}*/}
-            {/*{!!recommendFood && (*/}
-            {/*    <div className="w-full flex flex-col items-center">*/}
-            {/*      <LoadingSpinner img={imgRecommend} size={200}/>*/}
-            {/*      <p className="text-black mt-3 text-xl">추천 메뉴 불러오는 중...</p>*/}
-            {/*      <p></p>*/}
-            {/*    </div>*/}
-            {/*)}*/}
+          <div className="flex justify-between">
+            <p className="text-black text-xl font-bold">{string.RECOMMENDMENU}</p>
+            <div className="flex gap-4">
+              <img src={icLeft} className="w-5 h-5 cursor-pointer custom-swiper-prev"/>
+              <img src={icRight} className="w-5 h-5 cursor-pointer custom-swiper-next"/>
+            </div>
+          </div>
+          <div className="flex p-2 mt-2 overflow-x-auto gap-4 w-full" style={{scrollbarWidth: 'none', msOverflowStyle: 'none'}}>
+            <Swiper
+                spaceBetween={20}
+                slidesPerView={3}
+                modules={[Navigation]}
+                navigation={{
+                  prevEl: '.custom-swiper-prev',
+                  nextEl: '.custom-swiper-next',
+                }}
+            >
+              {recommendFood?.map((food, index) => (
+                  <SwiperSlide>
+                    <RecommendFood
+                        key={index}
+                        {...food}
+                    />
+                  </SwiperSlide>
+              ))}
+            </Swiper>
+
+            {!!recommendFood && (
+                <div className="w-full flex flex-col items-center">
+                  <LoadingSpinner img={imgRecommend} size={200}/>
+                  <p className="text-black mt-3 text-xl">추천 메뉴 불러오는 중...</p>
+                  <p></p>
+                </div>
+            )}
           </div>
         </div>
         <div className="bg-white rounded-2xl shadow-[10px_10px_80px_-15px_rgba(231,228,232,0.60)] w-[50%] p-6">
