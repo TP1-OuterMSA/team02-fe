@@ -1,16 +1,82 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import clsx from "clsx";
+import dayjs from "dayjs";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import {ko} from "date-fns/locale/ko";
 import {constant} from "@utils/constant.js";
 import {string} from "@utils/string.js";
 import {icCalendar, icBar, icBarWhite, icLinear, icLinearWhite, imgAdvice} from "@assets/index.js";
+import nutritionService from "@apis/nutrition/nutritionService.js";
 
 
 import NutritionChart from "@components/nutrition/NutritionChart.jsx";
 import RecommendFood from "@components/nutrition/RecommendFood.jsx";
-
+import {format} from "date-fns";
+const ADVICE_TEXT = "단백질 섭취량이 적어요. 단백질이 많은 음식을 섭취해보세요";
 const Nutrition = () => {
+  const [selectedDate, setSelectedDate] = useState(dayjs());
   const [activeTab, setActiveTab] = useState(constant.DAY);
   const [activeGraph, setActiveGraph] = useState(constant.STICK);
+  const [showTextBalloon, setShowTextBalloon] = useState(false);
+  const [displayedText, setDisplayedText] = useState("");
+  const [labels, setLabels] = useState([]);
+  const [carbData, setCarbData] = useState([]);
+  const [proteinData, setProteinData] = useState([]);
+  const [fatData, setFatData] = useState([]);
+  const [recommendFood, setRecommendFood] = useState([]);
+
+  useEffect(() => {
+    patchAnalyzeDate();
+  }, [selectedDate]);
+
+  useEffect(() => {
+    if (!showTextBalloon) return;
+
+    let index = 0;
+
+    const typingInterval = setInterval(() => {
+      setDisplayedText((prev) => {
+        // 방어 코드: index가 범위를 넘지 않도록
+        if (index >= ADVICE_TEXT.length) {
+          clearInterval(typingInterval);
+          // 전체 출력 후 3초 뒤에 말풍선 숨김
+          setTimeout(() => setShowTextBalloon(false), 2500);
+          return prev;
+        }
+        const next = prev + ADVICE_TEXT[index];
+        index++;
+        return next;
+      });
+    }, 100);
+
+    return () => clearInterval(typingInterval);
+  }, [showTextBalloon]);
+
+  const patchAnalyzeDate = async () => {
+    setLabels([]);
+    setCarbData([]);
+    setProteinData([]);
+    setFatData([]);
+
+    const datas = await nutritionService.getWeekNutrition({date: dayjs(selectedDate).format("YYYY-MM-DD")});
+    datas.nutritions.map((nutrition) => {
+      setLabels((prev) => [...prev, "~" + dayjs(nutrition.endDate).format("MM.DD")]);
+      setCarbData((prev) => [...prev, Math.round(nutrition.carb)]);
+      setProteinData((prev) => [...prev, Math.round(nutrition.protein)]);
+      setFatData((prev) => [...prev, Math.round(nutrition.fat)]);
+    })
+    setRecommendFood(datas.recommendFoods);
+    console.log("분석결과", datas);
+  }
+
+  console.log(recommendFood);
+
+  const handleAdviceClick = () => {
+    setDisplayedText("");
+    setShowTextBalloon(true);
+  }
+
 
   const handleTabClick = (tab) => {
     if (tab === constant.DAY) {
@@ -25,12 +91,19 @@ const Nutrition = () => {
   }
   return (
     <div className="w-full p-5">
-      <div className="bg-neutral-50 rounded-xl border border-gray-200 inline-block p-3 pr-8">
+      <div className="bg-neutral-50 rounded-xl border border-gray-200 inline-block p-3 pr-8 cursor-pointer">
         <div className="flex items-center gap-3">
           <img src={icCalendar} className="w-6 h-6"/>
-          <p className="text-black text-xl font-extrabold">2025-05-25 - 06.24</p>
+          <DatePicker
+            dateFormat={"yyyy-MM-dd"}
+            locale={ko}
+            className="text-black text-xl font-extrabold w-29 text-center focus:outline-none focus:ring-0"
+            selected={selectedDate}
+            onChange={(date) => setSelectedDate(date)}
+          />
         </div>
       </div>
+
       <div className="bg-white rounded-2xl shadow-[10px_10px_80px_-15px_rgba(231,228,232,0.60)] mt-4 pb-5">
         <div className="pl-7 pr-5 pt-5 flex justify-between mb-3">
           <div className="flex gap-3">
@@ -54,13 +127,23 @@ const Nutrition = () => {
             </div>
           </div>
         </div>
-        <NutritionChart/>
+        <NutritionChart
+          labels={labels}
+          carbData={carbData}
+          proteinData={proteinData}
+          fatData={fatData}
+        />
       </div>
       <div className="flex mt-4 gap-4">
         <div className="bg-white rounded-2xl shadow-[10px_10px_80px_-15px_rgba(231,228,232,0.60)] w-[50%] p-6">
           <p className="text-black text-xl font-bold">{string.RECOMMENDMENU}</p>
-          <div className="flex p-2 mt-2 overflow-x-auto gap-4">
-            <RecommendFood/>
+          <div className="flex p-2 mt-2 overflow-x-auto gap-4 w-full">
+            {recommendFood.map((food, index) => (
+              <RecommendFood
+                key={index}
+                {...food}
+              />
+            ))}
           </div>
         </div>
         <div className="bg-white rounded-2xl shadow-[10px_10px_80px_-15px_rgba(231,228,232,0.60)] w-[50%] p-6">
@@ -78,12 +161,14 @@ const Nutrition = () => {
 
         </div>
       </div>
-      <div className="w-16 h-16 bg-white rounded-full fixed bottom-5 right-5 shadow-[0px_1px_3px_0px_rgba(0,0,0,0.30)] shadow-[0px_4px_8px_3px_rgba(0,0,0,0.15)]">
+      <div
+        onClick={handleAdviceClick}
+        className="w-16 h-16 bg-white rounded-full fixed bottom-5 right-5 shadow-[0px_1px_3px_0px_rgba(0,0,0,0.30)] shadow-[0px_4px_8px_3px_rgba(0,0,0,0.15)]">
         <img src={imgAdvice} className="w-16 h-16 cursor-pointer"/>
       </div>
-      <div className="bg-blue-800 rounded-tl-xl rounded-tr-xl rounded-bl-xl p-3 inline-flex fixed bottom-13 right-25">
-        <p className="text-white">단백질 섭취량이 적어요. 단백질이 많은 음식을 섭취해보세요</p>
-      </div>
+      {showTextBalloon && <div className="bg-blue-800 rounded-tl-xl rounded-tr-xl rounded-bl-xl p-3 inline-flex fixed bottom-13 right-25">
+        <p className="text-white">{displayedText}</p>
+      </div>}
 
     </div>
   );

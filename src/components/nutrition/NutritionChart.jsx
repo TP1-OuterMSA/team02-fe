@@ -13,35 +13,27 @@ import {
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
-const NutritionChart = () => {
+const NutritionChart = ({labels, carbData, proteinData, fatData}) => {
   const data = {
-    labels: [
-      '월\n4.14',
-      '화\n4.15',
-      '수\n4.16',
-      '목\n4.17',
-      '금\n4.18',
-      '토\n4.19',
-      '일\n4.20',
-    ],
+    labels: labels,
     datasets: [
       {
         label: '탄수화물',
-        data: [450, 430, 470, 440, 460, 420, 400],
+        data: carbData,
         backgroundColor: 'rgba(24, 20, 243, 1)',
         borderRadius: 20,
         barPercentage: 0.7,
       },
       {
         label: '단백질',
-        data: [230, 210, 250, 240, 220, 210, 200],
+        data: proteinData,
         backgroundColor: 'rgba(7, 97, 90, 1)',
         borderRadius: 20,
         barPercentage: 0.7,
       },
       {
         label: '지방',
-        data: [180, 190, 170, 160, 150, 160, 170],
+        data: fatData,
         backgroundColor: 'rgba(22, 219, 204, 1)',
         borderRadius: 20,
         barPercentage: 0.7,
@@ -88,16 +80,16 @@ const NutritionChart = () => {
       },
       y: {
         beginAtZero: true,
-        max: 500,
+        max: 100,
         ticks: {
-          stepSize: 100,
+          stepSize: 20,
         },
       },
     },
   };
 
   return (
-    <div style={{ width: '100%', height: '300px', padding: '0 20px 0 20px'}}>
+    <div style={{ width: '100%', height: '280px', padding: '0 20px 0 20px'}}>
       <Bar data={data} options={options} />
     </div>
   );
