@@ -14,6 +14,7 @@ import nutritionService from "@apis/nutrition/nutritionService.js";
 import userService from "@apis/user/userService.js";
 
 import NutritionChart from "@components/nutrition/NutritionChart.jsx";
+import NutritionLinearChart from "@components/nutrition/NutritionLinearChart.jsx";
 import RecommendFood from "@components/nutrition/RecommendFood.jsx";
 import LoadingSpinner from "@components/common/LoadingSpinner.jsx";
 
@@ -217,12 +218,18 @@ const Nutrition = () => {
             </div>
           </div>
         </div>
-        <NutritionChart
+        {activeGraph === constant.STICK ?
+          <NutritionChart
           labels={labels}
           carbData={carbData}
           proteinData={proteinData}
           fatData={fatData}
-        />
+        /> : <NutritionLinearChart
+            labels={labels}
+            carbData={carbData}
+            proteinData={proteinData}
+            fatData={fatData}
+        />}
       </div>
       <div className="flex mt-4 gap-4">
         <div className="bg-white rounded-2xl shadow-[10px_10px_80px_-15px_rgba(231,228,232,0.60)] w-[50%] p-6">
