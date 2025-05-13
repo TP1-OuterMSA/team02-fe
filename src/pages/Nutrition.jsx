@@ -11,14 +11,46 @@ import {constant} from "@utils/constant.js";
 import {string} from "@utils/string.js";
 import {icCalendar, icBar, icBarWhite, icLinear, icLinearWhite,icLeft, icRight, imgAdvice, imgRecommend} from "@assets/index.js";
 import nutritionService from "@apis/nutrition/nutritionService.js";
-
+import userService from "@apis/user/userService.js";
 
 import NutritionChart from "@components/nutrition/NutritionChart.jsx";
 import RecommendFood from "@components/nutrition/RecommendFood.jsx";
 import LoadingSpinner from "@components/common/LoadingSpinner.jsx";
 
+const recommendDummy = [
+  {
+    "foodName": "연어 스테이크",
+    "foodWeight": 150.0,
+    "kcal": 280.0
+  },
+  {
+    "foodName": "견과류 믹스",
+    "foodWeight": 40.0,
+    "kcal": 220.0
+  },
+  {
+    "foodName": "계란 흰자 오믈렛",
+    "foodWeight": 150.0,
+    "kcal": 120.0
+  },
+  {
+    "foodName": "아보카도 샐러드",
+    "foodWeight": 200.0,
+    "kcal": 250.0
+  },
+  {
+    "foodName": "참치 통조림",
+    "foodWeight": 100.0,
+    "kcal": 120.0
+  }
+];
 const Nutrition = () => {
+  const [userData, setUserData] = useState(0);
+  const [monthlyKcal, setMonthlyKcal] = useState(0);
+  const [weeklyKcal, setWeeklyKcal] = useState(0);
   const [selectedDate, setSelectedDate] = useState(dayjs());
+  const [kcalPercentage, setKcalPercentage] = useState(0);
+  const [width, setWidth] = useState(0);
   const [activeTab, setActiveTab] = useState(constant.WEEK);
   const [activeGraph, setActiveGraph] = useState(constant.STICK);
   const [showTextBalloon, setShowTextBalloon] = useState(false);
@@ -29,14 +61,44 @@ const Nutrition = () => {
   const [fatData, setFatData] = useState([]);
   const [totalKcal, setTotalKcal] = useState(0);
   const [recommendFood, setRecommendFood] = useState([]);
-  const [evaluation, setEvaluation] = useState("한줄평을 가져올 수 없습니다. 다시 시도해주세요");
+  const [evaluation, setEvaluation] = useState("칼로리가 매우 낮고, 탄수화물, 단백질, 지방의 균형이 낮아보입니다. 단백질과 건강한 지방 섭취를 늘려 관리를 해보면 좋을 것 같아요.");
+  const [averageKcal, setAverageKcal] = useState(0);
 
-  console.log(dayjs(selectedDate).subtract(6, 'day').format('YYYY-MM-DD'));
+  useEffect(() => {
+    patchUserData();
+  }, []);
+
+  useEffect(() => {
+    setAverageKcal(activeTab === constant.WEEK ? (totalKcal / monthlyKcal) *1000 : (totalKcal / weeklyKcal) *1000);
+  }, [totalKcal, monthlyKcal, weeklyKcal]);
+
+  useEffect(() => {
+    setRecommendFood([]);
+    setTimeout(()=> {
+      setRecommendFood(recommendDummy);
+    }, 2000);
+  }, [selectedDate]);
+
+  useEffect(() => {
+    setKcalPercentage(activeTab === constant.WEEK ? (totalKcal / monthlyKcal) * 100 : (totalKcal / weeklyKcal) * 100);
+    setWidth(0);
+    setTimeout(() => {
+      setWidth(kcalPercentage);
+    }, 100);
+  }, [kcalPercentage, totalKcal]);
+
+
+  useEffect(() => {
+    setMonthlyKcal(userData * 49);
+    setWeeklyKcal(userData * 7);
+  }, [userData]);
+
   useEffect(() => {
     if(activeTab === constant.WEEK){
-      patchAnalyzeDate();
+      patchMonthlyAnalyzeDate();
+    } else if(activeTab === constant.DAY){
+      patchWeeklyAnalyzeDate();
     }
-
   }, [selectedDate, activeTab]);
 
   useEffect(() => {
@@ -62,7 +124,7 @@ const Nutrition = () => {
     return () => clearInterval(typingInterval);
   }, [showTextBalloon]);
 
-  const patchAnalyzeDate = async () => {
+  const patchMonthlyAnalyzeDate = async () => {
     setLabels([]);
     setCarbData([]);
     setProteinData([]);
@@ -70,15 +132,34 @@ const Nutrition = () => {
     setTotalKcal(0);
 
     const datas = await nutritionService.getWeekNutrition({date: dayjs(selectedDate).format("YYYY-MM-DD")});
-    datas.nutritions.map((nutrition) => {
+    datas?.nutritions.map((nutrition) => {
       setLabels((prev) => [...prev, "~" + dayjs(nutrition.endDate).format("MM.DD")]);
       setCarbData((prev) => [...prev, Math.round(nutrition.carb)]);
       setProteinData((prev) => [...prev, Math.round(nutrition.protein)]);
       setFatData((prev) => [...prev, Math.round(nutrition.fat)]);
       setTotalKcal((prev) => prev + nutrition.kcal);
     })
-    setRecommendFood(datas.recommendFoods);
-    console.log("분석결과", datas);
+  }
+
+  const patchWeeklyAnalyzeDate = async () => {
+    setLabels([]);
+    setCarbData([]);
+    setProteinData([]);
+    setFatData([]);
+    setTotalKcal(0);
+    const datas = await nutritionService.getDayNutrition({startDate: dayjs(selectedDate).format("YYYY-MM-DD"), endDate: dayjs(selectedDate).add(6, 'day').format("YYYY-MM-DD")});
+    datas.nutrition.map((data) => {
+      setLabels((prev) => [...prev, dayjs(data.date).format("MM.DD")]);
+      setCarbData((prev) => [...prev, Math.round(data.carb)]);
+      setProteinData((prev) => [...prev, Math.round(data.protein)]);
+      setFatData((prev) => [...prev, Math.round(data.fat)]);
+      setTotalKcal((prev) => prev + data.totalKcal);
+    })
+  }
+
+  const patchUserData = async () => {
+    const userData = await userService.getRecommendKcal();
+    setUserData(userData);
   }
 
   const handleAdviceClick = () => {
@@ -171,7 +252,7 @@ const Nutrition = () => {
               ))}
             </Swiper>
 
-            {!recommendFood && (
+            {recommendFood.length === 0 && (
                 <div className="w-full flex flex-col items-center">
                   <LoadingSpinner img={imgRecommend} size={200}/>
                   <p className="text-black mt-3 text-xl">추천 메뉴 불러오는 중...</p>
@@ -188,9 +269,15 @@ const Nutrition = () => {
               <p className="text-black text-xl font-bold">Total Kcal</p>
             </div>
             <div className="w-full h-6 bg-zinc-300 rounded-[10px]">
-              <div className="w-20 h-full bg-(--primary) rounded-[10px]"/>
+              <div
+                className="h-full bg-(--primary) rounded-[10px]"
+                style={{
+                  width: `${width}%`,
+                  transition: "width 1s ease-in-out"
+                }}
+              />
             </div>
-            <p className=" text-black text-xl font-normal ">평균적으로 2183 Kcal를 섭취하셨어요</p>
+            <p className=" text-black text-xl font-normal ">평균적으로 {Math.round(averageKcal)}Kcal를 섭취하셨어요</p>
           </div>
         </div>
       </div>
