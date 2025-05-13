@@ -19,7 +19,7 @@ import LoadingSpinner from "@components/common/LoadingSpinner.jsx";
 
 const Nutrition = () => {
   const [selectedDate, setSelectedDate] = useState(dayjs());
-  const [activeTab, setActiveTab] = useState(constant.DAY);
+  const [activeTab, setActiveTab] = useState(constant.WEEK);
   const [activeGraph, setActiveGraph] = useState(constant.STICK);
   const [showTextBalloon, setShowTextBalloon] = useState(false);
   const [displayedText, setDisplayedText] = useState("");
@@ -27,12 +27,17 @@ const Nutrition = () => {
   const [carbData, setCarbData] = useState([]);
   const [proteinData, setProteinData] = useState([]);
   const [fatData, setFatData] = useState([]);
+  const [totalKcal, setTotalKcal] = useState(0);
   const [recommendFood, setRecommendFood] = useState([]);
   const [evaluation, setEvaluation] = useState("한줄평을 가져올 수 없습니다. 다시 시도해주세요");
 
+  console.log(dayjs(selectedDate).subtract(6, 'day').format('YYYY-MM-DD'));
   useEffect(() => {
-    patchAnalyzeDate();
-  }, [selectedDate]);
+    if(activeTab === constant.WEEK){
+      patchAnalyzeDate();
+    }
+
+  }, [selectedDate, activeTab]);
 
   useEffect(() => {
     if (!showTextBalloon) return;
@@ -62,6 +67,7 @@ const Nutrition = () => {
     setCarbData([]);
     setProteinData([]);
     setFatData([]);
+    setTotalKcal(0);
 
     const datas = await nutritionService.getWeekNutrition({date: dayjs(selectedDate).format("YYYY-MM-DD")});
     datas.nutritions.map((nutrition) => {
@@ -69,11 +75,11 @@ const Nutrition = () => {
       setCarbData((prev) => [...prev, Math.round(nutrition.carb)]);
       setProteinData((prev) => [...prev, Math.round(nutrition.protein)]);
       setFatData((prev) => [...prev, Math.round(nutrition.fat)]);
+      setTotalKcal((prev) => prev + nutrition.kcal);
     })
     setRecommendFood(datas.recommendFoods);
     console.log("분석결과", datas);
   }
-
 
   const handleAdviceClick = () => {
     setDisplayedText("");
@@ -111,11 +117,11 @@ const Nutrition = () => {
         <div className="pl-7 pr-5 pt-5 flex justify-between mb-3">
           <div className="flex gap-3">
             <p
-              className={clsx("cursor-pointer text-xl font-bold", `${activeTab === constant.DAY ? "text-blue-800" : "text-neutral-500"}`)}
-              onClick={() => handleTabClick(constant.DAY)}>주간</p>
-            <p
               className={clsx("cursor-pointer text-xl font-bold", `${activeTab === constant.WEEK ? "text-blue-800" : "text-neutral-500"}`)}
-              onClick={() => handleTabClick(constant.WEEK)}>일일</p>
+              onClick={() => handleTabClick(constant.WEEK)}>주간</p>
+            <p
+              className={clsx("cursor-pointer text-xl font-bold", `${activeTab === constant.DAY ? "text-blue-800" : "text-neutral-500"}`)}
+              onClick={() => handleTabClick(constant.DAY)}>일일</p>
           </div>
           <div className="flex bg-white rounded-md border border-neutral-200 border-1">
             <div
@@ -157,16 +163,15 @@ const Nutrition = () => {
                 }}
             >
               {recommendFood?.map((food, index) => (
-                  <SwiperSlide>
+                  <SwiperSlide key={index}>
                     <RecommendFood
-                        key={index}
                         {...food}
                     />
                   </SwiperSlide>
               ))}
             </Swiper>
 
-            {!!recommendFood && (
+            {!recommendFood && (
                 <div className="w-full flex flex-col items-center">
                   <LoadingSpinner img={imgRecommend} size={200}/>
                   <p className="text-black mt-3 text-xl">추천 메뉴 불러오는 중...</p>
@@ -179,7 +184,7 @@ const Nutrition = () => {
           <p className="text-black text-xl font-bold">{string.ANALYZEKACL}</p>
           <div className="flex flex-col gap-4 h-full w-full justify-center">
             <div className="flex gap-2 items-end">
-              <p className="text-black text-3xl font-extrabold">2198</p>
+              <p className="text-black text-3xl font-extrabold">{Math.round(totalKcal)}</p>
               <p className="text-black text-xl font-bold">Total Kcal</p>
             </div>
             <div className="w-full h-6 bg-zinc-300 rounded-[10px]">
