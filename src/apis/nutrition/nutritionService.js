@@ -7,8 +7,24 @@ export const analyzeNutrition = async (date) => {
   return response.data;
 }
 
+export const getWeekNutrition = async ({date, count = 7}) => {
+  const response = await axiosInstance.get("/diet/weekly-nutrition", {
+    params: {date, count}
+  });
+  return response.data;
+}
+
+export const getDayNutrition = async ({startDate, endDate}) => {
+  const response = await axiosInstance.get("/diet/analyzeDay", {
+    params: {startDate, endDate}
+  });
+  return response.data;
+}
+
 const nutritionService = {
-  analyzeNutrition
+  analyzeNutrition,
+  getWeekNutrition,
+  getDayNutrition,
 }
 
 export default nutritionService;

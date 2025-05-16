@@ -32,6 +32,8 @@ export const string = {
   ALL: "전체",
   LIKE: "좋아요 많은 순",
   COMMENT: "댓글 많은 순",
+  RECOMMENDMENU: "추천메뉴",
+  ANALYZEKACL: "섭취 칼로리 분석",
   MY: "내글만 보기",
   PH_TITLE: "제목을 입력해주세요.",
   CONTENT: "글 내용",
