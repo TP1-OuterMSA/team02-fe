@@ -36,7 +36,7 @@ export const saveDiet = async ({date, mealType, foods}) => {
 export const deleteDiet = async ({dietFoodId, foodIds}) => {
   const response = await axiosInstance.delete(`/diet/deleteDietFood`,
     {
-      params: {dietFoodId},
+        params: {dietFoodId},
       data: {foodIds}
     }
   );

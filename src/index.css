@@ -108,5 +108,15 @@
         text-align: center;
     }
 
+    /* 좌우 화살표 버튼 색상 변경 */
+    .rdp-nav_button {
+        color: #f87171; /* 예: Tailwind의 rose-500 */
+    }
+
+    /* 호버 색상 */
+    .rdp-nav_button:hover {
+        color: #ef4444;
+    }
+
 }
 
