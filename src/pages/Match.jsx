@@ -7,7 +7,7 @@ import {DayPicker} from "react-day-picker";
 import "react-day-picker/style.css";
 import dayjs from "dayjs";
 
-import {icMap,icMealGood,icAlarm,icCalRegister,icEditLocation, icCelebration, icCloseWhite, icBack,icMyLocation, imgMark, imgMarkUnSelect} from "@assets/index.js";
+import {icMap,icMealGood,icAlarm,icCalRegister,icEditLocation, icHeartMatch,icHeartMatchFill, icCelebration, icCloseWhite, icBack,icMyLocation, imgMark, imgMarkUnSelect} from "@assets/index.js";
 
 import googleService from "@apis/external/googleService.js";
 import matchService from "@apis/match/matchService.js";
@@ -141,6 +141,7 @@ const Match = () => {
 
   // 마커 클릭 이벤트
   const handleMarkList = (item) => {
+    console.log(item);
     setSelectedPlace(item);
     setSearchKeyWord(item?.place_name);
     setShowDetail(true);
@@ -368,24 +369,32 @@ const Match = () => {
         </div>
 
         <div className="absolute bottom-3 left-4 z-10 max-w-[98%] min-w-[98%]">
-          <div className="cursor-pointer p-4 w-14 bg-white ml-[94%] rounded-[10px] shadow-[1px_3px_9px_0px_rgba(0,0,0,0.08)] border border-zinc-300">
-            <img src={icMyLocation} alt="myLocation" className="w-6 h-6" onClick={moveToCurrentLocation}/>
+          <div className="flex justify-between pr-2">
+            <div className="cursor-pointer p-4 w-14 bg-white rounded-[10px] shadow-[1px_3px_9px_0px_rgba(0,0,0,0.08)] border border-zinc-300">
+              <img src={icHeartMatchFill} alt="myLocation" className="w-6 h-6"/>
+            </div>
+            <div
+                className="cursor-pointer p-4 w-14 bg-white rounded-[10px] shadow-[1px_3px_9px_0px_rgba(0,0,0,0.08)] border border-zinc-300">
+              <img src={icMyLocation} alt="myLocation" className="w-6 h-6" onClick={moveToCurrentLocation}/>
+            </div>
           </div>
-          {markedList.length > 0 && !showDetail &&  <div className=" mt-4 flex gap-5 overflow-x-auto">
+
+          {markedList.length > 0 && !showDetail && <div className=" mt-4 flex gap-5 overflow-x-auto">
             {markedList.map((item, index) => (
-              <PlaceCard
-                place_name={item.place_name}
-                address_name={item.address_name}
-                key={index}
-              />
-              ))}
+                <PlaceCard
+                    place_name={item.place_name}
+                    address_name={item.address_name}
+                    key={index}
+                    onClick={() => handleMarkList(item)}
+                />
+            ))}
           </div>}
         </div>
 
         {isFoucs && <div
-          className="absolute overflow-y-auto top-21 left-5 z-10 w-80 h-120 bg-white rounded-[10px] shadow-[1px_3px_9px_0px_rgba(0,0,0,0.08)] border border-zinc-300"
-          style={{scrollbarWidth: 'none', msOverflowStyle: 'none'}}>
-          {searchList.map((item, index) => (
+            className="absolute overflow-y-auto top-21 left-5 z-10 w-80 h-120 bg-white rounded-[10px] shadow-[1px_3px_9px_0px_rgba(0,0,0,0.08)] border border-zinc-300"
+            style={{scrollbarWidth: 'none', msOverflowStyle: 'none'}}>
+        {searchList.map((item, index) => (
             <SearchItem
               key={index}
               {...item}
