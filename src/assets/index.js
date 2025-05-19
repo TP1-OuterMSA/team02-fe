@@ -26,6 +26,9 @@ export {default as icMinus} from '@assets/icon/ico_minus.svg';
 export {default as icPlusWhite} from '@assets/icon/ico_plus_white.svg';
 export {default as icAlarm} from '@assets/icon/ico_alarm.svg';
 export {default as icCalRegister} from '@assets/icon/ico_cal_register.svg';
+export {default as icMyLocation} from '@assets/icon/ico_my_location.svg';
+export {default as icCelebration} from '@assets/icon/ico_celebration.svg';
+export {default as icEditLocation} from '@assets/icon/ico_edit_location.svg';
 
 export {default as icCommunity} from '@assets/icon/ico_community.svg';
 export {default as icCommunityFill} from '@assets/icon/ico_community_fill.svg';

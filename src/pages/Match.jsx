@@ -7,7 +7,7 @@ import {DayPicker} from "react-day-picker";
 import "react-day-picker/style.css";
 import dayjs from "dayjs";
 
-import {icMap, icMealGood,icAlarm,icCalRegister,icBack, imgMark, imgMarkUnSelect} from "@assets/index.js";
+import {icMap,icMealGood,icAlarm,icCalRegister,icEditLocation, icCelebration, icCloseWhite, icBack,icMyLocation, imgMark, imgMarkUnSelect} from "@assets/index.js";
 
 import googleService from "@apis/external/googleService.js";
 import matchService from "@apis/match/matchService.js";
@@ -18,10 +18,13 @@ import ArticleCard from "@components/match/ArticleCard.jsx";
 import LoadingSpinner from "@components/common/LoadingSpinner.jsx";
 import CustomInput from "@components/common/CustomInput.jsx";
 import LongButton from "@components/common/LongButton.jsx";
+import Chips from "@components/match/Chips.jsx";
 
 const Match = () => {
   const [addressX, setAddressX] = useState(0);
   const [addressY, setAddressY] = useState(0);
+  const [neAddress, setNeAddress] = useState({});
+  const [swAddress, setSwAddress] = useState({});
   const [isFoucs, setIsFoucs] = useState(false);
   const [searchKeyWord, setSearchKeyWord] = useState('명지대학교 인문캠퍼스');
   const [debounce, setDebounce] = useState(searchKeyWord);
@@ -34,9 +37,22 @@ const Match = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [showDetail, setShowDetail] = useState(false);
   const [showPost, setShowPost] = useState(false);
+  const [mealPostList, setMealPostList] = useState([]);
+  const [activeChip, setActiveChip] = useState("");
+  const [cursor, setCursor] = useState(0);
   const [registerInfo, setRegisterInfo] = useState({selectedDate: dayjs(), selectedTime: '00:00', content:""});
 
   const {kakao} = window;
+  const userId = localStorage.getItem("userId");
+
+  const moveToCurrentLocation = () => {
+    navigator.geolocation.getCurrentPosition(function (position) {
+      const lat = position.coords.latitude;
+      const lon = position.coords.longitude;
+      setAddressX(lon);
+      setAddressY(lat);
+    })
+  };
 
   // 키워드로 장소 검색하기
   const handleSearch = (keyword, type) => {
@@ -96,6 +112,17 @@ const Match = () => {
     }
   }
 
+  // 주소와 관련된 글 목록 가져오기
+  const getMealPostByAddress = async () => {
+    const data = await matchService.getMealPost({cursor, address: selectedPlace.address_name});
+    setMealPostList(data)
+  }
+
+  const getPlaces = async () => {
+    const data = await matchService.getPlaces({nwLatitude: swAddress.Ma, nwLongitude: swAddress.La, seLatitude: neAddress.Ma, seLongitude:neAddress.La});
+    console.log(data)
+  }
+
   const handleMealPlace = () => {
     handleSearch("명지대학교 인문캠퍼스 맛집", 2)
   }
@@ -134,14 +161,24 @@ const Match = () => {
       "content": registerInfo.content,
     }
     handleMealPost(mealPost);
+    setShowPost(false);
+    toast.success("식사메이트 등록이 완료되었습니다.");
   }
-
 
   const handleMealPost = async (mealPost) => {
-    const data = matchService.saveMealPost(mealPost);
-    console.log(data);
+    await matchService.saveMealPost(mealPost);
   }
 
+  useEffect(() => {
+    const sw = mapInstance?.getBounds().getSouthWest();
+    const ne = mapInstance?.getBounds().getNorthEast();
+    setNeAddress(ne);
+    setSwAddress(sw);
+  }, [selectedPlace])
+  console.log(mealPostList)
+  useEffect(() => {
+    // getPlaces();
+  }, [neAddress, swAddress]);
 
   // debounce에 따라 검색결과 보여주기
   useEffect(() => {
@@ -155,14 +192,19 @@ const Match = () => {
   // 키워드로 장소 검색하기
   useEffect(() => {
     handleSearch(debounce, 1);
-    getPlaceId();
   }, [debounce])
 
   // 장소로 좌표(x,y) 검색하기
   useEffect(() => {
     handleSearchByPlace();
+    if(selectedPlace?.place_name) getPlaceId();
   }, [selectedPlace]);
 
+  useEffect(() => {
+    if(showDetail){
+      getMealPostByAddress();
+    }
+  }, [showDetail, debounce])
 
   return (
     <div className="w-full h-full relative pl-0.5">
@@ -196,113 +238,148 @@ const Match = () => {
             position={{lat: item.y, lng: item.x}}
           />)
         )}
-
         <div className="absolute top-5 left-5 z-10">
-          <div className="flex gap-3 items-start">
-            <div
-              className={clsx("w-80 bg-white rounded-[10px] shadow-[1px_3px_9px_0px_rgba(0,0,0,0.08)] border", isFoucs ? "border-2 border-(--primary)" : "border-zinc-300")}>
-              <div className="flex w-full h-full items-center gap-2 p-4">
-                <img src={icMap} alt="map" className="w-6 h-6"/>
-                <input
-                  type="search"
-                  value={searchKeyWord}
-                  onChange={(e) => setSearchKeyWord(e.target.value)}
-                  onKeyUp={handleKeyUp}
-                  onFocus={() => setIsFoucs(true)}
-                  onBlur={() => {
-                    setTimeout(() => setIsFoucs(false), 200);
-                  }}
-                  className="w-full h-full outline-none"
-                />
-              </div>
-              {!isFoucs && showDetail && <div>
-                <div className="w-full h-45">
-                  {!isLoading && (
-                    placeImage ? (
-                      <img src={placeImage} alt="place" className="w-full h-full object-cover"/>
-                    ) : (
-                      <div className="w-full h-full bg-gray-200 flex items-center justify-center text-gray-500 text-sm">
-                        이미지 없음
-                      </div>
-                    )
-                  )}
-                  {isLoading &&
+          <div
+            className={clsx("w-80 bg-white rounded-[10px] shadow-[1px_3px_9px_0px_rgba(0,0,0,0.08)] border", isFoucs ? "border-2 border-(--primary)" : "border-zinc-300")}>
+            <div className="flex w-full h-full items-center gap-2 p-4">
+              <img src={icMap} alt="map" className="w-6 h-6"/>
+              <input
+                type="search"
+                value={searchKeyWord}
+                onChange={(e) => setSearchKeyWord(e.target.value)}
+                onKeyUp={handleKeyUp}
+                onFocus={() => setIsFoucs(true)}
+                onBlur={() => {
+                  setTimeout(() => setIsFoucs(false), 200);
+                }}
+                className="w-full h-full outline-none"
+              />
+            </div>
+            {!isFoucs && showDetail && <div>
+              <div className="w-full h-45 relative">
+                {!isLoading && (
+                  placeImage ? (
+                    <img src={placeImage} alt="place" className="w-full h-full object-cover"/>
+                  ) : (
                     <div className="w-full h-full bg-gray-200 flex items-center justify-center text-gray-500 text-sm">
-                      <LoadingSpinner size={40}/>
+                      이미지 없음
                     </div>
-                  }
-                </div>
-                <div className="p-4">
-                  <p className="text-black text-xl font-extrabold mt-2">{selectedPlace.place_name}</p>
-                  <p className="text-black text-base font-normal mt-1">{selectedPlace.address_name}</p>
-                  <div className="flex mt-2 items-center gap-2">
-                    <img src={icAlarm} alt="alarm" className="w-5 h-5"/>
-                    <p>{openingHours?.open_now ? "영업중" : "영업종료"}</p>
+                  )
+                )}
+                {isLoading &&
+                  <div className="w-full h-full bg-gray-200 flex items-center justify-center text-gray-500 text-sm">
+                    <LoadingSpinner size={40}/>
                   </div>
-                  <div
-                    className="flex bg-white rounded-[10px] border border-zinc-300 p-3 gap-2 items-center justify-center mt-3 cursor-pointer" onClick={() => setShowPost(true)}>
-                    <img src={icCalRegister} alt="cal" className="w-5 h-5"/>
-                    <p className="text-blue-800 text-sm font-bold ">식사메이트 등록하기</p>
+                }
+                <img src={icCloseWhite} alt="close" className="absolute top-3 right-3 w-5 h-5 cursor-pointer"
+                     onClick={() => {
+                       setShowDetail(false)
+                     }}/>
+              </div>
+              <div className="p-4">
+                <p className="text-black text-xl font-extrabold mt-2">{selectedPlace.place_name}</p>
+                <p className="text-black text-base font-normal mt-1">{selectedPlace.address_name}</p>
+                <div className="flex mt-2 items-center gap-2">
+                  <img src={icAlarm} alt="alarm" className="w-5 h-5"/>
+                  <p>{openingHours?.open_now ? "영업중" : "영업종료"}</p>
+                </div>
+                <div
+                  className="flex bg-white rounded-[10px] border border-zinc-300 p-3 gap-2 items-center justify-center mt-3 cursor-pointer"
+                  onClick={() => setShowPost(true)}>
+                  <img src={icCalRegister} alt="cal" className="w-5 h-5"/>
+                  <p className="text-blue-800 text-sm font-bold ">식사메이트 등록하기</p>
+                </div>
+                <div className="w-full h-[1px] bg-gray-100 mt-5 mb-5"/>
+                <div>
+                  <p className="text-black text-sm font-bold mb-5">총 {mealPostList?.length}명</p>
+                  <div className="max-h-[30vh] overflow-x-auto">
+                    {mealPostList && mealPostList.map((item) => (
+                      <ArticleCard
+                        nick={"익명" + item.userId}
+                        isMine={item.userId !== userId}
+                        createdAt={dayjs(item.createdAt).format("YY.MM.DD")}
+                        content={item.content}
+                        schedule={dayjs(item.schedule).format("YY년 M월 DD일 HH시 MM분")}
+                        key={item.id}
+                      />
+                    ))}
                   </div>
-                  {/*<div className="w-full h-[1px] bg-gray-100 mt-5 mb-5"/>*/}
-                  {/*<div>*/}
-                  {/*  <p className="text-black text-sm font-bold mb-5">총 5명</p>*/}
-                  {/*  <div className="max-h-[30vh] overflow-x-auto">*/}
-                  {/*    <ArticleCard/>*/}
-                  {/*  </div>*/}
-                  {/*</div>*/}
                 </div>
-              </div>}
-              {showPost && <div
-                className="absolute w-80 bg-white top-0  rounded-[10px] shadow-[1px_3px_9px_0px_rgba(0,0,0,0.08)] p-5">
-                <div className="flex gap-1 items-center">
-                  <img src={icBack} alt="back" className="w-5 h-5 cursor-pointer" onClick={() => setShowPost(false)}/>
-                  <p className="text-black text-xl font-bold">{selectedPlace.place_name}</p>
-                </div>
-                <p className="text-black text-lg font-bold mt-6 mb-5">날짜를 선택해주세요</p>
-                <DayPicker
-                  animate
-                  locale={ko}
-                  mode="single"
-                  defaultMonth={new Date()}
-                  navLayout="around"
-                  selected={registerInfo.selectedDate}
-                  onSelect={(date) => {
-                    setRegisterInfo({...registerInfo, selectedDate: dayjs(date)})
-                  }}
-                  classNames={{
-                    today: 'text-black',
-                    chevron: 'black',
-                    selected: 'bg-blue-800 text-white',
-                  }}
-                />
-                <p className="text-black text-lg font-bold mt-6 mb-3">시간을 입력해주세요</p>
-                <input
-                  type="time"
-                  onChange={(e) => setRegisterInfo({...registerInfo, selectedTime: e.target.value})}
-                  className="p-3 w-full bg-white rounded-lg outline-zinc-300 outline outline-1 focus:outline-2 focus:outline-(--primary)"
-                />
-                <p className="text-black text-lg font-bold mt-6 mb-3">한줄글을 작성해주세요</p>
-                <textarea
-                  value={registerInfo.content}
-                  onChange={(e) => setRegisterInfo({...registerInfo, content: e.target.value})}
-                  className="p-3 mb-2 w-full bg-white rounded-lg outline-zinc-300 outline outline-1 focus:outline-2 focus:outline-(--primary)"
-                  rows={2}
-                />
-                <LongButton text={"작성완료"} onClick={handleSaveMealPost}/>
-              </div>}
-            </div>
-            <div
-              className="flex gap-2 bg-white w-22 h-10 mt-2 items-center justify-center p-3 rounded-full shadow-[1px_3px_9px_0px_rgba(0,0,0,0.08)] cursor-pointer"
-              onClick={handleMealPlace}>
-              <img src={icMealGood} alt="meal" className="w-5 h-5"/>
-              <p className="text-black text-sm font-bold text-center">맛집</p>
-            </div>
+              </div>
+            </div>}
+            {showPost && <div
+              className="absolute w-80 bg-white top-0  rounded-[10px] shadow-[1px_3px_9px_0px_rgba(0,0,0,0.08)] p-5">
+              <div className="flex gap-1 items-center">
+                <img src={icBack} alt="back" className="w-5 h-5 cursor-pointer" onClick={() => setShowPost(false)}/>
+                <p className="text-black text-xl font-bold">{selectedPlace.place_name}</p>
+              </div>
+              <p className="text-black text-lg font-bold mt-6 mb-5">날짜를 선택해주세요</p>
+              <DayPicker
+                animate
+                locale={ko}
+                mode="single"
+                defaultMonth={new Date()}
+                navLayout="around"
+                selected={registerInfo.selectedDate}
+                onSelect={(date) => {
+                  setRegisterInfo({...registerInfo, selectedDate: dayjs(date)})
+                }}
+                classNames={{
+                  today: 'text-black',
+                  chevron: 'black',
+                  selected: 'bg-blue-800 text-white',
+                }}
+              />
+              <p className="text-black text-lg font-bold mt-6 mb-3">시간을 입력해주세요</p>
+              <input
+                type="time"
+                onChange={(e) => setRegisterInfo({...registerInfo, selectedTime: e.target.value})}
+                className="p-3 w-full bg-white rounded-lg outline-zinc-300 outline outline-1 focus:outline-2 focus:outline-(--primary)"
+              />
+              <p className="text-black text-lg font-bold mt-6 mb-3">한줄글을 작성해주세요</p>
+              <textarea
+                value={registerInfo.content}
+                onChange={(e) => setRegisterInfo({...registerInfo, content: e.target.value})}
+                className="p-3 mb-2 w-full bg-white rounded-lg outline-zinc-300 outline outline-1 focus:outline-2 focus:outline-(--primary)"
+                rows={2}
+              />
+              <LongButton text={"작성완료"} onClick={handleSaveMealPost}/>
+            </div>}
+          </div>
+        </div>
+        <div className="absolute top-6 left-89">
+          <div className="flex gap-3">
+            <Chips
+              src={icEditLocation}
+              name={"매칭중"}
+              // onClick={}
+            />
+            <Chips
+              src={icMealGood}
+              name={"맛집"}
+              onClick={handleMealPlace}
+            />
+            <Chips
+              src={icCelebration}
+              name={"행사정보"}
+              // onClick={}
+            />
           </div>
         </div>
 
-        <div className="absolute bottom-3 left-4  max-w-[98%] z-10 flex gap-3 overflow-x-auto">
-          {/*<PlaceCard/>*/}
+        <div className="absolute bottom-3 left-4 z-10 max-w-[98%] min-w-[98%]">
+          <div className="cursor-pointer p-4 w-14 bg-white ml-[94%] rounded-[10px] shadow-[1px_3px_9px_0px_rgba(0,0,0,0.08)] border border-zinc-300">
+            <img src={icMyLocation} alt="myLocation" className="w-6 h-6" onClick={moveToCurrentLocation}/>
+          </div>
+          {markedList.length > 0 && !showDetail &&  <div className=" mt-4 flex gap-5 overflow-x-auto">
+            {markedList.map((item, index) => (
+              <PlaceCard
+                place_name={item.place_name}
+                address_name={item.address_name}
+                key={index}
+              />
+              ))}
+          </div>}
         </div>
 
         {isFoucs && <div

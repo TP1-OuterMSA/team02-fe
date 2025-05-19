@@ -1,21 +1,28 @@
-import {imgProfile} from "@assets/index.js";
+import {icKebab,icDate, imgProfile} from "@assets/index.js";
 import SmallButton from "@components/common/SmallButton.jsx";
 
-const ArticleCard = () => {
+const ArticleCard = ({nick , createdAt , schedule, content, isMine}) => {
   return (
     <div className="mt-3">
       <div className="flex gap-3">
-        <div className="w-10 h-10 rounded-full overflow-hidden">
+        <div className="w-12 h-10 rounded-full overflow-hidden">
           <img src={imgProfile} className="w-full h-full object-cover"/>
         </div>
-        <div>
-          <p className="text-black text-base font-bold items-center flex">안녕<span className="ml-1 text-zinc-400 text-xs font-bold">25.06.17</span></p>
-          <p className="text-black text-xs font-normal">2025년 5월 16일 (금) 오후 1시</p>
+        <div className="w-full">
+          <div className="flex justify-between w-ful">
+            <p className="text-black text-base font-bold items-center flex">{nick}<span className="ml-1 text-zinc-400 text-xs font-bold">{createdAt}</span></p>
+            {isMine && <img src={icKebab} className="w-6 h-6"/>}
+          </div>
+          <div className="flex gap-1 mt-1">
+            <img src={icDate} className="w-4 h-4"/>
+            <p className="text-black text-xs font-normal">{schedule}</p>
+          </div>
+
         </div>
       </div>
       <div className="flex items-center justify-between mt-3">
-        <p className="text-black text-sm font-normal">같이 밥드실분?</p>
-        <SmallButton text={"신청하기"}/>
+        <p className="text-black text-sm font-normal">{content}</p>
+        {!isMine && <SmallButton text={"신청하기"}/>}
       </div>
     </div>
   );
