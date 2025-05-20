@@ -23,8 +23,8 @@ import Chips from "@components/match/Chips.jsx";
 const Match = () => {
   const [addressX, setAddressX] = useState(0);
   const [addressY, setAddressY] = useState(0);
-  const [neAddress, setNeAddress] = useState({});
-  const [swAddress, setSwAddress] = useState({});
+  const [nwAddress, setNwAddress] = useState({});
+  const [seAddress, setSeAddress] = useState({});
   const [isFoucs, setIsFoucs] = useState(false);
   const [searchKeyWord, setSearchKeyWord] = useState('명지대학교 인문캠퍼스');
   const [debounce, setDebounce] = useState(searchKeyWord);
@@ -38,7 +38,6 @@ const Match = () => {
   const [showDetail, setShowDetail] = useState(false);
   const [showPost, setShowPost] = useState(false);
   const [mealPostList, setMealPostList] = useState([]);
-  const [activeChip, setActiveChip] = useState("");
   const [cursor, setCursor] = useState(0);
   const [registerInfo, setRegisterInfo] = useState({selectedDate: dayjs(), selectedTime: '00:00', content:""});
 
@@ -119,8 +118,26 @@ const Match = () => {
   }
 
   const getPlaces = async () => {
-    const data = await matchService.getPlaces({nwLatitude: swAddress.Ma, nwLongitude: swAddress.La, seLatitude: neAddress.Ma, seLongitude:neAddress.La});
-    console.log(data)
+    if (!mapInstance) return;
+
+    const bounds = mapInstance.getBounds();
+    const sw = bounds.getSouthWest(); // 남서쪽
+    const ne = bounds.getNorthEast(); // 북동쪽
+
+    const nwAddress = { Ma: ne.getLat(), La: sw.getLng() }; // 북서쪽
+    const seAddress = { Ma: sw.getLat(), La: ne.getLng() }; // 남동쪽
+
+    try {
+      const data = await matchService.getPlaces({
+        nwLatitude: nwAddress.Ma,
+        nwLongitude: nwAddress.La,
+        seLatitude: seAddress.Ma,
+        seLongitude: seAddress.La,
+      });
+      setMarkedList(data);
+    } catch (error) {
+      console.error("장소 조회 실패:", error);
+    }
   }
 
   const handleMealPlace = () => {
@@ -141,7 +158,6 @@ const Match = () => {
 
   // 마커 클릭 이벤트
   const handleMarkList = (item) => {
-    console.log(item);
     setSelectedPlace(item);
     setSearchKeyWord(item?.place_name);
     setShowDetail(true);
@@ -152,7 +168,11 @@ const Match = () => {
     }
   }
 
-  const handleSaveMealPost = () => {
+  const handleMatchMarker = () => {
+    getPlaces();
+  }
+
+  const handleSaveMealPost = async () => {
     const mealPost = {
       "latitude": selectedPlace.y,
       "longitude": selectedPlace.x,
@@ -161,7 +181,9 @@ const Match = () => {
       "schedule": registerInfo.selectedDate.format("YYYY-MM-DD") + 'T' + registerInfo.selectedTime + ":00",
       "content": registerInfo.content,
     }
-    handleMealPost(mealPost);
+    await handleMealPost(mealPost);
+    await getMealPostByAddress();
+
     setShowPost(false);
     toast.success("식사메이트 등록이 완료되었습니다.");
   }
@@ -169,17 +191,7 @@ const Match = () => {
   const handleMealPost = async (mealPost) => {
     await matchService.saveMealPost(mealPost);
   }
-
-  useEffect(() => {
-    const sw = mapInstance?.getBounds().getSouthWest();
-    const ne = mapInstance?.getBounds().getNorthEast();
-    setNeAddress(ne);
-    setSwAddress(sw);
-  }, [selectedPlace])
-  console.log(mealPostList)
-  useEffect(() => {
-    // getPlaces();
-  }, [neAddress, swAddress]);
+  
 
   // debounce에 따라 검색결과 보여주기
   useEffect(() => {
@@ -294,16 +306,18 @@ const Match = () => {
                 <div>
                   <p className="text-black text-sm font-bold mb-5">총 {mealPostList?.length}명</p>
                   <div className="max-h-[30vh] overflow-x-auto">
-                    {mealPostList && mealPostList.map((item) => (
-                      <ArticleCard
-                        nick={"익명" + item.userId}
-                        isMine={item.userId !== userId}
-                        createdAt={dayjs(item.createdAt).format("YY.MM.DD")}
-                        content={item.content}
-                        schedule={dayjs(item.schedule).format("YY년 M월 DD일 HH시 MM분")}
-                        key={item.id}
-                      />
-                    ))}
+                    {mealPostList && mealPostList?.map((item) => {
+                      return (
+                        <ArticleCard
+                          nick={"익명" + item?.userId}
+                          isMine={item?.userId.toString() === userId}
+                          createdAt={dayjs(item?.createdAt).format("YY.MM.DD")}
+                          content={item?.content}
+                          schedule={dayjs(item?.schedule).format("YY년 M월 DD일 HH시 MM분")}
+                          key={item?.id}
+                        />
+                      )
+                    })}
                   </div>
                 </div>
               </div>
@@ -353,7 +367,7 @@ const Match = () => {
             <Chips
               src={icEditLocation}
               name={"매칭중"}
-              // onClick={}
+              onClick={handleMatchMarker}
             />
             <Chips
               src={icMealGood}
@@ -384,6 +398,7 @@ const Match = () => {
                 <PlaceCard
                     place_name={item.place_name}
                     address_name={item.address_name}
+                    total={item?.matchPostCount}
                     key={index}
                     onClick={() => handleMarkList(item)}
                 />

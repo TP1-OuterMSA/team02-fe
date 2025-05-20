@@ -92,7 +92,7 @@ const Diet = () => {
 
 
   // 권장 칼로리 및 사용자 정보 조회
-  const yapatchUserData = async () => {
+  const patchUserData = async () => {
     const userData = await userService.getRecommendKcal();
     if(userData === 0) setIsModalOpen(true);
     else setCalories(userData);

@@ -15,7 +15,9 @@ export const getMealPost = async ({address, cursor, count = 5}) => {
 }
 
 export const getPlaces = async ({nwLongitude, nwLatitude, seLongitude, seLatitude}) => {
-  const response = await axiosInstance.get('/match/getPlaces', {nwLongitude, nwLatitude, seLongitude, seLatitude});
+  const response = await axiosInstance.get('/match/getPlaces', {
+    params:{"nw-longitude":nwLongitude,"nw-latitude": nwLatitude,"se-longitude": seLongitude,"se-latitude": seLatitude}
+  });
   return response.data;
 }
 
