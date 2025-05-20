@@ -60,6 +60,9 @@ export {default as icMealGood} from '@assets/icon/ico_meal_good.svg';
 export {default as icForkSpoon} from '@assets/icon/ico_fork_spoon.svg';
 export {default as icHeartMatch} from '@assets/icon/ico_heart_match.svg';
 export {default as icHeartMatchFill} from '@assets/icon/ico_heart_match_fill.svg';
+export {default as icArrowDown} from '@assets/icon/ico_arrow_down.svg';
+export {default as icArrowUp} from '@assets/icon/ico_arrow_up.svg';
+export {default as icNoticeWhite} from '@assets/icon/ico_notice_white.svg';
 
 export {default as imgBlank} from '@assets/images/img_blank.svg';
 export {default as imgRice} from '@assets/images/img_rice.svg';

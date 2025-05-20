@@ -11,20 +11,21 @@ import {icMap,icMealGood,icAlarm,icCalRegister,icEditLocation, icHeartMatch,icHe
 
 import googleService from "@apis/external/googleService.js";
 import matchService from "@apis/match/matchService.js";
+import schoolService from "@apis/school/schoolService.js";
 
 import SearchItem from "@components/match/SearchItem.jsx";
 import PlaceCard from "@components/match/PlaceCard.jsx";
 import ArticleCard from "@components/match/ArticleCard.jsx";
 import LoadingSpinner from "@components/common/LoadingSpinner.jsx";
-import CustomInput from "@components/common/CustomInput.jsx";
+import NoticeCard from "@components/match/NoticeCard.jsx";
 import LongButton from "@components/common/LongButton.jsx";
 import Chips from "@components/match/Chips.jsx";
+import noticeCard from "@components/match/NoticeCard.jsx";
+import {constant} from "@utils/constant.js";
 
 const Match = () => {
   const [addressX, setAddressX] = useState(0);
   const [addressY, setAddressY] = useState(0);
-  const [nwAddress, setNwAddress] = useState({});
-  const [seAddress, setSeAddress] = useState({});
   const [isFoucs, setIsFoucs] = useState(false);
   const [searchKeyWord, setSearchKeyWord] = useState('명지대학교 인문캠퍼스');
   const [debounce, setDebounce] = useState(searchKeyWord);
@@ -37,7 +38,12 @@ const Match = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [showDetail, setShowDetail] = useState(false);
   const [showPost, setShowPost] = useState(false);
+  const [showNotice, setShowNotice] = useState(false);
   const [mealPostList, setMealPostList] = useState([]);
+  const [eventCursor, setEventCursor] = useState(0);
+  const [noticeList, setNoticeList] = useState([]);
+  const [noticeData, setNoticeData] = useState();
+  const [noticeIndex, setNoticeIndex] = useState(0);
   const [cursor, setCursor] = useState(0);
   const [registerInfo, setRegisterInfo] = useState({selectedDate: dayjs(), selectedTime: '00:00', content:""});
 
@@ -140,6 +146,11 @@ const Match = () => {
     }
   }
 
+  const getSchoolEvents = async () => {
+    const data = await schoolService.getSchoolEvents({cursor: eventCursor, count: 10});
+    setNoticeList(prev => [...prev, ...data]);
+  }
+
   const handleMealPlace = () => {
     handleSearch("명지대학교 인문캠퍼스 맛집", 2)
   }
@@ -168,8 +179,13 @@ const Match = () => {
     }
   }
 
-  const handleMatchMarker = () => {
-    getPlaces();
+  const handleMatchMarker = async () => {
+    await getPlaces();
+  }
+
+  const handleEventMarker = async () => {
+    setNoticeList([])
+    await getSchoolEvents();
   }
 
   const handleSaveMealPost = async () => {
@@ -191,7 +207,27 @@ const Match = () => {
   const handleMealPost = async (mealPost) => {
     await matchService.saveMealPost(mealPost);
   }
-  
+
+  const handleNotice = async (type) => {
+    switch (type) {
+      case constant.UP:
+        setNoticeIndex(prev => Math.max(0, prev -1));
+        break;
+      case constant.DOWN:
+        setNoticeIndex(prev => prev + 1);
+        setEventCursor(noticeList[noticeIndex]?.id)
+        if(noticeList.length === noticeIndex) {
+          await getSchoolEvents();
+        }
+        break;
+      case constant.CANCEL:
+        setShowNotice(false);
+        break;
+    }
+
+  }
+
+  console.log(noticeList, noticeIndex)
 
   // debounce에 따라 검색결과 보여주기
   useEffect(() => {
@@ -218,6 +254,17 @@ const Match = () => {
       getMealPostByAddress();
     }
   }, [showDetail, debounce])
+
+  useEffect(() => {
+    if(noticeList.length > 0){
+      setNoticeData(noticeList[noticeIndex]);
+      setShowNotice(true);
+    }
+  }, [noticeList])
+
+  useEffect(() => {
+    setNoticeData(noticeList[noticeIndex]);
+  }, [noticeIndex])
 
   return (
     <div className="w-full h-full relative pl-0.5">
@@ -252,8 +299,7 @@ const Match = () => {
           />)
         )}
         <div className="absolute top-5 left-5 z-10">
-          <div
-            className={clsx("w-80 bg-white rounded-[10px] shadow-[1px_3px_9px_0px_rgba(0,0,0,0.08)] border", isFoucs ? "border-2 border-(--primary)" : "border-zinc-300")}>
+          <div className={clsx("w-80 bg-white rounded-[10px] shadow-[1px_3px_9px_0px_rgba(0,0,0,0.08)] border", isFoucs ? "border-2 border-(--primary)" : "border-zinc-300")}>
             <div className="flex w-full h-full items-center gap-2 p-4">
               <img src={icMap} alt="map" className="w-6 h-6"/>
               <input
@@ -377,19 +423,27 @@ const Match = () => {
             <Chips
               src={icCelebration}
               name={"행사정보"}
-              // onClick={}
+              onClick={handleEventMarker}
             />
           </div>
         </div>
+        {showNotice &&
+          <div className="absolute top-25 w-full z-10 pl-6 pr-6">
+            <NoticeCard
+              title={noticeData?.title}
+              date={noticeData?.date}
+              isShowUp={noticeIndex !== 0}
+              onClick={handleNotice}
+            />
+          </div>}
 
         <div className="absolute bottom-3 left-4 z-10 max-w-[98%] min-w-[98%]">
           <div className="flex justify-between pr-2">
             <div className="cursor-pointer p-4 w-14 bg-white rounded-[10px] shadow-[1px_3px_9px_0px_rgba(0,0,0,0.08)] border border-zinc-300">
               <img src={icHeartMatchFill} alt="myLocation" className="w-6 h-6"/>
             </div>
-            <div
-                className="cursor-pointer p-4 w-14 bg-white rounded-[10px] shadow-[1px_3px_9px_0px_rgba(0,0,0,0.08)] border border-zinc-300">
-              <img src={icMyLocation} alt="myLocation" className="w-6 h-6" onClick={moveToCurrentLocation}/>
+            <div className="cursor-pointer p-4 w-14 bg-white rounded-[10px] shadow-[1px_3px_9px_0px_rgba(0,0,0,0.08)] border border-zinc-300" onClick={moveToCurrentLocation}>
+              <img src={icMyLocation} alt="myLocation" className="w-6 h-6" />
             </div>
           </div>
 

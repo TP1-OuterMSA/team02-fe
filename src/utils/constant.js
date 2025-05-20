@@ -22,4 +22,7 @@ export const constant = {
   WEEK: "주간",
   LINEAR: "선형",
   STICK: "막대",
+  UP:"up",
+  DOWN:"down",
+  CANCEL:"cancel"
 }
