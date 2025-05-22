@@ -5,7 +5,7 @@ import {pagePath} from "@/routes/pagePath.js";
 const Header = () => {
   const {navigateTo} = useCustomNavigation();
   return (
-      <div className="w-full h-24 justify-between flex pl-7 pr-7 sticky top-0 bg-white">
+      <div className="w-full h-22 justify-between flex pl-7 pr-7 sticky top-0 bg-white">
         <img src={icMain} className="w-40 cursor-pointer min-md:w-0" onClick={() => navigateTo(pagePath.ROOT)}/>
         <div className="flex items-center gap-5">
           <img src={icNotify} className="w-7 h-7 cursor-pointer"/>
