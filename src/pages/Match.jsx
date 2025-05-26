@@ -21,8 +21,11 @@ import LoadingSpinner from "@components/common/LoadingSpinner.jsx";
 import NoticeCard from "@components/match/NoticeCard.jsx";
 import LongButton from "@components/common/LongButton.jsx";
 import Chips from "@components/match/Chips.jsx";
+import MatchListCard from "@components/match/MatchListCard.jsx";
+import MatchReply from "@components/modal/MatchReply.jsx";
 import noticeCard from "@components/match/NoticeCard.jsx";
 import {constant} from "@utils/constant.js";
+
 
 const Match = () => {
   const [addressX, setAddressX] = useState(0);
@@ -36,10 +39,14 @@ const Match = () => {
   const [mapInstance, setMapInstance] = useState(null);
   const [openingHours, setOpeningHours] = useState({});
   const [placeImage, setPlaceImage] = useState('');
+  const [message, setMessage] = useState('');
+  const [openCardId, setOpenCardId] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [showDetail, setShowDetail] = useState(false);
   const [showPost, setShowPost] = useState(false);
   const [showNotice, setShowNotice] = useState(false);
+  const [showMatchReply, setShowMatchReply] = useState(false);
+  const [showMatchList, setShowMatchList] = useState(false);
   const [mealPostList, setMealPostList] = useState([]);
   const [eventCursor, setEventCursor] = useState(0);
   const [noticeList, setNoticeList] = useState([]);
@@ -47,6 +54,9 @@ const Match = () => {
   const [noticeIndex, setNoticeIndex] = useState(0);
   const [cursor, setCursor] = useState(0);
   const [registerInfo, setRegisterInfo] = useState({selectedDate: dayjs(), selectedTime: '00:00', content:""});
+
+
+  console.log(registerInfo)
 
   const {kakao} = window;
   const userId = localStorage.getItem("userId");
@@ -90,6 +100,19 @@ const Match = () => {
         console.error("주소 변환 실패!");
       }
     })
+  }
+
+  const handleDropDown = async (type, item) => {
+    if(type === constant.EDIT){
+      const originSchedule = item.schedule.split(' ').splice(1,1)[0];
+      const formattedTime = dayjs(originSchedule, 'HH:mm:ss').format('HH:mm');
+      console.log("시간 분리",formattedTime)
+      // setShowPost(true);
+      // setRegisterInfo({content: item?.content})
+    } else{
+      console.log("삭제")
+    }
+    console.log(type, item)
   }
 
   // google API로 장소에 대한 id를 가져오기
@@ -369,10 +392,14 @@ const Match = () => {
                     {mealPostList && mealPostList?.map((item) => {
                       return (
                         <ArticleCard
+                          item={item}
                           nick={"익명" + item?.userId}
                           isMine={item?.userId.toString() === userId}
                           createdAt={dayjs(item?.createdAt).format("YY.MM.DD")}
                           content={item?.content}
+                          onClickDropDown={handleDropDown}
+                          openCardId={openCardId}
+                          setOpenCardId={setOpenCardId}
                           schedule={dayjs(item?.schedule).format("YY년 M월 DD일 HH시 MM분")}
                           key={item?.id}
                         />
@@ -452,9 +479,14 @@ const Match = () => {
           </div>}
 
         <div className="absolute bottom-3 left-4 z-10 max-w-[98%] min-w-[98%]">
-          <div className="flex justify-between pr-2">
-            <div className="cursor-pointer p-4 w-14 bg-white rounded-[10px] shadow-[1px_3px_9px_0px_rgba(0,0,0,0.08)] border border-zinc-300">
-              <img src={icHeartMatchFill} alt="myLocation" className="w-6 h-6"/>
+          {showMatchList &&
+            <div className="w-80 h-96 pt-2 overflow-y-auto bg-white rounded-[10px] shadow-[1px_3px_9px_0px_rgba(0,0,0,0.08)] border border-zinc-300">
+              <MatchListCard/>
+            </div>
+            }
+          <div className="flex justify-between pr-2 pt-2">
+            <div className={clsx("cursor-pointer p-4 w-14 rounded-[10px] shadow-[1px_3px_9px_0px_rgba(0,0,0,0.08)] border border-zinc-300", showMatchList ? "bg-(--primary)": "bg-white")} onClick={() => setShowMatchList(!showMatchList)}>
+              <img src={showMatchList ? icHeartMatch : icHeartMatchFill} alt="myLocation" className="w-6 h-6"/>
             </div>
             <div className="cursor-pointer p-4 w-14 bg-white rounded-[10px] shadow-[1px_3px_9px_0px_rgba(0,0,0,0.08)] border border-zinc-300" onClick={moveToCurrentLocation}>
               <img src={icMyLocation} alt="myLocation" className="w-6 h-6" />
@@ -486,6 +518,7 @@ const Match = () => {
           ))}
         </div>}
       </Map>
+      {showMatchReply && <MatchReply value={message} setValue={setMessage} onClickCancel={() => setShowMatchReply(false)}/>}
     </div>
   );
 };
