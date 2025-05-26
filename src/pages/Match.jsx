@@ -26,6 +26,7 @@ import MatchReply from "@components/modal/MatchReply.jsx";
 import noticeCard from "@components/match/NoticeCard.jsx";
 import {constant} from "@utils/constant.js";
 import {string} from "@utils/string.js";
+import {updatePosts} from "@apis/community/communityService.js";
 
 
 const Match = () => {
@@ -39,6 +40,8 @@ const Match = () => {
   const [markedList, setMarkedList] = useState([]);
   const [mapInstance, setMapInstance] = useState(null);
   const [openingHours, setOpeningHours] = useState({});
+  const [mode, setMode] = useState();
+  const [editPost, setEditPost] = useState({});
   const [placeImage, setPlaceImage] = useState('');
   const [message, setMessage] = useState('');
   const [openCardId, setOpenCardId] = useState(null);
@@ -108,6 +111,8 @@ const Match = () => {
       const originSchedule = item.schedule.split(' ');
       const formattedTime = dayjs(originSchedule, 'HH:mm:ss').format('HH:mm');
       setOpenCardId(null);
+      setEditPost(item);
+      setMode(constant.EDIT);
       setRegisterInfo({content: item?.content, selectedTime: formattedTime, selectedDate: dayjs(originSchedule[0])})
       setShowPost(true);
     } else{
@@ -227,6 +232,13 @@ const Match = () => {
 
     setShowPost(false);
     toast.success("식사메이트 등록이 완료되었습니다.");
+  }
+
+  const handleUpdateMealPost = async () => {
+    await matchService.updateMatchPost({postId: editPost.id, content: registerInfo.content, schedule: registerInfo.selectedDate.format("YYYY-MM-DD") + 'T' + registerInfo.selectedTime + ":00"});
+    await getMealPostByAddress();
+    setShowPost(false);
+    toast.success('식사메이트 수정이 완료되었습니다.');
   }
 
   const handleMealPost = async (mealPost) => {
@@ -381,7 +393,10 @@ const Match = () => {
                 </div>
                 <div
                   className="flex bg-white rounded-[10px] border border-zinc-300 p-3 gap-2 items-center justify-center mt-3 cursor-pointer"
-                  onClick={() => setShowPost(true)}>
+                  onClick={() => {
+                    setMode("")
+                    setShowPost(true)
+                  }}>
                   <img src={icCalRegister} alt="cal" className="w-5 h-5"/>
                   <p className="text-blue-800 text-sm font-bold ">식사메이트 등록하기</p>
                 </div>
@@ -449,7 +464,7 @@ const Match = () => {
                 className="p-3 mb-2 w-full bg-white rounded-lg outline-zinc-300 outline outline-1 focus:outline-2 focus:outline-(--primary)"
                 rows={2}
               />
-              <LongButton text={"작성완료"} onClick={handleSaveMealPost}/>
+              <LongButton text={"작성완료"} onClick={mode === constant.EDIT ? handleUpdateMealPost: handleSaveMealPost}/>
             </div>}
           </div>
         </div>
