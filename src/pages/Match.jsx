@@ -12,6 +12,7 @@ import {icMap,icMealGood,icAlarm,icCalRegister,icEditLocation, icHeartMatch,icHe
 import googleService from "@apis/external/googleService.js";
 import matchService from "@apis/match/matchService.js";
 import schoolService from "@apis/school/schoolService.js";
+import notificationService from "@apis/notification/notificationService.js";
 
 import SearchItem from "@components/match/SearchItem.jsx";
 import PlaceCard from "@components/match/PlaceCard.jsx";
@@ -121,6 +122,7 @@ const Match = () => {
   const getMealPostByAddress = async () => {
     const data = await matchService.getMealPost({cursor, address: selectedPlace.address_name});
     setMealPostList(data)
+    console.log(data)
   }
 
   const getPlaces = async () => {
@@ -227,7 +229,9 @@ const Match = () => {
 
   }
 
-  console.log(noticeList, noticeIndex)
+  const connectSSE = async () => {
+    await notificationService.connectSSE({userId: 1});
+  }
 
   // debounce에 따라 검색결과 보여주기
   useEffect(() => {
@@ -265,6 +269,16 @@ const Match = () => {
   useEffect(() => {
     setNoticeData(noticeList[noticeIndex]);
   }, [noticeIndex])
+
+  //매칭된 목록 불러오기
+  useEffect(() => {
+    const patchMatchData = async () => {
+      const data = await matchService.getMealMateOffers();
+      console.log(data);
+    }
+    connectSSE();
+    patchMatchData();
+  }, []);
 
   return (
     <div className="w-full h-full relative pl-0.5">

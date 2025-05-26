@@ -21,11 +21,18 @@ export const getPlaces = async ({nwLongitude, nwLatitude, seLongitude, seLatitud
   return response.data;
 }
 
+export const getMealMateOffers = async ({mealPostId, cursor=0, count = 5}) => {
+  const response = await axiosInstance.get('/match/getOffers', {
+    params: {mealPostId, cursor, count}
+  });
+  return response.data;
+}
 
 const matchService = {
   saveMealPost,
   getMealPost,
   getPlaces,
+  getMealMateOffers,
 }
 
 export default matchService;
