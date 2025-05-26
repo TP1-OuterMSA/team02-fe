@@ -25,6 +25,7 @@ import MatchListCard from "@components/match/MatchListCard.jsx";
 import MatchReply from "@components/modal/MatchReply.jsx";
 import noticeCard from "@components/match/NoticeCard.jsx";
 import {constant} from "@utils/constant.js";
+import {string} from "@utils/string.js";
 
 
 const Match = () => {
@@ -103,16 +104,15 @@ const Match = () => {
   }
 
   const handleDropDown = async (type, item) => {
-    if(type === constant.EDIT){
-      const originSchedule = item.schedule.split(' ').splice(1,1)[0];
+    if(type === string.EDIT){
+      const originSchedule = item.schedule.split(' ');
       const formattedTime = dayjs(originSchedule, 'HH:mm:ss').format('HH:mm');
-      console.log("시간 분리",formattedTime)
-      // setShowPost(true);
-      // setRegisterInfo({content: item?.content})
+      setOpenCardId(null);
+      setRegisterInfo({content: item?.content, selectedTime: formattedTime, selectedDate: dayjs(originSchedule[0])})
+      setShowPost(true);
     } else{
       console.log("삭제")
     }
-    console.log(type, item)
   }
 
   // google API로 장소에 대한 id를 가져오기
@@ -299,7 +299,7 @@ const Match = () => {
       const data = await matchService.getMealMateOffers();
       console.log(data);
     }
-    connectSSE();
+    // connectSSE();
     patchMatchData();
   }, []);
 
@@ -412,7 +412,10 @@ const Match = () => {
             {showPost && <div
               className="absolute w-80 bg-white top-0  rounded-[10px] shadow-[1px_3px_9px_0px_rgba(0,0,0,0.08)] p-5">
               <div className="flex gap-1 items-center">
-                <img src={icBack} alt="back" className="w-5 h-5 cursor-pointer" onClick={() => setShowPost(false)}/>
+                <img src={icBack} alt="back" className="w-5 h-5 cursor-pointer" onClick={() => {
+                  setRegisterInfo({})
+                  setShowPost(false)
+                }}/>
                 <p className="text-black text-xl font-bold">{selectedPlace.place_name}</p>
               </div>
               <p className="text-black text-lg font-bold mt-6 mb-5">날짜를 선택해주세요</p>
@@ -435,6 +438,7 @@ const Match = () => {
               <p className="text-black text-lg font-bold mt-6 mb-3">시간을 입력해주세요</p>
               <input
                 type="time"
+                value={registerInfo?.selectedTime}
                 onChange={(e) => setRegisterInfo({...registerInfo, selectedTime: e.target.value})}
                 className="p-3 w-full bg-white rounded-lg outline-zinc-300 outline outline-1 focus:outline-2 focus:outline-(--primary)"
               />
