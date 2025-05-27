@@ -63,7 +63,7 @@ const Match = () => {
   const [registerInfo, setRegisterInfo] = useState({selectedDate: dayjs(), selectedTime: '00:00', content:""});
 
 
-  const {kakao} = window;
+  // const {kakao} = window;
   const {confirmAlert} = useSystemAlert();
   const userId = localStorage.getItem("userId");
 
@@ -78,7 +78,7 @@ const Match = () => {
 
   // 키워드로 장소 검색하기
   const handleSearch = (keyword, type) => {
-    const ps = new kakao.maps.services.Places();
+    const ps = new window.maps.services.Places();
     ps.keywordSearch(keyword, function (data, status) {
       if (status === 'OK') {
         if (type === 1) {
@@ -96,7 +96,7 @@ const Match = () => {
 
   // 주소로 x,y 좌표 알아내기
   const handleSearchByPlace = () => {
-    const gecoder = new kakao.maps.services.Geocoder();
+    const gecoder = new window.maps.services.Geocoder();
     gecoder.addressSearch(selectedPlace?.address_name, function (result, status) {
       if (status === 'OK') {
         const {x, y} = selectedPlace;
@@ -211,7 +211,7 @@ const Match = () => {
     setShowDetail(true);
 
     if (mapInstance) {
-      const lating = new kakao.maps.LatLng(item.y, item.x);
+      const lating = new window.kakao.maps.LatLng(item.y, item.x);
       mapInstance.panTo(lating);
     }
   }
