@@ -21,7 +21,7 @@ export const replyMealMateOffer = async ({mealMateOfferId, matchState}) => {
   return response.data;
 }
 
-export const deleteMatchPost = async (postId) => {
+export const deleteMatchPost = async ({postId}) => {
   const response = await axiosInstance.delete(`/match/deletePost/${postId}`);
   return response.data;
 }

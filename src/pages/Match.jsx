@@ -116,7 +116,10 @@ const Match = () => {
       setRegisterInfo({content: item?.content, selectedTime: formattedTime, selectedDate: dayjs(originSchedule[0])})
       setShowPost(true);
     } else{
-      console.log("삭제")
+      await matchService.deleteMatchPost({postId: item?.id});
+      await getMealPostByAddress();
+      setOpenCardId(null);
+      toast.success("매칭요청이 삭제되었습니다.");
     }
   }
 
