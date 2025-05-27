@@ -4,7 +4,7 @@ import {icKebab,icDate, imgProfile} from "@assets/index.js";
 import SmallButton from "@components/common/SmallButton.jsx";
 import DropDown from "@components/common/DropDown.jsx";
 
-const ArticleCard = ({item, nick , createdAt , schedule, content, isMine,openCardId, setOpenCardId, onClickDropDown}) => {
+const ArticleCard = ({item, nick , createdAt , schedule, content, isMine,openCardId, setOpenCardId, onClickDropDown, onClickRequest}) => {
   const isDropdownOpen = openCardId === item.id;
 
   const handleMenuClick = () => {
@@ -39,7 +39,7 @@ const ArticleCard = ({item, nick , createdAt , schedule, content, isMine,openCar
       </div>
       <div className="flex items-center justify-between mt-3">
         <p className="text-black text-sm font-normal">{content}</p>
-        {!isMine && <SmallButton text={"신청하기"}/>}
+        {!isMine && <SmallButton text={"신청하기"} onClick={onClickRequest}/>}
       </div>
     </div>
   );

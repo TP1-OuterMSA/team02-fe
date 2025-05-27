@@ -44,6 +44,7 @@ const Match = () => {
   const [replyListMap, setReplyListMap] = useState({});
   const [mode, setMode] = useState();
   const [editPost, setEditPost] = useState({});
+  const [matchPost, setMatchPost] = useState({});
   const [placeImage, setPlaceImage] = useState('');
   const [message, setMessage] = useState('');
   const [openCardId, setOpenCardId] = useState(null);
@@ -269,13 +270,26 @@ const Match = () => {
     }
   }
 
+  const handleReplyMatchRequest = async (item, type) => {
+    await matchService.replyMealMateOffer({mealMateOfferId: item.id, matchState: type === constant.ACCEPT});
+    toast.success(type === constant.ACCEPT ? "매칭이 완료되었습니다." : "매칭이 거절되었습니다.");
+    await patchMatchData();
+  }
+
+  const handleMatchRequest = async () => {
+    await matchService.offerMealMateMatch({mealPostId: matchPost.id, content: message});
+    setMessage("")
+    toast.success("성공적으로 매칭요청이 신청되었습니다.");
+    setShowMatchReply(false)
+  }
+
   const connectSSE = async () => {
     await notificationService.connectSSE({userId: 1});
   }
 
   const patchMatchData = async () => {
     const data = await matchService.getMealMateOffers({mealPostId: ""});
-    console.log(data);
+    console.log(data)
     setMealMateList(data);
   }
 
@@ -318,9 +332,13 @@ const Match = () => {
 
   //매칭된 목록 불러오기
   useEffect(() => {
-    // connectSSE();
     patchMatchData();
   }, []);
+
+  // SSE 연동
+  useEffect(() => {
+    // connectSSE();
+  }, [])
 
   return (
     <div className="w-full h-full relative pl-0.5">
@@ -419,6 +437,10 @@ const Match = () => {
                           createdAt={dayjs(item?.createdAt).format("YY.MM.DD")}
                           content={item?.content}
                           onClickDropDown={handleDropDown}
+                          onClickRequest={() => {
+                            setMatchPost(item);
+                            setShowMatchReply(true);
+                          }}
                           openCardId={openCardId}
                           setOpenCardId={setOpenCardId}
                           schedule={dayjs(item?.schedule).format("YY년 M월 DD일 HH시 MM분")}
@@ -510,6 +532,7 @@ const Match = () => {
                   item={item}
                   replyListMap={replyListMap}
                   setReplyListMap={setReplyListMap}
+                  handleReplyMatch={handleReplyMatchRequest}
                 />
               ))}
             </div>}
@@ -543,7 +566,14 @@ const Match = () => {
           ))}
         </div>}
       </Map>
-      {showMatchReply && <MatchReply value={message} setValue={setMessage} onClickCancel={() => setShowMatchReply(false)}/>}
+      {showMatchReply &&
+        <MatchReply
+          data={matchPost}
+          value={message}
+          setValue={setMessage}
+          onClickBtn={handleMatchRequest}
+          onClickCancel={() => setShowMatchReply(false)}/>
+      }
     </div>
   );
 };

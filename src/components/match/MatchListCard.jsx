@@ -2,8 +2,9 @@ import {useEffect} from "react";
 import dayjs from "dayjs";
 import {icLocate, icArrowUpBlack, icArrowDownBlack} from "@assets/index.js";
 import MatchListCardItem from "@components/match/MatchListCardItem.jsx";
+import {constant} from "@utils/constant.js";
 
-const MatchListCard = ({item, replyListMap, setReplyListMap}) => {
+const MatchListCard = ({item, replyListMap, setReplyListMap, handleReplyMatch}) => {
   const showDetail = replyListMap[item.id];
 
   useEffect(() => {
@@ -26,7 +27,11 @@ const MatchListCard = ({item, replyListMap, setReplyListMap}) => {
         {item?.matchList.map((item, index) =>
           <MatchListCardItem
             key={index}
-            content={item?.content}/>
+            content={item?.content}
+            matchState={item?.matchState}
+            onClickRequest={() => handleReplyMatch(item, constant.ACCEPT)}
+            onClickRefuse={() => handleReplyMatch(item, constant.REJECT)}
+          />
         )}
       </div>}
     </div>
