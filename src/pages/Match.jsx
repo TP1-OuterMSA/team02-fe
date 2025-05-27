@@ -556,7 +556,7 @@ const Match = () => {
             ))}
           </div>}
         </div>
-        {isFoucs && <div className="absolute overflow-y-auto top-21 left-5 z-10 w-80 h-120 bg-white rounded-[10px] shadow-[1px_3px_9px_0px_rgba(0,0,0,0.08)] border border-zinc-300" style={{scrollbarWidth: 'none', msOverflowStyle: 'none'}}>
+        {isFoucs && <div className="absolute overflow-y-auto top-21 left-5 z-5 w-80 h-120 bg-white rounded-[10px] shadow-[1px_3px_9px_0px_rgba(0,0,0,0.08)] border border-zinc-300" style={{scrollbarWidth: 'none', msOverflowStyle: 'none'}}>
         {searchList.map((item, index) => (
             <SearchItem
               key={index}

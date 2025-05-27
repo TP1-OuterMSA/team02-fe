@@ -13,7 +13,7 @@ export const constant = {
   MINUS: "minus",
   WAITING: "WAITING",
   ACCEPT: "ACCEPTED",
-  REJECT: "REJECT",
+  REJECT: "REJECTED",
   ALL: "ALL",
   LIKE: "LIKE",
   COMMENT: "COMMENT",

@@ -20,7 +20,7 @@ const MatchListCardItem = ({content, matchState, onClickRequest, onClickRefuse})
         <SmallButton text={"거절"} style={"w-27 text-center bg-neutral-700"} onClick={onClickRefuse}/>
       </div>}
       {matchState === constant.ACCEPT &&
-        <SmallButton text={"쪽지 보내기"} style={"text-center mt-3"}/>
+        <SmallButton text={"쪽지 보내기"} style={"text-center mt-3 ml-9 mr-5"}/>
       }
     </div>
   );
