@@ -289,7 +289,6 @@ const Match = () => {
 
   const patchMatchData = async () => {
     const data = await matchService.getMealMateOffers({mealPostId: ""});
-    console.log(data)
     setMealMateList(data);
   }
 
@@ -337,7 +336,7 @@ const Match = () => {
 
   // SSE 연동
   useEffect(() => {
-    // connectSSE();
+    connectSSE();
   }, [])
 
   return (

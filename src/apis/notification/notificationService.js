@@ -1,15 +1,27 @@
 import {EventSourcePolyfill} from "event-source-polyfill";
+import {axiosInstance} from "@apis/axiosInstance.js";
 
 export const connectSSE = ({userId}) => {
-  const eventSource = new EventSourcePolyfill(`${import.meta.env.VITE_APP_BASE_URL}/notification/subscribe/${userId}`, {
+  const eventSource = new EventSourcePolyfill(`${import.meta.env.VITE_APP_BASE_URL}/notification/subscribe`, {
     headers: {
-      "Last-Event-ID": "1",
-    }
+      "Last-Event-ID": "",
+      "user-id": userId,
+    },
   });
 
   eventSource.onopen = () => {
     console.log("SSE connected");
   }
+
+  eventSource.addEventListener("sse", (event) => {
+    try {
+      console.log(event)
+      // getPastSSE({lastEventId: event.id, userId})
+      console.log("SSE 이벤트(JSON):", event);
+    } catch {
+      console.log("SSE 이벤트(일반 문자열):", event.data);
+    }
+  });
 
   eventSource.onmessage = (event) => {
     try{
@@ -33,6 +45,18 @@ export const connectSSE = ({userId}) => {
       console.log("SSE 종료")
     }
   }
+  return eventSource;
+}
+
+export const getPastSSE = async ({lastEventId, userId}) => {
+  console.log("lastEventId: ", lastEventId, userId)
+  const reponse = await axiosInstance.get("/notification/past", {
+    headers: {
+      "Last-Event-ID": lastEventId,
+      "user-id": userId,
+    },
+  });
+  return reponse.data;
 }
 
 const notificationService = {
