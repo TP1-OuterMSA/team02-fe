@@ -26,7 +26,7 @@ import MatchReply from "@components/modal/MatchReply.jsx";
 import noticeCard from "@components/match/NoticeCard.jsx";
 import {constant} from "@utils/constant.js";
 import {string} from "@utils/string.js";
-import {updatePosts} from "@apis/community/communityService.js";
+import {useSystemAlert} from "@hooks/useSystemAlert.js";
 
 
 const Match = () => {
@@ -38,8 +38,10 @@ const Match = () => {
   const [selectedPlace, setSelectedPlace] = useState({});
   const [searchList, setSearchList] = useState([]);
   const [markedList, setMarkedList] = useState([]);
+  const [mealMateList, setMealMateList] = useState([]);
   const [mapInstance, setMapInstance] = useState(null);
   const [openingHours, setOpeningHours] = useState({});
+  const [replyListMap, setReplyListMap] = useState({});
   const [mode, setMode] = useState();
   const [editPost, setEditPost] = useState({});
   const [placeImage, setPlaceImage] = useState('');
@@ -60,9 +62,8 @@ const Match = () => {
   const [registerInfo, setRegisterInfo] = useState({selectedDate: dayjs(), selectedTime: '00:00', content:""});
 
 
-  console.log(registerInfo)
-
   const {kakao} = window;
+  const {confirmAlert} = useSystemAlert();
   const userId = localStorage.getItem("userId");
 
   const moveToCurrentLocation = () => {
@@ -116,10 +117,13 @@ const Match = () => {
       setRegisterInfo({content: item?.content, selectedTime: formattedTime, selectedDate: dayjs(originSchedule[0])})
       setShowPost(true);
     } else{
-      await matchService.deleteMatchPost({postId: item?.id});
-      await getMealPostByAddress();
+      const result = confirmAlert(string.SA_DELETE);
+      if(result){
+        await matchService.deleteMatchPost({postId: item?.id});
+        await getMealPostByAddress();
+        toast.success("매칭요청이 삭제되었습니다.");
+      }
       setOpenCardId(null);
-      toast.success("매칭요청이 삭제되었습니다.");
     }
   }
 
@@ -153,7 +157,6 @@ const Match = () => {
   const getMealPostByAddress = async () => {
     const data = await matchService.getMealPost({cursor, address: selectedPlace.address_name});
     setMealPostList(data)
-    console.log(data)
   }
 
   const getPlaces = async () => {
@@ -264,11 +267,16 @@ const Match = () => {
         setShowNotice(false);
         break;
     }
-
   }
 
   const connectSSE = async () => {
     await notificationService.connectSSE({userId: 1});
+  }
+
+  const patchMatchData = async () => {
+    const data = await matchService.getMealMateOffers({mealPostId: ""});
+    console.log(data);
+    setMealMateList(data);
   }
 
   // debounce에 따라 검색결과 보여주기
@@ -310,10 +318,6 @@ const Match = () => {
 
   //매칭된 목록 불러오기
   useEffect(() => {
-    const patchMatchData = async () => {
-      const data = await matchService.getMealMateOffers();
-      console.log(data);
-    }
     // connectSSE();
     patchMatchData();
   }, []);
@@ -394,8 +398,7 @@ const Match = () => {
                   <img src={icAlarm} alt="alarm" className="w-5 h-5"/>
                   <p>{openingHours?.open_now ? "영업중" : "영업종료"}</p>
                 </div>
-                <div
-                  className="flex bg-white rounded-[10px] border border-zinc-300 p-3 gap-2 items-center justify-center mt-3 cursor-pointer"
+                <div className="flex bg-white rounded-[10px] border border-zinc-300 p-3 gap-2 items-center justify-center mt-3 cursor-pointer"
                   onClick={() => {
                     setMode("")
                     setShowPost(true)
@@ -427,8 +430,7 @@ const Match = () => {
                 </div>
               </div>
             </div>}
-            {showPost && <div
-              className="absolute w-80 bg-white top-0  rounded-[10px] shadow-[1px_3px_9px_0px_rgba(0,0,0,0.08)] p-5">
+            {showPost && <div className="absolute w-80 bg-white top-0 z-20 rounded-[10px] shadow-[1px_3px_9px_0px_rgba(0,0,0,0.08)] p-5">
               <div className="flex gap-1 items-center">
                 <img src={icBack} alt="back" className="w-5 h-5 cursor-pointer" onClick={() => {
                   setRegisterInfo({})
@@ -499,13 +501,18 @@ const Match = () => {
               onClick={handleNotice}
             />
           </div>}
-
         <div className="absolute bottom-3 left-4 z-10 max-w-[98%] min-w-[98%]">
           {showMatchList &&
             <div className="w-80 h-96 pt-2 overflow-y-auto bg-white rounded-[10px] shadow-[1px_3px_9px_0px_rgba(0,0,0,0.08)] border border-zinc-300">
-              <MatchListCard/>
-            </div>
-            }
+              {mealMateList?.map((item, index) => (
+                <MatchListCard
+                  key={index}
+                  item={item}
+                  replyListMap={replyListMap}
+                  setReplyListMap={setReplyListMap}
+                />
+              ))}
+            </div>}
           <div className="flex justify-between pr-2 pt-2">
             <div className={clsx("cursor-pointer p-4 w-14 rounded-[10px] shadow-[1px_3px_9px_0px_rgba(0,0,0,0.08)] border border-zinc-300", showMatchList ? "bg-(--primary)": "bg-white")} onClick={() => setShowMatchList(!showMatchList)}>
               <img src={showMatchList ? icHeartMatch : icHeartMatchFill} alt="myLocation" className="w-6 h-6"/>
@@ -514,7 +521,6 @@ const Match = () => {
               <img src={icMyLocation} alt="myLocation" className="w-6 h-6" />
             </div>
           </div>
-
           {markedList.length > 0 && !showDetail && <div className=" mt-4 flex gap-5 overflow-x-auto">
             {markedList.map((item, index) => (
                 <PlaceCard
@@ -527,10 +533,7 @@ const Match = () => {
             ))}
           </div>}
         </div>
-
-        {isFoucs && <div
-            className="absolute overflow-y-auto top-21 left-5 z-10 w-80 h-120 bg-white rounded-[10px] shadow-[1px_3px_9px_0px_rgba(0,0,0,0.08)] border border-zinc-300"
-            style={{scrollbarWidth: 'none', msOverflowStyle: 'none'}}>
+        {isFoucs && <div className="absolute overflow-y-auto top-21 left-5 z-10 w-80 h-120 bg-white rounded-[10px] shadow-[1px_3px_9px_0px_rgba(0,0,0,0.08)] border border-zinc-300" style={{scrollbarWidth: 'none', msOverflowStyle: 'none'}}>
         {searchList.map((item, index) => (
             <SearchItem
               key={index}
