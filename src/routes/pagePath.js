@@ -1,5 +1,6 @@
 export const pagePath = {
   ROOT: "/team2/",
+  DIET: "/team2/diet",
   NUTRITION: "/team2/nutrition",
 
   COMMUNITY: "/team2/community/home",

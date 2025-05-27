@@ -3,18 +3,17 @@ import {useLocation} from "react-router-dom";
 import dayjs from "dayjs";
 import {toast} from "react-toastify";
 
-import {icKebab, icHand, icHandFill, icSend, icChat, icPerson, icDate} from "@assets";
+import {icKebab, icHand, icHandFill, icSend, icChat, icPerson, icDate} from "@assets/";
 import communityService from "@apis/community/communityService.js";
 import commentService from "@apis/comments/commentService.js";
 import ReplyForm from "@components/communityDetail/ReplyForm.jsx";
 import DropDown from "@components/common/DropDown.jsx";
 import PostDetailEdit from "@components/modal/PostDetailEdit.jsx";
 import {useCustomNavigation} from "@hooks/useCustomNavigation.js";
+import {useSystemAlert} from "@hooks/useSystemAlert.js";
 import {pagePath} from "@/routes/pagePath.js";
 import {string} from "@utils/string.js";
 import {constant} from "@utils/constant.js";
-
-
 
 const CommunityDetail = () => {
   const [isLiked, setIsLiked] = useState(false);
@@ -25,17 +24,21 @@ const CommunityDetail = () => {
   const [isEdit, setIsEdit] = useState(false);
   const [floatReactions, setFloatReactions] = useState([]);
   const [replyEditMap, setReplyEditMap] = useState({});
+  const [replyLikeMap, setReplyLikeMap] = useState({});
+  const [sprinkleMap, setSprinkleMap] = useState({});
   const [image, setImage] = useState();
   const [preView, setPreView] = useState();
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+  const [writers, setWriters] = useState();
   const [commentMap, setCommentMap] = useState({});
 
   const postId = useLocation().pathname.split("/").splice(4, 1);
   const myId = localStorage.getItem("userId");
   const menuRef = useRef(null);
 
-  const {navigateTo} = useCustomNavigation()
+  const {navigateTo} = useCustomNavigation();
+  const {confirmAlert} = useSystemAlert();
 
   useEffect(() => {
     fetchData()
@@ -61,11 +64,15 @@ const CommunityDetail = () => {
     try {
       const postDetails = await communityService.getPostById(postId);
       setDetail(postDetails);
-      setReply(postDetails.commentResponseList);
-      setPreView(postDetails.image);
-      setTitle(postDetails.title);
-      setContent(postDetails.content);
-      setIsLiked(postDetails.likeStatus);
+      setReply(postDetails?.commentResponseList);
+      setPreView(postDetails?.image);
+      setTitle(postDetails?.title);
+      setContent(postDetails?.content);
+      setWriters(postDetails?.userId);
+      setIsLiked(postDetails?.likeStatus);
+      postDetails?.commentResponseList?.map(item => {
+        setReplyLikeMap(prev => ({...prev, [item?.commentId]: item?.liked}));
+      })
     } catch (e) {
       console.error(e);
     }
@@ -107,10 +114,22 @@ const CommunityDetail = () => {
   const handleMenu = async (menu) => {
     if(menu === string.EDIT) {
       setIsEdit(true);
-    } else{
-      await communityService.deletePost(postId);
-      toast.success("게시글을 삭제하였습니다.")
-      navigateTo(pagePath.COMMUNITY);
+    }
+    else if(menu === string.BLOCK) {
+      const result = confirmAlert(string.SA_BLOCK);
+      if(result){
+        await communityService.blockPost(postId);
+        toast.success(string.TP_BLOCK);
+        navigateTo(pagePath.COMMUNITY);
+      }
+    }
+    else {
+      const result = confirmAlert(string.SA_DELETE);
+      if(result){
+        await communityService.deletePost(postId);
+        toast.success("게시글을 삭제하였습니다.");
+        navigateTo(pagePath.COMMUNITY);
+      }
     }
     setIsMenuOpen(false);
   }
@@ -132,7 +151,6 @@ const CommunityDetail = () => {
       console.error(error);
     }
   }
-
   // 댓글 메뉴 관리(신고, 수정, 삭제)
   const handleReplyMenu = async (commentId, menu) => {
     switch(menu){
@@ -140,10 +158,16 @@ const CommunityDetail = () => {
         setReplyEditMap(prev => ({...prev, [commentId]: !prev[commentId]}));
         if(replyEditMap[commentId] && !!commentMap[commentId]){
           await updateComment(commentId, commentMap[commentId]);
-
         }
         break;
-      case constant.SIREN:
+      case constant.THUMB:
+        // 댓글 좋아요 api 연동해야함
+        setReplyLikeMap(prev => ({...prev, [commentId]: !prev[commentId]}));
+        !replyLikeMap[commentId] ? await commentService.likeComment(commentId) : await commentService.unlikeComment(commentId);
+        setSprinkleMap(prev => ({ ...prev, [commentId]: true }));
+        setTimeout(() => {
+          setSprinkleMap(prev => ({ ...prev, [commentId]: false }));
+        }, 800);
         break;
       case constant.DELETE:
         await deleteComment(commentId);
@@ -151,7 +175,6 @@ const CommunityDetail = () => {
     }
     await fetchData();
   }
-
   // 댓글 수정 API
   const updateComment = async (commentId, content) => {
     try{
@@ -209,7 +232,7 @@ const CommunityDetail = () => {
   }
 
   return (
-      <div className="pl-10 pr-10 text-wrap mb-10">
+      <div className="pl-10 pr-10 text-wrap mb-10 w-full">
         <header className="border-b pb-6 border-gray-200 relative">
           <div className="flex justify-between mt-10">
             <p className="text-black text-2xl font-semibold">{detail?.title}</p>
@@ -218,16 +241,22 @@ const CommunityDetail = () => {
         <div className="flex gap-4 mt-4">
           <div className="flex gap-1 items-center">
             <img src={icPerson} className="w-5 h-5"/>
-            <p className="text-zinc-600 text-base font-normal">{string.NONAME}</p>
+            <p className="text-zinc-600 text-base font-normal">{string.NONAME + writers}</p>
           </div>
           <div className="flex gap-1 items-center">
             <img src={icDate} className="w-5 h-5"/>
             <p className="text-zinc-600 text-base font-normal">{dayjs(detail?.createdAt).format("YY.MM.DD")}</p>
+            {detail?.updatedAt &&
+                <>
+                <div className="w-1 h-1 bg-black rounded-full ml-1 mr-1"></div>
+                <p className="text-neutral-400 text-base font-norma">{dayjs(detail?.updatedAt).format('YY.MM.DD')}에 수정됨</p>
+                </>
+            }
           </div>
         </div>
         {isMenuOpen && (
           <div ref={menuRef} className={`menu ${isMenuOpen ? "open" : ""} absolute top-10 right-0`}>
-            <DropDown onClick={handleMenu} />
+            <DropDown onClick={handleMenu} isShow={writers == myId} />
           </div>
         )}
       </header>
@@ -277,6 +306,7 @@ const CommunityDetail = () => {
             <ReplyForm
                 key={idx}
                 data={item}
+                isLike={replyLikeMap[item?.commentId]}
                 isMine={myId === item?.userId.toString()}
                 isEdit={replyEditMap[item?.commentId] === true}
                 comment={commentMap[item?.commentId] !== undefined ? commentMap[item?.commentId] : item.content}

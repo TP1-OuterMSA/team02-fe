@@ -12,23 +12,79 @@ export {default as icDate} from '@assets/icon/ico_date.svg';
 export {default as icPerson} from '@assets/icon/ico_person.svg';
 export {default as icSend} from '@assets/icon/ico_send.svg';
 export {default as icClose} from '@assets/icon/ico_close.svg';
+export {default as icCloseWhite} from '@assets/icon/ico_close_white.svg';
+export {default as icCloseGray} from '@assets/icon/ico_close_gray.svg';
 export {default as icReplyEdit} from '@assets/icon/ico_reply_edit.svg';
 export {default as icSiren} from '@assets/icon/ico_siren.svg';
 export {default as icTrash} from '@assets/icon/ico_trash.svg';
 export {default as icCheck} from '@assets/icon/ico_check.svg';
+export {default as icLeft} from '@assets/icon/ico_left.svg';
+export {default as icRight} from '@assets/icon/ico_right.svg';
+export {default as icSearch} from '@assets/icon/ico_search.svg';
+export {default as icPlus} from '@assets/icon/ico_plus.svg';
+export {default as icMinus} from '@assets/icon/ico_minus.svg';
+export {default as icPlusWhite} from '@assets/icon/ico_plus_white.svg';
+export {default as icAlarm} from '@assets/icon/ico_alarm.svg';
+export {default as icCalRegister} from '@assets/icon/ico_cal_register.svg';
+export {default as icMyLocation} from '@assets/icon/ico_my_location.svg';
+export {default as icCelebration} from '@assets/icon/ico_celebration.svg';
+export {default as icEditLocation} from '@assets/icon/ico_edit_location.svg';
 
 export {default as icCommunity} from '@assets/icon/ico_community.svg';
 export {default as icCommunityFill} from '@assets/icon/ico_community_fill.svg';
 export {default as icMatch} from '@assets/icon/ico_match.svg';
 export {default as icMatchFill} from '@assets/icon/ico_match_fill.svg';
+export {default as icDiet} from '@assets/icon/ico_diet.svg';
+export {default as icDietFill} from '@assets/icon/ico_diet_fill.svg';
 export {default as icNutrition} from '@assets/icon/ico_nutrition.svg';
 export {default as icNutritionFill} from '@assets/icon/ico_nutrition_fill.svg';
+export {default as icDown} from '@assets/icon/ico_down.svg';
+export {default as icCalendar} from "@assets/icon/ico_calendar.svg";
+export {default as icBar} from "@assets/icon/ico_bar.svg";
+export {default as icBarWhite} from "@assets/icon/ico_bar_white.svg";
+export {default as icLinear} from "@assets/icon/ico_linear.svg";
+export {default as icLinearWhite} from "@assets/icon/ico_linear_white.svg";
+
+
+export {default as icMorning} from '@assets/icon/ico_morning.svg';
+export {default as icLunch} from '@assets/icon/ico_lunch.svg';
+export {default as icDinner} from '@assets/icon/ico_dinner.svg';
+export {default as icSnack} from '@assets/icon/ico_snack.svg';
+
 export {default as icNotify} from '@assets/icon/ico_notify.svg';
-
-
+export {default as icThumb} from '@assets/icon/ico_thumb.svg';
+export {default as icThumbFill} from '@assets/icon/ico_thumb_fill.svg';
+export {default as icMap} from '@assets/icon/ico_map.svg';
+export {default as icLocate} from '@assets/icon/ico_locate.svg';
+export {default as icMealGood} from '@assets/icon/ico_meal_good.svg';
+export {default as icForkSpoon} from '@assets/icon/ico_fork_spoon.svg';
+export {default as icHeartMatch} from '@assets/icon/ico_heart_match.svg';
+export {default as icHeartMatchFill} from '@assets/icon/ico_heart_match_fill.svg';
+export {default as icArrowDown} from '@assets/icon/ico_arrow_down.svg';
+export {default as icArrowDownBlack} from '@assets/icon/ico_arrow_down_black.svg';
+export {default as icArrowUp} from '@assets/icon/ico_arrow_up.svg';
+export {default as icArrowUpBlack} from '@assets/icon/ico_arrow_up_black.svg';
+export {default as icNoticeWhite} from '@assets/icon/ico_notice_white.svg';
 
 export {default as imgBlank} from '@assets/images/img_blank.svg';
+export {default as imgRice} from '@assets/images/img_rice.svg';
 export {default as imgProfile} from '@assets/images/img_profile.svg';
 export {default as imgMainProfile} from '@assets/images/img_main_profile.svg';
+export {default as imgMainCharcter} from '@assets/images/img_main_character.svg';
+export {default as imgWelcome} from '@assets/images/img_welcome.svg';
+export {default as imgNoodle} from '@assets/images/img_noodle.svg';
+export {default as imgAdvice} from '@assets/images/img_advice.svg';
+export {default as imgFood} from '@assets/images/img_food.svg';
+export {default as imgRecommend} from '@assets/images/img_recommend.svg';
+export {default as imgMark} from '@assets/images/img_mark.svg';
+export {default as imgMarkUnSelect} from '@assets/images/img_mark_unselect.svg';
+export {default as imgPromise} from '@assets/images/img_promise.svg';
+
+export {default as imgEatRice} from '@assets/images/img_eat_rice.gif';
+export {default as imgEating} from '@assets/images/img_eating.gif';
+
+
+
+
 
 

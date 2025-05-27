@@ -9,6 +9,7 @@
 
     --animate-float: float 2s ease-in-out forwards;
     --animate-wiggle: wiggle 1s ease-in-out infinite;
+    --custom-break: '916px';
 
     @keyframes float {
         from {
@@ -32,14 +33,31 @@
 }
 
 @layer components {
-    .lnb_menu{
-        cursor: pointer;
-        padding: 24px;
-        border: var(--primary);
+    select {
+        -o-appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
     }
-    .lnb_menu:hover, .lnb_menu_active{
-        border-bottom: 2px solid var(--primary);
-        color: var(--primary);
+
+    .sidebar_text {
+        font-size: 1.2rem;
+        font-weight: bold;
+    }
+
+    .sidebar_menu {
+        display: flex;
+        gap: 0.5rem;
+        padding: 1rem;
+        align-items: center;
+        cursor: pointer;
+        color: black;
+    }
+
+    .sidebar_menu:hover, .sidebar_menu_active {
+        background-color: var(--primary);
+        border-radius: 0.5rem;
+        color: white;
     }
 
     .skeleton {
@@ -52,9 +70,14 @@
 
     .dropdown_menu {
         font-size: 16px;
-        font-weight: 400;
-        padding: 16px;
+        font-weight: 600;
+        padding: 10px;
         cursor: pointer;
+    }
+
+    .dropdown_menu:hover{
+        border-radius: 6px;
+        background-color: #D9D9D9;
     }
 
     .menu {
@@ -76,4 +99,24 @@
         transform: translateY(0);
         pointer-events: auto;
     }
+
+    .marked-day {
+        background-image: url("/src/assets/images/img_rice.svg");
+        background-repeat: no-repeat;
+        background-position: center;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    /* 좌우 화살표 버튼 색상 변경 */
+    .rdp-nav_button {
+        color: #f87171; /* 예: Tailwind의 rose-500 */
+    }
+
+    /* 호버 색상 */
+    .rdp-nav_button:hover {
+        color: #ef4444;
+    }
+
 }
+

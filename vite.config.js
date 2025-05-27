@@ -9,6 +9,21 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 export default defineConfig({
   plugins: [react(), tailwindcss()],
   base: '/team2/',
+  server: {
+    proxy: {
+      // 브라우저에서 /api로 요청이 들어오면,
+      "/web": {
+        target: "https://place.map.kakao.com/",  // target url을 yes24로 변경하고,
+        changeOrigin: true,  // target과 같은 도메인의 요청인 것처럼
+        rewrite: (path) => path.replace(/^\/web/, ""),	// target url로 요청시 /api 문자열은 제거
+      },
+      "/place":{
+        target: "https://maps.googleapis.com/maps/api/place/",  // target url을 yes24로 변경하고,
+        changeOrigin: true,  // target과 같은 도메인의 요청인 것처럼
+        rewrite: (path) => path.replace(/^\/place/, ""),	// target url로 요청시 /api 문자열은 제거
+      }
+    },
+  },
   resolve: {
     alias: {
       '@': path.resolve(__dirname, 'src'),

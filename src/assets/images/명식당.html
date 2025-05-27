@@ -1,0 +1,2921 @@
+<!DOCTYPE html>
+<!-- saved from url=(0033)http://localhost:5173/team2/match -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style type="text/css">:root{--toastify-color-light: #fff;--toastify-color-dark: #121212;--toastify-color-info: #3498db;--toastify-color-success: #07bc0c;--toastify-color-warning: #f1c40f;--toastify-color-error: hsl(6, 78%, 57%);--toastify-color-transparent: rgba(255, 255, 255, .7);--toastify-icon-color-info: var(--toastify-color-info);--toastify-icon-color-success: var(--toastify-color-success);--toastify-icon-color-warning: var(--toastify-color-warning);--toastify-icon-color-error: var(--toastify-color-error);--toastify-container-width: fit-content;--toastify-toast-width: 320px;--toastify-toast-offset: 16px;--toastify-toast-top: max(var(--toastify-toast-offset), env(safe-area-inset-top));--toastify-toast-right: max(var(--toastify-toast-offset), env(safe-area-inset-right));--toastify-toast-left: max(var(--toastify-toast-offset), env(safe-area-inset-left));--toastify-toast-bottom: max(var(--toastify-toast-offset), env(safe-area-inset-bottom));--toastify-toast-background: #fff;--toastify-toast-padding: 14px;--toastify-toast-min-height: 64px;--toastify-toast-max-height: 800px;--toastify-toast-bd-radius: 6px;--toastify-toast-shadow: 0px 4px 12px rgba(0, 0, 0, .1);--toastify-font-family: sans-serif;--toastify-z-index: 9999;--toastify-text-color-light: #757575;--toastify-text-color-dark: #fff;--toastify-text-color-info: #fff;--toastify-text-color-success: #fff;--toastify-text-color-warning: #fff;--toastify-text-color-error: #fff;--toastify-spinner-color: #616161;--toastify-spinner-color-empty-area: #e0e0e0;--toastify-color-progress-light: linear-gradient(to right, #4cd964, #5ac8fa, #007aff, #34aadc, #5856d6, #ff2d55);--toastify-color-progress-dark: #bb86fc;--toastify-color-progress-info: var(--toastify-color-info);--toastify-color-progress-success: var(--toastify-color-success);--toastify-color-progress-warning: var(--toastify-color-warning);--toastify-color-progress-error: var(--toastify-color-error);--toastify-color-progress-bgo: .2}.Toastify__toast-container{z-index:var(--toastify-z-index);-webkit-transform:translate3d(0,0,var(--toastify-z-index));position:fixed;width:var(--toastify-container-width);box-sizing:border-box;color:#fff;display:flex;flex-direction:column}.Toastify__toast-container--top-left{top:var(--toastify-toast-top);left:var(--toastify-toast-left)}.Toastify__toast-container--top-center{top:var(--toastify-toast-top);left:50%;transform:translate(-50%);align-items:center}.Toastify__toast-container--top-right{top:var(--toastify-toast-top);right:var(--toastify-toast-right);align-items:end}.Toastify__toast-container--bottom-left{bottom:var(--toastify-toast-bottom);left:var(--toastify-toast-left)}.Toastify__toast-container--bottom-center{bottom:var(--toastify-toast-bottom);left:50%;transform:translate(-50%);align-items:center}.Toastify__toast-container--bottom-right{bottom:var(--toastify-toast-bottom);right:var(--toastify-toast-right);align-items:end}.Toastify__toast{--y: 0;position:relative;touch-action:none;width:var(--toastify-toast-width);min-height:var(--toastify-toast-min-height);box-sizing:border-box;margin-bottom:1rem;padding:var(--toastify-toast-padding);border-radius:var(--toastify-toast-bd-radius);box-shadow:var(--toastify-toast-shadow);max-height:var(--toastify-toast-max-height);font-family:var(--toastify-font-family);z-index:0;display:flex;flex:1 auto;align-items:center;word-break:break-word}@media only screen and (max-width: 480px){.Toastify__toast-container{width:100vw;left:env(safe-area-inset-left);margin:0}.Toastify__toast-container--top-left,.Toastify__toast-container--top-center,.Toastify__toast-container--top-right{top:env(safe-area-inset-top);transform:translate(0)}.Toastify__toast-container--bottom-left,.Toastify__toast-container--bottom-center,.Toastify__toast-container--bottom-right{bottom:env(safe-area-inset-bottom);transform:translate(0)}.Toastify__toast-container--rtl{right:env(safe-area-inset-right);left:initial}.Toastify__toast{--toastify-toast-width: 100%;margin-bottom:0;border-radius:0}}.Toastify__toast-container[data-stacked=true]{width:var(--toastify-toast-width)}.Toastify__toast--stacked{position:absolute;width:100%;transform:translate3d(0,var(--y),0) scale(var(--s));transition:transform .3s}.Toastify__toast--stacked[data-collapsed] .Toastify__toast-body,.Toastify__toast--stacked[data-collapsed] .Toastify__close-button{transition:opacity .1s}.Toastify__toast--stacked[data-collapsed=false]{overflow:visible}.Toastify__toast--stacked[data-collapsed=true]:not(:last-child)>*{opacity:0}.Toastify__toast--stacked:after{content:"";position:absolute;left:0;right:0;height:calc(var(--g) * 1px);bottom:100%}.Toastify__toast--stacked[data-pos=top]{top:0}.Toastify__toast--stacked[data-pos=bot]{bottom:0}.Toastify__toast--stacked[data-pos=bot].Toastify__toast--stacked:before{transform-origin:top}.Toastify__toast--stacked[data-pos=top].Toastify__toast--stacked:before{transform-origin:bottom}.Toastify__toast--stacked:before{content:"";position:absolute;left:0;right:0;bottom:0;height:100%;transform:scaleY(3);z-index:-1}.Toastify__toast--rtl{direction:rtl}.Toastify__toast--close-on-click{cursor:pointer}.Toastify__toast-icon{margin-inline-end:10px;width:22px;flex-shrink:0;display:flex}.Toastify--animate{animation-fill-mode:both;animation-duration:.5s}.Toastify--animate-icon{animation-fill-mode:both;animation-duration:.3s}.Toastify__toast-theme--dark{background:var(--toastify-color-dark);color:var(--toastify-text-color-dark)}.Toastify__toast-theme--light,.Toastify__toast-theme--colored.Toastify__toast--default{background:var(--toastify-color-light);color:var(--toastify-text-color-light)}.Toastify__toast-theme--colored.Toastify__toast--info{color:var(--toastify-text-color-info);background:var(--toastify-color-info)}.Toastify__toast-theme--colored.Toastify__toast--success{color:var(--toastify-text-color-success);background:var(--toastify-color-success)}.Toastify__toast-theme--colored.Toastify__toast--warning{color:var(--toastify-text-color-warning);background:var(--toastify-color-warning)}.Toastify__toast-theme--colored.Toastify__toast--error{color:var(--toastify-text-color-error);background:var(--toastify-color-error)}.Toastify__progress-bar-theme--light{background:var(--toastify-color-progress-light)}.Toastify__progress-bar-theme--dark{background:var(--toastify-color-progress-dark)}.Toastify__progress-bar--info{background:var(--toastify-color-progress-info)}.Toastify__progress-bar--success{background:var(--toastify-color-progress-success)}.Toastify__progress-bar--warning{background:var(--toastify-color-progress-warning)}.Toastify__progress-bar--error{background:var(--toastify-color-progress-error)}.Toastify__progress-bar-theme--colored.Toastify__progress-bar--info,.Toastify__progress-bar-theme--colored.Toastify__progress-bar--success,.Toastify__progress-bar-theme--colored.Toastify__progress-bar--warning,.Toastify__progress-bar-theme--colored.Toastify__progress-bar--error{background:var(--toastify-color-transparent)}.Toastify__close-button{color:#fff;position:absolute;top:6px;right:6px;background:transparent;outline:none;border:none;padding:0;cursor:pointer;opacity:.7;transition:.3s ease;z-index:1}.Toastify__toast--rtl .Toastify__close-button{left:6px;right:unset}.Toastify__close-button--light{color:#000;opacity:.3}.Toastify__close-button>svg{fill:currentColor;height:16px;width:14px}.Toastify__close-button:hover,.Toastify__close-button:focus{opacity:1}@keyframes Toastify__trackProgress{0%{transform:scaleX(1)}to{transform:scaleX(0)}}.Toastify__progress-bar{position:absolute;bottom:0;left:0;width:100%;height:100%;z-index:1;opacity:.7;transform-origin:left}.Toastify__progress-bar--animated{animation:Toastify__trackProgress linear 1 forwards}.Toastify__progress-bar--controlled{transition:transform .2s}.Toastify__progress-bar--rtl{right:0;left:initial;transform-origin:right;border-bottom-left-radius:initial}.Toastify__progress-bar--wrp{position:absolute;overflow:hidden;bottom:0;left:0;width:100%;height:5px;border-bottom-left-radius:var(--toastify-toast-bd-radius);border-bottom-right-radius:var(--toastify-toast-bd-radius)}.Toastify__progress-bar--wrp[data-hidden=true]{opacity:0}.Toastify__progress-bar--bg{opacity:var(--toastify-color-progress-bgo);width:100%;height:100%}.Toastify__spinner{width:20px;height:20px;box-sizing:border-box;border:2px solid;border-radius:100%;border-color:var(--toastify-spinner-color-empty-area);border-right-color:var(--toastify-spinner-color);animation:Toastify__spin .65s linear infinite}@keyframes Toastify__bounceInRight{0%,60%,75%,90%,to{animation-timing-function:cubic-bezier(.215,.61,.355,1)}0%{opacity:0;transform:translate3d(3000px,0,0)}60%{opacity:1;transform:translate3d(-25px,0,0)}75%{transform:translate3d(10px,0,0)}90%{transform:translate3d(-5px,0,0)}to{transform:none}}@keyframes Toastify__bounceOutRight{20%{opacity:1;transform:translate3d(-20px,var(--y),0)}to{opacity:0;transform:translate3d(2000px,var(--y),0)}}@keyframes Toastify__bounceInLeft{0%,60%,75%,90%,to{animation-timing-function:cubic-bezier(.215,.61,.355,1)}0%{opacity:0;transform:translate3d(-3000px,0,0)}60%{opacity:1;transform:translate3d(25px,0,0)}75%{transform:translate3d(-10px,0,0)}90%{transform:translate3d(5px,0,0)}to{transform:none}}@keyframes Toastify__bounceOutLeft{20%{opacity:1;transform:translate3d(20px,var(--y),0)}to{opacity:0;transform:translate3d(-2000px,var(--y),0)}}@keyframes Toastify__bounceInUp{0%,60%,75%,90%,to{animation-timing-function:cubic-bezier(.215,.61,.355,1)}0%{opacity:0;transform:translate3d(0,3000px,0)}60%{opacity:1;transform:translate3d(0,-20px,0)}75%{transform:translate3d(0,10px,0)}90%{transform:translate3d(0,-5px,0)}to{transform:translateZ(0)}}@keyframes Toastify__bounceOutUp{20%{transform:translate3d(0,calc(var(--y) - 10px),0)}40%,45%{opacity:1;transform:translate3d(0,calc(var(--y) + 20px),0)}to{opacity:0;transform:translate3d(0,-2000px,0)}}@keyframes Toastify__bounceInDown{0%,60%,75%,90%,to{animation-timing-function:cubic-bezier(.215,.61,.355,1)}0%{opacity:0;transform:translate3d(0,-3000px,0)}60%{opacity:1;transform:translate3d(0,25px,0)}75%{transform:translate3d(0,-10px,0)}90%{transform:translate3d(0,5px,0)}to{transform:none}}@keyframes Toastify__bounceOutDown{20%{transform:translate3d(0,calc(var(--y) - 10px),0)}40%,45%{opacity:1;transform:translate3d(0,calc(var(--y) + 20px),0)}to{opacity:0;transform:translate3d(0,2000px,0)}}.Toastify__bounce-enter--top-left,.Toastify__bounce-enter--bottom-left{animation-name:Toastify__bounceInLeft}.Toastify__bounce-enter--top-right,.Toastify__bounce-enter--bottom-right{animation-name:Toastify__bounceInRight}.Toastify__bounce-enter--top-center{animation-name:Toastify__bounceInDown}.Toastify__bounce-enter--bottom-center{animation-name:Toastify__bounceInUp}.Toastify__bounce-exit--top-left,.Toastify__bounce-exit--bottom-left{animation-name:Toastify__bounceOutLeft}.Toastify__bounce-exit--top-right,.Toastify__bounce-exit--bottom-right{animation-name:Toastify__bounceOutRight}.Toastify__bounce-exit--top-center{animation-name:Toastify__bounceOutUp}.Toastify__bounce-exit--bottom-center{animation-name:Toastify__bounceOutDown}@keyframes Toastify__zoomIn{0%{opacity:0;transform:scale3d(.3,.3,.3)}50%{opacity:1}}@keyframes Toastify__zoomOut{0%{opacity:1}50%{opacity:0;transform:translate3d(0,var(--y),0) scale3d(.3,.3,.3)}to{opacity:0}}.Toastify__zoom-enter{animation-name:Toastify__zoomIn}.Toastify__zoom-exit{animation-name:Toastify__zoomOut}@keyframes Toastify__flipIn{0%{transform:perspective(400px) rotateX(90deg);animation-timing-function:ease-in;opacity:0}40%{transform:perspective(400px) rotateX(-20deg);animation-timing-function:ease-in}60%{transform:perspective(400px) rotateX(10deg);opacity:1}80%{transform:perspective(400px) rotateX(-5deg)}to{transform:perspective(400px)}}@keyframes Toastify__flipOut{0%{transform:translate3d(0,var(--y),0) perspective(400px)}30%{transform:translate3d(0,var(--y),0) perspective(400px) rotateX(-20deg);opacity:1}to{transform:translate3d(0,var(--y),0) perspective(400px) rotateX(90deg);opacity:0}}.Toastify__flip-enter{animation-name:Toastify__flipIn}.Toastify__flip-exit{animation-name:Toastify__flipOut}@keyframes Toastify__slideInRight{0%{transform:translate3d(110%,0,0);visibility:visible}to{transform:translate3d(0,var(--y),0)}}@keyframes Toastify__slideInLeft{0%{transform:translate3d(-110%,0,0);visibility:visible}to{transform:translate3d(0,var(--y),0)}}@keyframes Toastify__slideInUp{0%{transform:translate3d(0,110%,0);visibility:visible}to{transform:translate3d(0,var(--y),0)}}@keyframes Toastify__slideInDown{0%{transform:translate3d(0,-110%,0);visibility:visible}to{transform:translate3d(0,var(--y),0)}}@keyframes Toastify__slideOutRight{0%{transform:translate3d(0,var(--y),0)}to{visibility:hidden;transform:translate3d(110%,var(--y),0)}}@keyframes Toastify__slideOutLeft{0%{transform:translate3d(0,var(--y),0)}to{visibility:hidden;transform:translate3d(-110%,var(--y),0)}}@keyframes Toastify__slideOutDown{0%{transform:translate3d(0,var(--y),0)}to{visibility:hidden;transform:translate3d(0,500px,0)}}@keyframes Toastify__slideOutUp{0%{transform:translate3d(0,var(--y),0)}to{visibility:hidden;transform:translate3d(0,-500px,0)}}.Toastify__slide-enter--top-left,.Toastify__slide-enter--bottom-left{animation-name:Toastify__slideInLeft}.Toastify__slide-enter--top-right,.Toastify__slide-enter--bottom-right{animation-name:Toastify__slideInRight}.Toastify__slide-enter--top-center{animation-name:Toastify__slideInDown}.Toastify__slide-enter--bottom-center{animation-name:Toastify__slideInUp}.Toastify__slide-exit--top-left,.Toastify__slide-exit--bottom-left{animation-name:Toastify__slideOutLeft;animation-timing-function:ease-in;animation-duration:.3s}.Toastify__slide-exit--top-right,.Toastify__slide-exit--bottom-right{animation-name:Toastify__slideOutRight;animation-timing-function:ease-in;animation-duration:.3s}.Toastify__slide-exit--top-center{animation-name:Toastify__slideOutUp;animation-timing-function:ease-in;animation-duration:.3s}.Toastify__slide-exit--bottom-center{animation-name:Toastify__slideOutDown;animation-timing-function:ease-in;animation-duration:.3s}@keyframes Toastify__spin{0%{transform:rotate(0)}to{transform:rotate(360deg)}}
+</style>
+    <script type="module">import { injectIntoGlobalHook } from "/team2/@react-refresh";
+injectIntoGlobalHook(window);
+window.$RefreshReg$ = () => {};
+window.$RefreshSig$ = () => (type) => type;</script>
+
+    <script type="module" src="./명식당_files/client"></script>
+
+    
+    <link rel="icon" type="image/svg+xml" href="http://localhost:5173/team2/favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+    <link href="./명식당_files/css2" rel="stylesheet">
+    <link href="./명식당_files/index.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>명식당</title>
+  <style type="text/css" data-vite-dev-id="/Users/kyungsoo/Documents/Project/team02-fe/src/index.css">/*! tailwindcss v4.0.17 | MIT License | https://tailwindcss.com */
+@layer theme, base, components, utilities;
+@layer theme {
+  :root, :host {
+    --font-sans: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+      "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+      "Courier New", monospace;
+    --color-red-100: oklch(0.936 0.032 17.717);
+    --color-red-600: oklch(0.577 0.245 27.325);
+    --color-lime-400: oklch(0.841 0.238 128.85);
+    --color-green-600: oklch(0.627 0.194 149.214);
+    --color-blue-600: oklch(0.546 0.245 262.881);
+    --color-blue-800: oklch(0.424 0.199 265.638);
+    --color-indigo-50: oklch(0.962 0.018 272.314);
+    --color-indigo-100: oklch(0.93 0.034 272.788);
+    --color-gray-100: oklch(0.967 0.003 264.542);
+    --color-gray-200: oklch(0.928 0.006 264.531);
+    --color-gray-300: oklch(0.872 0.01 258.338);
+    --color-gray-500: oklch(0.551 0.027 264.364);
+    --color-zinc-100: oklch(0.967 0.001 286.375);
+    --color-zinc-300: oklch(0.871 0.006 286.286);
+    --color-zinc-400: oklch(0.705 0.015 286.067);
+    --color-zinc-500: oklch(0.552 0.016 285.938);
+    --color-zinc-600: oklch(0.442 0.017 285.786);
+    --color-zinc-700: oklch(0.37 0.013 285.805);
+    --color-neutral-50: oklch(0.985 0 0);
+    --color-neutral-100: oklch(0.97 0 0);
+    --color-neutral-200: oklch(0.922 0 0);
+    --color-neutral-400: oklch(0.708 0 0);
+    --color-neutral-500: oklch(0.556 0 0);
+    --color-stone-100: oklch(0.97 0.001 106.424);
+    --color-stone-400: oklch(0.709 0.01 56.259);
+    --color-stone-500: oklch(0.553 0.013 58.071);
+    --color-black: #000;
+    --color-white: #fff;
+    --spacing: 0.25rem;
+    --text-xs: 0.75rem;
+    --text-xs--line-height: calc(1 / 0.75);
+    --text-sm: 0.875rem;
+    --text-sm--line-height: calc(1.25 / 0.875);
+    --text-base: 1rem;
+    --text-base--line-height: calc(1.5 / 1);
+    --text-lg: 1.125rem;
+    --text-lg--line-height: calc(1.75 / 1.125);
+    --text-xl: 1.25rem;
+    --text-xl--line-height: calc(1.75 / 1.25);
+    --text-2xl: 1.5rem;
+    --text-2xl--line-height: calc(2 / 1.5);
+    --text-3xl: 1.875rem;
+    --text-3xl--line-height: calc(2.25 / 1.875);
+    --text-4xl: 2.25rem;
+    --text-4xl--line-height: calc(2.5 / 2.25);
+    --font-weight-normal: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+    --font-weight-extrabold: 800;
+    --radius-xs: 0.125rem;
+    --radius-md: 0.375rem;
+    --radius-lg: 0.5rem;
+    --radius-xl: 0.75rem;
+    --radius-2xl: 1rem;
+    --radius-3xl: 1.5rem;
+    --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+    --animate-spin: spin 1s linear infinite;
+    --animate-pulse: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    --default-transition-duration: 150ms;
+    --default-transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    --default-font-family: var(--font-sans);
+    --default-mono-font-family: var(--font-mono);
+    --primary: #013F9F;
+    --text-grey: #757575;
+    --light-grey: #D9D9D9;
+    --skeleton: #b3b3b3;
+    --animate-float: float 2s ease-in-out forwards;
+  }
+}
+@layer base {
+  *, ::after, ::before, ::backdrop, ::file-selector-button {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border: 0 solid;
+  }
+  html, :host {
+    line-height: 1.5;
+    -webkit-text-size-adjust: 100%;
+    tab-size: 4;
+    font-family: var(--default-font-family, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji");
+    font-feature-settings: var(--default-font-feature-settings, normal);
+    font-variation-settings: var(--default-font-variation-settings, normal);
+    -webkit-tap-highlight-color: transparent;
+  }
+  hr {
+    height: 0;
+    color: inherit;
+    border-top-width: 1px;
+  }
+  abbr:where([title]) {
+    -webkit-text-decoration: underline dotted;
+    text-decoration: underline dotted;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-size: inherit;
+    font-weight: inherit;
+  }
+  a {
+    color: inherit;
+    -webkit-text-decoration: inherit;
+    text-decoration: inherit;
+  }
+  b, strong {
+    font-weight: bolder;
+  }
+  code, kbd, samp, pre {
+    font-family: var(--default-mono-font-family, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace);
+    font-feature-settings: var(--default-mono-font-feature-settings, normal);
+    font-variation-settings: var(--default-mono-font-variation-settings, normal);
+    font-size: 1em;
+  }
+  small {
+    font-size: 80%;
+  }
+  sub, sup {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+  }
+  sub {
+    bottom: -0.25em;
+  }
+  sup {
+    top: -0.5em;
+  }
+  table {
+    text-indent: 0;
+    border-color: inherit;
+    border-collapse: collapse;
+  }
+  :-moz-focusring {
+    outline: auto;
+  }
+  progress {
+    vertical-align: baseline;
+  }
+  summary {
+    display: list-item;
+  }
+  ol, ul, menu {
+    list-style: none;
+  }
+  img, svg, video, canvas, audio, iframe, embed, object {
+    display: block;
+    vertical-align: middle;
+  }
+  img, video {
+    max-width: 100%;
+    height: auto;
+  }
+  button, input, select, optgroup, textarea, ::file-selector-button {
+    font: inherit;
+    font-feature-settings: inherit;
+    font-variation-settings: inherit;
+    letter-spacing: inherit;
+    color: inherit;
+    border-radius: 0;
+    background-color: transparent;
+    opacity: 1;
+  }
+  :where(select:is([multiple], [size])) optgroup {
+    font-weight: bolder;
+  }
+  :where(select:is([multiple], [size])) optgroup option {
+    padding-inline-start: 20px;
+  }
+  ::file-selector-button {
+    margin-inline-end: 4px;
+  }
+  ::placeholder {
+    opacity: 1;
+  }
+  @supports (not (-webkit-appearance: -apple-pay-button))  or (contain-intrinsic-size: 1px) {
+    ::placeholder {
+      color: color-mix(in oklab, currentColor 50%, transparent);
+    }
+  }
+  textarea {
+    resize: vertical;
+  }
+  ::-webkit-search-decoration {
+    -webkit-appearance: none;
+  }
+  ::-webkit-date-and-time-value {
+    min-height: 1lh;
+    text-align: inherit;
+  }
+  ::-webkit-datetime-edit {
+    display: inline-flex;
+  }
+  ::-webkit-datetime-edit-fields-wrapper {
+    padding: 0;
+  }
+  ::-webkit-datetime-edit, ::-webkit-datetime-edit-year-field, ::-webkit-datetime-edit-month-field, ::-webkit-datetime-edit-day-field, ::-webkit-datetime-edit-hour-field, ::-webkit-datetime-edit-minute-field, ::-webkit-datetime-edit-second-field, ::-webkit-datetime-edit-millisecond-field, ::-webkit-datetime-edit-meridiem-field {
+    padding-block: 0;
+  }
+  :-moz-ui-invalid {
+    box-shadow: none;
+  }
+  button, input:where([type="button"], [type="reset"], [type="submit"]), ::file-selector-button {
+    appearance: button;
+  }
+  ::-webkit-inner-spin-button, ::-webkit-outer-spin-button {
+    height: auto;
+  }
+  [hidden]:where(:not([hidden="until-found"])) {
+    display: none !important;
+  }
+}
+@layer utilities {
+  .pointer-events-none {
+    pointer-events: none;
+  }
+  .absolute {
+    position: absolute;
+  }
+  .fixed {
+    position: fixed;
+  }
+  .relative {
+    position: relative;
+  }
+  .sticky {
+    position: sticky;
+  }
+  .inset-0 {
+    inset: calc(var(--spacing) * 0);
+  }
+  .top-0 {
+    top: calc(var(--spacing) * 0);
+  }
+  .top-1\/2 {
+    top: calc(1/2 * 100%);
+  }
+  .top-4 {
+    top: calc(var(--spacing) * 4);
+  }
+  .top-5 {
+    top: calc(var(--spacing) * 5);
+  }
+  .top-9 {
+    top: calc(var(--spacing) * 9);
+  }
+  .top-10 {
+    top: calc(var(--spacing) * 10);
+  }
+  .top-21 {
+    top: calc(var(--spacing) * 21);
+  }
+  .right-0 {
+    right: calc(var(--spacing) * 0);
+  }
+  .right-2 {
+    right: calc(var(--spacing) * 2);
+  }
+  .right-3 {
+    right: calc(var(--spacing) * 3);
+  }
+  .right-5 {
+    right: calc(var(--spacing) * 5);
+  }
+  .right-10 {
+    right: calc(var(--spacing) * 10);
+  }
+  .right-25 {
+    right: calc(var(--spacing) * 25);
+  }
+  .bottom-3 {
+    bottom: calc(var(--spacing) * 3);
+  }
+  .bottom-5 {
+    bottom: calc(var(--spacing) * 5);
+  }
+  .bottom-10 {
+    bottom: calc(var(--spacing) * 10);
+  }
+  .bottom-13 {
+    bottom: calc(var(--spacing) * 13);
+  }
+  .left-0 {
+    left: calc(var(--spacing) * 0);
+  }
+  .left-4 {
+    left: calc(var(--spacing) * 4);
+  }
+  .left-5 {
+    left: calc(var(--spacing) * 5);
+  }
+  .z-1 {
+    z-index: 1;
+  }
+  .z-10 {
+    z-index: 10;
+  }
+  .z-20 {
+    z-index: 20;
+  }
+  .z-50 {
+    z-index: 50;
+  }
+  .m-1 {
+    margin: calc(var(--spacing) * 1);
+  }
+  .mt-1 {
+    margin-top: calc(var(--spacing) * 1);
+  }
+  .mt-2 {
+    margin-top: calc(var(--spacing) * 2);
+  }
+  .mt-3 {
+    margin-top: calc(var(--spacing) * 3);
+  }
+  .mt-4 {
+    margin-top: calc(var(--spacing) * 4);
+  }
+  .mt-5 {
+    margin-top: calc(var(--spacing) * 5);
+  }
+  .mt-6 {
+    margin-top: calc(var(--spacing) * 6);
+  }
+  .mt-7 {
+    margin-top: calc(var(--spacing) * 7);
+  }
+  .mt-8 {
+    margin-top: calc(var(--spacing) * 8);
+  }
+  .mt-10 {
+    margin-top: calc(var(--spacing) * 10);
+  }
+  .mt-15 {
+    margin-top: calc(var(--spacing) * 15);
+  }
+  .mt-40 {
+    margin-top: calc(var(--spacing) * 40);
+  }
+  .mt-50 {
+    margin-top: calc(var(--spacing) * 50);
+  }
+  .mr-1 {
+    margin-right: calc(var(--spacing) * 1);
+  }
+  .mb-2 {
+    margin-bottom: calc(var(--spacing) * 2);
+  }
+  .mb-3 {
+    margin-bottom: calc(var(--spacing) * 3);
+  }
+  .mb-5 {
+    margin-bottom: calc(var(--spacing) * 5);
+  }
+  .mb-6 {
+    margin-bottom: calc(var(--spacing) * 6);
+  }
+  .mb-10 {
+    margin-bottom: calc(var(--spacing) * 10);
+  }
+  .ml-1 {
+    margin-left: calc(var(--spacing) * 1);
+  }
+  .contents {
+    display: contents;
+  }
+  .flex {
+    display: flex;
+  }
+  .grid {
+    display: grid;
+  }
+  .hidden {
+    display: none;
+  }
+  .inline-block {
+    display: inline-block;
+  }
+  .inline-flex {
+    display: inline-flex;
+  }
+  .h-1 {
+    height: calc(var(--spacing) * 1);
+  }
+  .h-3 {
+    height: calc(var(--spacing) * 3);
+  }
+  .h-3\.5 {
+    height: calc(var(--spacing) * 3.5);
+  }
+  .h-4 {
+    height: calc(var(--spacing) * 4);
+  }
+  .h-5 {
+    height: calc(var(--spacing) * 5);
+  }
+  .h-6 {
+    height: calc(var(--spacing) * 6);
+  }
+  .h-7 {
+    height: calc(var(--spacing) * 7);
+  }
+  .h-9 {
+    height: calc(var(--spacing) * 9);
+  }
+  .h-10 {
+    height: calc(var(--spacing) * 10);
+  }
+  .h-11 {
+    height: calc(var(--spacing) * 11);
+  }
+  .h-12 {
+    height: calc(var(--spacing) * 12);
+  }
+  .h-16 {
+    height: calc(var(--spacing) * 16);
+  }
+  .h-22 {
+    height: calc(var(--spacing) * 22);
+  }
+  .h-24 {
+    height: calc(var(--spacing) * 24);
+  }
+  .h-28 {
+    height: calc(var(--spacing) * 28);
+  }
+  .h-35 {
+    height: calc(var(--spacing) * 35);
+  }
+  .h-42 {
+    height: calc(var(--spacing) * 42);
+  }
+  .h-44 {
+    height: calc(var(--spacing) * 44);
+  }
+  .h-45 {
+    height: calc(var(--spacing) * 45);
+  }
+  .h-52 {
+    height: calc(var(--spacing) * 52);
+  }
+  .h-54 {
+    height: calc(var(--spacing) * 54);
+  }
+  .h-56 {
+    height: calc(var(--spacing) * 56);
+  }
+  .h-62 {
+    height: calc(var(--spacing) * 62);
+  }
+  .h-72 {
+    height: calc(var(--spacing) * 72);
+  }
+  .h-96 {
+    height: calc(var(--spacing) * 96);
+  }
+  .h-110 {
+    height: calc(var(--spacing) * 110);
+  }
+  .h-120 {
+    height: calc(var(--spacing) * 120);
+  }
+  .h-200 {
+    height: calc(var(--spacing) * 200);
+  }
+  .h-\[1px\] {
+    height: 1px;
+  }
+  .h-\[44vh\] {
+    height: 44vh;
+  }
+  .h-\[50px\] {
+    height: 50px;
+  }
+  .h-\[72vh\] {
+    height: 72vh;
+  }
+  .h-\[90vh\] {
+    height: 90vh;
+  }
+  .h-full {
+    height: 100%;
+  }
+  .max-h-\[30vh\] {
+    max-height: 30vh;
+  }
+  .w-1 {
+    width: calc(var(--spacing) * 1);
+  }
+  .w-1\/2 {
+    width: calc(1/2 * 100%);
+  }
+  .w-3 {
+    width: calc(var(--spacing) * 3);
+  }
+  .w-4 {
+    width: calc(var(--spacing) * 4);
+  }
+  .w-5 {
+    width: calc(var(--spacing) * 5);
+  }
+  .w-6 {
+    width: calc(var(--spacing) * 6);
+  }
+  .w-7 {
+    width: calc(var(--spacing) * 7);
+  }
+  .w-9 {
+    width: calc(var(--spacing) * 9);
+  }
+  .w-10 {
+    width: calc(var(--spacing) * 10);
+  }
+  .w-11 {
+    width: calc(var(--spacing) * 11);
+  }
+  .w-12 {
+    width: calc(var(--spacing) * 12);
+  }
+  .w-15 {
+    width: calc(var(--spacing) * 15);
+  }
+  .w-16 {
+    width: calc(var(--spacing) * 16);
+  }
+  .w-20 {
+    width: calc(var(--spacing) * 20);
+  }
+  .w-22 {
+    width: calc(var(--spacing) * 22);
+  }
+  .w-24 {
+    width: calc(var(--spacing) * 24);
+  }
+  .w-28 {
+    width: calc(var(--spacing) * 28);
+  }
+  .w-29 {
+    width: calc(var(--spacing) * 29);
+  }
+  .w-36 {
+    width: calc(var(--spacing) * 36);
+  }
+  .w-38 {
+    width: calc(var(--spacing) * 38);
+  }
+  .w-40 {
+    width: calc(var(--spacing) * 40);
+  }
+  .w-52 {
+    width: calc(var(--spacing) * 52);
+  }
+  .w-60 {
+    width: calc(var(--spacing) * 60);
+  }
+  .w-72 {
+    width: calc(var(--spacing) * 72);
+  }
+  .w-80 {
+    width: calc(var(--spacing) * 80);
+  }
+  .w-95 {
+    width: calc(var(--spacing) * 95);
+  }
+  .w-100 {
+    width: calc(var(--spacing) * 100);
+  }
+  .w-130 {
+    width: calc(var(--spacing) * 130);
+  }
+  .w-150 {
+    width: calc(var(--spacing) * 150);
+  }
+  .w-160 {
+    width: calc(var(--spacing) * 160);
+  }
+  .w-180 {
+    width: calc(var(--spacing) * 180);
+  }
+  .w-260 {
+    width: calc(var(--spacing) * 260);
+  }
+  .w-\[40\%\] {
+    width: 40%;
+  }
+  .w-\[50\%\] {
+    width: 50%;
+  }
+  .w-\[100\%\] {
+    width: 100%;
+  }
+  .w-\[470px\] {
+    width: 470px;
+  }
+  .w-full {
+    width: 100%;
+  }
+  .max-w-72 {
+    max-width: calc(var(--spacing) * 72);
+  }
+  .max-w-\[98\%\] {
+    max-width: 98%;
+  }
+  .min-w-40 {
+    min-width: calc(var(--spacing) * 40);
+  }
+  .min-w-48 {
+    min-width: calc(var(--spacing) * 48);
+  }
+  .min-w-75 {
+    min-width: calc(var(--spacing) * 75);
+  }
+  .min-w-96 {
+    min-width: calc(var(--spacing) * 96);
+  }
+  .origin-center {
+    transform-origin: center;
+  }
+  .-translate-y-1\/2 {
+    --tw-translate-y: calc(calc(1/2 * 100%) * -1);
+    translate: var(--tw-translate-x) var(--tw-translate-y);
+  }
+  .transform {
+    transform: var(--tw-rotate-x) var(--tw-rotate-y) var(--tw-rotate-z) var(--tw-skew-x) var(--tw-skew-y);
+  }
+  .animate-float {
+    animation: var(--animate-float);
+  }
+  .animate-spin {
+    animation: var(--animate-spin);
+  }
+  .cursor-pointer {
+    cursor: pointer;
+  }
+  .appearance-none {
+    appearance: none;
+  }
+  .grid-cols-1 {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+  .flex-col {
+    flex-direction: column;
+  }
+  .items-center {
+    align-items: center;
+  }
+  .items-end {
+    align-items: flex-end;
+  }
+  .items-start {
+    align-items: flex-start;
+  }
+  .justify-between {
+    justify-content: space-between;
+  }
+  .justify-center {
+    justify-content: center;
+  }
+  .justify-start {
+    justify-content: flex-start;
+  }
+  .gap-1 {
+    gap: calc(var(--spacing) * 1);
+  }
+  .gap-2 {
+    gap: calc(var(--spacing) * 2);
+  }
+  .gap-2\.5 {
+    gap: calc(var(--spacing) * 2.5);
+  }
+  .gap-3 {
+    gap: calc(var(--spacing) * 3);
+  }
+  .gap-4 {
+    gap: calc(var(--spacing) * 4);
+  }
+  .gap-5 {
+    gap: calc(var(--spacing) * 5);
+  }
+  .gap-6 {
+    gap: calc(var(--spacing) * 6);
+  }
+  .truncate {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .overflow-hidden {
+    overflow: hidden;
+  }
+  .overflow-x-auto {
+    overflow-x: auto;
+  }
+  .overflow-y-auto {
+    overflow-y: auto;
+  }
+  .rounded {
+    border-radius: 0.25rem;
+  }
+  .rounded-2xl {
+    border-radius: var(--radius-2xl);
+  }
+  .rounded-3xl {
+    border-radius: var(--radius-3xl);
+  }
+  .rounded-\[10px\] {
+    border-radius: 10px;
+  }
+  .rounded-full {
+    border-radius: calc(infinity * 1px);
+  }
+  .rounded-lg {
+    border-radius: var(--radius-lg);
+  }
+  .rounded-md {
+    border-radius: var(--radius-md);
+  }
+  .rounded-xl {
+    border-radius: var(--radius-xl);
+  }
+  .rounded-xs {
+    border-radius: var(--radius-xs);
+  }
+  .rounded-tl-xl {
+    border-top-left-radius: var(--radius-xl);
+  }
+  .rounded-tr-xl {
+    border-top-right-radius: var(--radius-xl);
+  }
+  .rounded-bl-xl {
+    border-bottom-left-radius: var(--radius-xl);
+  }
+  .border {
+    border-style: var(--tw-border-style);
+    border-width: 1px;
+  }
+  .border-1 {
+    border-style: var(--tw-border-style);
+    border-width: 1px;
+  }
+  .border-2 {
+    border-style: var(--tw-border-style);
+    border-width: 2px;
+  }
+  .border-r {
+    border-right-style: var(--tw-border-style);
+    border-right-width: 1px;
+  }
+  .border-b {
+    border-bottom-style: var(--tw-border-style);
+    border-bottom-width: 1px;
+  }
+  .border-\(--light-grey\) {
+    border-color: var(--light-grey);
+  }
+  .border-\(--primary\) {
+    border-color: var(--primary);
+  }
+  .border-blue-800 {
+    border-color: var(--color-blue-800);
+  }
+  .border-blue-800\/50 {
+    border-color: color-mix(in oklab, var(--color-blue-800) 50%, transparent);
+  }
+  .border-gray-200 {
+    border-color: var(--color-gray-200);
+  }
+  .border-gray-300 {
+    border-color: var(--color-gray-300);
+  }
+  .border-neutral-200 {
+    border-color: var(--color-neutral-200);
+  }
+  .border-zinc-300 {
+    border-color: var(--color-zinc-300);
+  }
+  .bg-\(--primary\) {
+    background-color: var(--primary);
+  }
+  .bg-black {
+    background-color: var(--color-black);
+  }
+  .bg-black\/30 {
+    background-color: color-mix(in oklab, var(--color-black) 30%, transparent);
+  }
+  .bg-blue-600 {
+    background-color: var(--color-blue-600);
+  }
+  .bg-blue-800 {
+    background-color: var(--color-blue-800);
+  }
+  .bg-blue-800\/5 {
+    background-color: color-mix(in oklab, var(--color-blue-800) 5%, transparent);
+  }
+  .bg-blue-800\/20 {
+    background-color: color-mix(in oklab, var(--color-blue-800) 20%, transparent);
+  }
+  .bg-gray-100 {
+    background-color: var(--color-gray-100);
+  }
+  .bg-gray-200 {
+    background-color: var(--color-gray-200);
+  }
+  .bg-green-600 {
+    background-color: var(--color-green-600);
+  }
+  .bg-indigo-50 {
+    background-color: var(--color-indigo-50);
+  }
+  .bg-indigo-100 {
+    background-color: var(--color-indigo-100);
+  }
+  .bg-lime-400 {
+    background-color: var(--color-lime-400);
+  }
+  .bg-neutral-50 {
+    background-color: var(--color-neutral-50);
+  }
+  .bg-neutral-100 {
+    background-color: var(--color-neutral-100);
+  }
+  .bg-neutral-200 {
+    background-color: var(--color-neutral-200);
+  }
+  .bg-neutral-500 {
+    background-color: var(--color-neutral-500);
+  }
+  .bg-stone-100 {
+    background-color: var(--color-stone-100);
+  }
+  .bg-white {
+    background-color: var(--color-white);
+  }
+  .bg-zinc-300 {
+    background-color: var(--color-zinc-300);
+  }
+  .stroke-\(--primary\) {
+    stroke: var(--primary);
+  }
+  .stroke-zinc-100 {
+    stroke: var(--color-zinc-100);
+  }
+  .object-cover {
+    object-fit: cover;
+  }
+  .p-1 {
+    padding: calc(var(--spacing) * 1);
+  }
+  .p-2 {
+    padding: calc(var(--spacing) * 2);
+  }
+  .p-2\.5 {
+    padding: calc(var(--spacing) * 2.5);
+  }
+  .p-3 {
+    padding: calc(var(--spacing) * 3);
+  }
+  .p-3\.5 {
+    padding: calc(var(--spacing) * 3.5);
+  }
+  .p-4 {
+    padding: calc(var(--spacing) * 4);
+  }
+  .p-5 {
+    padding: calc(var(--spacing) * 5);
+  }
+  .p-6 {
+    padding: calc(var(--spacing) * 6);
+  }
+  .p-10 {
+    padding: calc(var(--spacing) * 10);
+  }
+  .px-1 {
+    padding-inline: calc(var(--spacing) * 1);
+  }
+  .px-5 {
+    padding-inline: calc(var(--spacing) * 5);
+  }
+  .px-7 {
+    padding-inline: calc(var(--spacing) * 7);
+  }
+  .px-16 {
+    padding-inline: calc(var(--spacing) * 16);
+  }
+  .py-1 {
+    padding-block: calc(var(--spacing) * 1);
+  }
+  .py-3 {
+    padding-block: calc(var(--spacing) * 3);
+  }
+  .py-3\.5 {
+    padding-block: calc(var(--spacing) * 3.5);
+  }
+  .py-5 {
+    padding-block: calc(var(--spacing) * 5);
+  }
+  .pt-2 {
+    padding-top: calc(var(--spacing) * 2);
+  }
+  .pt-3 {
+    padding-top: calc(var(--spacing) * 3);
+  }
+  .pt-4 {
+    padding-top: calc(var(--spacing) * 4);
+  }
+  .pt-5 {
+    padding-top: calc(var(--spacing) * 5);
+  }
+  .pt-10 {
+    padding-top: calc(var(--spacing) * 10);
+  }
+  .pt-20 {
+    padding-top: calc(var(--spacing) * 20);
+  }
+  .pt-34 {
+    padding-top: calc(var(--spacing) * 34);
+  }
+  .pr-1 {
+    padding-right: calc(var(--spacing) * 1);
+  }
+  .pr-1\.5 {
+    padding-right: calc(var(--spacing) * 1.5);
+  }
+  .pr-2 {
+    padding-right: calc(var(--spacing) * 2);
+  }
+  .pr-3 {
+    padding-right: calc(var(--spacing) * 3);
+  }
+  .pr-4 {
+    padding-right: calc(var(--spacing) * 4);
+  }
+  .pr-5 {
+    padding-right: calc(var(--spacing) * 5);
+  }
+  .pr-7 {
+    padding-right: calc(var(--spacing) * 7);
+  }
+  .pr-8 {
+    padding-right: calc(var(--spacing) * 8);
+  }
+  .pr-10 {
+    padding-right: calc(var(--spacing) * 10);
+  }
+  .pr-12 {
+    padding-right: calc(var(--spacing) * 12);
+  }
+  .pb-2 {
+    padding-bottom: calc(var(--spacing) * 2);
+  }
+  .pb-3 {
+    padding-bottom: calc(var(--spacing) * 3);
+  }
+  .pb-4 {
+    padding-bottom: calc(var(--spacing) * 4);
+  }
+  .pb-5 {
+    padding-bottom: calc(var(--spacing) * 5);
+  }
+  .pb-6 {
+    padding-bottom: calc(var(--spacing) * 6);
+  }
+  .pb-10 {
+    padding-bottom: calc(var(--spacing) * 10);
+  }
+  .pb-34 {
+    padding-bottom: calc(var(--spacing) * 34);
+  }
+  .pl-0\.5 {
+    padding-left: calc(var(--spacing) * 0.5);
+  }
+  .pl-1 {
+    padding-left: calc(var(--spacing) * 1);
+  }
+  .pl-1\.5 {
+    padding-left: calc(var(--spacing) * 1.5);
+  }
+  .pl-2 {
+    padding-left: calc(var(--spacing) * 2);
+  }
+  .pl-3 {
+    padding-left: calc(var(--spacing) * 3);
+  }
+  .pl-4 {
+    padding-left: calc(var(--spacing) * 4);
+  }
+  .pl-5 {
+    padding-left: calc(var(--spacing) * 5);
+  }
+  .pl-7 {
+    padding-left: calc(var(--spacing) * 7);
+  }
+  .pl-10 {
+    padding-left: calc(var(--spacing) * 10);
+  }
+  .pl-12 {
+    padding-left: calc(var(--spacing) * 12);
+  }
+  .pl-77 {
+    padding-left: calc(var(--spacing) * 77);
+  }
+  .text-center {
+    text-align: center;
+  }
+  .text-left {
+    text-align: left;
+  }
+  .text-2xl {
+    font-size: var(--text-2xl);
+    line-height: var(--tw-leading, var(--text-2xl--line-height));
+  }
+  .text-3xl {
+    font-size: var(--text-3xl);
+    line-height: var(--tw-leading, var(--text-3xl--line-height));
+  }
+  .text-4xl {
+    font-size: var(--text-4xl);
+    line-height: var(--tw-leading, var(--text-4xl--line-height));
+  }
+  .text-base {
+    font-size: var(--text-base);
+    line-height: var(--tw-leading, var(--text-base--line-height));
+  }
+  .text-lg {
+    font-size: var(--text-lg);
+    line-height: var(--tw-leading, var(--text-lg--line-height));
+  }
+  .text-sm {
+    font-size: var(--text-sm);
+    line-height: var(--tw-leading, var(--text-sm--line-height));
+  }
+  .text-xl {
+    font-size: var(--text-xl);
+    line-height: var(--tw-leading, var(--text-xl--line-height));
+  }
+  .text-xs {
+    font-size: var(--text-xs);
+    line-height: var(--tw-leading, var(--text-xs--line-height));
+  }
+  .font-bold {
+    --tw-font-weight: var(--font-weight-bold);
+    font-weight: var(--font-weight-bold);
+  }
+  .font-extrabold {
+    --tw-font-weight: var(--font-weight-extrabold);
+    font-weight: var(--font-weight-extrabold);
+  }
+  .font-medium {
+    --tw-font-weight: var(--font-weight-medium);
+    font-weight: var(--font-weight-medium);
+  }
+  .font-normal {
+    --tw-font-weight: var(--font-weight-normal);
+    font-weight: var(--font-weight-normal);
+  }
+  .font-semibold {
+    --tw-font-weight: var(--font-weight-semibold);
+    font-weight: var(--font-weight-semibold);
+  }
+  .text-wrap {
+    text-wrap: wrap;
+  }
+  .whitespace-nowrap {
+    white-space: nowrap;
+  }
+  .text-\(--primary\) {
+    color: var(--primary);
+  }
+  .text-\(--text-grey\) {
+    color: var(--text-grey);
+  }
+  .text-black {
+    color: var(--color-black);
+  }
+  .text-blue-800 {
+    color: var(--color-blue-800);
+  }
+  .text-gray-500 {
+    color: var(--color-gray-500);
+  }
+  .text-neutral-400 {
+    color: var(--color-neutral-400);
+  }
+  .text-neutral-500 {
+    color: var(--color-neutral-500);
+  }
+  .text-red-600 {
+    color: var(--color-red-600);
+  }
+  .text-stone-400 {
+    color: var(--color-stone-400);
+  }
+  .text-stone-500 {
+    color: var(--color-stone-500);
+  }
+  .text-white {
+    color: var(--color-white);
+  }
+  .text-zinc-400 {
+    color: var(--color-zinc-400);
+  }
+  .text-zinc-500 {
+    color: var(--color-zinc-500);
+  }
+  .text-zinc-600 {
+    color: var(--color-zinc-600);
+  }
+  .text-zinc-700 {
+    color: var(--color-zinc-700);
+  }
+  .shadow-2xl {
+    --tw-shadow: 0 25px 50px -12px var(--tw-shadow-color, rgb(0 0 0 / 0.25));
+    box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+  }
+  .shadow-\[0px_1px_2px_0px_rgba\(0\,0\,0\,0\.30\)\] {
+    --tw-shadow: 0px 1px 2px 0px var(--tw-shadow-color, rgba(0,0,0,0.30));
+    box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+  }
+  .shadow-\[0px_1px_3px_0px_rgba\(0\,0\,0\,0\.30\)\] {
+    --tw-shadow: 0px 1px 3px 0px var(--tw-shadow-color, rgba(0,0,0,0.30));
+    box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+  }
+  .shadow-\[0px_2px_6px_2px_rgba\(0\,0\,0\,0\.15\)\] {
+    --tw-shadow: 0px 2px 6px 2px var(--tw-shadow-color, rgba(0,0,0,0.15));
+    box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+  }
+  .shadow-\[0px_4px_8px_3px_rgba\(0\,0\,0\,0\.15\)\] {
+    --tw-shadow: 0px 4px 8px 3px var(--tw-shadow-color, rgba(0,0,0,0.15));
+    box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+  }
+  .shadow-\[0px_4px_10px_0px_rgba\(0\,0\,0\,0\.15\)\] {
+    --tw-shadow: 0px 4px 10px 0px var(--tw-shadow-color, rgba(0,0,0,0.15));
+    box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+  }
+  .shadow-\[1px_3px_9px_0px_rgba\(0\,0\,0\,0\.08\)\] {
+    --tw-shadow: 1px 3px 9px 0px var(--tw-shadow-color, rgba(0,0,0,0.08));
+    box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+  }
+  .shadow-\[10px_10px_80px_-15px_rgba\(231\,228\,232\,0\.60\)\] {
+    --tw-shadow: 10px 10px 80px -15px var(--tw-shadow-color, rgba(231,228,232,0.60));
+    box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+  }
+  .outline {
+    outline-style: var(--tw-outline-style);
+    outline-width: 1px;
+  }
+  .outline-1 {
+    outline-style: var(--tw-outline-style);
+    outline-width: 1px;
+  }
+  .outline-zinc-300 {
+    outline-color: var(--color-zinc-300);
+  }
+  .transition {
+    transition-property: color, background-color, border-color, outline-color, text-decoration-color, fill, stroke, --tw-gradient-from, --tw-gradient-via, --tw-gradient-to, opacity, box-shadow, transform, translate, scale, rotate, filter, -webkit-backdrop-filter, backdrop-filter;
+    transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
+    transition-duration: var(--tw-duration, var(--default-transition-duration));
+  }
+  .ease-in-out {
+    --tw-ease: var(--ease-in-out);
+    transition-timing-function: var(--ease-in-out);
+  }
+  .outline-none {
+    --tw-outline-style: none;
+    outline-style: none;
+  }
+  .hover\:bg-red-100\/50 {
+    &:hover {
+      @media (hover: hover) {
+        background-color: color-mix(in oklab, var(--color-red-100) 50%, transparent);
+      }
+    }
+  }
+  .hover\:shadow-2xl {
+    &:hover {
+      @media (hover: hover) {
+        --tw-shadow: 0 25px 50px -12px var(--tw-shadow-color, rgb(0 0 0 / 0.25));
+        box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+      }
+    }
+  }
+  .focus\:ring-0 {
+    &:focus {
+      --tw-ring-shadow: var(--tw-ring-inset,) 0 0 0 calc(0px + var(--tw-ring-offset-width)) var(--tw-ring-color, currentColor);
+      box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+    }
+  }
+  .focus\:outline-2 {
+    &:focus {
+      outline-style: var(--tw-outline-style);
+      outline-width: 2px;
+    }
+  }
+  .focus\:outline-\(--primary\) {
+    &:focus {
+      outline-color: var(--primary);
+    }
+  }
+  .focus\:outline-none {
+    &:focus {
+      --tw-outline-style: none;
+      outline-style: none;
+    }
+  }
+  .max-xl\:mb-1\.5 {
+    @media (width < 80rem) {
+      margin-bottom: calc(var(--spacing) * 1.5);
+    }
+  }
+  .max-xl\:flex-col {
+    @media (width < 80rem) {
+      flex-direction: column;
+    }
+  }
+  .max-xl\:gap-0 {
+    @media (width < 80rem) {
+      gap: calc(var(--spacing) * 0);
+    }
+  }
+  .max-lg\:min-w-47 {
+    @media (width < 64rem) {
+      min-width: calc(var(--spacing) * 47);
+    }
+  }
+  .max-md\:hidden {
+    @media (width < 48rem) {
+      display: none;
+    }
+  }
+  .max-md\:h-40 {
+    @media (width < 48rem) {
+      height: calc(var(--spacing) * 40);
+    }
+  }
+  .max-md\:w-40 {
+    @media (width < 48rem) {
+      width: calc(var(--spacing) * 40);
+    }
+  }
+  .max-md\:w-full {
+    @media (width < 48rem) {
+      width: 100%;
+    }
+  }
+  .max-md\:pl-0 {
+    @media (width < 48rem) {
+      padding-left: calc(var(--spacing) * 0);
+    }
+  }
+  .max-md\:text-2xl {
+    @media (width < 48rem) {
+      font-size: var(--text-2xl);
+      line-height: var(--tw-leading, var(--text-2xl--line-height));
+    }
+  }
+  .min-md\:w-0 {
+    @media (width >= 48rem) {
+      width: calc(var(--spacing) * 0);
+    }
+  }
+  .\@max-\[1000px\]\:hidden {
+    @container (width < 1000px) {
+      display: none;
+    }
+  }
+  .\[\&\:\:-webkit-inner-spin-button\]\:appearance-none {
+    &::-webkit-inner-spin-button {
+      appearance: none;
+    }
+  }
+  .\[\&\:\:-webkit-outer-spin-button\]\:appearance-none {
+    &::-webkit-outer-spin-button {
+      appearance: none;
+    }
+  }
+}
+@layer components {
+  select {
+    -o-appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+  }
+  .sidebar_text {
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+  .sidebar_menu {
+    display: flex;
+    gap: 0.5rem;
+    padding: 1rem;
+    align-items: center;
+    cursor: pointer;
+    color: black;
+  }
+  .sidebar_menu:hover, .sidebar_menu_active {
+    background-color: var(--primary);
+    border-radius: 0.5rem;
+    color: white;
+  }
+  .skeleton {
+    width: 120px;
+    height: 23px;
+    border-radius: 5px;
+    background-color: var(--skeleton);
+    animation: var(--animate-pulse);
+  }
+  .dropdown_menu {
+    font-size: 16px;
+    font-weight: 600;
+    padding: 10px;
+    cursor: pointer;
+  }
+  .dropdown_menu:hover {
+    border-radius: 6px;
+    background-color: #D9D9D9;
+  }
+  .menu {
+    position: absolute;
+    top: 40px;
+    right: 0;
+    width: 150px;
+    background: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+    pointer-events: none;
+  }
+  .menu.open {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+  .marked-day {
+    background-image: url("/team2/src/assets/images/img_rice.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    font-weight: bold;
+    text-align: center;
+  }
+}
+@property --tw-translate-x {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0;
+}
+@property --tw-translate-y {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0;
+}
+@property --tw-translate-z {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0;
+}
+@property --tw-rotate-x {
+  syntax: "*";
+  inherits: false;
+  initial-value: rotateX(0);
+}
+@property --tw-rotate-y {
+  syntax: "*";
+  inherits: false;
+  initial-value: rotateY(0);
+}
+@property --tw-rotate-z {
+  syntax: "*";
+  inherits: false;
+  initial-value: rotateZ(0);
+}
+@property --tw-skew-x {
+  syntax: "*";
+  inherits: false;
+  initial-value: skewX(0);
+}
+@property --tw-skew-y {
+  syntax: "*";
+  inherits: false;
+  initial-value: skewY(0);
+}
+@property --tw-border-style {
+  syntax: "*";
+  inherits: false;
+  initial-value: solid;
+}
+@property --tw-font-weight {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-shadow {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0 0 #0000;
+}
+@property --tw-shadow-color {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-inset-shadow {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0 0 #0000;
+}
+@property --tw-inset-shadow-color {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-ring-color {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-ring-shadow {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0 0 #0000;
+}
+@property --tw-inset-ring-color {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-inset-ring-shadow {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0 0 #0000;
+}
+@property --tw-ring-inset {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-ring-offset-width {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: 0px;
+}
+@property --tw-ring-offset-color {
+  syntax: "*";
+  inherits: false;
+  initial-value: #fff;
+}
+@property --tw-ring-offset-shadow {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0 0 #0000;
+}
+@property --tw-outline-style {
+  syntax: "*";
+  inherits: false;
+  initial-value: solid;
+}
+@property --tw-ease {
+  syntax: "*";
+  inherits: false;
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes pulse {
+  50% {
+    opacity: 0.5;
+  }
+}
+@keyframes float {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(-500px);
+    opacity: 0;
+  }
+}
+</style><style type="text/css" data-vite-dev-id="/Users/kyungsoo/Documents/Project/team02-fe/src/App.css">body {
+  font-family: 'Nanum Gothic',sans-serif;
+  scrollbar-width: none;
+}</style><style type="text/css" data-vite-dev-id="/Users/kyungsoo/Documents/Project/team02-fe/node_modules/react-day-picker/src/style.css">/* Variables declaration */
+/* prettier-ignore */
+.rdp-root {
+  --rdp-accent-color: blue; /* The accent color used for selected days and UI elements. */
+  --rdp-accent-background-color: #f0f0ff; /* The accent background color used for selected days and UI elements. */
+
+  --rdp-day-height: 44px; /* The height of the day cells. */
+  --rdp-day-width: 44px; /* The width of the day cells. */
+  
+  --rdp-day_button-border-radius: 100%; /* The border radius of the day cells. */
+  --rdp-day_button-border: 2px solid transparent; /* The border of the day cells. */
+  --rdp-day_button-height: 42px; /* The height of the day cells. */
+  --rdp-day_button-width: 42px; /* The width of the day cells. */
+  
+  --rdp-selected-border: 2px solid var(--rdp-accent-color); /* The border of the selected days. */
+  --rdp-disabled-opacity: 0.5; /* The opacity of the disabled days. */
+  --rdp-outside-opacity: 0.75; /* The opacity of the days outside the current month. */
+  --rdp-today-color: var(--rdp-accent-color); /* The color of the today's date. */
+  
+  --rdp-dropdown-gap: 0.5rem;/* The gap between the dropdowns used in the month captons. */
+  
+  --rdp-months-gap: 2rem; /* The gap between the months in the multi-month view. */
+  
+  --rdp-nav_button-disabled-opacity: 0.5; /* The opacity of the disabled navigation buttons. */
+  --rdp-nav_button-height: 2.25rem; /* The height of the navigation buttons. */
+  --rdp-nav_button-width: 2.25rem; /* The width of the navigation buttons. */
+  --rdp-nav-height: 2.75rem; /* The height of the navigation bar. */
+  
+  --rdp-range_middle-background-color: var(--rdp-accent-background-color); /* The color of the background for days in the middle of a range. */
+  --rdp-range_middle-color: inherit;/* The color of the range text. */
+  
+  --rdp-range_start-color: white; /* The color of the range text. */
+  --rdp-range_start-background: linear-gradient(var(--rdp-gradient-direction), transparent 50%, var(--rdp-range_middle-background-color) 50%); /* Used for the background of the start of the selected range. */
+  --rdp-range_start-date-background-color: var(--rdp-accent-color); /* The background color of the date when at the start of the selected range. */
+  
+  --rdp-range_end-background: linear-gradient(var(--rdp-gradient-direction), var(--rdp-range_middle-background-color) 50%, transparent 50%); /* Used for the background of the end of the selected range. */
+  --rdp-range_end-color: white;/* The color of the range text. */
+  --rdp-range_end-date-background-color: var(--rdp-accent-color); /* The background color of the date when at the end of the selected range. */
+  
+  --rdp-week_number-border-radius: 100%; /* The border radius of the week number. */
+  --rdp-week_number-border: 2px solid transparent; /* The border of the week number. */
+  
+  --rdp-week_number-height: var(--rdp-day-height); /* The height of the week number cells. */
+  --rdp-week_number-opacity: 0.75; /* The opacity of the week number. */
+  --rdp-week_number-width: var(--rdp-day-width); /* The width of the week number cells. */
+  --rdp-weeknumber-text-align: center; /* The text alignment of the weekday cells. */
+
+  --rdp-weekday-opacity: 0.75; /* The opacity of the weekday. */
+  --rdp-weekday-padding: 0.5rem 0rem; /* The padding of the weekday. */
+  --rdp-weekday-text-align: center; /* The text alignment of the weekday cells. */
+
+  --rdp-gradient-direction: 90deg;
+
+  --rdp-animation_duration: 0.3s;
+  --rdp-animation_timing: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.rdp-root[dir="rtl"] {
+  --rdp-gradient-direction: -90deg;
+}
+
+.rdp-root[data-broadcast-calendar="true"] {
+  --rdp-outside-opacity: unset;
+}
+
+/* Root of the component. */
+.rdp-root {
+  position: relative; /* Required to position the navigation toolbar. */
+  box-sizing: border-box;
+}
+
+.rdp-root * {
+  box-sizing: border-box;
+}
+
+.rdp-day {
+  width: var(--rdp-day-width);
+  height: var(--rdp-day-height);
+  text-align: center;
+}
+
+.rdp-day_button {
+  background: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+
+  width: var(--rdp-day_button-width);
+  height: var(--rdp-day_button-height);
+  border: var(--rdp-day_button-border);
+  border-radius: var(--rdp-day_button-border-radius);
+}
+
+.rdp-day_button:disabled {
+  cursor: revert;
+}
+
+.rdp-caption_label {
+  z-index: 1;
+
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+
+  white-space: nowrap;
+  border: 0;
+}
+
+.rdp-dropdown:focus-visible ~ .rdp-caption_label {
+  outline: 5px auto Highlight;
+  outline: 5px auto -webkit-focus-ring-color;
+}
+
+.rdp-button_next,
+.rdp-button_previous {
+  border: none;
+  background: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  appearance: none;
+
+  width: var(--rdp-nav_button-width);
+  height: var(--rdp-nav_button-height);
+}
+
+.rdp-button_next:disabled,
+.rdp-button_next[aria-disabled="true"],
+.rdp-button_previous:disabled,
+.rdp-button_previous[aria-disabled="true"] {
+  cursor: revert;
+
+  opacity: var(--rdp-nav_button-disabled-opacity);
+}
+
+.rdp-chevron {
+  display: inline-block;
+  fill: var(--rdp-accent-color);
+}
+
+.rdp-root[dir="rtl"] .rdp-nav .rdp-chevron {
+  transform: rotate(180deg);
+  transform-origin: 50%;
+}
+
+.rdp-dropdowns {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--rdp-dropdown-gap);
+}
+.rdp-dropdown {
+  z-index: 2;
+
+  /* Reset */
+  opacity: 0;
+  appearance: none;
+  position: absolute;
+  inset-block-start: 0;
+  inset-block-end: 0;
+  inset-inline-start: 0;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  cursor: inherit;
+  border: none;
+  line-height: inherit;
+}
+
+.rdp-dropdown_root {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.rdp-dropdown_root[data-disabled="true"] .rdp-chevron {
+  opacity: var(--rdp-disabled-opacity);
+}
+
+.rdp-month_caption {
+  display: flex;
+  align-content: center;
+  height: var(--rdp-nav-height);
+  font-weight: bold;
+  font-size: large;
+}
+
+.rdp-months {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--rdp-months-gap);
+  max-width: fit-content;
+}
+
+.rdp-month_grid {
+  border-collapse: collapse;
+}
+
+.rdp-nav {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-end: 0;
+
+  display: flex;
+  align-items: center;
+
+  height: var(--rdp-nav-height);
+}
+
+.rdp-weekday {
+  opacity: var(--rdp-weekday-opacity);
+  padding: var(--rdp-weekday-padding);
+  font-weight: 500;
+  font-size: smaller;
+  text-align: var(--rdp-weekday-text-align);
+  text-transform: var(--rdp-weekday-text-transform);
+}
+
+.rdp-week_number {
+  opacity: var(--rdp-week_number-opacity);
+  font-weight: 400;
+  font-size: small;
+  height: var(--rdp-week_number-height);
+  width: var(--rdp-week_number-width);
+  border: var(--rdp-week_number-border);
+  border-radius: var(--rdp-week_number-border-radius);
+  text-align: var(--rdp-weeknumber-text-align);
+}
+
+/* DAY MODIFIERS */
+.rdp-today:not(.rdp-outside) {
+  color: var(--rdp-today-color);
+}
+
+.rdp-selected {
+  font-weight: bold;
+  font-size: large;
+}
+
+.rdp-selected .rdp-day_button {
+  border: var(--rdp-selected-border);
+}
+
+.rdp-outside {
+  opacity: var(--rdp-outside-opacity);
+}
+
+.rdp-disabled {
+  opacity: var(--rdp-disabled-opacity);
+}
+
+.rdp-hidden {
+  visibility: hidden;
+  color: var(--rdp-range_start-color);
+}
+
+.rdp-range_start {
+  background: var(--rdp-range_start-background);
+}
+
+.rdp-range_start .rdp-day_button {
+  background-color: var(--rdp-range_start-date-background-color);
+  color: var(--rdp-range_start-color);
+}
+
+.rdp-range_middle {
+  background-color: var(--rdp-range_middle-background-color);
+}
+
+.rdp-range_middle .rdp-day_button {
+  border-color: transparent;
+  border: unset;
+  border-radius: unset;
+  color: var(--rdp-range_middle-color);
+}
+
+.rdp-range_end {
+  background: var(--rdp-range_end-background);
+  color: var(--rdp-range_end-color);
+}
+
+.rdp-range_end .rdp-day_button {
+  color: var(--rdp-range_start-color);
+  background-color: var(--rdp-range_end-date-background-color);
+}
+
+.rdp-range_start.rdp-range_end {
+  background: revert;
+}
+
+.rdp-focusable {
+  cursor: pointer;
+}
+
+@keyframes rdp-slide_in_left {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes rdp-slide_in_right {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes rdp-slide_out_left {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes rdp-slide_out_right {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.rdp-weeks_before_enter {
+  animation: rdp-slide_in_left var(--rdp-animation_duration)
+    var(--rdp-animation_timing) forwards;
+}
+
+.rdp-weeks_before_exit {
+  animation: rdp-slide_out_left var(--rdp-animation_duration)
+    var(--rdp-animation_timing) forwards;
+}
+
+.rdp-weeks_after_enter {
+  animation: rdp-slide_in_right var(--rdp-animation_duration)
+    var(--rdp-animation_timing) forwards;
+}
+
+.rdp-weeks_after_exit {
+  animation: rdp-slide_out_right var(--rdp-animation_duration)
+    var(--rdp-animation_timing) forwards;
+}
+
+.rdp-root[dir="rtl"] .rdp-weeks_after_enter {
+  animation: rdp-slide_in_left var(--rdp-animation_duration)
+    var(--rdp-animation_timing) forwards;
+}
+
+.rdp-root[dir="rtl"] .rdp-weeks_before_exit {
+  animation: rdp-slide_out_right var(--rdp-animation_duration)
+    var(--rdp-animation_timing) forwards;
+}
+
+.rdp-root[dir="rtl"] .rdp-weeks_before_enter {
+  animation: rdp-slide_in_right var(--rdp-animation_duration)
+    var(--rdp-animation_timing) forwards;
+}
+
+.rdp-root[dir="rtl"] .rdp-weeks_after_exit {
+  animation: rdp-slide_out_left var(--rdp-animation_duration)
+    var(--rdp-animation_timing) forwards;
+}
+
+@keyframes rdp-fade_in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes rdp-fade_out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.rdp-caption_after_enter {
+  animation: rdp-fade_in var(--rdp-animation_duration)
+    var(--rdp-animation_timing) forwards;
+}
+
+.rdp-caption_after_exit {
+  animation: rdp-fade_out var(--rdp-animation_duration)
+    var(--rdp-animation_timing) forwards;
+}
+
+.rdp-caption_before_enter {
+  animation: rdp-fade_in var(--rdp-animation_duration)
+    var(--rdp-animation_timing) forwards;
+}
+
+.rdp-caption_before_exit {
+  animation: rdp-fade_out var(--rdp-animation_duration)
+    var(--rdp-animation_timing) forwards;
+}
+</style><style type="text/css" data-vite-dev-id="/Users/kyungsoo/Documents/Project/team02-fe/node_modules/swiper/swiper.css">/**
+ * Swiper 11.2.6
+ * Most modern mobile touch slider and framework with hardware accelerated transitions
+ * https://swiperjs.com
+ *
+ * Copyright 2014-2025 Vladimir Kharlampidi
+ *
+ * Released under the MIT License
+ *
+ * Released on: March 19, 2025
+ */
+
+/* FONT_START */
+@font-face {
+  font-family: 'swiper-icons';
+  src: url('data:application/font-woff;charset=utf-8;base64, d09GRgABAAAAAAZgABAAAAAADAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABGRlRNAAAGRAAAABoAAAAci6qHkUdERUYAAAWgAAAAIwAAACQAYABXR1BPUwAABhQAAAAuAAAANuAY7+xHU1VCAAAFxAAAAFAAAABm2fPczU9TLzIAAAHcAAAASgAAAGBP9V5RY21hcAAAAkQAAACIAAABYt6F0cBjdnQgAAACzAAAAAQAAAAEABEBRGdhc3AAAAWYAAAACAAAAAj//wADZ2x5ZgAAAywAAADMAAAD2MHtryVoZWFkAAABbAAAADAAAAA2E2+eoWhoZWEAAAGcAAAAHwAAACQC9gDzaG10eAAAAigAAAAZAAAArgJkABFsb2NhAAAC0AAAAFoAAABaFQAUGG1heHAAAAG8AAAAHwAAACAAcABAbmFtZQAAA/gAAAE5AAACXvFdBwlwb3N0AAAFNAAAAGIAAACE5s74hXjaY2BkYGAAYpf5Hu/j+W2+MnAzMYDAzaX6QjD6/4//Bxj5GA8AuRwMYGkAPywL13jaY2BkYGA88P8Agx4j+/8fQDYfA1AEBWgDAIB2BOoAeNpjYGRgYNBh4GdgYgABEMnIABJzYNADCQAACWgAsQB42mNgYfzCOIGBlYGB0YcxjYGBwR1Kf2WQZGhhYGBiYGVmgAFGBiQQkOaawtDAoMBQxXjg/wEGPcYDDA4wNUA2CCgwsAAAO4EL6gAAeNpj2M0gyAACqxgGNWBkZ2D4/wMA+xkDdgAAAHjaY2BgYGaAYBkGRgYQiAHyGMF8FgYHIM3DwMHABGQrMOgyWDLEM1T9/w8UBfEMgLzE////P/5//f/V/xv+r4eaAAeMbAxwIUYmIMHEgKYAYjUcsDAwsLKxc3BycfPw8jEQA/gZBASFhEVExcQlJKWkZWTl5BUUlZRVVNXUNTQZBgMAAMR+E+gAEQFEAAAAKgAqACoANAA+AEgAUgBcAGYAcAB6AIQAjgCYAKIArAC2AMAAygDUAN4A6ADyAPwBBgEQARoBJAEuATgBQgFMAVYBYAFqAXQBfgGIAZIBnAGmAbIBzgHsAAB42u2NMQ6CUAyGW568x9AneYYgm4MJbhKFaExIOAVX8ApewSt4Bic4AfeAid3VOBixDxfPYEza5O+Xfi04YADggiUIULCuEJK8VhO4bSvpdnktHI5QCYtdi2sl8ZnXaHlqUrNKzdKcT8cjlq+rwZSvIVczNiezsfnP/uznmfPFBNODM2K7MTQ45YEAZqGP81AmGGcF3iPqOop0r1SPTaTbVkfUe4HXj97wYE+yNwWYxwWu4v1ugWHgo3S1XdZEVqWM7ET0cfnLGxWfkgR42o2PvWrDMBSFj/IHLaF0zKjRgdiVMwScNRAoWUoH78Y2icB/yIY09An6AH2Bdu/UB+yxopYshQiEvnvu0dURgDt8QeC8PDw7Fpji3fEA4z/PEJ6YOB5hKh4dj3EvXhxPqH/SKUY3rJ7srZ4FZnh1PMAtPhwP6fl2PMJMPDgeQ4rY8YT6Gzao0eAEA409DuggmTnFnOcSCiEiLMgxCiTI6Cq5DZUd3Qmp10vO0LaLTd2cjN4fOumlc7lUYbSQcZFkutRG7g6JKZKy0RmdLY680CDnEJ+UMkpFFe1RN7nxdVpXrC4aTtnaurOnYercZg2YVmLN/d/gczfEimrE/fs/bOuq29Zmn8tloORaXgZgGa78yO9/cnXm2BpaGvq25Dv9S4E9+5SIc9PqupJKhYFSSl47+Qcr1mYNAAAAeNptw0cKwkAAAMDZJA8Q7OUJvkLsPfZ6zFVERPy8qHh2YER+3i/BP83vIBLLySsoKimrqKqpa2hp6+jq6RsYGhmbmJqZSy0sraxtbO3sHRydnEMU4uR6yx7JJXveP7WrDycAAAAAAAH//wACeNpjYGRgYOABYhkgZgJCZgZNBkYGLQZtIJsFLMYAAAw3ALgAeNolizEKgDAQBCchRbC2sFER0YD6qVQiBCv/H9ezGI6Z5XBAw8CBK/m5iQQVauVbXLnOrMZv2oLdKFa8Pjuru2hJzGabmOSLzNMzvutpB3N42mNgZGBg4GKQYzBhYMxJLMlj4GBgAYow/P/PAJJhLM6sSoWKfWCAAwDAjgbRAAB42mNgYGBkAIIbCZo5IPrmUn0hGA0AO8EFTQAA');
+  font-weight: 400;
+  font-style: normal;
+}
+/* FONT_END */
+:root {
+  --swiper-theme-color: #007aff;
+  /*
+  --swiper-preloader-color: var(--swiper-theme-color);
+  --swiper-wrapper-transition-timing-function: initial;
+  */
+}
+:host {
+  position: relative;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  z-index: 1;
+}
+.swiper {
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  overflow: hidden;
+  list-style: none;
+  padding: 0;
+  /* Fix of Webkit flickering */
+  z-index: 1;
+  display: block;
+}
+.swiper-vertical > .swiper-wrapper {
+  flex-direction: column;
+}
+.swiper-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  display: flex;
+  transition-property: transform;
+  transition-timing-function: var(--swiper-wrapper-transition-timing-function, initial);
+  box-sizing: content-box;
+}
+.swiper-android .swiper-slide,
+.swiper-ios .swiper-slide,
+.swiper-wrapper {
+  transform: translate3d(0px, 0, 0);
+}
+.swiper-horizontal {
+  touch-action: pan-y;
+}
+.swiper-vertical {
+  touch-action: pan-x;
+}
+.swiper-slide {
+  flex-shrink: 0;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transition-property: transform;
+  display: block;
+}
+.swiper-slide-invisible-blank {
+  visibility: hidden;
+}
+/* Auto Height */
+.swiper-autoheight,
+.swiper-autoheight .swiper-slide {
+  height: auto;
+}
+.swiper-autoheight .swiper-wrapper {
+  align-items: flex-start;
+  transition-property: transform, height;
+}
+.swiper-backface-hidden .swiper-slide {
+  transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+}
+/* 3D Effects */
+.swiper-3d.swiper-css-mode .swiper-wrapper {
+  perspective: 1200px;
+}
+.swiper-3d .swiper-wrapper {
+  transform-style: preserve-3d;
+}
+.swiper-3d {
+  perspective: 1200px;
+}
+.swiper-3d .swiper-slide,
+.swiper-3d .swiper-cube-shadow {
+  transform-style: preserve-3d;
+}
+/* CSS Mode */
+.swiper-css-mode > .swiper-wrapper {
+  overflow: auto;
+  scrollbar-width: none;
+  /* For Firefox */
+  -ms-overflow-style: none;
+  /* For Internet Explorer and Edge */
+}
+.swiper-css-mode > .swiper-wrapper::-webkit-scrollbar {
+  display: none;
+}
+.swiper-css-mode > .swiper-wrapper > .swiper-slide {
+  scroll-snap-align: start start;
+}
+.swiper-css-mode.swiper-horizontal > .swiper-wrapper {
+  scroll-snap-type: x mandatory;
+}
+.swiper-css-mode.swiper-vertical > .swiper-wrapper {
+  scroll-snap-type: y mandatory;
+}
+.swiper-css-mode.swiper-free-mode > .swiper-wrapper {
+  scroll-snap-type: none;
+}
+.swiper-css-mode.swiper-free-mode > .swiper-wrapper > .swiper-slide {
+  scroll-snap-align: none;
+}
+.swiper-css-mode.swiper-centered > .swiper-wrapper::before {
+  content: '';
+  flex-shrink: 0;
+  order: 9999;
+}
+.swiper-css-mode.swiper-centered > .swiper-wrapper > .swiper-slide {
+  scroll-snap-align: center center;
+  scroll-snap-stop: always;
+}
+.swiper-css-mode.swiper-centered.swiper-horizontal > .swiper-wrapper > .swiper-slide:first-child {
+  margin-inline-start: var(--swiper-centered-offset-before);
+}
+.swiper-css-mode.swiper-centered.swiper-horizontal > .swiper-wrapper::before {
+  height: 100%;
+  min-height: 1px;
+  width: var(--swiper-centered-offset-after);
+}
+.swiper-css-mode.swiper-centered.swiper-vertical > .swiper-wrapper > .swiper-slide:first-child {
+  margin-block-start: var(--swiper-centered-offset-before);
+}
+.swiper-css-mode.swiper-centered.swiper-vertical > .swiper-wrapper::before {
+  width: 100%;
+  min-width: 1px;
+  height: var(--swiper-centered-offset-after);
+}
+/* Slide styles start */
+/* 3D Shadows */
+.swiper-3d .swiper-slide-shadow,
+.swiper-3d .swiper-slide-shadow-left,
+.swiper-3d .swiper-slide-shadow-right,
+.swiper-3d .swiper-slide-shadow-top,
+.swiper-3d .swiper-slide-shadow-bottom,
+.swiper-3d .swiper-slide-shadow,
+.swiper-3d .swiper-slide-shadow-left,
+.swiper-3d .swiper-slide-shadow-right,
+.swiper-3d .swiper-slide-shadow-top,
+.swiper-3d .swiper-slide-shadow-bottom {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 10;
+}
+.swiper-3d .swiper-slide-shadow {
+  background: rgba(0, 0, 0, 0.15);
+}
+.swiper-3d .swiper-slide-shadow-left {
+  background-image: linear-gradient(to left, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
+}
+.swiper-3d .swiper-slide-shadow-right {
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
+}
+.swiper-3d .swiper-slide-shadow-top {
+  background-image: linear-gradient(to top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
+}
+.swiper-3d .swiper-slide-shadow-bottom {
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
+}
+.swiper-lazy-preloader {
+  width: 42px;
+  height: 42px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-left: -21px;
+  margin-top: -21px;
+  z-index: 10;
+  transform-origin: 50%;
+  box-sizing: border-box;
+  border: 4px solid var(--swiper-preloader-color, var(--swiper-theme-color));
+  border-radius: 50%;
+  border-top-color: transparent;
+}
+.swiper:not(.swiper-watch-progress) .swiper-lazy-preloader,
+.swiper-watch-progress .swiper-slide-visible .swiper-lazy-preloader {
+  animation: swiper-preloader-spin 1s infinite linear;
+}
+.swiper-lazy-preloader-white {
+  --swiper-preloader-color: #fff;
+}
+.swiper-lazy-preloader-black {
+  --swiper-preloader-color: #000;
+}
+@keyframes swiper-preloader-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+/* Slide styles end */
+</style><style type="text/css" data-vite-dev-id="/Users/kyungsoo/Documents/Project/team02-fe/node_modules/react-datepicker/dist/react-datepicker.css">@charset "UTF-8";
+.react-datepicker__navigation-icon::before, .react-datepicker__year-read-view--down-arrow,
+.react-datepicker__month-read-view--down-arrow,
+.react-datepicker__month-year-read-view--down-arrow {
+  border-color: #ccc;
+  border-style: solid;
+  border-width: 3px 3px 0 0;
+  content: "";
+  display: block;
+  height: 9px;
+  position: absolute;
+  top: 6px;
+  width: 9px;
+}
+.react-datepicker-wrapper {
+  display: inline-block;
+  padding: 0;
+  border: 0;
+}
+
+.react-datepicker {
+  font-family: "Helvetica Neue", helvetica, arial, sans-serif;
+  font-size: 0.8rem;
+  background-color: #fff;
+  color: #000;
+  border: 1px solid #aeaeae;
+  border-radius: 0.3rem;
+  display: inline-block;
+  position: relative;
+  line-height: initial;
+}
+
+.react-datepicker--time-only .react-datepicker__time-container {
+  border-left: 0;
+}
+.react-datepicker--time-only .react-datepicker__time,
+.react-datepicker--time-only .react-datepicker__time-box {
+  border-bottom-left-radius: 0.3rem;
+  border-bottom-right-radius: 0.3rem;
+}
+
+.react-datepicker-popper {
+  z-index: 1;
+  line-height: 0;
+}
+.react-datepicker-popper .react-datepicker__triangle {
+  stroke: #aeaeae;
+}
+.react-datepicker-popper[data-placement^=bottom] .react-datepicker__triangle {
+  fill: #f0f0f0;
+  color: #f0f0f0;
+}
+.react-datepicker-popper[data-placement^=top] .react-datepicker__triangle {
+  fill: #fff;
+  color: #fff;
+}
+
+.react-datepicker__header {
+  text-align: center;
+  background-color: #f0f0f0;
+  border-bottom: 1px solid #aeaeae;
+  border-top-left-radius: 0.3rem;
+  padding: 8px 0;
+  position: relative;
+}
+.react-datepicker__header--time {
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+.react-datepicker__header--time:not(.react-datepicker__header--time--only) {
+  border-top-left-radius: 0;
+}
+.react-datepicker__header:not(.react-datepicker__header--has-time-select) {
+  border-top-right-radius: 0.3rem;
+}
+
+.react-datepicker__year-dropdown-container--select,
+.react-datepicker__month-dropdown-container--select,
+.react-datepicker__month-year-dropdown-container--select,
+.react-datepicker__year-dropdown-container--scroll,
+.react-datepicker__month-dropdown-container--scroll,
+.react-datepicker__month-year-dropdown-container--scroll {
+  display: inline-block;
+  margin: 0 15px;
+}
+
+.react-datepicker__current-month,
+.react-datepicker-time__header,
+.react-datepicker-year-header {
+  margin-top: 0;
+  color: #000;
+  font-weight: bold;
+  font-size: 0.944rem;
+}
+
+h2.react-datepicker__current-month {
+  padding: 0;
+  margin: 0;
+}
+
+.react-datepicker-time__header {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.react-datepicker__navigation {
+  align-items: center;
+  background: none;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  cursor: pointer;
+  position: absolute;
+  top: 2px;
+  padding: 0;
+  border: none;
+  z-index: 1;
+  height: 32px;
+  width: 32px;
+  text-indent: -999em;
+  overflow: hidden;
+}
+.react-datepicker__navigation--previous {
+  left: 2px;
+}
+.react-datepicker__navigation--next {
+  right: 2px;
+}
+.react-datepicker__navigation--next--with-time:not(.react-datepicker__navigation--next--with-today-button) {
+  right: 85px;
+}
+.react-datepicker__navigation--years {
+  position: relative;
+  top: 0;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+.react-datepicker__navigation--years-previous {
+  top: 4px;
+}
+.react-datepicker__navigation--years-upcoming {
+  top: -4px;
+}
+.react-datepicker__navigation:hover *::before {
+  border-color: rgb(165.75, 165.75, 165.75);
+}
+
+.react-datepicker__navigation-icon {
+  position: relative;
+  top: -1px;
+  font-size: 20px;
+  width: 0;
+}
+.react-datepicker__navigation-icon--next {
+  left: -2px;
+}
+.react-datepicker__navigation-icon--next::before {
+  transform: rotate(45deg);
+  left: -7px;
+}
+.react-datepicker__navigation-icon--previous {
+  right: -2px;
+}
+.react-datepicker__navigation-icon--previous::before {
+  transform: rotate(225deg);
+  right: -7px;
+}
+
+.react-datepicker__month-container {
+  float: left;
+}
+
+.react-datepicker__year {
+  margin: 0.4rem;
+  text-align: center;
+}
+.react-datepicker__year-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 180px;
+}
+.react-datepicker__year .react-datepicker__year-text {
+  display: inline-block;
+  width: 4rem;
+  margin: 2px;
+}
+
+.react-datepicker__month {
+  margin: 0.4rem;
+  text-align: center;
+}
+.react-datepicker__month .react-datepicker__month-text,
+.react-datepicker__month .react-datepicker__quarter-text {
+  display: inline-block;
+  width: 4rem;
+  margin: 2px;
+}
+
+.react-datepicker__input-time-container {
+  clear: both;
+  width: 100%;
+  float: left;
+  margin: 5px 0 10px 15px;
+  text-align: left;
+}
+.react-datepicker__input-time-container .react-datepicker-time__caption {
+  display: inline-block;
+}
+.react-datepicker__input-time-container .react-datepicker-time__input-container {
+  display: inline-block;
+}
+.react-datepicker__input-time-container .react-datepicker-time__input-container .react-datepicker-time__input {
+  display: inline-block;
+  margin-left: 10px;
+}
+.react-datepicker__input-time-container .react-datepicker-time__input-container .react-datepicker-time__input input {
+  width: auto;
+}
+.react-datepicker__input-time-container .react-datepicker-time__input-container .react-datepicker-time__input input[type=time]::-webkit-inner-spin-button,
+.react-datepicker__input-time-container .react-datepicker-time__input-container .react-datepicker-time__input input[type=time]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.react-datepicker__input-time-container .react-datepicker-time__input-container .react-datepicker-time__input input[type=time] {
+  -moz-appearance: textfield;
+}
+.react-datepicker__input-time-container .react-datepicker-time__input-container .react-datepicker-time__delimiter {
+  margin-left: 5px;
+  display: inline-block;
+}
+
+.react-datepicker__time-container {
+  float: right;
+  border-left: 1px solid #aeaeae;
+  width: 85px;
+}
+.react-datepicker__time-container--with-today-button {
+  display: inline;
+  border: 1px solid #aeaeae;
+  border-radius: 0.3rem;
+  position: absolute;
+  right: -87px;
+  top: 0;
+}
+.react-datepicker__time-container .react-datepicker__time {
+  position: relative;
+  background: white;
+  border-bottom-right-radius: 0.3rem;
+}
+.react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box {
+  width: 85px;
+  overflow-x: hidden;
+  margin: 0 auto;
+  text-align: center;
+  border-bottom-right-radius: 0.3rem;
+}
+.react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box ul.react-datepicker__time-list {
+  list-style: none;
+  margin: 0;
+  height: calc(195px + 1.7rem / 2);
+  overflow-y: scroll;
+  padding-right: 0;
+  padding-left: 0;
+  width: 100%;
+  box-sizing: content-box;
+}
+.react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box ul.react-datepicker__time-list li.react-datepicker__time-list-item {
+  height: 30px;
+  padding: 5px 10px;
+  white-space: nowrap;
+}
+.react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box ul.react-datepicker__time-list li.react-datepicker__time-list-item:hover {
+  cursor: pointer;
+  background-color: #f0f0f0;
+}
+.react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box ul.react-datepicker__time-list li.react-datepicker__time-list-item--selected {
+  background-color: #216ba5;
+  color: white;
+  font-weight: bold;
+}
+.react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box ul.react-datepicker__time-list li.react-datepicker__time-list-item--selected:hover {
+  background-color: #216ba5;
+}
+.react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box ul.react-datepicker__time-list li.react-datepicker__time-list-item--disabled {
+  color: #ccc;
+}
+.react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box ul.react-datepicker__time-list li.react-datepicker__time-list-item--disabled:hover {
+  cursor: default;
+  background-color: transparent;
+}
+
+.react-datepicker__week-number {
+  color: #ccc;
+  display: inline-block;
+  width: 1.7rem;
+  line-height: 1.7rem;
+  text-align: center;
+  margin: 0.166rem;
+}
+.react-datepicker__week-number.react-datepicker__week-number--clickable {
+  cursor: pointer;
+}
+.react-datepicker__week-number.react-datepicker__week-number--clickable:not(.react-datepicker__week-number--selected):hover {
+  border-radius: 0.3rem;
+  background-color: #f0f0f0;
+}
+.react-datepicker__week-number--selected {
+  border-radius: 0.3rem;
+  background-color: #216ba5;
+  color: #fff;
+}
+.react-datepicker__week-number--selected:hover {
+  background-color: rgb(28.75, 93.2196969697, 143.75);
+}
+
+.react-datepicker__day-names {
+  white-space: nowrap;
+  margin-bottom: -8px;
+}
+
+.react-datepicker__week {
+  white-space: nowrap;
+}
+
+.react-datepicker__day-name,
+.react-datepicker__day,
+.react-datepicker__time-name {
+  color: #000;
+  display: inline-block;
+  width: 1.7rem;
+  line-height: 1.7rem;
+  text-align: center;
+  margin: 0.166rem;
+}
+
+.react-datepicker__day,
+.react-datepicker__month-text,
+.react-datepicker__quarter-text,
+.react-datepicker__year-text {
+  cursor: pointer;
+}
+.react-datepicker__day:not([aria-disabled=true]):hover,
+.react-datepicker__month-text:not([aria-disabled=true]):hover,
+.react-datepicker__quarter-text:not([aria-disabled=true]):hover,
+.react-datepicker__year-text:not([aria-disabled=true]):hover {
+  border-radius: 0.3rem;
+  background-color: #f0f0f0;
+}
+.react-datepicker__day--today,
+.react-datepicker__month-text--today,
+.react-datepicker__quarter-text--today,
+.react-datepicker__year-text--today {
+  font-weight: bold;
+}
+.react-datepicker__day--highlighted,
+.react-datepicker__month-text--highlighted,
+.react-datepicker__quarter-text--highlighted,
+.react-datepicker__year-text--highlighted {
+  border-radius: 0.3rem;
+  background-color: #3dcc4a;
+  color: #fff;
+}
+.react-datepicker__day--highlighted:not([aria-disabled=true]):hover,
+.react-datepicker__month-text--highlighted:not([aria-disabled=true]):hover,
+.react-datepicker__quarter-text--highlighted:not([aria-disabled=true]):hover,
+.react-datepicker__year-text--highlighted:not([aria-disabled=true]):hover {
+  background-color: rgb(49.8551020408, 189.6448979592, 62.5632653061);
+}
+.react-datepicker__day--highlighted-custom-1,
+.react-datepicker__month-text--highlighted-custom-1,
+.react-datepicker__quarter-text--highlighted-custom-1,
+.react-datepicker__year-text--highlighted-custom-1 {
+  color: magenta;
+}
+.react-datepicker__day--highlighted-custom-2,
+.react-datepicker__month-text--highlighted-custom-2,
+.react-datepicker__quarter-text--highlighted-custom-2,
+.react-datepicker__year-text--highlighted-custom-2 {
+  color: green;
+}
+.react-datepicker__day--holidays,
+.react-datepicker__month-text--holidays,
+.react-datepicker__quarter-text--holidays,
+.react-datepicker__year-text--holidays {
+  position: relative;
+  border-radius: 0.3rem;
+  background-color: #ff6803;
+  color: #fff;
+}
+.react-datepicker__day--holidays .overlay,
+.react-datepicker__month-text--holidays .overlay,
+.react-datepicker__quarter-text--holidays .overlay,
+.react-datepicker__year-text--holidays .overlay {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #333;
+  color: #fff;
+  padding: 4px;
+  border-radius: 4px;
+  white-space: nowrap;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s, opacity 0.3s ease-in-out;
+}
+.react-datepicker__day--holidays:not([aria-disabled=true]):hover,
+.react-datepicker__month-text--holidays:not([aria-disabled=true]):hover,
+.react-datepicker__quarter-text--holidays:not([aria-disabled=true]):hover,
+.react-datepicker__year-text--holidays:not([aria-disabled=true]):hover {
+  background-color: rgb(207, 82.9642857143, 0);
+}
+.react-datepicker__day--holidays:hover .overlay,
+.react-datepicker__month-text--holidays:hover .overlay,
+.react-datepicker__quarter-text--holidays:hover .overlay,
+.react-datepicker__year-text--holidays:hover .overlay {
+  visibility: visible;
+  opacity: 1;
+}
+.react-datepicker__day--selected, .react-datepicker__day--in-selecting-range, .react-datepicker__day--in-range,
+.react-datepicker__month-text--selected,
+.react-datepicker__month-text--in-selecting-range,
+.react-datepicker__month-text--in-range,
+.react-datepicker__quarter-text--selected,
+.react-datepicker__quarter-text--in-selecting-range,
+.react-datepicker__quarter-text--in-range,
+.react-datepicker__year-text--selected,
+.react-datepicker__year-text--in-selecting-range,
+.react-datepicker__year-text--in-range {
+  border-radius: 0.3rem;
+  background-color: #216ba5;
+  color: #fff;
+}
+.react-datepicker__day--selected:not([aria-disabled=true]):hover, .react-datepicker__day--in-selecting-range:not([aria-disabled=true]):hover, .react-datepicker__day--in-range:not([aria-disabled=true]):hover,
+.react-datepicker__month-text--selected:not([aria-disabled=true]):hover,
+.react-datepicker__month-text--in-selecting-range:not([aria-disabled=true]):hover,
+.react-datepicker__month-text--in-range:not([aria-disabled=true]):hover,
+.react-datepicker__quarter-text--selected:not([aria-disabled=true]):hover,
+.react-datepicker__quarter-text--in-selecting-range:not([aria-disabled=true]):hover,
+.react-datepicker__quarter-text--in-range:not([aria-disabled=true]):hover,
+.react-datepicker__year-text--selected:not([aria-disabled=true]):hover,
+.react-datepicker__year-text--in-selecting-range:not([aria-disabled=true]):hover,
+.react-datepicker__year-text--in-range:not([aria-disabled=true]):hover {
+  background-color: rgb(28.75, 93.2196969697, 143.75);
+}
+.react-datepicker__day--keyboard-selected,
+.react-datepicker__month-text--keyboard-selected,
+.react-datepicker__quarter-text--keyboard-selected,
+.react-datepicker__year-text--keyboard-selected {
+  border-radius: 0.3rem;
+  background-color: rgb(186.25, 217.0833333333, 241.25);
+  color: rgb(0, 0, 0);
+}
+.react-datepicker__day--keyboard-selected:not([aria-disabled=true]):hover,
+.react-datepicker__month-text--keyboard-selected:not([aria-disabled=true]):hover,
+.react-datepicker__quarter-text--keyboard-selected:not([aria-disabled=true]):hover,
+.react-datepicker__year-text--keyboard-selected:not([aria-disabled=true]):hover {
+  background-color: rgb(28.75, 93.2196969697, 143.75);
+}
+.react-datepicker__day--in-selecting-range:not(.react-datepicker__day--in-range,
+.react-datepicker__month-text--in-range,
+.react-datepicker__quarter-text--in-range,
+.react-datepicker__year-text--in-range),
+.react-datepicker__month-text--in-selecting-range:not(.react-datepicker__day--in-range,
+.react-datepicker__month-text--in-range,
+.react-datepicker__quarter-text--in-range,
+.react-datepicker__year-text--in-range),
+.react-datepicker__quarter-text--in-selecting-range:not(.react-datepicker__day--in-range,
+.react-datepicker__month-text--in-range,
+.react-datepicker__quarter-text--in-range,
+.react-datepicker__year-text--in-range),
+.react-datepicker__year-text--in-selecting-range:not(.react-datepicker__day--in-range,
+.react-datepicker__month-text--in-range,
+.react-datepicker__quarter-text--in-range,
+.react-datepicker__year-text--in-range) {
+  background-color: rgba(33, 107, 165, 0.5);
+}
+.react-datepicker__month--selecting-range .react-datepicker__day--in-range:not(.react-datepicker__day--in-selecting-range,
+.react-datepicker__month-text--in-selecting-range,
+.react-datepicker__quarter-text--in-selecting-range,
+.react-datepicker__year-text--in-selecting-range), .react-datepicker__year--selecting-range .react-datepicker__day--in-range:not(.react-datepicker__day--in-selecting-range,
+.react-datepicker__month-text--in-selecting-range,
+.react-datepicker__quarter-text--in-selecting-range,
+.react-datepicker__year-text--in-selecting-range),
+.react-datepicker__month--selecting-range .react-datepicker__month-text--in-range:not(.react-datepicker__day--in-selecting-range,
+.react-datepicker__month-text--in-selecting-range,
+.react-datepicker__quarter-text--in-selecting-range,
+.react-datepicker__year-text--in-selecting-range),
+.react-datepicker__year--selecting-range .react-datepicker__month-text--in-range:not(.react-datepicker__day--in-selecting-range,
+.react-datepicker__month-text--in-selecting-range,
+.react-datepicker__quarter-text--in-selecting-range,
+.react-datepicker__year-text--in-selecting-range),
+.react-datepicker__month--selecting-range .react-datepicker__quarter-text--in-range:not(.react-datepicker__day--in-selecting-range,
+.react-datepicker__month-text--in-selecting-range,
+.react-datepicker__quarter-text--in-selecting-range,
+.react-datepicker__year-text--in-selecting-range),
+.react-datepicker__year--selecting-range .react-datepicker__quarter-text--in-range:not(.react-datepicker__day--in-selecting-range,
+.react-datepicker__month-text--in-selecting-range,
+.react-datepicker__quarter-text--in-selecting-range,
+.react-datepicker__year-text--in-selecting-range),
+.react-datepicker__month--selecting-range .react-datepicker__year-text--in-range:not(.react-datepicker__day--in-selecting-range,
+.react-datepicker__month-text--in-selecting-range,
+.react-datepicker__quarter-text--in-selecting-range,
+.react-datepicker__year-text--in-selecting-range),
+.react-datepicker__year--selecting-range .react-datepicker__year-text--in-range:not(.react-datepicker__day--in-selecting-range,
+.react-datepicker__month-text--in-selecting-range,
+.react-datepicker__quarter-text--in-selecting-range,
+.react-datepicker__year-text--in-selecting-range) {
+  background-color: #f0f0f0;
+  color: #000;
+}
+.react-datepicker__day--disabled,
+.react-datepicker__month-text--disabled,
+.react-datepicker__quarter-text--disabled,
+.react-datepicker__year-text--disabled {
+  cursor: default;
+  color: #ccc;
+}
+.react-datepicker__day--disabled .overlay,
+.react-datepicker__month-text--disabled .overlay,
+.react-datepicker__quarter-text--disabled .overlay,
+.react-datepicker__year-text--disabled .overlay {
+  position: absolute;
+  bottom: 70%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #333;
+  color: #fff;
+  padding: 4px;
+  border-radius: 4px;
+  white-space: nowrap;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s, opacity 0.3s ease-in-out;
+}
+
+.react-datepicker__input-container {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+.react-datepicker__input-container .react-datepicker__calendar-icon {
+  position: absolute;
+  padding: 0.5rem;
+  box-sizing: content-box;
+}
+
+.react-datepicker__view-calendar-icon input {
+  padding: 6px 10px 5px 25px;
+}
+
+.react-datepicker__year-read-view,
+.react-datepicker__month-read-view,
+.react-datepicker__month-year-read-view {
+  border: 1px solid transparent;
+  border-radius: 0.3rem;
+  position: relative;
+}
+.react-datepicker__year-read-view:hover,
+.react-datepicker__month-read-view:hover,
+.react-datepicker__month-year-read-view:hover {
+  cursor: pointer;
+}
+.react-datepicker__year-read-view:hover .react-datepicker__year-read-view--down-arrow,
+.react-datepicker__year-read-view:hover .react-datepicker__month-read-view--down-arrow,
+.react-datepicker__month-read-view:hover .react-datepicker__year-read-view--down-arrow,
+.react-datepicker__month-read-view:hover .react-datepicker__month-read-view--down-arrow,
+.react-datepicker__month-year-read-view:hover .react-datepicker__year-read-view--down-arrow,
+.react-datepicker__month-year-read-view:hover .react-datepicker__month-read-view--down-arrow {
+  border-top-color: rgb(178.5, 178.5, 178.5);
+}
+.react-datepicker__year-read-view--down-arrow,
+.react-datepicker__month-read-view--down-arrow,
+.react-datepicker__month-year-read-view--down-arrow {
+  transform: rotate(135deg);
+  right: -16px;
+  top: 0;
+}
+
+.react-datepicker__year-dropdown,
+.react-datepicker__month-dropdown,
+.react-datepicker__month-year-dropdown {
+  background-color: #f0f0f0;
+  position: absolute;
+  width: 50%;
+  left: 25%;
+  top: 30px;
+  z-index: 1;
+  text-align: center;
+  border-radius: 0.3rem;
+  border: 1px solid #aeaeae;
+}
+.react-datepicker__year-dropdown:hover,
+.react-datepicker__month-dropdown:hover,
+.react-datepicker__month-year-dropdown:hover {
+  cursor: pointer;
+}
+.react-datepicker__year-dropdown--scrollable,
+.react-datepicker__month-dropdown--scrollable,
+.react-datepicker__month-year-dropdown--scrollable {
+  height: 150px;
+  overflow-y: scroll;
+}
+
+.react-datepicker__year-option,
+.react-datepicker__month-option,
+.react-datepicker__month-year-option {
+  line-height: 20px;
+  width: 100%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+.react-datepicker__year-option:first-of-type,
+.react-datepicker__month-option:first-of-type,
+.react-datepicker__month-year-option:first-of-type {
+  border-top-left-radius: 0.3rem;
+  border-top-right-radius: 0.3rem;
+}
+.react-datepicker__year-option:last-of-type,
+.react-datepicker__month-option:last-of-type,
+.react-datepicker__month-year-option:last-of-type {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  border-bottom-left-radius: 0.3rem;
+  border-bottom-right-radius: 0.3rem;
+}
+.react-datepicker__year-option:hover,
+.react-datepicker__month-option:hover,
+.react-datepicker__month-year-option:hover {
+  background-color: #ccc;
+}
+.react-datepicker__year-option:hover .react-datepicker__navigation--years-upcoming,
+.react-datepicker__month-option:hover .react-datepicker__navigation--years-upcoming,
+.react-datepicker__month-year-option:hover .react-datepicker__navigation--years-upcoming {
+  border-bottom-color: rgb(178.5, 178.5, 178.5);
+}
+.react-datepicker__year-option:hover .react-datepicker__navigation--years-previous,
+.react-datepicker__month-option:hover .react-datepicker__navigation--years-previous,
+.react-datepicker__month-year-option:hover .react-datepicker__navigation--years-previous {
+  border-top-color: rgb(178.5, 178.5, 178.5);
+}
+.react-datepicker__year-option--selected,
+.react-datepicker__month-option--selected,
+.react-datepicker__month-year-option--selected {
+  position: absolute;
+  left: 15px;
+}
+
+.react-datepicker__close-icon {
+  cursor: pointer;
+  background-color: transparent;
+  border: 0;
+  outline: 0;
+  padding: 0 6px 0 0;
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  display: table-cell;
+  vertical-align: middle;
+}
+.react-datepicker__close-icon::after {
+  cursor: pointer;
+  background-color: #216ba5;
+  color: #fff;
+  border-radius: 50%;
+  height: 16px;
+  width: 16px;
+  padding: 2px;
+  font-size: 12px;
+  line-height: 1;
+  text-align: center;
+  display: table-cell;
+  vertical-align: middle;
+  content: "×";
+}
+.react-datepicker__close-icon--disabled {
+  cursor: default;
+}
+.react-datepicker__close-icon--disabled::after {
+  cursor: default;
+  background-color: #ccc;
+}
+
+.react-datepicker__today-button {
+  background: #f0f0f0;
+  border-top: 1px solid #aeaeae;
+  cursor: pointer;
+  text-align: center;
+  font-weight: bold;
+  padding: 5px 0;
+  clear: left;
+}
+
+.react-datepicker__portal {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.8);
+  left: 0;
+  top: 0;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  z-index: 2147483647;
+}
+.react-datepicker__portal .react-datepicker__day-name,
+.react-datepicker__portal .react-datepicker__day,
+.react-datepicker__portal .react-datepicker__time-name {
+  width: 3rem;
+  line-height: 3rem;
+}
+@media (max-width: 400px), (max-height: 550px) {
+  .react-datepicker__portal .react-datepicker__day-name,
+  .react-datepicker__portal .react-datepicker__day,
+  .react-datepicker__portal .react-datepicker__time-name {
+    width: 2rem;
+    line-height: 2rem;
+  }
+}
+.react-datepicker__portal .react-datepicker__current-month,
+.react-datepicker__portal .react-datepicker-time__header {
+  font-size: 1.44rem;
+}
+
+.react-datepicker__children-container {
+  width: 13.8rem;
+  margin: 0.4rem;
+  padding-right: 0.2rem;
+  padding-left: 0.2rem;
+  height: auto;
+}
+
+.react-datepicker__aria-live {
+  position: absolute;
+  clip-path: circle(0);
+  border: 0;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  width: 1px;
+  white-space: nowrap;
+}
+
+.react-datepicker__calendar-icon {
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.125em;
+}
+</style><style></style><style></style><style></style><style></style><style></style><style></style><style></style><style></style><style></style><style></style><style></style><style></style><style></style><style></style><style></style><style></style><style></style><style></style><style></style><style></style><style></style><style></style><style></style><style></style><style></style><style></style><style></style><style></style><style></style><style></style><style></style></head>
+  <body>
+    <div id="root"><div><div class="relative w-full"><div class="flex flex-col gap-2 p-2.5 min-w-75 max-md:hidden @max-[1000px]:hidden max-lg:min-w-47 border-r border-neutral-200 fixed top-0 left-0 h-full bg-white z-1 "><div class="w-72 h-24 px-5 py-5"><img class="w-38 cursor-pointer" src="./명식당_files/ico_main.svg"></div><div class="sidebar_menu "><img alt="icDiet" class="w-6 h-6" src="data:image/svg+xml,%3csvg%20width=&#39;24&#39;%20height=&#39;24&#39;%20viewBox=&#39;0%200%2024%2024&#39;%20fill=&#39;none&#39;%20xmlns=&#39;http://www.w3.org/2000/svg&#39;%3e%3cg%20id=&#39;Property%201=off&#39;%3e%3cmask%20id=&#39;mask0_184_972&#39;%20style=&#39;mask-type:alpha&#39;%20maskUnits=&#39;userSpaceOnUse&#39;%20x=&#39;0&#39;%20y=&#39;0&#39;%20width=&#39;24&#39;%20height=&#39;24&#39;%3e%3crect%20id=&#39;Bounding%20box&#39;%20width=&#39;24&#39;%20height=&#39;24&#39;%20fill=&#39;%23D9D9D9&#39;/%3e%3c/mask%3e%3cg%20mask=&#39;url(%23mask0_184_972)&#39;%3e%3cpath%20id=&#39;chef_hat&#39;%20d=&#39;M9%2014H11V9H9V14ZM5%2012.5C4.23333%2012.1167%203.625%2011.5625%203.175%2010.8375C2.725%2010.1125%202.5%209.325%202.5%208.475C2.5%207.225%202.92917%206.16667%203.7875%205.3C4.64583%204.43333%205.7%204%206.95%204C7.15%204%207.35417%204.01667%207.5625%204.05C7.77083%204.08333%207.975%204.125%208.175%204.175C8.59167%203.49167%209.13333%202.95833%209.8%202.575C10.4667%202.19167%2011.2%202%2012%202C12.8%202%2013.5333%202.19167%2014.2%202.575C14.8667%202.95833%2015.4083%203.49167%2015.825%204.175C16.025%204.125%2016.225%204.08333%2016.425%204.05C16.625%204.01667%2016.8333%204%2017.05%204C18.3%204%2019.3542%204.43333%2020.2125%205.3C21.0708%206.16667%2021.5%207.225%2021.5%208.475C21.5%209.325%2021.275%2010.1125%2020.825%2010.8375C20.375%2011.5625%2019.7667%2012.1167%2019%2012.5V18H5V12.5ZM13%2014H15V9H13V14ZM7%2016H17V11.275L18.1%2010.725C18.5333%2010.5083%2018.875%2010.2042%2019.125%209.8125C19.375%209.42083%2019.5%208.98333%2019.5%208.5C19.5%207.8%2019.2625%207.20833%2018.7875%206.725C18.3125%206.24167%2017.7333%206%2017.05%206C16.8667%206%2016.7%206.01667%2016.55%206.05C16.4%206.08333%2016.2417%206.125%2016.075%206.175L14.9%206.5L14.125%205.2C13.8917%204.81667%2013.5875%204.52083%2013.2125%204.3125C12.8375%204.10417%2012.4333%204%2012%204C11.5667%204%2011.1625%204.10417%2010.7875%204.3125C10.4125%204.52083%2010.1083%204.81667%209.875%205.2L9.1%206.5L7.9%206.175C7.73333%206.14167%207.57083%206.10417%207.4125%206.0625C7.25417%206.02083%207.09167%206%206.925%206C6.24167%206%205.66667%206.24167%205.2%206.725C4.73333%207.20833%204.5%207.8%204.5%208.5C4.5%208.98333%204.625%209.42083%204.875%209.8125C5.125%2010.2042%205.46667%2010.5083%205.9%2010.725L7%2011.275V16ZM5%2018H7V20H17V18H19V22H5V18Z&#39;%20fill=&#39;%231C1B1F&#39;/%3e%3c/g%3e%3c/g%3e%3c/svg%3e"><p class="sidebar_text">식단작성</p></div><div class="sidebar_menu "><img alt="icNutrition" class="w-6 h-6" src="data:image/svg+xml,%3csvg%20width=&#39;24&#39;%20height=&#39;24&#39;%20viewBox=&#39;0%200%2024%2024&#39;%20fill=&#39;none&#39;%20xmlns=&#39;http://www.w3.org/2000/svg&#39;%3e%3cmask%20id=&#39;mask0_238_2647&#39;%20style=&#39;mask-type:alpha&#39;%20maskUnits=&#39;userSpaceOnUse&#39;%20x=&#39;0&#39;%20y=&#39;0&#39;%20width=&#39;24&#39;%20height=&#39;24&#39;%3e%3crect%20width=&#39;24&#39;%20height=&#39;24&#39;%20fill=&#39;%23D9D9D9&#39;/%3e%3c/mask%3e%3cg%20mask=&#39;url(%23mask0_238_2647)&#39;%3e%3cpath%20d=&#39;M7%2017H9V12H7V17ZM15%2017H17V7H15V17ZM11%2017H13V14H11V17ZM11%2012H13V10H11V12ZM5%2021C4.45%2021%203.97917%2020.8042%203.5875%2020.4125C3.19583%2020.0208%203%2019.55%203%2019V5C3%204.45%203.19583%203.97917%203.5875%203.5875C3.97917%203.19583%204.45%203%205%203H19C19.55%203%2020.0208%203.19583%2020.4125%203.5875C20.8042%203.97917%2021%204.45%2021%205V19C21%2019.55%2020.8042%2020.0208%2020.4125%2020.4125C20.0208%2020.8042%2019.55%2021%2019%2021H5ZM5%2019H19V5H5V19Z&#39;%20fill=&#39;%231C1B1F&#39;/%3e%3c/g%3e%3c/svg%3e"><p class="sidebar_text">식단분석</p></div><div class="sidebar_menu "><img alt="icCommunity" class="w-6 h-6" src="data:image/svg+xml,%3csvg%20width=&#39;24&#39;%20height=&#39;24&#39;%20viewBox=&#39;0%200%2024%2024&#39;%20fill=&#39;none&#39;%20xmlns=&#39;http://www.w3.org/2000/svg&#39;%3e%3cg%20id=&#39;Property%201=off&#39;%3e%3cmask%20id=&#39;mask0_184_973&#39;%20style=&#39;mask-type:alpha&#39;%20maskUnits=&#39;userSpaceOnUse&#39;%20x=&#39;0&#39;%20y=&#39;0&#39;%20width=&#39;24&#39;%20height=&#39;24&#39;%3e%3crect%20id=&#39;Bounding%20box&#39;%20width=&#39;24&#39;%20height=&#39;24&#39;%20fill=&#39;%23D9D9D9&#39;/%3e%3c/mask%3e%3cg%20mask=&#39;url(%23mask0_184_973)&#39;%3e%3cpath%20id=&#39;tooltip&#39;%20d=&#39;M12%2022L9.325%2018H4C3.45%2018%202.97917%2017.8042%202.5875%2017.4125C2.19583%2017.0208%202%2016.55%202%2016V4C2%203.45%202.19583%202.97917%202.5875%202.5875C2.97917%202.19583%203.45%202%204%202H20C20.55%202%2021.0208%202.19583%2021.4125%202.5875C21.8042%202.97917%2022%203.45%2022%204V16C22%2016.55%2021.8042%2017.0208%2021.4125%2017.4125C21.0208%2017.8042%2020.55%2018%2020%2018H14.675L12%2022ZM12%2018.4L13.6%2016H20V4H4V16H10.4L12%2018.4Z&#39;%20fill=&#39;%231C1B1F&#39;/%3e%3c/g%3e%3c/g%3e%3c/svg%3e"><p class="sidebar_text">커뮤니티</p></div><div class="sidebar_menu sidebar_menu_active"><img alt="icMatch" class="w-6 h-6" src="data:image/svg+xml,%3csvg%20width=&#39;24&#39;%20height=&#39;24&#39;%20viewBox=&#39;0%200%2024%2024&#39;%20fill=&#39;none&#39;%20xmlns=&#39;http://www.w3.org/2000/svg&#39;%3e%3cg%20id=&#39;Property%201=on&#39;%3e%3cmask%20id=&#39;mask0_184_977&#39;%20style=&#39;mask-type:alpha&#39;%20maskUnits=&#39;userSpaceOnUse&#39;%20x=&#39;0&#39;%20y=&#39;0&#39;%20width=&#39;24&#39;%20height=&#39;24&#39;%3e%3crect%20id=&#39;Bounding%20box&#39;%20width=&#39;24&#39;%20height=&#39;24&#39;%20fill=&#39;%23D9D9D9&#39;/%3e%3c/mask%3e%3cg%20mask=&#39;url(%23mask0_184_977)&#39;%3e%3cpath%20id=&#39;back_hand&#39;%20d=&#39;M12.8%2023C11.4333%2023%2010.15%2022.6875%208.94995%2022.0625C7.74995%2021.4375%206.76662%2020.5667%205.99995%2019.45L1.19995%2012.4L1.67495%2011.925C2.00828%2011.575%202.42078%2011.375%202.91245%2011.325C3.40412%2011.275%203.84995%2011.3917%204.24995%2011.675L6.99995%2013.575V4C6.99995%203.71667%207.09579%203.47917%207.28745%203.2875C7.47912%203.09583%207.71662%203%207.99995%203C8.28329%203%208.52079%203.09583%208.71245%203.2875C8.90412%203.47917%208.99995%203.71667%208.99995%204V12H11V2C11%201.71667%2011.0958%201.47917%2011.2875%201.2875C11.4791%201.09583%2011.7166%201%2012%201C12.2833%201%2012.5208%201.09583%2012.7125%201.2875C12.9041%201.47917%2013%201.71667%2013%202V12H15V3C15%202.71667%2015.0958%202.47917%2015.2875%202.2875C15.4791%202.09583%2015.7166%202%2016%202C16.2833%202%2016.5208%202.09583%2016.7125%202.2875C16.9041%202.47917%2017%202.71667%2017%203V12H19V5C19%204.71667%2019.0958%204.47917%2019.2875%204.2875C19.4791%204.09583%2019.7166%204%2020%204C20.2833%204%2020.5208%204.09583%2020.7125%204.2875C20.9041%204.47917%2021%204.71667%2021%205V14.8C21%2017.0833%2020.2041%2019.0208%2018.6125%2020.6125C17.0208%2022.2042%2015.0833%2023%2012.8%2023Z&#39;%20fill=&#39;white&#39;/%3e%3c/g%3e%3c/g%3e%3c/svg%3e"><p class="sidebar_text">식사 메이트</p></div></div><div class="pl-77 max-md:pl-0"><div class="w-full h-22 justify-between flex pl-7 pr-7 sticky top-0 bg-white"><img class="w-40 cursor-pointer min-md:w-0" src="./명식당_files/ico_main.svg"><div class="flex items-center gap-5"><img class="w-7 h-7 cursor-pointer" src="data:image/svg+xml,%3csvg%20width=&#39;30&#39;%20height=&#39;30&#39;%20viewBox=&#39;0%200%2030%2030&#39;%20fill=&#39;none&#39;%20xmlns=&#39;http://www.w3.org/2000/svg&#39;%3e%3cg%20id=&#39;notifications&#39;%3e%3cmask%20id=&#39;mask0_184_1809&#39;%20style=&#39;mask-type:alpha&#39;%20maskUnits=&#39;userSpaceOnUse&#39;%20x=&#39;0&#39;%20y=&#39;0&#39;%20width=&#39;30&#39;%20height=&#39;30&#39;%3e%3crect%20id=&#39;Bounding%20box&#39;%20width=&#39;30&#39;%20height=&#39;30&#39;%20fill=&#39;%23D9D9D9&#39;/%3e%3c/mask%3e%3cg%20mask=&#39;url(%23mask0_184_1809)&#39;%3e%3cpath%20id=&#39;notifications_2&#39;%20d=&#39;M5%2023.75V21.25H7.5V12.5C7.5%2010.7708%208.02083%209.23438%209.0625%207.89062C10.1042%206.54688%2011.4583%205.66667%2013.125%205.25V4.375C13.125%203.85417%2013.3073%203.41146%2013.6719%203.04688C14.0365%202.68229%2014.4792%202.5%2015%202.5C15.5208%202.5%2015.9635%202.68229%2016.3281%203.04688C16.6927%203.41146%2016.875%203.85417%2016.875%204.375V5.25C18.5417%205.66667%2019.8958%206.54688%2020.9375%207.89062C21.9792%209.23438%2022.5%2010.7708%2022.5%2012.5V21.25H25V23.75H5ZM15%2027.5C14.3125%2027.5%2013.724%2027.2552%2013.2344%2026.7656C12.7448%2026.276%2012.5%2025.6875%2012.5%2025H17.5C17.5%2025.6875%2017.2552%2026.276%2016.7656%2026.7656C16.276%2027.2552%2015.6875%2027.5%2015%2027.5ZM10%2021.25H20V12.5C20%2011.125%2019.5104%209.94792%2018.5312%208.96875C17.5521%207.98958%2016.375%207.5%2015%207.5C13.625%207.5%2012.4479%207.98958%2011.4688%208.96875C10.4896%209.94792%2010%2011.125%2010%2012.5V21.25Z&#39;%20fill=&#39;%231C1B1F&#39;/%3e%3c/g%3e%3c/g%3e%3c/svg%3e"><img class="w-11 h-11 cursor-pointer" src="data:image/svg+xml,%3csvg%20width=&#39;46&#39;%20height=&#39;46&#39;%20viewBox=&#39;0%200%2046%2046&#39;%20fill=&#39;none&#39;%20xmlns=&#39;http://www.w3.org/2000/svg&#39;%3e%3cg%20clip-path=&#39;url(%23clip0_184_1785)&#39;%3e%3crect%20width=&#39;46&#39;%20height=&#39;46&#39;%20rx=&#39;23&#39;%20fill=&#39;url(%23paint0_linear_184_1785)&#39;/%3e%3cpath%20d=&#39;M14.5663%2032.167C17.3774%2034.2114%2020.1886%2035.847%2022.9997%2035.847C25.8107%2035.847%2028.622%2034.2114%2031.433%2032.167C29.1159%2031.4616%2027.9404%2030.4087%2027.9063%2029.0083C27.9063%2028.7587%2027.9082%2028.4042%2027.9099%2027.7385C27.9099%2027.6328%2027.9101%2027.5246%2027.9106%2027.4138C27.9152%2025.629%2027.9227%2023.2738%2027.9333%2020.8818C30.1309%2018.0333%2029.3236%2014.6939%2028.635%2014.7771C27.7907%2014.8799%2020.4763%207.93877%2019.0733%207.58288C17.6703%207.22699%2014.1063%208.37592%2013.493%2011.5768C12.8797%2014.7776%2012.6233%2022.8457%2014.9497%2026.0668C15.6117%2026.9834%2016.6543%2027.3419%2018.0777%2027.1424C18.0797%2027.8123%2018.0837%2028.1883%2018.093%2028.947C18.0748%2030.4111%2016.8993%2031.4624%2014.5663%2032.167Z&#39;%20fill=&#39;url(%23paint1_linear_184_1785)&#39;/%3e%3cpath%20d=&#39;M18.0928%2027.14C21.4661%2026.7567%2023.6128%2025.3%2023.6128%2025.3C23.6128%2025.3%2021.1594%2028.3667%2018.0928%2028.98V27.14Z&#39;%20fill=&#39;%23FC9F6A&#39;/%3e%3cpath%20d=&#39;M29.0565%2020.93C30.113%2018.3893%2034.3465%2013.2148%2030.6972%209.99476C29.4705%204.01476%2022.6932%204.6767%2018.1698%206.0567C15.1297%206.98421%2012.8338%208.8167%2012.3432%207.4367C9.2765%209.99476%2010.8123%2012.4967%2012.8338%2013.2148C14.6686%2013.8664%2017.7712%2014.5181%2023.0468%2013.9048C23.9891%2013.7951%2023.7918%2016.6813%2024.2954%2016.9934C25.0508%2017.4615%2025.6372%2014.5181%2027.7084%2015.4019C29.7796%2016.2857%2028.5505%2020.3837%2026.3272%2020.3837C25.5605%2020.3837%2025.1772%2022.4916%2027.2472%2023.4882C28.7498%2024.2267%2028.37%2022.581%2029.0565%2020.93Z&#39;%20fill=&#39;url(%23paint2_linear_184_1785)&#39;/%3e%3cpath%20d=&#39;M39.0996%2036.8473C40.5593%2039.8153%2041.3996%2046.6606%2041.3996%2046.6606H4.59961C4.59961%2046.6606%205.44018%2039.8146%206.89961%2036.8473C8.35904%2033.88%2016.8816%2031.1278%2016.8816%2031.1278C21.5909%2032.9667%2024.4728%2032.9667%2029.1132%2031.1267C29.1132%2031.1267%2037.6399%2033.8792%2039.0996%2036.8473Z&#39;%20fill=&#39;url(%23paint3_linear_184_1785)&#39;/%3e%3cpath%20d=&#39;M24.0725%2032.2001L24.8392%2046.3068H21.1592L21.9258%2032.2001C21.9258%2032.2001%2022.6415%2031.4335%2022.9992%2031.4335C23.3569%2031.4335%2024.0725%2032.2001%2024.0725%2032.2001Z&#39;%20fill=&#39;url(%23paint4_linear_184_1785)&#39;/%3e%3cpath%20d=&#39;M24.2471%2035.0662L21.8359%2033.6731L21.9258%2032.2001C22.4029%2031.689%2022.7606%2031.4335%2022.9991%2031.4335C23.2376%2031.4335%2023.5954%2031.689%2024.0725%2032.2001L24.2473%2035.0662H24.2471Z&#39;%20fill=&#39;%23645050&#39;/%3e%3cpath%20d=&#39;M22.9996%2031.4322L21.4662%2034.1934L16.7129%2031.2801L18.0929%2029.2867L22.9996%2031.0993L27.9062%2029.2867L29.2862%2031.2801L24.5329%2034.1934L22.9996%2031.4322Z&#39;%20fill=&#39;white&#39;/%3e%3c/g%3e%3cdefs%3e%3clinearGradient%20id=&#39;paint0_linear_184_1785&#39;%20x1=&#39;23&#39;%20y1=&#39;0&#39;%20x2=&#39;23&#39;%20y2=&#39;46&#39;%20gradientUnits=&#39;userSpaceOnUse&#39;%3e%3cstop%20stop-color=&#39;%23806A6A&#39;/%3e%3cstop%20offset=&#39;1&#39;%20stop-color=&#39;%23665654&#39;/%3e%3c/linearGradient%3e%3clinearGradient%20id=&#39;paint1_linear_184_1785&#39;%20x1=&#39;22.2517&#39;%20y1=&#39;7.52063&#39;%20x2=&#39;22.2517&#39;%20y2=&#39;35.847&#39;%20gradientUnits=&#39;userSpaceOnUse&#39;%3e%3cstop%20stop-color=&#39;%23F7B186&#39;/%3e%3cstop%20offset=&#39;1&#39;%20stop-color=&#39;%23FFC299&#39;/%3e%3c/linearGradient%3e%3clinearGradient%20id=&#39;paint2_linear_184_1785&#39;%20x1=&#39;21.3807&#39;%20y1=&#39;5.11951&#39;%20x2=&#39;21.3807&#39;%20y2=&#39;23.6698&#39;%20gradientUnits=&#39;userSpaceOnUse&#39;%3e%3cstop%20stop-color=&#39;%231D0024&#39;/%3e%3cstop%20offset=&#39;1&#39;%20stop-color=&#39;%23100014&#39;/%3e%3c/linearGradient%3e%3clinearGradient%20id=&#39;paint3_linear_184_1785&#39;%20x1=&#39;22.9996&#39;%20y1=&#39;31.1267&#39;%20x2=&#39;22.9996&#39;%20y2=&#39;46.6606&#39;%20gradientUnits=&#39;userSpaceOnUse&#39;%3e%3cstop%20stop-color=&#39;%231D0024&#39;/%3e%3cstop%20offset=&#39;1&#39;%20stop-color=&#39;%23100014&#39;/%3e%3c/linearGradient%3e%3clinearGradient%20id=&#39;paint4_linear_184_1785&#39;%20x1=&#39;22.9992&#39;%20y1=&#39;31.4335&#39;%20x2=&#39;22.9992&#39;%20y2=&#39;46.3068&#39;%20gradientUnits=&#39;userSpaceOnUse&#39;%3e%3cstop%20stop-color=&#39;%23806A6A&#39;/%3e%3cstop%20offset=&#39;1&#39;%20stop-color=&#39;%23665654&#39;/%3e%3c/linearGradient%3e%3cclipPath%20id=&#39;clip0_184_1785&#39;%3e%3crect%20width=&#39;46&#39;%20height=&#39;46&#39;%20rx=&#39;23&#39;%20fill=&#39;white&#39;/%3e%3c/clipPath%3e%3c/defs%3e%3c/svg%3e"></div></div><div class="w-full h-full relative pl-0.5"><div id="__react-kakao-maps-sdk___Map" class="w-[100%] h-[90vh] relative z-1" style="overflow: hidden; background: url(&quot;http://t1.daumcdn.net/mapjsapi/images/2x/bg_tile.png&quot;);"><div style="position: absolute; left: 0px; top: 0px; width: 100%; height: 100%; touch-action: none; cursor: url(&quot;http://t1.daumcdn.net/mapjsapi/images/2x/cursor/openhand.cur.ico&quot;) 7 5, url(&quot;http://t1.daumcdn.net/mapjsapi/images/2x/cursor/openhand.cur.ico&quot;), default;"><div style="position: absolute; left: 0px; top: 0px;"><div style="position: absolute; z-index: 0; display: none;"></div><div style="position: absolute; z-index: 1; left: 0px; top: 0px;"><img src="./명식당_files/869.png" alt="" draggable="false" style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: -186px; top: 786px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 256px; height: 256px;"><img src="./명식당_files/870.png" alt="" draggable="false" style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: 70px; top: 786px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 256px; height: 256px;"><img src="./명식당_files/871.png" alt="" draggable="false" style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: 326px; top: 786px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 256px; height: 256px;"><img src="./명식당_files/872.png" alt="" draggable="false" style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: 582px; top: 786px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 256px; height: 256px;"><img src="./명식당_files/873.png" alt="" draggable="false" style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: 838px; top: 786px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 256px; height: 256px;"><img src="./명식당_files/874.png" alt="" draggable="false" style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: 1094px; top: 786px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 256px; height: 256px;"><img src="./명식당_files/869(1).png" alt="" draggable="false" style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: -186px; top: 530px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 256px; height: 256px;"><img src="./명식당_files/870(1).png" alt="" draggable="false" style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: 70px; top: 530px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 256px; height: 256px;"><img src="./명식당_files/871(1).png" alt="" draggable="false" style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: 326px; top: 530px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 256px; height: 256px;"><img src="./명식당_files/872(1).png" alt="" draggable="false" style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: 582px; top: 530px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 256px; height: 256px;"><img src="./명식당_files/873(1).png" alt="" draggable="false" style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: 838px; top: 530px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 256px; height: 256px;"><img src="./명식당_files/874(1).png" alt="" draggable="false" style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: 1094px; top: 530px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 256px; height: 256px;"><img src="./명식당_files/869(2).png" alt="" draggable="false" style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: -186px; top: 274px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 256px; height: 256px;"><img src="./명식당_files/870(2).png" alt="" draggable="false" style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: 70px; top: 274px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 256px; height: 256px;"><img src="./명식당_files/871(2).png" alt="" draggable="false" style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: 326px; top: 274px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 256px; height: 256px;"><img src="./명식당_files/872(2).png" alt="" draggable="false" style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: 582px; top: 274px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 256px; height: 256px;"><img src="./명식당_files/873(2).png" alt="" draggable="false" style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: 838px; top: 274px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 256px; height: 256px;"><img src="./명식당_files/874(2).png" alt="" draggable="false" style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: 1094px; top: 274px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 256px; height: 256px;"><img src="./명식당_files/869(3).png" alt="" draggable="false" style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: -186px; top: 18px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 256px; height: 256px;"><img src="./명식당_files/870(3).png" alt="" draggable="false" style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: 70px; top: 18px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 256px; height: 256px;"><img src="./명식당_files/871(3).png" alt="" draggable="false" style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: 326px; top: 18px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 256px; height: 256px;"><img src="./명식당_files/872(3).png" alt="" draggable="false" style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: 582px; top: 18px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 256px; height: 256px;"><img src="./명식당_files/873(3).png" alt="" draggable="false" style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: 838px; top: 18px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 256px; height: 256px;"><img src="./명식당_files/874(3).png" alt="" draggable="false" style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: 1094px; top: 18px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 256px; height: 256px;"><img src="./명식당_files/869(4).png" alt="" draggable="false" style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: -186px; top: -238px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 256px; height: 256px;"><img src="./명식당_files/870(4).png" alt="" draggable="false" style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: 70px; top: -238px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 256px; height: 256px;"><img src="./명식당_files/871(4).png" alt="" draggable="false" style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: 326px; top: -238px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 256px; height: 256px;"><img src="./명식당_files/872(4).png" alt="" draggable="false" style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: 582px; top: -238px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 256px; height: 256px;"><img src="./명식당_files/873(4).png" alt="" draggable="false" style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: 838px; top: -238px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 256px; height: 256px;"><img src="./명식당_files/874(4).png" alt="" draggable="false" style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: 1094px; top: -238px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 256px; height: 256px;"></div><div style="position: absolute; z-index: 1;"></div><div style="width: 1066px; height: 797px; position: absolute; z-index: 1;"></div><div style="position: absolute; z-index: 1;"><svg version="1.1" style="stroke: none; stroke-dashoffset: 0.5; stroke-linejoin: round; fill: none; transform: translateZ(0px); position: absolute; left: -2132px; top: -1594px; width: 5330px; height: 3985px;" viewBox="0 0 5330 3985"><defs></defs></svg></div><div style="position: absolute; z-index: 1; width: 100%; height: 0px; transform: translateZ(0px);"><div style="position: absolute; margin: -49px 0px 0px -20px; z-index: 0; left: 532px; top: 398px; display: block;"><img draggable="false" src="./명식당_files/img_mark.svg" alt="" role="presentation" title="" style="min-width: 0px; min-height: 0px; max-width: 99999px; max-height: none; border: 0px; display: block; position: absolute; user-select: none; -webkit-user-drag: none; clip: rect(0px, 42px, 50px, 0px); top: 0px; left: 0px; width: 42px; height: 50px;"></div></div></div></div><div style="position: absolute; cursor: default; z-index: 1; margin: 0px 6px; height: 19px; line-height: 14px; left: 0px; bottom: 0px; color: rgb(0, 0, 0);"><div style="color: rgb(0, 0, 0); text-align: center; font-size: 10px; float: left;"><div style="float: left; margin: 2px 3px 0px 4px; height: 6px; transition: width 0.1s; border-top: none rgb(0, 0, 0); border-right: 2px solid rgb(0, 0, 0); border-bottom: 2px solid rgb(0, 0, 0); border-left: 2px solid rgb(0, 0, 0); border-image: initial; width: 46px;"></div><div style="float: left; margin: 0px 4px 0px 0px; font-family: AppleSDGothicNeo-Regular, 돋움, dotum, sans-serif; font-weight: bold; color: rgb(0, 0, 0);">50m</div></div><div style="margin: 0px 4px; float: left;"><a target="_blank" href="http://map.kakao.com/" style="float: left; width: 32px; height: 10px;"><img src="./명식당_files/m_bi_b.png" alt="Kakao 맵으로 이동(새창열림)" style="float: left; width: 32px; height: 10px; border: none;"></a><div style="font: 11px / 11px Arial, Tahoma, Dotum, sans-serif; float: left;"></div></div></div><div style="cursor: auto; position: absolute; z-index: 2; left: 0px; top: 0px;"></div></div><div class="absolute top-5 left-5 z-10"><div class="flex gap-3 items-start"><div class="w-80 bg-white rounded-[10px] shadow-[1px_3px_9px_0px_rgba(0,0,0,0.08)] border border-zinc-300"><div class="flex w-full h-full items-center gap-2 p-4"><img alt="map" class="w-6 h-6" src="data:image/svg+xml,%3csvg%20width=&#39;24&#39;%20height=&#39;24&#39;%20viewBox=&#39;0%200%2024%2024&#39;%20fill=&#39;none&#39;%20xmlns=&#39;http://www.w3.org/2000/svg&#39;%3e%3cmask%20id=&#39;mask0_536_5495&#39;%20style=&#39;mask-type:alpha&#39;%20maskUnits=&#39;userSpaceOnUse&#39;%20x=&#39;0&#39;%20y=&#39;0&#39;%20width=&#39;24&#39;%20height=&#39;24&#39;%3e%3crect%20width=&#39;24&#39;%20height=&#39;24&#39;%20fill=&#39;%23D9D9D9&#39;/%3e%3c/mask%3e%3cg%20mask=&#39;url(%23mask0_536_5495)&#39;%3e%3cpath%20d=&#39;M15%2021L9%2018.9L4.35%2020.7C4.01667%2020.8333%203.70833%2020.7958%203.425%2020.5875C3.14167%2020.3792%203%2020.1%203%2019.75V5.75C3%205.53333%203.0625%205.34167%203.1875%205.175C3.3125%205.00833%203.48333%204.88333%203.7%204.8L9%203L15%205.1L19.65%203.3C19.9833%203.16667%2020.2917%203.20417%2020.575%203.4125C20.8583%203.62083%2021%203.9%2021%204.25V18.25C21%2018.4667%2020.9375%2018.6583%2020.8125%2018.825C20.6875%2018.9917%2020.5167%2019.1167%2020.3%2019.2L15%2021ZM14%2018.55V6.85L10%205.45V17.15L14%2018.55ZM16%2018.55L19%2017.55V5.7L16%206.85V18.55ZM5%2018.3L8%2017.15V5.45L5%206.45V18.3Z&#39;%20fill=&#39;%231C1B1F&#39;/%3e%3c/g%3e%3c/svg%3e"><input class="w-full h-full outline-none" type="search" value="명지대학교 인문캠퍼스"></div><div class="absolute w-80 h-200 bg-white top-0  rounded-[10px] shadow-[1px_3px_9px_0px_rgba(0,0,0,0.08)] p-5"><div class="flex gap-1 items-center"><img alt="back" class="w-5 h-5 cursor-pointer" src="data:image/svg+xml,%3csvg%20width=&#39;24&#39;%20height=&#39;24&#39;%20viewBox=&#39;0%200%2024%2024&#39;%20fill=&#39;none&#39;%20xmlns=&#39;http://www.w3.org/2000/svg&#39;%3e%3cg%20id=&#39;Group%2019&#39;%3e%3cg%20id=&#39;arrow_back_ios&#39;%3e%3cmask%20id=&#39;mask0_22_1488&#39;%20style=&#39;mask-type:alpha&#39;%20maskUnits=&#39;userSpaceOnUse&#39;%20x=&#39;0&#39;%20y=&#39;0&#39;%20width=&#39;24&#39;%20height=&#39;24&#39;%3e%3crect%20id=&#39;Bounding%20box&#39;%20width=&#39;24&#39;%20height=&#39;24&#39;%20fill=&#39;%23D9D9D9&#39;/%3e%3c/mask%3e%3cg%20mask=&#39;url(%23mask0_22_1488)&#39;%3e%3cpath%20id=&#39;arrow_back_ios_2&#39;%20d=&#39;M10%2022L0%2012L10%202L11.775%203.775L3.55%2012L11.775%2020.225L10%2022Z&#39;%20fill=&#39;%231C1B1F&#39;/%3e%3c/g%3e%3c/g%3e%3c/g%3e%3c/svg%3e"><p class="text-black text-xl font-bold">손가네 빈대떡</p></div><p class="text-black text-lg font-bold mt-6">날짜를 선택해주세요</p><div class="rdp-root"><div class="rdp-months"><nav data-animated-nav="true" class="rdp-nav" aria-label=""><button type="button" class="rdp-button_previous" aria-label="Go to the Previous Month"><svg class="rdp-chevron" width="24" height="24" viewBox="0 0 24 24"><polygon points="16 18.112 9.81111111 12 16 5.87733333 14.0888889 4 6 12 14.0888889 20"></polygon></svg></button><button type="button" class="rdp-button_next" aria-label="Go to the Next Month"><svg class="rdp-chevron" width="24" height="24" viewBox="0 0 24 24"><polygon points="8 18.112 14.18888889 12 8 5.87733333 9.91111111 4 18 12 9.91111111 20"></polygon></svg></button></nav><div data-animated-month="true" class="rdp-month"><div data-animated-caption="true" class="rdp-month_caption"><span class="rdp-caption_label" role="status" aria-live="polite">May 2025</span></div><table role="grid" aria-multiselectable="false" aria-label="May 2025" class="rdp-month_grid"><thead aria-hidden="true"><tr data-animated-weekdays="true" class="rdp-weekdays"><th aria-label="Sunday" class="rdp-weekday" scope="col">Su</th><th aria-label="Monday" class="rdp-weekday" scope="col">Mo</th><th aria-label="Tuesday" class="rdp-weekday" scope="col">Tu</th><th aria-label="Wednesday" class="rdp-weekday" scope="col">We</th><th aria-label="Thursday" class="rdp-weekday" scope="col">Th</th><th aria-label="Friday" class="rdp-weekday" scope="col">Fr</th><th aria-label="Saturday" class="rdp-weekday" scope="col">Sa</th></tr></thead><tbody data-animated-weeks="true" class="rdp-weeks"><tr class="rdp-week"><td class="rdp-day rdp-hidden rdp-outside" role="gridcell" data-day="2025-04-27" data-month="2025-04" data-hidden="true" data-outside="true"></td><td class="rdp-day rdp-hidden rdp-outside" role="gridcell" data-day="2025-04-28" data-month="2025-04" data-hidden="true" data-outside="true"></td><td class="rdp-day rdp-hidden rdp-outside" role="gridcell" data-day="2025-04-29" data-month="2025-04" data-hidden="true" data-outside="true"></td><td class="rdp-day rdp-hidden rdp-outside" role="gridcell" data-day="2025-04-30" data-month="2025-04" data-hidden="true" data-outside="true"></td><td class="rdp-day" role="gridcell" aria-label="Thursday, May 1st, 2025" data-day="2025-05-01">1</td><td class="rdp-day" role="gridcell" aria-label="Friday, May 2nd, 2025" data-day="2025-05-02">2</td><td class="rdp-day" role="gridcell" aria-label="Saturday, May 3rd, 2025" data-day="2025-05-03">3</td></tr><tr class="rdp-week"><td class="rdp-day" role="gridcell" aria-label="Sunday, May 4th, 2025" data-day="2025-05-04">4</td><td class="rdp-day" role="gridcell" aria-label="Monday, May 5th, 2025" data-day="2025-05-05">5</td><td class="rdp-day" role="gridcell" aria-label="Tuesday, May 6th, 2025" data-day="2025-05-06">6</td><td class="rdp-day" role="gridcell" aria-label="Wednesday, May 7th, 2025" data-day="2025-05-07">7</td><td class="rdp-day" role="gridcell" aria-label="Thursday, May 8th, 2025" data-day="2025-05-08">8</td><td class="rdp-day" role="gridcell" aria-label="Friday, May 9th, 2025" data-day="2025-05-09">9</td><td class="rdp-day" role="gridcell" aria-label="Saturday, May 10th, 2025" data-day="2025-05-10">10</td></tr><tr class="rdp-week"><td class="rdp-day" role="gridcell" aria-label="Sunday, May 11th, 2025" data-day="2025-05-11">11</td><td class="rdp-day" role="gridcell" aria-label="Monday, May 12th, 2025" data-day="2025-05-12">12</td><td class="rdp-day" role="gridcell" aria-label="Tuesday, May 13th, 2025" data-day="2025-05-13">13</td><td class="rdp-day" role="gridcell" aria-label="Wednesday, May 14th, 2025" data-day="2025-05-14">14</td><td class="rdp-day" role="gridcell" aria-label="Thursday, May 15th, 2025" data-day="2025-05-15">15</td><td class="rdp-day" role="gridcell" aria-label="Friday, May 16th, 2025" data-day="2025-05-16">16</td><td class="rdp-day" role="gridcell" aria-label="Saturday, May 17th, 2025" data-day="2025-05-17">17</td></tr><tr class="rdp-week"><td class="rdp-day rdp-today" role="gridcell" aria-label="Today, Sunday, May 18th, 2025" data-day="2025-05-18" data-today="true">18</td><td class="rdp-day" role="gridcell" aria-label="Monday, May 19th, 2025" data-day="2025-05-19">19</td><td class="rdp-day" role="gridcell" aria-label="Tuesday, May 20th, 2025" data-day="2025-05-20">20</td><td class="rdp-day" role="gridcell" aria-label="Wednesday, May 21st, 2025" data-day="2025-05-21">21</td><td class="rdp-day" role="gridcell" aria-label="Thursday, May 22nd, 2025" data-day="2025-05-22">22</td><td class="rdp-day" role="gridcell" aria-label="Friday, May 23rd, 2025" data-day="2025-05-23">23</td><td class="rdp-day" role="gridcell" aria-label="Saturday, May 24th, 2025" data-day="2025-05-24">24</td></tr><tr class="rdp-week"><td class="rdp-day" role="gridcell" aria-label="Sunday, May 25th, 2025" data-day="2025-05-25">25</td><td class="rdp-day" role="gridcell" aria-label="Monday, May 26th, 2025" data-day="2025-05-26">26</td><td class="rdp-day" role="gridcell" aria-label="Tuesday, May 27th, 2025" data-day="2025-05-27">27</td><td class="rdp-day" role="gridcell" aria-label="Wednesday, May 28th, 2025" data-day="2025-05-28">28</td><td class="rdp-day" role="gridcell" aria-label="Thursday, May 29th, 2025" data-day="2025-05-29">29</td><td class="rdp-day" role="gridcell" aria-label="Friday, May 30th, 2025" data-day="2025-05-30">30</td><td class="rdp-day" role="gridcell" aria-label="Saturday, May 31st, 2025" data-day="2025-05-31">31</td></tr></tbody></table></div></div></div></div></div><div class="flex gap-2 bg-white w-22 h-10 mt-2 items-center justify-center p-3 rounded-full shadow-[1px_3px_9px_0px_rgba(0,0,0,0.08)] cursor-pointer"><img alt="meal" class="w-5 h-5" src="data:image/svg+xml,%3csvg%20width=&#39;20&#39;%20height=&#39;20&#39;%20viewBox=&#39;0%200%2020%2020&#39;%20fill=&#39;none&#39;%20xmlns=&#39;http://www.w3.org/2000/svg&#39;%3e%3cg%20id=&#39;Group%204093&#39;%3e%3cg%20id=&#39;Group%204092&#39;%3e%3cg%20id=&#39;Group%204091&#39;%3e%3cg%20id=&#39;fork_spoon&#39;%3e%3cmask%20id=&#39;mask0_539_5846&#39;%20style=&#39;mask-type:alpha&#39;%20maskUnits=&#39;userSpaceOnUse&#39;%20x=&#39;0&#39;%20y=&#39;0&#39;%20width=&#39;20&#39;%20height=&#39;20&#39;%3e%3crect%20id=&#39;Bounding%20box&#39;%20width=&#39;20&#39;%20height=&#39;20&#39;%20fill=&#39;%23D9D9D9&#39;/%3e%3c/mask%3e%3cg%20mask=&#39;url(%23mask0_539_5846)&#39;%3e%3cpath%20id=&#39;fork_spoon_2&#39;%20d=&#39;M5%2018.3332V10.7082C4.25%2010.5137%203.64583%2010.1179%203.1875%209.52067C2.72917%208.92345%202.5%208.24984%202.5%207.49984V1.6665H4.16667V6.6665H5V1.6665H6.66667V6.6665H7.5V1.6665H9.16667V7.49984C9.16667%208.24984%208.9375%208.92345%208.47917%209.52067C8.02083%2010.1179%207.41667%2010.5137%206.66667%2010.7082V18.3332H5ZM13.3333%2018.3332V10.3957C12.5833%2010.1457%2011.9792%209.62137%2011.5208%208.82275C11.0625%208.02414%2010.8333%207.11789%2010.8333%206.104C10.8333%204.86789%2011.1597%203.81928%2011.8125%202.95817C12.4653%202.09706%2013.25%201.6665%2014.1667%201.6665C15.0833%201.6665%2015.8681%202.10053%2016.5208%202.96859C17.1736%203.83664%2017.5%204.88873%2017.5%206.12484C17.5%207.13873%2017.2708%208.0415%2016.8125%208.83317C16.3542%209.62484%2015.75%2010.1457%2015%2010.3957V18.3332H13.3333Z&#39;%20fill=&#39;%23013F9F&#39;/%3e%3c/g%3e%3c/g%3e%3c/g%3e%3c/g%3e%3c/g%3e%3c/svg%3e"><p class="text-black text-sm font-bold text-center">맛집</p></div></div></div><div class="absolute bottom-3 left-4  max-w-[98%] z-10 flex gap-3 overflow-x-auto"></div></div></div></div><section class="Toastify" aria-live="polite" aria-atomic="false" aria-relevant="additions text" aria-label="Notifications Alt+T"></section></div></div>
+    <script type="module" src="./명식당_files/main.jsx"></script>
+    <script type="text/javascript" src="./명식당_files/maps.js"></script>
+    <script type="text/javascript" src="./명식당_files/maps(1).js"></script><script type="text/javascript" src="./명식당_files/maps-geocoder.js"></script>
+    <script type="text/javascript" src="./명식당_files/sdk.js"></script><script charset="UTF-8" src="./명식당_files/kakao.js"></script><script charset="UTF-8" src="./명식당_files/services.js"></script>
+  
+
+</body></html>
