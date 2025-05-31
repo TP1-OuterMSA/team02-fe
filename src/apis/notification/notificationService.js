@@ -1,50 +1,42 @@
 import {EventSourcePolyfill} from "event-source-polyfill";
 import {axiosInstance} from "@apis/axiosInstance.js";
 
-export const connectSSE = ({userId}) => {
-  const eventSource = new EventSourcePolyfill(`${import.meta.env.VITE_APP_BASE_URL}/notification/subscribe`, {
-    headers: {
-      "Last-Event-ID": "",
-      "user-id": userId,
-    },
-  });
 
-  eventSource.onopen = () => {
-    console.log("SSE connected");
+let eventSource = null;
+export const connectSSE = () => {
+  let token = localStorage.getItem("accessToken");
+  // 리프레시 전용 인스턴스 (인증 서비스 경로)
+
+  const connect = () => {
+    eventSource = new EventSourcePolyfill(`${import.meta.env.VITE_APP_BASE_URL}/notification/subscribe`, {
+      headers: {
+        "Last-Event-ID": "",
+        "Authorization": `Bearer ${token}`,
+      },
+      heartBeatTimeout: 10000,
+    });
+
+    eventSource.onerror = async (err) => {
+      const status = err?.status || err?.target?.status;
+
+      if (status === 401) {
+        // 토큰 만료 → 리프레시 시도
+        try {
+          const { data } = await axiosInstance.post("/api/auth/user/refresh");
+          const newToken = data.accessToken;
+          localStorage.setItem("accessToken", newToken);
+          token = newToken;
+
+          // 기존 SSE 종료 후 재연결
+          eventSource.close();
+          connect(); // 재귀적으로 다시 연결
+        } catch (error) {
+          console.log(error)
+        }
+      }
+    };
   }
-
-  eventSource.addEventListener("sse", (event) => {
-    try {
-      console.log(event)
-      // getPastSSE({lastEventId: event.id, userId})
-      console.log("SSE 이벤트(JSON):", event);
-    } catch {
-      console.log("SSE 이벤트(일반 문자열):", event.data);
-    }
-  });
-
-  eventSource.onmessage = (event) => {
-    try{
-      const data = JSON.parse(event.data);
-      console.log("SSE 데이터: ", data);
-    } catch (error){
-      console.error("SSE 데이터 파싱 실패:", error);
-    }
-  }
-
-  eventSource.onerror = (e) => {
-    eventSource.close();
-
-    if(e.error){
-      // 에러 발생시 할일
-      console.log("SSE 에러 발생:", e)
-    }
-
-    if (e.target.readyState === EventSource.CLOSED) {
-      // 종료 시 할 일
-      console.log("SSE 종료")
-    }
-  }
+  connect();
   return eventSource;
 }
 
@@ -53,7 +45,7 @@ export const getPastSSE = async ({lastEventId, userId}) => {
   const reponse = await axiosInstance.get("/notification/past", {
     headers: {
       "Last-Event-ID": lastEventId,
-      "user-id": userId,
+      "Authorization": userId,
     },
   });
   return reponse.data;

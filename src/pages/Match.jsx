@@ -62,8 +62,7 @@ const Match = () => {
   const [cursor, setCursor] = useState(0);
   const [registerInfo, setRegisterInfo] = useState({selectedDate: dayjs(), selectedTime: '00:00', content:""});
 
-
-  // const {kakao} = window;
+  const {kakao} = window;
   const {confirmAlert} = useSystemAlert();
   const userId = localStorage.getItem("userId");
 
@@ -78,7 +77,7 @@ const Match = () => {
 
   // 키워드로 장소 검색하기
   const handleSearch = (keyword, type) => {
-    const ps = new window.maps.services.Places();
+    const ps = new kakao.maps.services.Places();
     ps.keywordSearch(keyword, function (data, status) {
       if (status === 'OK') {
         if (type === 1) {
@@ -96,7 +95,7 @@ const Match = () => {
 
   // 주소로 x,y 좌표 알아내기
   const handleSearchByPlace = () => {
-    const gecoder = new window.maps.services.Geocoder();
+    const gecoder = new kakao.maps.services.Geocoder();
     gecoder.addressSearch(selectedPlace?.address_name, function (result, status) {
       if (status === 'OK') {
         const {x, y} = selectedPlace;
@@ -211,7 +210,7 @@ const Match = () => {
     setShowDetail(true);
 
     if (mapInstance) {
-      const lating = new window.kakao.maps.LatLng(item.y, item.x);
+      const lating = new kakao.maps.LatLng(item.y, item.x);
       mapInstance.panTo(lating);
     }
   }
@@ -284,7 +283,7 @@ const Match = () => {
   }
 
   const connectSSE = async () => {
-    await notificationService.connectSSE({userId: 1});
+    const event = await notificationService.connectSSE({userId: 1});
   }
 
   const patchMatchData = async () => {
@@ -336,7 +335,6 @@ const Match = () => {
 
   // SSE 연동
   useEffect(() => {
-    connectSSE();
   }, [])
 
   return (
@@ -408,7 +406,7 @@ const Match = () => {
                        setShowDetail(false)
                      }}/>
               </div>
-              <div className="p-4">
+              <div className="p-4 z-20">
                 <p className="text-black text-xl font-extrabold mt-2">{selectedPlace.place_name}</p>
                 <p className="text-black text-base font-normal mt-1">{selectedPlace.address_name}</p>
                 <div className="flex mt-2 items-center gap-2">
@@ -451,7 +449,7 @@ const Match = () => {
                 </div>
               </div>
             </div>}
-            {showPost && <div className="absolute w-80 bg-white top-0 z-20 rounded-[10px] shadow-[1px_3px_9px_0px_rgba(0,0,0,0.08)] p-5">
+            {showPost && <div className="absolute w-80 bg-white top-0 z-40 rounded-[10px] shadow-[1px_3px_9px_0px_rgba(0,0,0,0.08)] p-5">
               <div className="flex gap-1 items-center">
                 <img src={icBack} alt="back" className="w-5 h-5 cursor-pointer" onClick={() => {
                   setRegisterInfo({})
@@ -464,6 +462,7 @@ const Match = () => {
                 animate
                 locale={ko}
                 mode="single"
+                disabled={{before: dayjs().toDate()}}
                 defaultMonth={new Date()}
                 navLayout="around"
                 selected={registerInfo.selectedDate}
