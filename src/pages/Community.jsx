@@ -69,7 +69,7 @@ const Community = () => {
 
   // 커뮤니티 글 목록 api 연결
   useEffect( () => {
-    localStorage.setItem("userId", 1);
+    // localStorage.setItem("userId", 1);
   }, []);
 
 
