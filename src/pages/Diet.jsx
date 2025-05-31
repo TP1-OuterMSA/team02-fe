@@ -175,7 +175,9 @@ const Diet = () => {
   }
 
   const handleSaveAndClose = async (data) => {
-    await saveDiets(data);
+    if(data.length > 0){
+      await saveDiets(data);
+    }
     setIsAddDietOpen(false);
   }
 
