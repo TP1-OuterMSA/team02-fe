@@ -12,9 +12,14 @@ export const updateRecommendKcal = async (kcal) => {
   return response.data;
 }
 
+export const getMyUserId  = async () => {
+  const response  = await axiosInstance.get('/user/getMyId');
+  return response.data;
+}
 const userService = {
   getRecommendKcal,
   updateRecommendKcal,
+  getMyUserId,
 }
 
 export default  userService;
