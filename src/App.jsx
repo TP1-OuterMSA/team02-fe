@@ -13,12 +13,10 @@ function App() {
   const {navigateTo} = useCustomNavigation();
   const {navigateToWindow} = useCustomWindowNavigation();
 
-  const [userId, setUserId] = useState();
-
 
   const patchUserId = async () => {
     const data =  await userService.getMyUserId();
-    setUserId(data);
+    localStorage.setItem('userId', data);
   }
   useEffect(() => {
     const accessToken = localStorage.getItem("accessToken");
@@ -31,9 +29,6 @@ function App() {
     }
   }, []);
   
-  useEffect(() => {
-    localStorage.setItem("userId", userId)
-  }, [userId])
   return (
     <div>
       {router}
