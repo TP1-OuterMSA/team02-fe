@@ -1,6 +1,7 @@
 import {useEffect, useRef} from "react";
 import {icNotify, imgMainProfile, icMain} from "@assets/index.js";
 import {useCustomNavigation} from "@hooks/useCustomNavigation.js";
+import {useCustomWindowNavigation} from "@hooks/useCustomWindowNavigation.js";
 import {pagePath} from "@/routes/pagePath.js";
 import notificationService from "@apis/notification/notificationService.js";
 import {toast} from "react-toastify";
@@ -8,6 +9,7 @@ import {toast} from "react-toastify";
 
 const Header = () => {
   const {navigateTo} = useCustomNavigation();
+  const {navigateToWindow} = useCustomWindowNavigation();
   const eventSourceRef = useRef(null);
   const reconnectTimeoutRef = useRef(null);
 
@@ -70,7 +72,7 @@ const Header = () => {
         <img src={icMain} className="w-40 cursor-pointer min-md:w-0" onClick={() => navigateTo(pagePath.ROOT)}/>
         <div className="flex items-center gap-5">
           <img src={icNotify} className="w-7 h-7 cursor-pointer"/>
-          <img src={imgMainProfile} className="w-11 h-11 cursor-pointer"/>
+          <img src={imgMainProfile} className="w-11 h-11 cursor-pointer" onClick={() => navigateToWindow(pagePath.MYPAGE)}/>
         </div>
       </div>
   );
