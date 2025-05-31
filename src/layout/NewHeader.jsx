@@ -1,5 +1,4 @@
 import {icMain, icNotify, imgMainProfile} from "@assets/index.js";
-
 const NewHeader = () => {
   return (
       <div className="w-full h-24 flex justify-between pl-5 pr-5">

@@ -8,4 +8,7 @@ export const pagePath = {
   POST: "/team2/community/post",
 
   MATCH: "/team2/match",
+  LOGIN: "/team2/login",
+  REGISTER: "/team2/register",
+  MYPAGE: "/team6/",
 };

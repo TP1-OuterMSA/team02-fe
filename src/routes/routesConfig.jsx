@@ -1,5 +1,5 @@
 import {pagePath} from "@/routes/pagePath.js";
-
+import { Navigate } from "react-router-dom";
 import RootLayout from "@layout/RootLayout.jsx";
 
 import Home from "@pages/Home.jsx";
@@ -9,8 +9,19 @@ import Community from "@pages/Community.jsx";
 import CommunityDetail from "@pages/CommunityDetail.jsx";
 import CommunityPost from "@pages/CommunityPost.jsx";
 import Match from "@pages/Match.jsx";
+import Login from "@pages/Login.jsx";
+import Register from "@pages/Register.jsx";
 
-const routesConfig = [{
+const routesConfig = [
+  {
+    path: pagePath.LOGIN,
+    element: <Login />
+  },
+  {
+    path: pagePath.REGISTER,
+    element: <Register />
+  },
+  {
   path: pagePath.ROOT,
   element: <RootLayout />,
   children: [
@@ -22,6 +33,7 @@ const routesConfig = [{
     {path: pagePath.POST, element: <CommunityPost />},
     {path: pagePath.MATCH, element: <Match />},
   ]
-}];
+  },
+];
 
 export default routesConfig;

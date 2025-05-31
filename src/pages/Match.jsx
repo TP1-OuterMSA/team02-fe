@@ -12,6 +12,7 @@ import {icMap,icMealGood,icAlarm,icCalRegister,icEditLocation, icHeartMatch,icHe
 import googleService from "@apis/external/googleService.js";
 import matchService from "@apis/match/matchService.js";
 import schoolService from "@apis/school/schoolService.js";
+import notificationService from "@apis/notification/notificationService.js";
 
 import SearchItem from "@components/match/SearchItem.jsx";
 import PlaceCard from "@components/match/PlaceCard.jsx";
@@ -20,8 +21,13 @@ import LoadingSpinner from "@components/common/LoadingSpinner.jsx";
 import NoticeCard from "@components/match/NoticeCard.jsx";
 import LongButton from "@components/common/LongButton.jsx";
 import Chips from "@components/match/Chips.jsx";
+import MatchListCard from "@components/match/MatchListCard.jsx";
+import MatchReply from "@components/modal/MatchReply.jsx";
 import noticeCard from "@components/match/NoticeCard.jsx";
 import {constant} from "@utils/constant.js";
+import {string} from "@utils/string.js";
+import {useSystemAlert} from "@hooks/useSystemAlert.js";
+
 
 const Match = () => {
   const [addressX, setAddressX] = useState(0);
@@ -32,13 +38,22 @@ const Match = () => {
   const [selectedPlace, setSelectedPlace] = useState({});
   const [searchList, setSearchList] = useState([]);
   const [markedList, setMarkedList] = useState([]);
+  const [mealMateList, setMealMateList] = useState([]);
   const [mapInstance, setMapInstance] = useState(null);
   const [openingHours, setOpeningHours] = useState({});
+  const [replyListMap, setReplyListMap] = useState({});
+  const [mode, setMode] = useState();
+  const [editPost, setEditPost] = useState({});
+  const [matchPost, setMatchPost] = useState({});
   const [placeImage, setPlaceImage] = useState('');
+  const [message, setMessage] = useState('');
+  const [openCardId, setOpenCardId] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [showDetail, setShowDetail] = useState(false);
   const [showPost, setShowPost] = useState(false);
   const [showNotice, setShowNotice] = useState(false);
+  const [showMatchReply, setShowMatchReply] = useState(false);
+  const [showMatchList, setShowMatchList] = useState(false);
   const [mealPostList, setMealPostList] = useState([]);
   const [eventCursor, setEventCursor] = useState(0);
   const [noticeList, setNoticeList] = useState([]);
@@ -48,6 +63,7 @@ const Match = () => {
   const [registerInfo, setRegisterInfo] = useState({selectedDate: dayjs(), selectedTime: '00:00', content:""});
 
   const {kakao} = window;
+  const {confirmAlert} = useSystemAlert();
   const userId = localStorage.getItem("userId");
 
   const moveToCurrentLocation = () => {
@@ -89,6 +105,26 @@ const Match = () => {
         console.error("주소 변환 실패!");
       }
     })
+  }
+
+  const handleDropDown = async (type, item) => {
+    if(type === string.EDIT){
+      const originSchedule = item.schedule.split(' ');
+      const formattedTime = dayjs(originSchedule, 'HH:mm:ss').format('HH:mm');
+      setOpenCardId(null);
+      setEditPost(item);
+      setMode(constant.EDIT);
+      setRegisterInfo({content: item?.content, selectedTime: formattedTime, selectedDate: dayjs(originSchedule[0])})
+      setShowPost(true);
+    } else{
+      const result = confirmAlert(string.SA_DELETE);
+      if(result){
+        await matchService.deleteMatchPost({postId: item?.id});
+        await getMealPostByAddress();
+        toast.success("매칭요청이 삭제되었습니다.");
+      }
+      setOpenCardId(null);
+    }
   }
 
   // google API로 장소에 대한 id를 가져오기
@@ -204,6 +240,13 @@ const Match = () => {
     toast.success("식사메이트 등록이 완료되었습니다.");
   }
 
+  const handleUpdateMealPost = async () => {
+    await matchService.updateMatchPost({postId: editPost.id, content: registerInfo.content, schedule: registerInfo.selectedDate.format("YYYY-MM-DD") + 'T' + registerInfo.selectedTime + ":00"});
+    await getMealPostByAddress();
+    setShowPost(false);
+    toast.success('식사메이트 수정이 완료되었습니다.');
+  }
+
   const handleMealPost = async (mealPost) => {
     await matchService.saveMealPost(mealPost);
   }
@@ -224,10 +267,29 @@ const Match = () => {
         setShowNotice(false);
         break;
     }
-
   }
 
-  console.log(noticeList, noticeIndex)
+  const handleReplyMatchRequest = async (item, type) => {
+    await matchService.replyMealMateOffer({mealMateOfferId: item.id, matchState: type === constant.ACCEPT});
+    toast.success(type === constant.ACCEPT ? "매칭이 완료되었습니다." : "매칭이 거절되었습니다.");
+    await patchMatchData();
+  }
+
+  const handleMatchRequest = async () => {
+    await matchService.offerMealMateMatch({mealPostId: matchPost.id, content: message});
+    setMessage("")
+    toast.success("성공적으로 매칭요청이 신청되었습니다.");
+    setShowMatchReply(false)
+  }
+
+  const connectSSE = async () => {
+    const event = await notificationService.connectSSE({userId: 1});
+  }
+
+  const patchMatchData = async () => {
+    const data = await matchService.getMealMateOffers({mealPostId: ""});
+    setMealMateList(data);
+  }
 
   // debounce에 따라 검색결과 보여주기
   useEffect(() => {
@@ -265,6 +327,15 @@ const Match = () => {
   useEffect(() => {
     setNoticeData(noticeList[noticeIndex]);
   }, [noticeIndex])
+
+  //매칭된 목록 불러오기
+  useEffect(() => {
+    patchMatchData();
+  }, []);
+
+  // SSE 연동
+  useEffect(() => {
+  }, [])
 
   return (
     <div className="w-full h-full relative pl-0.5">
@@ -335,16 +406,18 @@ const Match = () => {
                        setShowDetail(false)
                      }}/>
               </div>
-              <div className="p-4">
+              <div className="p-4 z-20">
                 <p className="text-black text-xl font-extrabold mt-2">{selectedPlace.place_name}</p>
                 <p className="text-black text-base font-normal mt-1">{selectedPlace.address_name}</p>
                 <div className="flex mt-2 items-center gap-2">
                   <img src={icAlarm} alt="alarm" className="w-5 h-5"/>
                   <p>{openingHours?.open_now ? "영업중" : "영업종료"}</p>
                 </div>
-                <div
-                  className="flex bg-white rounded-[10px] border border-zinc-300 p-3 gap-2 items-center justify-center mt-3 cursor-pointer"
-                  onClick={() => setShowPost(true)}>
+                <div className="flex bg-white rounded-[10px] border border-zinc-300 p-3 gap-2 items-center justify-center mt-3 cursor-pointer"
+                  onClick={() => {
+                    setMode("")
+                    setShowPost(true)
+                  }}>
                   <img src={icCalRegister} alt="cal" className="w-5 h-5"/>
                   <p className="text-blue-800 text-sm font-bold ">식사메이트 등록하기</p>
                 </div>
@@ -355,10 +428,18 @@ const Match = () => {
                     {mealPostList && mealPostList?.map((item) => {
                       return (
                         <ArticleCard
+                          item={item}
                           nick={"익명" + item?.userId}
                           isMine={item?.userId.toString() === userId}
                           createdAt={dayjs(item?.createdAt).format("YY.MM.DD")}
                           content={item?.content}
+                          onClickDropDown={handleDropDown}
+                          onClickRequest={() => {
+                            setMatchPost(item);
+                            setShowMatchReply(true);
+                          }}
+                          openCardId={openCardId}
+                          setOpenCardId={setOpenCardId}
                           schedule={dayjs(item?.schedule).format("YY년 M월 DD일 HH시 MM분")}
                           key={item?.id}
                         />
@@ -368,10 +449,12 @@ const Match = () => {
                 </div>
               </div>
             </div>}
-            {showPost && <div
-              className="absolute w-80 bg-white top-0  rounded-[10px] shadow-[1px_3px_9px_0px_rgba(0,0,0,0.08)] p-5">
+            {showPost && <div className="absolute w-80 bg-white top-0 z-40 rounded-[10px] shadow-[1px_3px_9px_0px_rgba(0,0,0,0.08)] p-5">
               <div className="flex gap-1 items-center">
-                <img src={icBack} alt="back" className="w-5 h-5 cursor-pointer" onClick={() => setShowPost(false)}/>
+                <img src={icBack} alt="back" className="w-5 h-5 cursor-pointer" onClick={() => {
+                  setRegisterInfo({})
+                  setShowPost(false)
+                }}/>
                 <p className="text-black text-xl font-bold">{selectedPlace.place_name}</p>
               </div>
               <p className="text-black text-lg font-bold mt-6 mb-5">날짜를 선택해주세요</p>
@@ -379,6 +462,7 @@ const Match = () => {
                 animate
                 locale={ko}
                 mode="single"
+                disabled={{before: dayjs().toDate()}}
                 defaultMonth={new Date()}
                 navLayout="around"
                 selected={registerInfo.selectedDate}
@@ -394,6 +478,7 @@ const Match = () => {
               <p className="text-black text-lg font-bold mt-6 mb-3">시간을 입력해주세요</p>
               <input
                 type="time"
+                value={registerInfo?.selectedTime}
                 onChange={(e) => setRegisterInfo({...registerInfo, selectedTime: e.target.value})}
                 className="p-3 w-full bg-white rounded-lg outline-zinc-300 outline outline-1 focus:outline-2 focus:outline-(--primary)"
               />
@@ -404,7 +489,7 @@ const Match = () => {
                 className="p-3 mb-2 w-full bg-white rounded-lg outline-zinc-300 outline outline-1 focus:outline-2 focus:outline-(--primary)"
                 rows={2}
               />
-              <LongButton text={"작성완료"} onClick={handleSaveMealPost}/>
+              <LongButton text={"작성완료"} onClick={mode === constant.EDIT ? handleUpdateMealPost: handleSaveMealPost}/>
             </div>}
           </div>
         </div>
@@ -436,17 +521,27 @@ const Match = () => {
               onClick={handleNotice}
             />
           </div>}
-
         <div className="absolute bottom-3 left-4 z-10 max-w-[98%] min-w-[98%]">
-          <div className="flex justify-between pr-2">
-            <div className="cursor-pointer p-4 w-14 bg-white rounded-[10px] shadow-[1px_3px_9px_0px_rgba(0,0,0,0.08)] border border-zinc-300">
-              <img src={icHeartMatchFill} alt="myLocation" className="w-6 h-6"/>
+          {showMatchList &&
+            <div className="w-80 h-96 pt-2 overflow-y-auto bg-white rounded-[10px] shadow-[1px_3px_9px_0px_rgba(0,0,0,0.08)] border border-zinc-300">
+              {mealMateList?.map((item, index) => (
+                <MatchListCard
+                  key={index}
+                  item={item}
+                  replyListMap={replyListMap}
+                  setReplyListMap={setReplyListMap}
+                  handleReplyMatch={handleReplyMatchRequest}
+                />
+              ))}
+            </div>}
+          <div className="flex justify-between pr-2 pt-2">
+            <div className={clsx("cursor-pointer p-4 w-14 rounded-[10px] shadow-[1px_3px_9px_0px_rgba(0,0,0,0.08)] border border-zinc-300", showMatchList ? "bg-(--primary)": "bg-white")} onClick={() => setShowMatchList(!showMatchList)}>
+              <img src={showMatchList ? icHeartMatch : icHeartMatchFill} alt="myLocation" className="w-6 h-6"/>
             </div>
             <div className="cursor-pointer p-4 w-14 bg-white rounded-[10px] shadow-[1px_3px_9px_0px_rgba(0,0,0,0.08)] border border-zinc-300" onClick={moveToCurrentLocation}>
               <img src={icMyLocation} alt="myLocation" className="w-6 h-6" />
             </div>
           </div>
-
           {markedList.length > 0 && !showDetail && <div className=" mt-4 flex gap-5 overflow-x-auto">
             {markedList.map((item, index) => (
                 <PlaceCard
@@ -459,10 +554,7 @@ const Match = () => {
             ))}
           </div>}
         </div>
-
-        {isFoucs && <div
-            className="absolute overflow-y-auto top-21 left-5 z-10 w-80 h-120 bg-white rounded-[10px] shadow-[1px_3px_9px_0px_rgba(0,0,0,0.08)] border border-zinc-300"
-            style={{scrollbarWidth: 'none', msOverflowStyle: 'none'}}>
+        {isFoucs && <div className="absolute overflow-y-auto top-21 left-5 z-5 w-80 h-120 bg-white rounded-[10px] shadow-[1px_3px_9px_0px_rgba(0,0,0,0.08)] border border-zinc-300" style={{scrollbarWidth: 'none', msOverflowStyle: 'none'}}>
         {searchList.map((item, index) => (
             <SearchItem
               key={index}
@@ -472,6 +564,14 @@ const Match = () => {
           ))}
         </div>}
       </Map>
+      {showMatchReply &&
+        <MatchReply
+          data={matchPost}
+          value={message}
+          setValue={setMessage}
+          onClickBtn={handleMatchRequest}
+          onClickCancel={() => setShowMatchReply(false)}/>
+      }
     </div>
   );
 };

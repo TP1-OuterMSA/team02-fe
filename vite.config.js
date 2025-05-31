@@ -21,6 +21,11 @@ export default defineConfig({
         target: "https://maps.googleapis.com/maps/api/place/",  // target url을 yes24로 변경하고,
         changeOrigin: true,  // target과 같은 도메인의 요청인 것처럼
         rewrite: (path) => path.replace(/^\/place/, ""),	// target url로 요청시 /api 문자열은 제거
+      },
+      '/api': {
+        target: 'http://54.180.87.206:8080',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, '')
       }
     },
   },
@@ -29,6 +34,7 @@ export default defineConfig({
       '@': path.resolve(__dirname, 'src'),
       '@apis': path.resolve(__dirname, 'src/apis'),
       '@assets': path.resolve(__dirname, 'src/assets'),
+      '@context': path.resolve(__dirname, 'src/context'),
       '@components': path.resolve(__dirname, 'src/components'),
       '@hooks': path.resolve(__dirname, 'src/hooks'),
       '@layout': path.resolve(__dirname, 'src/layout'),

@@ -61,7 +61,9 @@ export {default as icForkSpoon} from '@assets/icon/ico_fork_spoon.svg';
 export {default as icHeartMatch} from '@assets/icon/ico_heart_match.svg';
 export {default as icHeartMatchFill} from '@assets/icon/ico_heart_match_fill.svg';
 export {default as icArrowDown} from '@assets/icon/ico_arrow_down.svg';
+export {default as icArrowDownBlack} from '@assets/icon/ico_arrow_down_black.svg';
 export {default as icArrowUp} from '@assets/icon/ico_arrow_up.svg';
+export {default as icArrowUpBlack} from '@assets/icon/ico_arrow_up_black.svg';
 export {default as icNoticeWhite} from '@assets/icon/ico_notice_white.svg';
 
 export {default as imgBlank} from '@assets/images/img_blank.svg';
@@ -76,6 +78,7 @@ export {default as imgFood} from '@assets/images/img_food.svg';
 export {default as imgRecommend} from '@assets/images/img_recommend.svg';
 export {default as imgMark} from '@assets/images/img_mark.svg';
 export {default as imgMarkUnSelect} from '@assets/images/img_mark_unselect.svg';
+export {default as imgPromise} from '@assets/images/img_promise.svg';
 
 export {default as imgEatRice} from '@assets/images/img_eat_rice.gif';
 export {default as imgEating} from '@assets/images/img_eating.gif';
