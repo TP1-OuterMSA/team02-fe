@@ -28,8 +28,8 @@ function App() {
       navigateTo(pagePath.ROOT)
       patchUserId();
     } else{
-      navigateTo(pagePath.LOGIN)
-      // navigateToWindow("/team6/login")
+      // navigateTo(pagePath.LOGIN)
+      navigateToWindow("/team6/login")
     }
   }, []);
   
