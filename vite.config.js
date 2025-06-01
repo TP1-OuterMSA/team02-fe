@@ -22,11 +22,11 @@ export default defineConfig({
         changeOrigin: true,  // target과 같은 도메인의 요청인 것처럼
         rewrite: (path) => path.replace(/^\/place/, ""),	// target url로 요청시 /api 문자열은 제거
       },
-      '/api': {
-        target: 'http://54.180.87.206:8080',
-        changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, '')
-      }
+      // '/api': {
+      //   target: 'http://localhost:8080',
+      //   changeOrigin: true,
+      //   rewrite: (path) => path.replace(/^\/api/, '')
+      // }
     },
   },
   resolve: {
