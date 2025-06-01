@@ -282,10 +282,6 @@ const Match = () => {
     setShowMatchReply(false)
   }
 
-  const connectSSE = async () => {
-    const event = await notificationService.connectSSE({userId: 1});
-  }
-
   const patchMatchData = async () => {
     const data = await matchService.getMealMateOffers({mealPostId: ""});
     setMealMateList(data);
