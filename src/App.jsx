@@ -5,8 +5,12 @@ import userService from "@apis/user/userService.js";
 import {ToastContainer} from "react-toastify";
 import {useCustomNavigation} from "@hooks/useCustomNavigation.js";
 import {useCustomWindowNavigation} from "@hooks/useCustomWindowNavigation.js";
-import {useEffect, useState} from "react";
+import {useEffect} from "react";
 import {pagePath} from "@/routes/pagePath.js";
+import axios from "axios";
+
+// // Allow sending HttpOnly cookies
+axios.defaults.withCredentials = true;
 
 function App() {
   const router = useRoutes(RoutesConfig);
@@ -24,8 +28,8 @@ function App() {
       navigateTo(pagePath.ROOT)
       patchUserId();
     } else{
-      navigateTo(pagePath.LOGIN)
-      // navigateToWindow("/team6/login")
+      // navigateTo(pagePath.LOGIN)
+      navigateToWindow("/team6/login")
     }
   }, []);
   
