@@ -1,14 +1,16 @@
 import {axiosInstance} from "@apis/axiosInstance.js";
 
+const GT_PREFIX = import.meta.env.VITE_GT_SERVICE_PREFIX;
+
 export const getPosts = async (cursor = 0 , count = 4, filter) => {
-  const response = await axiosInstance.get("/community/getPosts", {
+  const response = await axiosInstance.get(`${GT_PREFIX}/community/getPosts`, {
     params: {cursor, count, filter}
   });
   return response.data;
 }
 
 export const getPostById = async (id) => {
-  const response = await axiosInstance.get(`/community/getPost/${id}`);
+  const response = await axiosInstance.get(`${GT_PREFIX}/community/getPost/${id}`);
   return response.data;
 }
 
@@ -20,7 +22,7 @@ export const savePosts = async ({title, content, image}) => {
   formData.append("request", requestBlob);
   formData.append("image", image);
 
-  const response = await axiosInstance.post("/community/save", formData, {
+  const response = await axiosInstance.post(`${GT_PREFIX}/community/save`, formData, {
     headers: { "Content-Type": "multipart/form-data" },
   });
   return response.data;
@@ -34,30 +36,30 @@ export const updatePosts = async ({postId, title, content, image}) => {
   formData.append("request", requestBlob);
   formData.append("image", image);
 
-  const response = await axiosInstance.patch(`/community/update/${postId}`, formData, {
+  const response = await axiosInstance.patch(`${GT_PREFIX}/community/update/${postId}`, formData, {
     headers: { "Content-Type": "multipart/form-data" },
   });
   return response.data;
 }
 
 export const likePost = async (postId) => {
-  const response = await axiosInstance.post(`/community/like/${postId}`);
+  const response = await axiosInstance.post(`${GT_PREFIX}/community/like/${postId}`);
   return response.data;
 }
 export const unLikePost = async (postId) => {
-  const response = await axiosInstance.post(`/community/unlike/${postId}`);
+  const response = await axiosInstance.post(`${GT_PREFIX}/community/unlike/${postId}`);
   return response.data;
 }
 export const blockPost = async (postId) => {
-  const response = await axiosInstance.patch(`/community/block/${postId}`);
+  const response = await axiosInstance.patch(`${GT_PREFIX}/community/block/${postId}`);
   return response.data;
 }
 export const unBlockPost = async (postId) => {
-  const response = await axiosInstance.patch(`/community/unblock/${postId}`);
+  const response = await axiosInstance.patch(`${GT_PREFIX}/community/unblock/${postId}`);
   return response.data;
 }
 export const deletePost = async (postId) => {
-  const response = await axiosInstance.delete(`/community/delete/${postId}`);
+  const response = await axiosInstance.delete(`${GT_PREFIX}/community/delete/${postId}`);
   return response.data;
 }
 
