@@ -13,7 +13,8 @@ env:
   APP_ENV: development
   VITE_APP_BASE_URL: ${{ secrets.REACT_APP_API_URL }}
   VITE_APP_KAKAO_APP_KEY: ${{ secrets.VITE_APP_KAKAO_APP_KEY }}
-  VITE_APP_GOOGLE_API_KEY: $${{ secrets.VITE_APP_GOOGLE_API_KEY }}
+  VITE_APP_GOOGLE_API_KEY: ${{ secrets.VITE_APP_GOOGLE_API_KEY }}
+  VITE_ABSOLUTE_URL: ${{ secretes.VITE_ABSOLUTE_URL }}
   APP_NAME: team02-fe
   ECR_REPOSITORY: 809691348554.dkr.ecr.ap-northeast-2.amazonaws.com/team02-fe-repository
 permissions:
@@ -61,7 +62,7 @@ jobs:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           DOCKER_TAG: ${{ env.APP_ENV }}
         run: |
-          docker build --build-arg VITE_APP_KAKAO_APP_KEY=${{ secrets.VITE_APP_KAKAO_APP_KEY }} --build-arg VITE_APP_GOOGLE_API_KEY=${{ secrets.VITE_APP_GOOGLE_API_KEY }} --build-arg VITE_APP_BASE_URL=${{ secrets.REACT_APP_API_URL }} -t ${{ env.ECR_REPOSITORY }}:sha-${{ env.SHORT_SHA }} .
+          docker build --build-arg VITE_ABSOLUTE_URL=${{ secrets.VITE_ABSOLUTE_URL }} --build-arg VITE_APP_KAKAO_APP_KEY=${{ secrets.VITE_APP_KAKAO_APP_KEY }} --build-arg VITE_APP_GOOGLE_API_KEY=${{ secrets.VITE_APP_GOOGLE_API_KEY }} --build-arg VITE_APP_BASE_URL=${{ secrets.REACT_APP_API_URL }} -t ${{ env.ECR_REPOSITORY }}:sha-${{ env.SHORT_SHA }} .
           docker push ${{ env.ECR_REPOSITORY }}:sha-${{ env.SHORT_SHA }}
 
       # Infra 저장소 업데이트 단계
