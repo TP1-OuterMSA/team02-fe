@@ -1,6 +1,6 @@
 import {axiosInstance} from "@apis/axiosInstance.js";
 
-const GT_PREFIX = import.meta.env.VITE_GT_SERVICE_PREFIX;
+const GT_PREFIX = import.meta.env.VITE_ABSOLUTE_URL + "/api/team06-api-gateway";
 
 export const analyzeNutrition = async (date) => {
   const response = await axiosInstance.get(`${GT_PREFIX}/diet/analyze`, {
