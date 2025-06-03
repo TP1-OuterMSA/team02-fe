@@ -1,6 +1,7 @@
 import {EventSourcePolyfill} from "event-source-polyfill";
 import {axiosInstance} from "@apis/axiosInstance.js";
 
+const GT_PREFIX = import.meta.env.VITE_ABSOLUTE_URL + "/api/team06-api-gateway";
 
 let eventSource = null;
 export const connectSSE = () => {
@@ -8,7 +9,7 @@ export const connectSSE = () => {
   // 리프레시 전용 인스턴스 (인증 서비스 경로)
 
   const connect = () => {
-    eventSource = new EventSourcePolyfill(`${import.meta.env.VITE_APP_BASE_URL}/notification/subscribe`, {
+    eventSource = new EventSourcePolyfill(`${import.meta.env.VITE_APP_BASE_URL}${GT_PREFIX}/notification/subscribe`, {
       headers: {
         "Last-Event-ID": "",
         "Authorization": `Bearer ${token}`,
@@ -42,7 +43,7 @@ export const connectSSE = () => {
 
 export const getPastSSE = async ({lastEventId, userId}) => {
   console.log("lastEventId: ", lastEventId, userId)
-  const reponse = await axiosInstance.get("/notification/past", {
+  const reponse = await axiosInstance.get(`${GT_PREFIX}/notification/past`, {
     headers: {
       "Last-Event-ID": lastEventId,
       "Authorization": userId,

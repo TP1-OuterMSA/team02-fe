@@ -11,10 +11,10 @@ export const axiosInstance = axios.create({
   },
 });
 
-// 리프레시 전용 인스턴스 (인증 서비스 경로)
+// 인증 서비스 인스턴스 (authserver 서비스 경로)
 const authInstance = axios.create({
   withCredentials: true,
-  baseURL: import.meta.env.VITE_API_AUTH_URL,
+  baseURL: import.meta.env.VITE_ABSOLUTE_URL + "/api/team06-auth-service",
 });
 
 // -- 토큰 재발급 로직을 위한 변수들 --

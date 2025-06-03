@@ -1,19 +1,21 @@
 import {axiosInstance} from "@apis/axiosInstance.js";
 
+const GT_PREFIX = import.meta.env.VITE_ABSOLUTE_URL + "/api/team06-api-gateway";
+
 export const getRecommendKcal = async () => {
-  const response = await axiosInstance.get('/user/getRecommendKcal');
+  const response = await axiosInstance.get(`${GT_PREFIX}/user/getRecommendKcal`);
   return response.data;
 }
 
 export const updateRecommendKcal = async (kcal) => {
-  const response = await axiosInstance.patch('/user/updateKcal', {}, {
+  const response = await axiosInstance.patch(`${GT_PREFIX}/user/updateKcal`, {}, {
     params: {kcal}
   });
   return response.data;
 }
 
 export const getMyUserId  = async () => {
-  const response  = await axiosInstance.get('/user/getMyId');
+  const response  = await axiosInstance.get(`${GT_PREFIX}/user/getMyId`);
   return response.data;
 }
 const userService = {
