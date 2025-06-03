@@ -1,6 +1,6 @@
 import {axiosInstance} from "@apis/axiosInstance.js";
 
-const GT_PREFIX = import.meta.env.VITE_ABSOLUTE_URL + "/api/team06-api-gateway";
+const GT_PREFIX = import.meta.env.VITE_ABSOLUTE_URL + "/api/team06-api-gateway/api/team2";
 
 export const getPosts = async (cursor = 0 , count = 4, filter) => {
   const response = await axiosInstance.get(`${GT_PREFIX}/community/getPosts`, {

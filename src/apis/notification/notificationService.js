@@ -1,7 +1,7 @@
 import {EventSourcePolyfill} from "event-source-polyfill";
 import {axiosInstance} from "@apis/axiosInstance.js";
 
-const GT_PREFIX = import.meta.env.VITE_ABSOLUTE_URL + "/api/team06-api-gateway";
+const GT_PREFIX = import.meta.env.VITE_ABSOLUTE_URL + "/api/team06-api-gateway/api/team2";
 
 let eventSource = null;
 export const connectSSE = () => {
