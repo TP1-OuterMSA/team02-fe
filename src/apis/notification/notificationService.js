@@ -9,7 +9,7 @@ export const connectSSE = () => {
   // 리프레시 전용 인스턴스 (인증 서비스 경로)
 
   const connect = () => {
-    eventSource = new EventSourcePolyfill(`${import.meta.env.VITE_APP_BASE_URL}${GT_PREFIX}/notification/subscribe`, {
+    eventSource = new EventSourcePolyfill(`${GT_PREFIX}/notification/subscribe`, {
       headers: {
         "Last-Event-ID": "",
         "Authorization": `Bearer ${token}`,
