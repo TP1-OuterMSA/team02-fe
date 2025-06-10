@@ -39,8 +39,12 @@ const setAccessToken = (token) => {
 axiosInstance.interceptors.request.use(
     (config) => {
       const token = localStorage.getItem("accessToken");
+      const userid = localStorage.getItem("userId");
       if (token) {
         config.headers.Authorization = `Bearer ${token}`;
+        if(userid){
+          config.headers["user-id"] = userid;
+        }
       }
       return config;
     },
